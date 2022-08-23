@@ -7,23 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
+		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
+		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
+		CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B128B4588800D173AB /* BaseViewController.swift */; };
+		CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B328B458E000D173AB /* BackButton.swift */; };
+		CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B528B458F400D173AB /* ImageLiterals.swift */; };
 		CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */; };
 		CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */; };
-		CBFCDC2228B3684D004BCB27 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC2128B3684D004BCB27 /* ViewController.swift */; };
+		CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */; };
 		CBFCDC2728B3684E004BCB27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBFCDC2628B3684E004BCB27 /* Assets.xcassets */; };
 		CBFCDC2A28B3684E004BCB27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */; };
-		CBFCDC3228B369F2004BCB27 /* LiveFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC3128B369F2004BCB27 /* LiveFeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
+		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		CBE1A3B128B4588800D173AB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		CBE1A3B328B458E000D173AB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
+		CBE1A3B528B458F400D173AB /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		CBFCDC1A28B3684D004BCB27 /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CBFCDC2128B3684D004BCB27 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetectionViewController.swift; sourceTree = "<group>"; };
 		CBFCDC2628B3684E004BCB27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CBFCDC2928B3684E004BCB27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CBFCDC2B28B3684E004BCB27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CBFCDC3128B369F2004BCB27 /* LiveFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveFeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CBE1A3A828B4542500D173AB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */,
+				CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */,
+				CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		CBFCDC1128B3684D004BCB27 = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +76,16 @@
 		CBFCDC1C28B3684D004BCB27 /* FaceReader */ = {
 			isa = PBXGroup;
 			children = (
+				CBE1A3A828B4542500D173AB /* Extensions */,
 				CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */,
 				CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */,
-				CBFCDC2128B3684D004BCB27 /* ViewController.swift */,
-				CBFCDC3128B369F2004BCB27 /* LiveFeedViewController.swift */,
+				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
 				CBFCDC2628B3684E004BCB27 /* Assets.xcassets */,
 				CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */,
 				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
+				CBE1A3B128B4588800D173AB /* BaseViewController.swift */,
+				CBE1A3B328B458E000D173AB /* BackButton.swift */,
+				CBE1A3B528B458F400D173AB /* ImageLiterals.swift */,
 			);
 			path = FaceReader;
 			sourceTree = "<group>";
@@ -137,9 +160,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBFCDC2228B3684D004BCB27 /* ViewController.swift in Sources */,
+				CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */,
+				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
+				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
 				CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */,
-				CBFCDC3228B369F2004BCB27 /* LiveFeedViewController.swift in Sources */,
+				CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */,
+				CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */,
+				CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */,
+				CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */,
 				CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
