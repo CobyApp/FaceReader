@@ -51,8 +51,16 @@ class FaceDetectionViewController: BaseViewController {
         }
     }
     
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+
+        navigationItem.leftBarButtonItem = nil
+        title = "사진을 찍어주세요"
+    }
+    
     @objc private func didTapCameraButton() {
-        print(FaceManager.leftEye)
+        let viewController = FaceResultViewController()
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     private func cropToPreviewLayer(originalImage: UIImage) -> UIImage? {
