@@ -26,3 +26,26 @@ final class FaceManager {
     
     private init() { }
 }
+
+let gradeData: [[String: String]] = [
+    [
+        "grade": "낭(狼)",
+        "info": "위험인자가 될 집단의 출현"
+    ],
+    [
+        "grade": "호(虎)",
+        "info": "불특정 다수의 생명의 위기"
+    ],
+    [
+        "grade": "귀(鬼)",
+        "info": "도시 전체의 기능정지 및 괴멸 위기"
+    ],
+    [
+        "grade": "용(龍)",
+        "info": "도시 여러개가 괴멸 당할 위기"
+    ],
+    [
+        "grade": "신(神)",
+        "info": "인류멸망의 위기"
+    ],
+]
