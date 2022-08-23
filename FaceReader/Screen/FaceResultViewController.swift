@@ -24,14 +24,14 @@ class FaceResultViewController: BaseViewController {
     
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "재해레벨 : \(gradeData[0]["grade"])"
+        label.text = "재해레벨 : \(gradeData[FaceManager.grade]["grade"])"
         label.font = .systemFont(ofSize: 24, weight: .semibold)
         return label
     }()
     
     private lazy var gradeInfoLabel: UILabel = {
         let label = UILabel()
-        label.text = gradeData[0]["info"]
+        label.text = gradeData[FaceManager.grade]["info"]
         label.font = .systemFont(ofSize: 20, weight: .medium)
         return label
     }()

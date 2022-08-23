@@ -24,6 +24,12 @@ final class FaceManager {
     
     static var faceImage: UIImage? = nil
     
+    static var score: Int = 0
+    static var grade: Int = 0
+    
+    func getGrade() {
+    }
+    
     private init() { }
 }
 
