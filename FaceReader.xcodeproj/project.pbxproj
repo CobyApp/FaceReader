@@ -13,6 +13,8 @@
 		CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B128B4588800D173AB /* BaseViewController.swift */; };
 		CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B328B458E000D173AB /* BackButton.swift */; };
 		CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B528B458F400D173AB /* ImageLiterals.swift */; };
+		CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */; };
+		CBE1A3BA28B473FB00D173AB /* FaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B928B473FB00D173AB /* FaceManager.swift */; };
 		CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */; };
 		CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */; };
 		CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */; };
@@ -27,6 +29,8 @@
 		CBE1A3B128B4588800D173AB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		CBE1A3B328B458E000D173AB /* BackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButton.swift; sourceTree = "<group>"; };
 		CBE1A3B528B458F400D173AB /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
+		CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultViewController.swift; sourceTree = "<group>"; };
+		CBE1A3B928B473FB00D173AB /* FaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceManager.swift; sourceTree = "<group>"; };
 		CBFCDC1A28B3684D004BCB27 /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,7 @@
 				CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */,
 				CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */,
 				CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */,
+				CBE1A3B928B473FB00D173AB /* FaceManager.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -80,6 +85,7 @@
 				CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */,
 				CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */,
 				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
+				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
 				CBFCDC2628B3684E004BCB27 /* Assets.xcassets */,
 				CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */,
 				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
@@ -162,10 +168,12 @@
 			files = (
 				CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */,
 				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
+				CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */,
 				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
 				CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */,
 				CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */,
 				CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */,
+				CBE1A3BA28B473FB00D173AB /* FaceManager.swift in Sources */,
 				CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */,
 				CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */,
 				CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */,
