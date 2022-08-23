@@ -57,9 +57,82 @@
 				CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */,
 				CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */,
 				CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */,
-				CBE1A3B928B473FB00D173AB /* FaceManager.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CBE1A3BB28B47C5800D173AB /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
+				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
+		CBE1A3BC28B47C6E00D173AB /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3C228B47CE400D173AB /* Utils */,
+				CBE1A3C128B47CD300D173AB /* Resource */,
+				CBE1A3BF28B47C9F00D173AB /* Support */,
+				CBE1A3C028B47CB900D173AB /* UIComponent */,
+				CBE1A3BE28B47C9200D173AB /* Literal */,
+				CBE1A3BD28B47C8300D173AB /* Base */,
+				CBE1A3A828B4542500D173AB /* Extensions */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		CBE1A3BD28B47C8300D173AB /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3B128B4588800D173AB /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		CBE1A3BE28B47C9200D173AB /* Literal */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3B528B458F400D173AB /* ImageLiterals.swift */,
+			);
+			path = Literal;
+			sourceTree = "<group>";
+		};
+		CBE1A3BF28B47C9F00D173AB /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */,
+				CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */,
+				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		CBE1A3C028B47CB900D173AB /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3B328B458E000D173AB /* BackButton.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		CBE1A3C128B47CD300D173AB /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				CBFCDC2628B3684E004BCB27 /* Assets.xcassets */,
+				CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		CBE1A3C228B47CE400D173AB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1A3B928B473FB00D173AB /* FaceManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		CBFCDC1128B3684D004BCB27 = {
@@ -81,17 +154,8 @@
 		CBFCDC1C28B3684D004BCB27 /* FaceReader */ = {
 			isa = PBXGroup;
 			children = (
-				CBE1A3A828B4542500D173AB /* Extensions */,
-				CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */,
-				CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */,
-				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
-				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
-				CBFCDC2628B3684E004BCB27 /* Assets.xcassets */,
-				CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */,
-				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
-				CBE1A3B128B4588800D173AB /* BaseViewController.swift */,
-				CBE1A3B328B458E000D173AB /* BackButton.swift */,
-				CBE1A3B528B458F400D173AB /* ImageLiterals.swift */,
+				CBE1A3BB28B47C5800D173AB /* Screen */,
+				CBE1A3BC28B47C6E00D173AB /* Global */,
 			);
 			path = FaceReader;
 			sourceTree = "<group>";
