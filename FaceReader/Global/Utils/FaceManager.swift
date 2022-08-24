@@ -42,7 +42,6 @@ final class FaceManager {
     static var lipsRatio: Double? = nil
     static var faceRatio: Double? = nil
     
-    static var eyeDistanceIndex: Int = 0
     static var eyeRatioIndex: Int = 0
     static var noseRatioIndex: Int = 0
     static var lipsRatioIndex: Int = 0
@@ -65,26 +64,32 @@ final class FaceManager {
         FaceManager.lipsHeight = (FaceManager.outerLips![10].y - FaceManager.outerLips![4].y) as Double
         
         // face
-        FaceManager.faceFirst = (FaceManager.nose![0].y - FaceManager.leftEyebrow![3].y) as Double
-        FaceManager.faceSecond = (FaceManager.faceContour![8].y - FaceManager.nose![0].y) as Double
+        FaceManager.faceFirst = (FaceManager.nose![4].y - FaceManager.leftEyebrow![3].y) as Double
+        FaceManager.faceSecond = (FaceManager.faceContour![8].y - FaceManager.nose![4].y) as Double
         
         // ratio
-        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth!
-        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight!
-        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight!
-        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond!
+        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함 -> 1.3
+        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함 -> 0.5
+        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.5
+        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
         
-        print("eye")
-        print(FaceManager.eyeRatio)
-
-        print("nose")
-        print(FaceManager.noseRatio)
-
-        print("lips")
-        print(FaceManager.lipsRatio)
-
-        print("face")
-        print(FaceManager.faceRatio)
+        if FaceManager.eyeRatio! > 1.2 && FaceManager.eyeRatio! < 1.4  {
+            FaceManager.eyeRatioIndex = 1
+        }
+        
+        if FaceManager.noseRatio! > 0.4 && FaceManager.noseRatio! < 0.6  {
+            FaceManager.noseRatioIndex = 1
+        }
+        
+        if FaceManager.lipsRatio! > 2.4 && FaceManager.lipsRatio! < 2.6  {
+            FaceManager.lipsRatioIndex = 1
+        }
+        
+        if FaceManager.faceRatio! > 1.0 && FaceManager.faceRatio! < 1.2  {
+            FaceManager.faceRatioIndex = 1
+        }
+        
+        FaceManager.grade = FaceManager.eyeRatioIndex + FaceManager.noseRatioIndex + FaceManager.lipsRatioIndex + FaceManager.faceRatioIndex
     }
     
     private init() { }
