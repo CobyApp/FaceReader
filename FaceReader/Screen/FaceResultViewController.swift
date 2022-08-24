@@ -11,7 +11,7 @@ class FaceResultViewController: BaseViewController {
     
     private enum Size {
         static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
-        static let imageHeight: CGFloat = imageWidth * 1.5
+        static let imageHeight: CGFloat = imageWidth * 1.2
     }
     
     private let scrollView : UIScrollView! = UIScrollView()
@@ -90,8 +90,10 @@ class FaceResultViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
 
+        let backButton = UIBarButtonItem()
+        backButton.title = "다시 찍기"
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         navigationItem.leftBarButtonItem = nil
-        navigationItem.backBarButtonItem?.title="다시 찍기"
         title = "괴인 측정 결과"
     }
 }

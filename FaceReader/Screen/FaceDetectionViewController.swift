@@ -20,6 +20,12 @@ class FaceDetectionViewController: BaseViewController {
         return button
     }()
     
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -37,16 +43,23 @@ class FaceDetectionViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(cameraButton)
+        view.addSubviews(backgroundView, cameraButton)
+        
+        let backgroundViewConstraints = [
+            backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundView.heightAnchor.constraint(equalToConstant: 120),
+        ]
 
         let cameraButtonConstraints = [
-            cameraButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
             cameraButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cameraButton.heightAnchor.constraint(equalToConstant: 50),
             cameraButton.widthAnchor.constraint(equalToConstant: 50)
         ]
 
-        [cameraButtonConstraints].forEach { constraints in
+        [backgroundViewConstraints, cameraButtonConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
