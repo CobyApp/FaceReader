@@ -55,7 +55,7 @@ class FaceDetectionViewController: BaseViewController {
         super.setupNavigationBar()
 
         navigationItem.leftBarButtonItem = nil
-        title = "사진을 찍어주세요"
+        title = "얼굴 사진을 찍어주세요"
     }
     
     @objc private func didTapCameraButton() {

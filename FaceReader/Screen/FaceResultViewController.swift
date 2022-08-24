@@ -9,10 +9,19 @@ import UIKit
 
 class FaceResultViewController: BaseViewController {
     
+    private enum Size {
+        static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
+        static let imageHeight: CGFloat = imageWidth * 1.5
+    }
+    
+    private let scrollView : UIScrollView! = UIScrollView()
+    private let contentView : UIView! = UIView()
+    
     private let faceImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = FaceManager.faceImage
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -31,26 +40,49 @@ class FaceResultViewController: BaseViewController {
     }()
     
     override func render() {
-        view.addSubviews(faceImageView, gradeLabel, gradeInfoLabel)
+        view.addSubviews(scrollView)
+        scrollView.addSubviews(contentView)
+        contentView.addSubviews(faceImageView, gradeLabel, gradeInfoLabel)
+        
+        let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        contentViewHeight.priority = .defaultLow
+        contentViewHeight.isActive = true
+        
+        scrollView.showsVerticalScrollIndicator = false
+        
+        let scrollViewConstraints = [
+            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        
+        let contentViewConstraints = [
+            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+        ]
         
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            faceImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            faceImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 40),
-            faceImageView.heightAnchor.constraint(equalToConstant: 200)
+            faceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            faceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            faceImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            faceImageView.heightAnchor.constraint(equalToConstant: Size.imageHeight)
         ]
         
         let gradeLabelConstraints = [
             gradeLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor, constant: 20),
-            gradeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            gradeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ]
         
         let gradeInfoLabelConstraints = [
             gradeInfoLabel.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
-            gradeInfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            gradeInfoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ]
         
-        [faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints].forEach { constraints in
+        [scrollViewConstraints, contentViewConstraints, faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -59,6 +91,7 @@ class FaceResultViewController: BaseViewController {
         super.setupNavigationBar()
 
         navigationItem.leftBarButtonItem = nil
+        navigationItem.backBarButtonItem?.title="다시 찍기"
         title = "괴인 측정 결과"
     }
 }
