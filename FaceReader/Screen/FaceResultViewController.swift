@@ -41,7 +41,7 @@ class FaceResultViewController: BaseViewController {
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "현상금 ₩\(FaceManager.totalScore)"
+        label.text = "현상금 ₩\(numberFormatter(number: FaceManager.totalScore))"
         label.font = .systemFont(ofSize: 20, weight: .medium)
         return label
     }()
@@ -107,5 +107,12 @@ class FaceResultViewController: BaseViewController {
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
         navigationItem.leftBarButtonItem = nil
         title = "괴인 측정 결과"
+    }
+    
+    func numberFormatter(number: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: NSNumber(value: number))!
     }
 }
