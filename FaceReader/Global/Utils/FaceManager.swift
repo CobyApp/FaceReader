@@ -66,7 +66,7 @@ final class FaceManager {
         
         // face
         FaceManager.faceFirst = (FaceManager.nose![0].y - FaceManager.leftEyebrow![3].y) as Double
-        FaceManager.faceSecond = (FaceManager.faceContour![0].y - FaceManager.nose![0].y) as Double
+        FaceManager.faceSecond = (FaceManager.faceContour![8].y - FaceManager.nose![0].y) as Double
         
         // ratio
         FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth!
