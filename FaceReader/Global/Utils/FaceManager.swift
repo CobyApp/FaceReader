@@ -70,28 +70,28 @@ final class FaceManager {
         FaceManager.faceSecond = (FaceManager.faceContour![8].y - FaceManager.nose![4].y) as Double
         
         // ratio
-        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함
-        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함
-        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함
-        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함
+        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함 -> 1.1
+        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함 -> 0.6
+        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.5
+        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
         
-        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1) * 100000000)
-        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.64) * 100000000)
-        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 3) * 100000000)
-        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1) * 100000000)
+        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 100000000)
+        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 100000000)
+        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.5) * 100000000)
+        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 100000000)
         
         FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
         
         if FaceManager.totalScore < 20000000 {
-            FaceManager.grade = 4
+            FaceManager.grade = 0
         } else if FaceManager.totalScore < 40000000 {
-            FaceManager.grade = 3
+            FaceManager.grade = 1
         } else if FaceManager.totalScore < 60000000 {
             FaceManager.grade = 2
         } else if FaceManager.totalScore < 80000000 {
-            FaceManager.grade = 1
+            FaceManager.grade = 3
         } else {
-            FaceManager.grade = 0
+            FaceManager.grade = 4
         }
         
         print(FaceManager.totalScore)
