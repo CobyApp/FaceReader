@@ -42,10 +42,12 @@ final class FaceManager {
     static var lipsRatio: Double? = nil
     static var faceRatio: Double? = nil
     
-    static var eyeRatioIndex: Int = 0
-    static var noseRatioIndex: Int = 0
-    static var lipsRatioIndex: Int = 0
-    static var faceRatioIndex: Int = 0
+    static var eyeRatioScore: Int = 0
+    static var noseRatioScore: Int = 0
+    static var lipsRatioScore: Int = 0
+    static var faceRatioScore: Int = 0
+    
+    static var totalScore: Int = 0
 
     static var grade: Int = 0
     
@@ -73,23 +75,26 @@ final class FaceManager {
         FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.5
         FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
         
-        if FaceManager.eyeRatio! > 1.2 && FaceManager.eyeRatio! < 1.4  {
-            FaceManager.eyeRatioIndex = 1
+        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.3) * 100)
+        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.5) * 100)
+        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.5) * 100)
+        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 100)
+        
+        FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
+        
+        if FaceManager.totalScore < 20 {
+            FaceManager.grade = 4
+        } else if FaceManager.totalScore < 40 {
+            FaceManager.grade = 3
+        } else if FaceManager.totalScore < 60 {
+            FaceManager.grade = 2
+        } else if FaceManager.totalScore < 80 {
+            FaceManager.grade = 1
+        } else {
+            FaceManager.grade = 0
         }
         
-        if FaceManager.noseRatio! > 0.4 && FaceManager.noseRatio! < 0.6  {
-            FaceManager.noseRatioIndex = 1
-        }
-        
-        if FaceManager.lipsRatio! > 2.4 && FaceManager.lipsRatio! < 2.6  {
-            FaceManager.lipsRatioIndex = 1
-        }
-        
-        if FaceManager.faceRatio! > 1.0 && FaceManager.faceRatio! < 1.2  {
-            FaceManager.faceRatioIndex = 1
-        }
-        
-        FaceManager.grade = FaceManager.eyeRatioIndex + FaceManager.noseRatioIndex + FaceManager.lipsRatioIndex + FaceManager.faceRatioIndex
+        print(FaceManager.totalScore)
     }
     
     private init() { }

@@ -39,10 +39,17 @@ class FaceResultViewController: BaseViewController {
         return label
     }()
     
+    private lazy var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.text = "현상금 ₩\(FaceManager.totalScore)"
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+        return label
+    }()
+    
     override func render() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(faceImageView, gradeLabel, gradeInfoLabel)
+        contentView.addSubviews(faceImageView, gradeLabel, gradeInfoLabel, scoreLabel)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
         contentViewHeight.priority = .defaultLow
@@ -82,7 +89,12 @@ class FaceResultViewController: BaseViewController {
             gradeInfoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ]
         
-        [scrollViewConstraints, contentViewConstraints, faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints].forEach { constraints in
+        let scoreLabelConstraints = [
+            scoreLabel.topAnchor.constraint(equalTo: gradeInfoLabel.bottomAnchor, constant: 20),
+            scoreLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+        ]
+        
+        [scrollViewConstraints, contentViewConstraints, faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints, scoreLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
