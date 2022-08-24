@@ -16,6 +16,7 @@
 		CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */; };
 		CBE1A3BA28B473FB00D173AB /* FaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3B928B473FB00D173AB /* FaceManager.swift */; };
 		CBE688F328B5D7A300720D32 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE688F228B5D7A300720D32 /* UIFont+Extension.swift */; };
+		CBE688F528B6225C00720D32 /* SangSangAnt.otf in Resources */ = {isa = PBXBuildFile; fileRef = CBE688F428B6225C00720D32 /* SangSangAnt.otf */; };
 		CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */; };
 		CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */; };
 		CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */; };
@@ -32,8 +33,8 @@
 		CBE1A3B528B458F400D173AB /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
 		CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultViewController.swift; sourceTree = "<group>"; };
 		CBE1A3B928B473FB00D173AB /* FaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceManager.swift; sourceTree = "<group>"; };
-		CBE688F128B5D20600720D32 /* SangSangAnt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SangSangAnt.otf; sourceTree = "<group>"; };
 		CBE688F228B5D7A300720D32 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		CBE688F428B6225C00720D32 /* SangSangAnt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SangSangAnt.otf; sourceTree = "<group>"; };
 		CBFCDC1A28B3684D004BCB27 /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,7 +144,7 @@
 		CBE688F028B5D1B200720D32 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				CBE688F128B5D20600720D32 /* SangSangAnt.otf */,
+				CBE688F428B6225C00720D32 /* SangSangAnt.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -231,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CBE688F528B6225C00720D32 /* SangSangAnt.otf in Resources */,
 				CBFCDC2A28B3684E004BCB27 /* LaunchScreen.storyboard in Resources */,
 				CBFCDC2728B3684E004BCB27 /* Assets.xcassets in Resources */,
 			);

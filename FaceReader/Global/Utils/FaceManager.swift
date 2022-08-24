@@ -72,23 +72,23 @@ final class FaceManager {
         // ratio
         FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함 -> 1.1
         FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함 -> 0.6
-        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.5
+        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.4
         FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
         
-        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 100000000)
-        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 100000000)
-        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.5) * 100000000)
-        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 100000000)
+        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 10000)
+        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 10000)
+        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.4) * 10000)
+        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 10000)
         
         FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
         
-        if FaceManager.totalScore < 40000000 {
+        if FaceManager.totalScore < 8000 {
             FaceManager.grade = 0
-        } else if FaceManager.totalScore < 60000000 {
+        } else if FaceManager.totalScore < 12000 {
             FaceManager.grade = 1
-        } else if FaceManager.totalScore < 80000000 {
+        } else if FaceManager.totalScore < 16000 {
             FaceManager.grade = 2
-        } else if FaceManager.totalScore < 100000000 {
+        } else if FaceManager.totalScore < 20000 {
             FaceManager.grade = 3
         } else {
             FaceManager.grade = 4

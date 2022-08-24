@@ -14,6 +14,28 @@ class FaceResultViewController: BaseViewController {
         static let imageHeight: CGFloat = imageWidth * 1.2
     }
     
+    private lazy var backLabel: UILabel = {
+        let label = UILabel()
+        label.text = "다시 찍기"
+        label.font = .font(.regular, ofSize: 20)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBackLabel))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+        return label
+    }()
+    
+    private lazy var shareLabel: UILabel = {
+        let label = UILabel()
+        label.text = "공유"
+        label.font = .font(.regular, ofSize: 20)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapShareLabel))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
+        return label
+    }()
+    
     private let scrollView : UIScrollView! = UIScrollView()
     private let contentView : UIView! = UIView()
     
@@ -41,7 +63,7 @@ class FaceResultViewController: BaseViewController {
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "현상금 ₩\(numberFormatter(number: FaceManager.totalScore))"
+        label.text = "현상금 : \(numberFormatter(number: FaceManager.totalScore*100))원"
         label.font = .font(.regular, ofSize: 20)
         return label
     }()
@@ -101,11 +123,12 @@ class FaceResultViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
+        
+        let backLabelView = makeBarButtonItem(with: backLabel)
+        let shareLabelView = makeBarButtonItem(with: shareLabel)
 
-        let backButton = UIBarButtonItem()
-        backButton.title = "다시 찍기"
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationItem.leftBarButtonItem = nil
+        navigationItem.leftBarButtonItem = backLabelView
+        navigationItem.rightBarButtonItem = shareLabelView
         title = "괴인 측정 결과"
     }
     
@@ -114,5 +137,12 @@ class FaceResultViewController: BaseViewController {
         numberFormatter.numberStyle = .decimal
         
         return numberFormatter.string(from: NSNumber(value: number))!
+    }
+    
+    @objc private func didTapBackLabel(sender: UITapGestureRecognizer) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func didTapShareLabel(sender: UITapGestureRecognizer) {
     }
 }
