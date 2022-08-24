@@ -53,8 +53,8 @@ class BaseViewController: UIViewController {
     func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let appearance = UINavigationBarAppearance()
-        let font = UIFont.systemFont(ofSize: 17, weight: .regular)
-        let largeFont = UIFont.systemFont(ofSize: 34, weight: .semibold)
+        let font = UIFont.font(.regular, ofSize: 17)
+        let largeFont = UIFont.font(.regular, ofSize: 34)
         
         appearance.titleTextAttributes = [.font: font]
         appearance.largeTitleTextAttributes = [.font: largeFont]

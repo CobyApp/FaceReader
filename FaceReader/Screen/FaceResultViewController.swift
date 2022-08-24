@@ -28,21 +28,21 @@ class FaceResultViewController: BaseViewController {
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
         label.text = "재해레벨 : \(gradeData[FaceManager.grade]["grade"]!)"
-        label.font = .systemFont(ofSize: 24, weight: .semibold)
+        label.font = .font(.regular, ofSize: 24)
         return label
     }()
     
     private lazy var gradeInfoLabel: UILabel = {
         let label = UILabel()
         label.text = gradeData[FaceManager.grade]["info"]
-        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.font = .font(.regular, ofSize: 20)
         return label
     }()
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
         label.text = "현상금 ₩\(numberFormatter(number: FaceManager.totalScore))"
-        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.font = .font(.regular, ofSize: 20)
         return label
     }()
     

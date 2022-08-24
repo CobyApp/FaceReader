@@ -82,13 +82,13 @@ final class FaceManager {
         
         FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
         
-        if FaceManager.totalScore < 20000000 {
+        if FaceManager.totalScore < 40000000 {
             FaceManager.grade = 0
-        } else if FaceManager.totalScore < 40000000 {
-            FaceManager.grade = 1
         } else if FaceManager.totalScore < 60000000 {
-            FaceManager.grade = 2
+            FaceManager.grade = 1
         } else if FaceManager.totalScore < 80000000 {
+            FaceManager.grade = 2
+        } else if FaceManager.totalScore < 100000000 {
             FaceManager.grade = 3
         } else {
             FaceManager.grade = 4
