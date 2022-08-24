@@ -25,16 +25,16 @@ class FaceResultViewController: BaseViewController {
         return label
     }()
     
-    private lazy var shareLabel: UILabel = {
-        let label = UILabel()
-        label.text = "공유"
-        label.font = .font(.regular, ofSize: 20)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapShareLabel))
-        label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(tap)
-        return label
-    }()
+//    private lazy var shareLabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "공유"
+//        label.font = .font(.regular, ofSize: 20)
+//        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapShareLabel))
+//        label.isUserInteractionEnabled = true
+//        label.addGestureRecognizer(tap)
+//        return label
+//    }()
     
     private let scrollView : UIScrollView! = UIScrollView()
     private let contentView : UIView! = UIView()
@@ -137,10 +137,10 @@ class FaceResultViewController: BaseViewController {
         super.setupNavigationBar()
         
         let backLabelView = makeBarButtonItem(with: backLabel)
-        let shareLabelView = makeBarButtonItem(with: shareLabel)
+//        let shareLabelView = makeBarButtonItem(with: shareLabel)
 
         navigationItem.leftBarButtonItem = backLabelView
-        navigationItem.rightBarButtonItem = shareLabelView
+//        navigationItem.rightBarButtonItem = shareLabelView
         title = "괴인 측정 결과"
     }
     
