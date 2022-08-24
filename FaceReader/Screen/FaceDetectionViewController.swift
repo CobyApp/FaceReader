@@ -72,8 +72,10 @@ class FaceDetectionViewController: BaseViewController {
     }
     
     @objc private func didTapCameraButton() {
-        let viewController = FaceResultViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        guard (FaceManager.leftEye != nil) else { return }
+        FaceManager.shared.setValues()
+//        let viewController = FaceResultViewController()
+//        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
 

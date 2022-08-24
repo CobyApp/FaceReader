@@ -24,10 +24,39 @@ final class FaceManager {
     
     static var faceImage: UIImage? = nil
     
+    static var eyeDistance: CGFloat? = nil
+    static var eyeWidth: CGFloat? = nil
+    static var eyeHeight: CGFloat? = nil
+    
+    static var noseWidth: CGFloat? = nil
+    static var noseHeight: CGFloat? = nil
+    
+    static var lipsWidth: CGFloat? = nil
+    static var lipsHeight: CGFloat? = nil
+    
+    static var faceWidth: CGFloat? = nil
+    static var faceHeight: CGFloat? = nil
+    
     static var score: Int = 0
     static var grade: Int = 0
     
-    func getGrade() {
+    func setValues() {
+        // eye
+        FaceManager.eyeDistance = FaceManager.rightEye![3].x - FaceManager.leftEye![3].x
+        FaceManager.eyeWidth = FaceManager.leftEye![3].x - FaceManager.leftEye![0].x
+        FaceManager.eyeHeight = FaceManager.leftEye![5].y - FaceManager.leftEye![1].y
+        
+        // nose
+        FaceManager.noseWidth = FaceManager.nose![5].x - FaceManager.nose![3].x
+        FaceManager.noseHeight = FaceManager.nose![4].y - FaceManager.nose![0].y
+        
+        // Lips
+        FaceManager.lipsWidth = FaceManager.outerLips![7].x - FaceManager.outerLips![13].x
+        FaceManager.lipsHeight = FaceManager.outerLips![10].y - FaceManager.outerLips![4].y
+        
+        // face
+        FaceManager.faceWidth = FaceManager.faceContour![0].x - FaceManager.faceContour![16].x
+        FaceManager.faceHeight = FaceManager.faceContour![8].y - FaceManager.faceContour![0].y
     }
     
     private init() { }
