@@ -62,22 +62,6 @@ class FaceDetectionViewController: BaseViewController {
         let viewController = FaceResultViewController()
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    private func cropToPreviewLayer(originalImage: UIImage) -> UIImage? {
-        guard let cgImage = originalImage.cgImage else { return nil }
-
-        let outputRect = previewLayer.metadataOutputRectConverted(fromLayerRect: previewLayer.bounds)
-
-        let width = CGFloat(cgImage.width)
-        let height = CGFloat(cgImage.height)
-        let cropRect = CGRect(x: outputRect.origin.x * width, y: outputRect.origin.y * height, width: outputRect.size.width * width, height: outputRect.size.height * height)
-
-        if let croppedCGImage = cgImage.cropping(to: cropRect) {
-            return UIImage(cgImage: croppedCGImage, scale: 1.0, orientation: originalImage.imageOrientation)
-        }
-
-        return nil
-    }
 }
 
 // MARK: - Video Processing methods
@@ -127,6 +111,9 @@ extension FaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferDeleg
             return
         }
         
+        let ciimage = CIImage(cvPixelBuffer: imageBuffer)
+        FaceManager.faceImage = self.convert(cmage: ciimage)
+        
         // 2
         let detectFaceRequest = VNDetectFaceLandmarksRequest(completionHandler: detectedFace)
         
@@ -139,6 +126,13 @@ extension FaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferDeleg
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func convert(cmage: CIImage) -> UIImage {
+         let context = CIContext(options: nil)
+         let cgImage = context.createCGImage(cmage, from: cmage.extent)!
+         let image = UIImage(cgImage: cgImage)
+         return image
     }
 }
 

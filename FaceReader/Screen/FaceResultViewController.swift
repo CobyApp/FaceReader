@@ -9,22 +9,16 @@ import UIKit
 
 class FaceResultViewController: BaseViewController {
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "괴인 측정기"
-        label.font = .systemFont(ofSize: 30, weight: .semibold)
-        return label
-    }()
-    
     private let faceImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.btnCamera
+        imageView.image = FaceManager.faceImage
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "재해레벨 : \(gradeData[FaceManager.grade]["grade"])"
+        label.text = "재해레벨 : \(gradeData[FaceManager.grade]["grade"]!)"
         label.font = .systemFont(ofSize: 24, weight: .semibold)
         return label
     }()
@@ -37,18 +31,13 @@ class FaceResultViewController: BaseViewController {
     }()
     
     override func render() {
-        view.addSubviews(titleLabel, faceImageView, gradeLabel, gradeInfoLabel)
-        
-        let titleLabelConstraints = [
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ]
+        view.addSubviews(faceImageView, gradeLabel, gradeInfoLabel)
         
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            faceImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             faceImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            faceImageView.widthAnchor.constraint(equalToConstant: 80),
-            faceImageView.heightAnchor.constraint(equalToConstant: 80)
+            faceImageView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 40),
+            faceImageView.heightAnchor.constraint(equalToConstant: 200)
         ]
         
         let gradeLabelConstraints = [
@@ -61,8 +50,15 @@ class FaceResultViewController: BaseViewController {
             gradeInfoLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ]
         
-        [titleLabelConstraints, faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints].forEach { constraints in
+        [faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
+    }
+    
+    override func setupNavigationBar() {
+        super.setupNavigationBar()
+
+        navigationItem.leftBarButtonItem = nil
+        title = "괴인 측정 결과"
     }
 }
