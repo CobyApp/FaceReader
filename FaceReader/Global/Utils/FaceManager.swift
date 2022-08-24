@@ -24,39 +24,67 @@ final class FaceManager {
     
     static var faceImage: UIImage? = nil
     
-    static var eyeDistance: CGFloat? = nil
-    static var eyeWidth: CGFloat? = nil
-    static var eyeHeight: CGFloat? = nil
+    static var eyeDistance: Double? = nil
+    static var eyeWidth: Double? = nil
+    static var eyeHeight: Double? = nil
     
-    static var noseWidth: CGFloat? = nil
-    static var noseHeight: CGFloat? = nil
+    static var noseWidth: Double? = nil
+    static var noseHeight: Double? = nil
     
-    static var lipsWidth: CGFloat? = nil
-    static var lipsHeight: CGFloat? = nil
+    static var lipsWidth: Double? = nil
+    static var lipsHeight: Double? = nil
     
-    static var faceWidth: CGFloat? = nil
-    static var faceHeight: CGFloat? = nil
+    static var faceFirst: Double? = nil
+    static var faceSecond: Double? = nil
     
-    static var score: Int = 0
+    static var eyeRatio: Double? = nil
+    static var noseRatio: Double? = nil
+    static var lipsRatio: Double? = nil
+    static var faceRatio: Double? = nil
+    
+    static var eyeDistanceIndex: Int = 0
+    static var eyeRatioIndex: Int = 0
+    static var noseRatioIndex: Int = 0
+    static var lipsRatioIndex: Int = 0
+    static var faceRatioIndex: Int = 0
+
     static var grade: Int = 0
     
     func setValues() {
         // eye
-        FaceManager.eyeDistance = FaceManager.rightEye![3].x - FaceManager.leftEye![3].x
-        FaceManager.eyeWidth = FaceManager.leftEye![3].x - FaceManager.leftEye![0].x
-        FaceManager.eyeHeight = FaceManager.leftEye![5].y - FaceManager.leftEye![1].y
+        FaceManager.eyeDistance = (FaceManager.rightEye![3].x - FaceManager.leftEye![3].x) as Double
+        FaceManager.eyeWidth = (FaceManager.leftEye![3].x - FaceManager.leftEye![0].x) as Double
+        FaceManager.eyeHeight = (FaceManager.leftEye![5].y - FaceManager.leftEye![1].y) as Double
         
         // nose
-        FaceManager.noseWidth = FaceManager.nose![5].x - FaceManager.nose![3].x
-        FaceManager.noseHeight = FaceManager.nose![4].y - FaceManager.nose![0].y
+        FaceManager.noseWidth = (FaceManager.nose![5].x - FaceManager.nose![3].x) as Double
+        FaceManager.noseHeight = (FaceManager.nose![4].y - FaceManager.nose![0].y) as Double
         
-        // Lips
-        FaceManager.lipsWidth = FaceManager.outerLips![7].x - FaceManager.outerLips![13].x
-        FaceManager.lipsHeight = FaceManager.outerLips![10].y - FaceManager.outerLips![4].y
+        // lips
+        FaceManager.lipsWidth = (FaceManager.outerLips![7].x - FaceManager.outerLips![13].x) as Double
+        FaceManager.lipsHeight = (FaceManager.outerLips![10].y - FaceManager.outerLips![4].y) as Double
         
         // face
-        FaceManager.faceWidth = FaceManager.faceContour![0].x - FaceManager.faceContour![16].x
-        FaceManager.faceHeight = FaceManager.faceContour![8].y - FaceManager.faceContour![0].y
+        FaceManager.faceFirst = (FaceManager.nose![0].y - FaceManager.leftEyebrow![3].y) as Double
+        FaceManager.faceSecond = (FaceManager.faceContour![0].y - FaceManager.nose![0].y) as Double
+        
+        // ratio
+        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth!
+        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight!
+        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight!
+        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond!
+        
+        print("eye")
+        print(FaceManager.eyeRatio)
+
+        print("nose")
+        print(FaceManager.noseRatio)
+
+        print("lips")
+        print(FaceManager.lipsRatio)
+
+        print("face")
+        print(FaceManager.faceRatio)
     }
     
     private init() { }
