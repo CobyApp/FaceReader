@@ -8,10 +8,18 @@
 import UIKit
 
 import AVFoundation
+import Lottie
 import Vision
 
 class FaceDetectionViewController: BaseViewController {
     var sequenceHandler = VNSequenceRequestHandler()
+    
+    private let loading: AnimationView = .init(name: "loading")
+    private let coverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return view
+    }()
     
     private lazy var cameraButton: UIButton = {
         let button = UIButton()
@@ -43,7 +51,9 @@ class FaceDetectionViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(backgroundView, cameraButton)
+        view.addSubviews(backgroundView, cameraButton, coverView, loading)
+        loading.isHidden = true
+        coverView.isHidden = true
         
         let backgroundViewConstraints = [
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -58,8 +68,20 @@ class FaceDetectionViewController: BaseViewController {
             cameraButton.heightAnchor.constraint(equalToConstant: 50),
             cameraButton.widthAnchor.constraint(equalToConstant: 50)
         ]
+        
+        let coverViewConstraints = [
+            coverView.topAnchor.constraint(equalTo: view.topAnchor),
+            coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            coverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            coverView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        
+        let loadingConstraints = [
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
 
-        [backgroundViewConstraints, cameraButtonConstraints].forEach { constraints in
+        [backgroundViewConstraints, cameraButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -73,6 +95,9 @@ class FaceDetectionViewController: BaseViewController {
     
     @objc private func didTapCameraButton() {
         guard (FaceManager.leftEye != nil) else { return }
+        coverView.isHidden = false
+        loading.isHidden = false
+        loading.play()
         
         FaceManager.shared.postImage() { result in
             switch result {
@@ -80,6 +105,9 @@ class FaceDetectionViewController: BaseViewController {
                 print(image)
                 FaceManager.cartoonImage = image
                 FaceManager.shared.setValues()
+                self.loading.pause()
+                self.loading.isHidden = true
+                self.coverView.isHidden = true
                 self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
             case .failure(let error):
                 print(error)
