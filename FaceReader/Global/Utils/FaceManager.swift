@@ -24,6 +24,7 @@ final class FaceManager {
     static var faceContour: [CGPoint]? = nil
     
     static var faceImage: UIImage? = nil
+    static var cartoonImage: UIImage? = nil
     
     static var eyeDistance: Double? = nil
     static var eyeWidth: Double? = nil
@@ -96,8 +97,7 @@ final class FaceManager {
         }
     }
     
-    func postImage() {
-        
+    func postImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
         let URL = "https://master-white-box-cartoonization-psi1104.endpoint.ainize.ai/predict"
         let header : HTTPHeaders = [
             "accept": "image/jpg",
@@ -115,7 +115,12 @@ final class FaceManager {
                 multipartFormData.append(image, withName: "source", fileName: "\(image).png", mimeType: "image/png")
             }
         }, to: URL, usingThreshold: UInt64.init(), method: .post, headers: header).response { response in
-            print(response.response)
+            switch response.result {
+            case .success(let value):
+                completion(.success(UIImage(data: value!)!))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     

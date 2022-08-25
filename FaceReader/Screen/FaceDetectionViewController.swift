@@ -73,10 +73,18 @@ class FaceDetectionViewController: BaseViewController {
     
     @objc private func didTapCameraButton() {
         guard (FaceManager.leftEye != nil) else { return }
-        FaceManager.shared.postImage()
-        FaceManager.shared.setValues()
-        let viewController = FaceResultViewController()
-        self.navigationController?.pushViewController(viewController, animated: true)
+        
+        FaceManager.shared.postImage() { result in
+            switch result {
+            case .success(let image):
+                print(image)
+                FaceManager.cartoonImage = image
+                FaceManager.shared.setValues()
+                self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 }
 

@@ -41,7 +41,7 @@ class FaceResultViewController: BaseViewController {
     
     private let faceImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = FaceManager.faceImage
+        imageView.image = FaceManager.cartoonImage
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView
