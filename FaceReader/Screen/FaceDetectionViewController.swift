@@ -30,7 +30,7 @@ class FaceDetectionViewController: BaseViewController {
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         return view
     }()
     

@@ -9,11 +9,10 @@ import UIKit
 
 enum ImageLiterals {
     
-    // MARK: - button
-    
     static var btnBack: UIImage { .load(systemName: "chevron.backward") }
     static var btnCamera: UIImage { .load(name: "camera") }
   
+    static var background: UIImage { .load(name: "background") }
 }
 
 extension UIImage {
