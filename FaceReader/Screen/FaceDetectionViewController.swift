@@ -149,7 +149,7 @@ class FaceDetectionViewController: BaseViewController {
         super.setupNavigationBar()
 
         navigationItem.leftBarButtonItem = nil
-        title = "괴인 등급 측정기"
+        title = "괴인 측정기"
     }
     
     @objc private func didTapCameraButton() {

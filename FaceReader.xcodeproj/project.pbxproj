@@ -11,6 +11,7 @@
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
 		CB9E777A28BBE32A0072DB9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */; };
+		CB9E777D28BBFB000072DB9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB9E777F28BBFB000072DB9A /* InfoPlist.strings */; };
 		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
 		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
 		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
@@ -31,6 +32,8 @@
 /* Begin PBXFileReference section */
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		CB9E777E28BBFB000072DB9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB9E778028BBFB1C0072DB9A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 				CBFCDC1D28B3684D004BCB27 /* AppDelegate.swift */,
 				CBFCDC1F28B3684D004BCB27 /* SceneDelegate.swift */,
 				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
+				CB9E777F28BBFB000072DB9A /* InfoPlist.strings */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -230,6 +234,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = CBFCDC1128B3684D004BCB27;
 			packageReferences = (
@@ -254,6 +259,7 @@
 				CBFCDC2A28B3684E004BCB27 /* LaunchScreen.storyboard in Resources */,
 				CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */,
 				CBFCDC2728B3684E004BCB27 /* Assets.xcassets in Resources */,
+				CB9E777D28BBFB000072DB9A /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +289,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		CB9E777F28BBFB000072DB9A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB9E777E28BBFB000072DB9A /* en */,
+				CB9E778028BBFB1C0072DB9A /* ko */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -345,7 +360,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -400,7 +415,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
