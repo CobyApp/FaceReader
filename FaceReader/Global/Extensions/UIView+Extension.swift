@@ -47,23 +47,23 @@ extension UIView {
                        delay: delay,
                        options: .curveEaseIn,
                        animations: {
-                        self.alpha = 1.0
-                       }, completion: completion)
+            self.alpha = 1.0
+        }, completion: completion)
     }
     
     func showAnimation(_ completionBlock: @escaping () -> Void) {
-      isUserInteractionEnabled = false
+        isUserInteractionEnabled = false
         UIView.animate(withDuration: 0.1,
                        delay: 0,
                        options: .curveLinear,
                        animations: { [weak self] in
-                            self?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
+            self?.transform = CGAffineTransform.init(scaleX: 0.95, y: 0.95)
         }) {  (done) in
             UIView.animate(withDuration: 0.1,
                            delay: 0,
                            options: .curveLinear,
                            animations: { [weak self] in
-                                self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+                self?.transform = CGAffineTransform.init(scaleX: 1, y: 1)
             }) { [weak self] (_) in
                 self?.isUserInteractionEnabled = true
                 completionBlock()
@@ -72,20 +72,27 @@ extension UIView {
     }
     
     func addSubviews(_ views: UIView...) {
-      for view in views {
-        view.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(view)
-      }
+        for view in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(view)
+        }
     }
     
     @IBInspectable
     var cornerRadius: CGFloat {
-      get {
-        return layer.cornerRadius
-      }
-      
-      set {
-        layer.cornerRadius = newValue
-      }
+        get {
+            return layer.cornerRadius
+        }
+        
+        set {
+            layer.cornerRadius = newValue
+        }
+    }
+    
+    func asImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
     }
 }

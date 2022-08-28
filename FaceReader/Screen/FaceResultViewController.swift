@@ -39,32 +39,40 @@ class FaceResultViewController: BaseViewController {
     private let scrollView : UIScrollView! = UIScrollView()
     private let contentView : UIView! = UIView()
     
+    private let wantedLabel: UILabel = {
+        let label = UILabel()
+        label.text = "WANTED"
+        label.font = .font(.regular, ofSize: 80)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     private let faceImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = FaceManager.cartoonImage
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.cornerRadius = 5
         return imageView
     }()
     
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "재해레벨 : \(gradeData[FaceManager.grade]["grade"]!)"
-        label.font = .font(.regular, ofSize: 24)
-        return label
-    }()
-    
-    private lazy var gradeInfoLabel: UILabel = {
-        let label = UILabel()
-        label.text = gradeData[FaceManager.grade]["info"]
-        label.font = .font(.regular, ofSize: 20)
+        label.text = "\(gradeData[FaceManager.grade]["grade"]!) \(gradeData[FaceManager.grade]["info"]!)"
+        label.font = .font(.regular, ofSize: 40)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
         label.text = "현상금 : \(numberFormatter(number: FaceManager.totalScore*100))원"
-        label.font = .font(.regular, ofSize: 20)
+        label.font = .font(.regular, ofSize: 30)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -78,7 +86,7 @@ class FaceResultViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(faceImageView, gradeLabel, gradeInfoLabel, scoreLabel, levelLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, gradeLabel, scoreLabel, levelLabel)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
         contentViewHeight.priority = .defaultLow
@@ -101,8 +109,14 @@ class FaceResultViewController: BaseViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ]
         
+        let wantedLabelConstraints = [
+            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            wantedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            wantedLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+        ]
+        
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 4),
             faceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             faceImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             faceImageView.heightAnchor.constraint(equalToConstant: Size.imageHeight)
@@ -110,17 +124,14 @@ class FaceResultViewController: BaseViewController {
         
         let gradeLabelConstraints = [
             gradeLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor, constant: 20),
-            gradeLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ]
-        
-        let gradeInfoLabelConstraints = [
-            gradeInfoLabel.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
-            gradeInfoLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            gradeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            gradeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let scoreLabelConstraints = [
-            scoreLabel.topAnchor.constraint(equalTo: gradeInfoLabel.bottomAnchor, constant: 20),
-            scoreLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
+            scoreLabel.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
+            scoreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let levelLabelConstraints = [
@@ -128,7 +139,7 @@ class FaceResultViewController: BaseViewController {
             levelLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ]
         
-        [scrollViewConstraints, contentViewConstraints, faceImageViewConstraints, gradeLabelConstraints, gradeInfoLabelConstraints, scoreLabelConstraints, levelLabelConstraints].forEach { constraints in
+        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, gradeLabelConstraints, scoreLabelConstraints, levelLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -156,5 +167,30 @@ class FaceResultViewController: BaseViewController {
     }
     
     @objc private func didTapShareLabel(sender: UITapGestureRecognizer) {
+        let wantedImage = contentView.asImage()
+        var shareObject = [UIImage]()
+        
+        shareObject.append(wantedImage)
+        
+        let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+
+        activityViewController.excludedActivityTypes = [
+            UIActivity.ActivityType.postToFacebook,
+            UIActivity.ActivityType.postToTwitter,
+            UIActivity.ActivityType.postToWeibo,
+            UIActivity.ActivityType.print,
+            UIActivity.ActivityType.copyToPasteboard,
+            UIActivity.ActivityType.assignToContact,
+            UIActivity.ActivityType.addToReadingList,
+            UIActivity.ActivityType.postToFlickr,
+            UIActivity.ActivityType.postToVimeo,
+            UIActivity.ActivityType.postToTencentWeibo,
+            UIActivity.ActivityType.openInIBooks,
+            UIActivity.ActivityType.markupAsPDF
+        ]
+
+        self.present(activityViewController, animated: true)
     }
 }
