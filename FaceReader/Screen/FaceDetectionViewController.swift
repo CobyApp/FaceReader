@@ -24,19 +24,19 @@ class FaceDetectionViewController: BaseViewController {
     
     private let topBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         return view
     }()
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
         return view
     }()
     
     private let ratioGuideLabel: UILabel = {
         let label = UILabel()
-        label.text = "얼굴 비율 측정을 통해, 괴인 등급을 측정합니다."
+        label.text = "얼굴 비율로 괴인 등급을 측정합니다."
         label.font = .font(.regular, ofSize: 24)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -161,15 +161,19 @@ class FaceDetectionViewController: BaseViewController {
         FaceManager.shared.postImage() { result in
             switch result {
             case .success(let image):
-                print(image)
                 FaceManager.cartoonImage = image
                 FaceManager.shared.setValues()
                 self.loading.pause()
                 self.loading.isHidden = true
                 self.coverView.isHidden = true
                 self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
-            case .failure(let error):
-                print(error)
+            case .failure(_):
+                FaceManager.cartoonImage = FaceManager.faceImage
+                FaceManager.shared.setValues()
+                self.loading.pause()
+                self.loading.isHidden = true
+                self.coverView.isHidden = true
+                self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
             }
         }
     }

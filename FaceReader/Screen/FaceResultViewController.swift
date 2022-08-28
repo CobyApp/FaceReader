@@ -10,6 +10,9 @@ import UIKit
 class FaceResultViewController: BaseViewController {
     
     private enum Size {
+        static let wantedWidth: CGFloat = UIScreen.main.bounds.size.width
+        static let wantedHeight: CGFloat = wantedWidth * 1.8
+        
         static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
         static let imageHeight: CGFloat = imageWidth * 0.8
     }
@@ -42,7 +45,8 @@ class FaceResultViewController: BaseViewController {
     private let wantedLabel: UILabel = {
         let label = UILabel()
         label.text = "WANTED"
-        label.font = .font(.regular, ofSize: 80)
+        label.font = .font(.regular, ofSize: 100)
+        label.textColor = UIColor.mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -54,15 +58,26 @@ class FaceResultViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 5
-        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.borderColor = UIColor.mainText.cgColor
         imageView.layer.cornerRadius = 5
         return imageView
     }()
     
+    private let deadOrLiveLabel: UILabel = {
+        let label = UILabel()
+        label.text = "DEAD OR LIVE"
+        label.font = .font(.regular, ofSize: 60)
+        label.textColor = UIColor.mainText
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(gradeData[FaceManager.grade]["grade"]!) \(gradeData[FaceManager.grade]["info"]!)"
+        label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
+        label.textColor = UIColor.mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -70,8 +85,9 @@ class FaceResultViewController: BaseViewController {
     
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
-        label.text = "현상금 : \(numberFormatter(number: FaceManager.totalScore*100))원"
-        label.font = .font(.regular, ofSize: 30)
+        label.text = "$\(numberFormatter(number: FaceManager.totalScore))"
+        label.font = .font(.regular, ofSize: 60)
+        label.textColor = UIColor.mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -80,7 +96,7 @@ class FaceResultViewController: BaseViewController {
     override func render() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(wantedLabel, faceImageView, gradeLabel, scoreLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)
         contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
@@ -101,35 +117,42 @@ class FaceResultViewController: BaseViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: Size.wantedHeight)
         ]
         
         let wantedLabelConstraints = [
-            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             wantedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             wantedLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         ]
         
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 8),
+            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 4),
             faceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             faceImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             faceImageView.heightAnchor.constraint(equalToConstant: Size.imageHeight)
         ]
         
+        let deadOrLiveLabelConstraints = [
+            deadOrLiveLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor, constant: 4),
+            deadOrLiveLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            deadOrLiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+        ]
+        
         let gradeLabelConstraints = [
-            gradeLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor, constant: 20),
+            gradeLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
             gradeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             gradeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let scoreLabelConstraints = [
-            scoreLabel.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
+            scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             scoreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
-        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, gradeLabelConstraints, scoreLabelConstraints].forEach { constraints in
+        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }

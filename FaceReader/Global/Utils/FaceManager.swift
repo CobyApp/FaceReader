@@ -74,27 +74,33 @@ final class FaceManager {
         // ratio
         FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함 -> 1.1
         FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함 -> 0.6
-        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.4
+        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.6
         FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
         
-        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 10000)
-        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 10000)
-        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.4) * 10000)
-        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 10000)
+        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 20000) * 1000
+        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 20000) * 1000
+        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.6) * 5000) * 1000
+        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 20000) * 1000
         
         FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
         
-        if FaceManager.totalScore < 8000 {
+        if FaceManager.totalScore < 10000000 {
             FaceManager.grade = 0
-        } else if FaceManager.totalScore < 12000 {
+        } else if FaceManager.totalScore < 15000000 {
             FaceManager.grade = 1
-        } else if FaceManager.totalScore < 16000 {
+        } else if FaceManager.totalScore < 20000000 {
             FaceManager.grade = 2
-        } else if FaceManager.totalScore < 20000 {
+        } else if FaceManager.totalScore < 30000000 {
             FaceManager.grade = 3
         } else {
             FaceManager.grade = 4
         }
+        
+        print("values")
+        print(FaceManager.eyeRatio! - 1.1)
+        print(FaceManager.noseRatio! - 0.6)
+        print(FaceManager.lipsRatio! - 2.6)
+        print(FaceManager.faceRatio! - 1.1)
     }
     
     func postImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
@@ -117,7 +123,11 @@ final class FaceManager {
         }, to: URL, usingThreshold: UInt64.init(), method: .post, headers: header).response { response in
             switch response.result {
             case .success(let value):
-                completion(.success(UIImage(data: value!)!))
+                guard let cartoonImage = UIImage(data: value!) else {
+                    completion(.success(FaceManager.faceImage!))
+                    return
+                }
+                completion(.success(cartoonImage))
             case .failure(let error):
                 completion(.failure(error))
             }
