@@ -11,7 +11,7 @@ class FaceResultViewController: BaseViewController {
     
     private enum Size {
         static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
-        static let imageHeight: CGFloat = imageWidth * 1.2
+        static let imageHeight: CGFloat = imageWidth * 0.8
     }
     
     private lazy var backLabel: UILabel = {
@@ -53,6 +53,7 @@ class FaceResultViewController: BaseViewController {
         imageView.image = FaceManager.cartoonImage
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 5
         imageView.layer.borderColor = UIColor.black.cgColor
         imageView.layer.cornerRadius = 5
         return imageView
@@ -76,17 +77,11 @@ class FaceResultViewController: BaseViewController {
         return label
     }()
     
-    private lazy var levelLabel: UILabel = {
-        let label = UILabel()
-        label.text = "낭(狼) > 호(虎) > 귀(鬼) > 용(龍) > 신(神)"
-        label.font = .font(.regular, ofSize: 14)
-        return label
-    }()
-    
     override func render() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(wantedLabel, faceImageView, gradeLabel, scoreLabel, levelLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, gradeLabel, scoreLabel)
+        contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
         contentViewHeight.priority = .defaultLow
@@ -110,13 +105,13 @@ class FaceResultViewController: BaseViewController {
         ]
         
         let wantedLabelConstraints = [
-            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            wantedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            wantedLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 40),
+            wantedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            wantedLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         ]
         
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 4),
+            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 8),
             faceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             faceImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             faceImageView.heightAnchor.constraint(equalToConstant: Size.imageHeight)
@@ -134,12 +129,7 @@ class FaceResultViewController: BaseViewController {
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
-        let levelLabelConstraints = [
-            levelLabel.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 20),
-            levelLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
-        ]
-        
-        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, gradeLabelConstraints, scoreLabelConstraints, levelLabelConstraints].forEach { constraints in
+        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, gradeLabelConstraints, scoreLabelConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }

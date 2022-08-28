@@ -15,10 +15,50 @@ class FaceDetectionViewController: BaseViewController {
     var sequenceHandler = VNSequenceRequestHandler()
     
     private let loading: AnimationView = .init(name: "loading")
+    
     private let coverView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         return view
+    }()
+    
+    private let topBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        return view
+    }()
+    
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+        return view
+    }()
+    
+    private let ratioGuideLabel: UILabel = {
+        let label = UILabel()
+        label.text = "얼굴 비율 측정을 통해, 괴인 등급을 측정합니다."
+        label.font = .font(.regular, ofSize: 24)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    private let levelGuideLabel: UILabel = {
+        let label = UILabel()
+        label.text = "재해레벨 : 낭(狼) > 호(虎) > 귀(鬼) > 용(龍) > 신(神)"
+        label.font = .font(.regular, ofSize: 17)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
+    private let photoGuideLabel: UILabel = {
+        let label = UILabel()
+        label.text = "얼굴 사진은 카툰화 이미지로 변경됩니다."
+        label.font = .font(.regular, ofSize: 24)
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }()
     
     private lazy var cameraButton: UIButton = {
@@ -26,12 +66,6 @@ class FaceDetectionViewController: BaseViewController {
         button.addTarget(self, action: #selector(didTapCameraButton), for: .touchUpInside)
         button.setImage(ImageLiterals.btnCamera, for: .normal)
         return button
-    }()
-    
-    private let backgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        return view
     }()
     
     let session = AVCaptureSession()
@@ -51,19 +85,44 @@ class FaceDetectionViewController: BaseViewController {
     }
     
     override func render() {
-        view.addSubviews(backgroundView, cameraButton, coverView, loading)
+        view.addSubviews(topBackgroundView, backgroundView, ratioGuideLabel, levelGuideLabel, photoGuideLabel, cameraButton, coverView, loading)
         loading.isHidden = true
         coverView.isHidden = true
+        
+        let topBackgroundViewConstraints = [
+            topBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            topBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topBackgroundView.heightAnchor.constraint(equalToConstant: 140),
+        ]
         
         let backgroundViewConstraints = [
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.heightAnchor.constraint(equalToConstant: 120),
+            backgroundView.heightAnchor.constraint(equalToConstant: 240),
+        ]
+        
+        let ratioGuideLabelConstraints = [
+            ratioGuideLabel.bottomAnchor.constraint(equalTo: topBackgroundView.topAnchor, constant: 70),
+            ratioGuideLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ratioGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ]
+        
+        let levelGuideLabelConstraints = [
+            levelGuideLabel.bottomAnchor.constraint(equalTo: ratioGuideLabel.bottomAnchor, constant: 40),
+            levelGuideLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            levelGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ]
+        
+        let photoGuideLabelConstraints = [
+            photoGuideLabel.bottomAnchor.constraint(equalTo: cameraButton.topAnchor, constant: -40),
+            photoGuideLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            photoGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ]
 
         let cameraButtonConstraints = [
-            cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40),
+            cameraButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80),
             cameraButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cameraButton.heightAnchor.constraint(equalToConstant: 50),
             cameraButton.widthAnchor.constraint(equalToConstant: 50)
@@ -81,7 +140,7 @@ class FaceDetectionViewController: BaseViewController {
             loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
 
-        [backgroundViewConstraints, cameraButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
+        [topBackgroundViewConstraints, backgroundViewConstraints, ratioGuideLabelConstraints, levelGuideLabelConstraints, photoGuideLabelConstraints, cameraButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -90,7 +149,7 @@ class FaceDetectionViewController: BaseViewController {
         super.setupNavigationBar()
 
         navigationItem.leftBarButtonItem = nil
-        title = "얼굴 사진을 찍어주세요"
+        title = "괴인 등급 측정기"
     }
     
     @objc private func didTapCameraButton() {

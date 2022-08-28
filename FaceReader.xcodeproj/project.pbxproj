@@ -10,7 +10,6 @@
 		CB2B2AB728B6A35200EDEC8D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2AB628B6A35200EDEC8D /* Alamofire */; };
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
-		CB4FFEAC28BBCB2100BA26E9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB4FFEAB28BBCB2100BA26E9 /* MainViewController.swift */; };
 		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
 		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
 		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
@@ -30,7 +29,6 @@
 
 /* Begin PBXFileReference section */
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
-		CB4FFEAB28BBCB2100BA26E9 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 			children = (
 				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
 				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
-				CB4FFEAB28BBCB2100BA26E9 /* MainViewController.swift */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -265,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */,
-				CB4FFEAC28BBCB2100BA26E9 /* MainViewController.swift in Sources */,
 				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
 				CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */,
 				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
