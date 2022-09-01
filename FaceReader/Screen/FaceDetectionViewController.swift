@@ -12,6 +12,12 @@ import Lottie
 import Vision
 
 class FaceDetectionViewController: BaseViewController {
+    
+    private enum Size {
+        static let topBackgroundHeight: CGFloat = UIScreen.main.bounds.size.height * 0.18
+        static let backgroundHeight: CGFloat = UIScreen.main.bounds.size.height * 0.3
+    }
+    
     var sequenceHandler = VNSequenceRequestHandler()
     
     private let loading: AnimationView = .init(name: "loading")
@@ -93,14 +99,14 @@ class FaceDetectionViewController: BaseViewController {
             topBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             topBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            topBackgroundView.heightAnchor.constraint(equalToConstant: 140),
+            topBackgroundView.heightAnchor.constraint(equalToConstant: Size.topBackgroundHeight),
         ]
         
         let backgroundViewConstraints = [
             backgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundView.heightAnchor.constraint(equalToConstant: 240),
+            backgroundView.heightAnchor.constraint(equalToConstant: Size.backgroundHeight),
         ]
         
         let ratioGuideLabelConstraints = [
@@ -153,7 +159,10 @@ class FaceDetectionViewController: BaseViewController {
     }
     
     @objc private func didTapCameraButton() {
-        guard (FaceManager.leftEye != nil) else { return }
+        guard (FaceManager.leftEye != nil) else {
+            showToast()
+            return
+        }
         coverView.isHidden = false
         loading.isHidden = false
         loading.play()
@@ -176,6 +185,24 @@ class FaceDetectionViewController: BaseViewController {
                 self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
             }
         }
+    }
+    
+    private func showToast() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = .font(.regular, ofSize: 20)
+        toastLabel.textAlignment = .center;
+        toastLabel.text = "얼굴을 촬영해주세요"
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
     }
 }
 
