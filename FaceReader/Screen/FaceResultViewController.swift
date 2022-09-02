@@ -65,7 +65,7 @@ class FaceResultViewController: BaseViewController {
     
     private let deadOrLiveLabel: UILabel = {
         let label = UILabel()
-        label.text = "DEAD OR LIVE"
+        label.text = "DEAD OR ALIVE"
         label.font = .font(.regular, ofSize: 60)
         label.textColor = UIColor.mainText
         label.textAlignment = .center

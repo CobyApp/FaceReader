@@ -26,63 +26,46 @@ final class FaceManager {
     static var faceImage: UIImage? = nil
     static var cartoonImage: UIImage? = nil
     
-    static var eyeDistance: Double? = nil
-    static var eyeWidth: Double? = nil
-    static var eyeHeight: Double? = nil
-    
-    static var noseWidth: Double? = nil
-    static var noseHeight: Double? = nil
-    
-    static var lipsWidth: Double? = nil
-    static var lipsHeight: Double? = nil
-    
-    static var faceFirst: Double? = nil
-    static var faceSecond: Double? = nil
-    
-    static var eyeRatio: Double? = nil
-    static var noseRatio: Double? = nil
-    static var lipsRatio: Double? = nil
-    static var faceRatio: Double? = nil
-    
-    static var eyeRatioScore: Int = 0
-    static var noseRatioScore: Int = 0
-    static var lipsRatioScore: Int = 0
-    static var faceRatioScore: Int = 0
-    
     static var totalScore: Int = 0
-
     static var grade: Int = 0
     
     func setValues() {
+        guard let leftEyebrow = FaceManager.leftEyebrow else { return }
+        guard let rightEye = FaceManager.rightEye else { return }
+        guard let leftEye = FaceManager.leftEye else { return }
+        guard let nose = FaceManager.nose else { return }
+        guard let outerLips = FaceManager.outerLips else { return }
+        guard let faceContour = FaceManager.faceContour else { return }
+        
         // eye
-        FaceManager.eyeDistance = (FaceManager.rightEye![3].x - FaceManager.leftEye![3].x) as Double
-        FaceManager.eyeWidth = (FaceManager.leftEye![3].x - FaceManager.leftEye![0].x) as Double
-        FaceManager.eyeHeight = (FaceManager.leftEye![5].y - FaceManager.leftEye![1].y) as Double
+        let eyeDistance = (rightEye[3].x - leftEye[3].x) as Double
+        let eyeWidth = (leftEye[3].x - leftEye[0].x) as Double
         
         // nose
-        FaceManager.noseWidth = (FaceManager.nose![5].x - FaceManager.nose![3].x) as Double
-        FaceManager.noseHeight = (FaceManager.nose![4].y - FaceManager.nose![0].y) as Double
+        let noseWidth = (nose[5].x - nose[3].x) as Double
+        let noseHeight = (nose[4].y - nose[0].y) as Double
         
         // lips
-        FaceManager.lipsWidth = (FaceManager.outerLips![7].x - FaceManager.outerLips![13].x) as Double
-        FaceManager.lipsHeight = (FaceManager.outerLips![10].y - FaceManager.outerLips![4].y) as Double
+        let lipsWidth = (outerLips[7].x - outerLips[13].x) as Double
+        let lipsHeight = (outerLips[10].y - outerLips[4].y) as Double
         
         // face
-        FaceManager.faceFirst = (FaceManager.nose![4].y - FaceManager.leftEyebrow![3].y) as Double
-        FaceManager.faceSecond = (FaceManager.faceContour![8].y - FaceManager.nose![4].y) as Double
+        let faceFirst = (nose[4].y - leftEyebrow[3].y) as Double
+        let faceSecond = (faceContour[8].y - nose[4].y) as Double
         
         // ratio
-        FaceManager.eyeRatio = FaceManager.eyeDistance! / FaceManager.eyeWidth! // 1에 가까워야함 -> 1.1
-        FaceManager.noseRatio = FaceManager.noseWidth! / FaceManager.noseHeight! // 0.64에 가까워야함 -> 0.6
-        FaceManager.lipsRatio = FaceManager.lipsWidth! / FaceManager.lipsHeight! // 3에 가까워야함 -> 2.6
-        FaceManager.faceRatio = FaceManager.faceFirst! / FaceManager.faceSecond! // 1에 가까워야함 -> 1.1
+        let eyeRatio = eyeDistance / eyeWidth // 1에 가까워야함 -> 1.1
+        let noseRatio = noseWidth / noseHeight // 0.64에 가까워야함 -> 0.6
+        let lipsRatio = lipsWidth / lipsHeight // 3에 가까워야함 -> 2.6
+        let faceRatio = faceFirst / faceSecond // 1에 가까워야함 -> 1.1
         
-        FaceManager.eyeRatioScore = Int(abs(FaceManager.eyeRatio! - 1.1) * 20000) * 1000
-        FaceManager.noseRatioScore = Int(abs(FaceManager.noseRatio! - 0.6) * 20000) * 1000
-        FaceManager.lipsRatioScore = Int(abs(FaceManager.lipsRatio! - 2.6) * 5000) * 1000
-        FaceManager.faceRatioScore = Int(abs(FaceManager.faceRatio! - 1.1) * 20000) * 1000
+        // score
+        let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 20000) * 1000
+        let noseRatioScore = Int(abs(noseRatio - 0.6) * 20000) * 1000
+        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 5000) * 1000
+        let faceRatioScore = Int(abs(faceRatio - 1.1) * 20000) * 1000
         
-        FaceManager.totalScore = FaceManager.eyeRatioScore + FaceManager.noseRatioScore + FaceManager.lipsRatioScore + FaceManager.faceRatioScore
+        FaceManager.totalScore = eyeRatioScore + noseRatioScore + lipsRatioScore + faceRatioScore
         
         if FaceManager.totalScore < 10000000 {
             FaceManager.grade = 0
@@ -95,12 +78,6 @@ final class FaceManager {
         } else {
             FaceManager.grade = 4
         }
-        
-        print("values")
-        print(FaceManager.eyeRatio! - 1.1)
-        print(FaceManager.noseRatio! - 0.6)
-        print(FaceManager.lipsRatio! - 2.6)
-        print(FaceManager.faceRatio! - 1.1)
     }
     
     func postImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
