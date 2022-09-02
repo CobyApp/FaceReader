@@ -62,7 +62,7 @@ final class FaceManager {
         // score
         let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 20000) * 1000
         let noseRatioScore = Int(abs(noseRatio - 0.6) * 20000) * 1000
-        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 5000) * 1000
+        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 10000) * 1000
         let faceRatioScore = Int(abs(faceRatio - 1.1) * 20000) * 1000
         
         FaceManager.totalScore = eyeRatioScore + noseRatioScore + lipsRatioScore + faceRatioScore
