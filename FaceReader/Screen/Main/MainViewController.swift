@@ -52,6 +52,16 @@ final class MainViewController: BaseViewController {
         return button
     }()
     
+    private lazy var segControl: MSegmentedControl = {
+        let segControl = MSegmentedControl(
+            frame: CGRect(x: 0, y: 0, width: 0, height: 0),
+            buttonTitle: ["일간", "주간", "월간", "올타임"])
+        segControl.textColor = .black
+        segControl.selectorTextColor = .white
+        segControl.delegate = self
+        return segControl
+    }()
+    
     private let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -75,10 +85,17 @@ final class MainViewController: BaseViewController {
     }()
     
     override func setupLayout() {
-        view.addSubviews(listCollectionView, cameraButton)
+        view.addSubviews(segControl, listCollectionView, cameraButton)
+        
+        let segControlConstraints = [
+            segControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            segControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            segControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            segControl.heightAnchor.constraint(equalToConstant: 44)
+        ]
         
         let listCollectionViewConstraints = [
-            listCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            listCollectionView.topAnchor.constraint(equalTo: segControl.bottomAnchor, constant: 10),
             listCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             listCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10),
             listCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -91,7 +108,7 @@ final class MainViewController: BaseViewController {
             cameraButton.heightAnchor.constraint(equalToConstant: 70)
         ]
         
-        [listCollectionViewConstraints, cameraButtonConstraints]
+        [segControlConstraints, listCollectionViewConstraints, cameraButtonConstraints]
             .forEach { constraints in
                 NSLayoutConstraint.activate(constraints)
             }
@@ -132,5 +149,17 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 //        DispatchQueue.main.async {
 //            self.navigationController?.pushViewController(viewController, animated: true)
 //        }
+    }
+}
+
+extension MainViewController: MSegmentedControlDelegate {
+    func segSelectedIndexChange(to index: Int) {
+        switch index {
+        case 0: print("일간")
+        case 1: print("주간")
+        case 2: print("월간")
+        case 3: print("올타임")
+        default: break
+        }
     }
 }
