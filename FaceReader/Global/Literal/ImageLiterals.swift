@@ -10,6 +10,7 @@ import UIKit
 enum ImageLiterals {
     static var logo: UIImage { .load(name: "logo")}
     static var btnBack: UIImage { .load(systemName: "chevron.backward") }
+    static var btnHelp: UIImage { .load(systemName: "exclamationmark.circle") }
     static var btnCamera: UIImage { .load(name: "camera") }
     static var background: UIImage { .load(name: "background") }
 }

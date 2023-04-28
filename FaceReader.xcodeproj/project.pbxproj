@@ -10,12 +10,15 @@
 		CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52C429FB849800B4FF69 /* MainViewController.swift */; };
 		CB1A52CD29FB863B00B4FF69 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52CC29FB863B00B4FF69 /* BaseCollectionViewCell.swift */; };
 		CB1A52CF29FB864F00B4FF69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */; };
-		CB1A52D129FB8CBC00B4FF69 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52D029FB8CBC00B4FF69 /* RankView.swift */; };
 		CB2B2AB728B6A35200EDEC8D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2AB628B6A35200EDEC8D /* Alamofire */; };
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
 		CB9E777A28BBE32A0072DB9A /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */; };
 		CB9E777D28BBFB000072DB9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB9E777F28BBFB000072DB9A /* InfoPlist.strings */; };
+		CBA34D9629FC24CA002D6ECB /* RankCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9529FC24CA002D6ECB /* RankCollectionViewCell.swift */; };
+		CBA34D9829FC27B4002D6ECB /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */; };
+		CBA34D9A29FC27CE002D6ECB /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */; };
+		CBA34D9D29FC2A34002D6ECB /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */; };
 		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
 		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
 		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
@@ -37,11 +40,14 @@
 		CB1A52C429FB849800B4FF69 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		CB1A52CC29FB863B00B4FF69 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		CB1A52D029FB8CBC00B4FF69 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CB9E777E28BBFB000072DB9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CB9E778028BBFB1C0072DB9A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CBA34D9529FC24CA002D6ECB /* RankCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankCollectionViewCell.swift; sourceTree = "<group>"; };
+		CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
+		CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
 		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -86,24 +92,16 @@
 		CB1A52C729FB851200B4FF69 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				CB1A52C829FB85AD00B4FF69 /* UIComponent */,
 				CB1A52C929FB85C100B4FF69 /* Cell */,
 				CB1A52C429FB849800B4FF69 /* MainViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		CB1A52C829FB85AD00B4FF69 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				CB1A52D029FB8CBC00B4FF69 /* RankView.swift */,
-			);
-			path = UIComponent;
-			sourceTree = "<group>";
-		};
 		CB1A52C929FB85C100B4FF69 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				CBA34D9529FC24CA002D6ECB /* RankCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -116,6 +114,8 @@
 				CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */,
 				CBE688F228B5D7A300720D32 /* UIFont+Extension.swift */,
 				CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */,
+				CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */,
+				CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				CBE1A3B328B458E000D173AB /* BackButton.swift */,
+				CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
@@ -326,8 +327,11 @@
 				CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */,
 				CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */,
 				CBE1A3BA28B473FB00D173AB /* FaceManager.swift in Sources */,
-				CB1A52D129FB8CBC00B4FF69 /* RankView.swift in Sources */,
+				CBA34D9829FC27B4002D6ECB /* UICollectionView.swift in Sources */,
+				CBA34D9629FC24CA002D6ECB /* RankCollectionViewCell.swift in Sources */,
+				CBA34D9A29FC27CE002D6ECB /* NSObject+Extension.swift in Sources */,
 				CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */,
+				CBA34D9D29FC2A34002D6ECB /* HelpButton.swift in Sources */,
 				CB9E777A28BBE32A0072DB9A /* UIColor+Extension.swift in Sources */,
 				CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */,
 				CBFCDC2028B3684D004BCB27 /* SceneDelegate.swift in Sources */,
