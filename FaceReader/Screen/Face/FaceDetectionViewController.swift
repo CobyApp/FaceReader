@@ -49,12 +49,16 @@ final class FaceDetectionViewController: BaseViewController {
         return label
     }()
     
-    private let levelGuideLabel: UILabel = {
+    private let tipLabel: UILabel = {
         let label = UILabel()
-        label.text = "재해레벨 : 낭(狼) > 호(虎) > 귀(鬼) > 용(龍) > 신(神)"
+        label.text = """
+눈, 코, 입, 얼굴형 등의 좌표값을 통해 비율을 측정하므로
+얼굴을 망가뜨릴수록 높은 등급을 얻을 수 있습니다.
+"""
         label.font = .font(.regular, ofSize: 17)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         return label
     }()
     
@@ -91,7 +95,7 @@ final class FaceDetectionViewController: BaseViewController {
     }
     
     override func setupLayout() {
-        view.addSubviews(topBackgroundView, backgroundView, ratioGuideLabel, levelGuideLabel, photoGuideLabel, cameraButton, coverView, loading)
+        view.addSubviews(topBackgroundView, backgroundView, ratioGuideLabel, tipLabel, photoGuideLabel, cameraButton, coverView, loading)
         loading.isHidden = true
         coverView.isHidden = true
         
@@ -115,10 +119,10 @@ final class FaceDetectionViewController: BaseViewController {
             ratioGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ]
         
-        let levelGuideLabelConstraints = [
-            levelGuideLabel.bottomAnchor.constraint(equalTo: ratioGuideLabel.bottomAnchor, constant: 40),
-            levelGuideLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            levelGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        let tipLabelConstraints = [
+            tipLabel.bottomAnchor.constraint(equalTo: ratioGuideLabel.bottomAnchor, constant: 60),
+            tipLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tipLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ]
         
         let photoGuideLabelConstraints = [
@@ -146,15 +150,13 @@ final class FaceDetectionViewController: BaseViewController {
             loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
 
-        [topBackgroundViewConstraints, backgroundViewConstraints, ratioGuideLabelConstraints, levelGuideLabelConstraints, photoGuideLabelConstraints, cameraButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
+        [topBackgroundViewConstraints, backgroundViewConstraints, ratioGuideLabelConstraints, tipLabelConstraints, photoGuideLabelConstraints, cameraButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-
-        navigationItem.leftBarButtonItem = nil
         title = "괴인 측정기"
     }
     

@@ -72,7 +72,7 @@ final class FaceResultViewController: BaseViewController {
         return label
     }()
     
-    private lazy var gradeLabel: UILabel = {
+    private lazy var tipLabel: UILabel = {
         let label = UILabel()
         label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
@@ -95,7 +95,7 @@ final class FaceResultViewController: BaseViewController {
     override func setupLayout() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, tipLabel, scoreLabel)
         contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
@@ -140,9 +140,9 @@ final class FaceResultViewController: BaseViewController {
         ]
         
         let gradeLabelConstraints = [
-            gradeLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
-            gradeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            gradeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            tipLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
+            tipLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            tipLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let scoreLabelConstraints = [

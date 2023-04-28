@@ -10,9 +10,9 @@ import UIKit
 final class HelpViewController: BaseViewController {
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 20.0
-        static let collectionVerticalSpacing: CGFloat = 4.0
+        static let collectionVerticalSpacing: CGFloat = 0.0
         static let cellWidth: CGFloat = UIScreen.main.bounds.size.width - collectionHorizontalSpacing * 2
-        static let cellHeight: CGFloat = 60
+        static let cellHeight: CGFloat = 400
         static let collectionInset = UIEdgeInsets(
             top: collectionVerticalSpacing,
             left: collectionHorizontalSpacing,
@@ -34,7 +34,6 @@ final class HelpViewController: BaseViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.backgroundColor = .clear
         collectionView.dataSource = self
-        collectionView.delegate = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(
             cell: GradeInfoCollectionViewCell.self,
@@ -61,29 +60,23 @@ final class HelpViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        title = "점수 산출"
+        title = "재해 레벨"
     }
 }
 
 // MARK: - UICollectionViewDataSource
 extension HelpViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 20
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: GradeInfoCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        
+        cell.gradeImageView.image = gradeData[indexPath.item]["image"] as? UIImage
+        cell.gradeLabel.text = "\(gradeData[indexPath.item]["grade"]!) : \(gradeData[indexPath.item]["info"]!)"
+        cell.detailLabel.text = gradeData[indexPath.item]["detail"] as? String
 
         return cell
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-extension HelpViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let viewController = MeetingDetailViewController(meeting: meetings[indexPath.item])
-//        DispatchQueue.main.async {
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//        }
     }
 }

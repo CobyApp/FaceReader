@@ -90,7 +90,7 @@ final class MainViewController: BaseViewController {
         let segControlConstraints = [
             segControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            segControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            segControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
             segControl.heightAnchor.constraint(equalToConstant: 44)
         ]
         
