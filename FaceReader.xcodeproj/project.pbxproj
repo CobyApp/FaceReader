@@ -19,6 +19,8 @@
 		CBA34D9829FC27B4002D6ECB /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */; };
 		CBA34D9A29FC27CE002D6ECB /* NSObject+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */; };
 		CBA34D9D29FC2A34002D6ECB /* HelpButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */; };
+		CBA34DA029FC2C4E002D6ECB /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */; };
+		CBA34DA429FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34DA329FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift */; };
 		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
 		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
 		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
@@ -48,6 +50,8 @@
 		CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extension.swift"; sourceTree = "<group>"; };
 		CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButton.swift; sourceTree = "<group>"; };
+		CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
+		CBA34DA329FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -106,6 +110,31 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		CBA34D9E29FC2C3F002D6ECB /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				CBA34DA229FC2C59002D6ECB /* UIComponet */,
+				CBA34DA129FC2C55002D6ECB /* Cell */,
+				CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		CBA34DA129FC2C55002D6ECB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				CBA34DA329FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		CBA34DA229FC2C59002D6ECB /* UIComponet */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponet;
+			sourceTree = "<group>";
+		};
 		CBE1A3A828B4542500D173AB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				CB1A52C729FB851200B4FF69 /* Main */,
+				CBA34D9E29FC2C3F002D6ECB /* Help */,
 				CB1A52C629FB84FE00B4FF69 /* Face */,
 			);
 			path = Screen;
@@ -317,11 +347,13 @@
 			files = (
 				CB1A52CF29FB864F00B4FF69 /* BaseTableViewCell.swift in Sources */,
 				CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */,
+				CBA34DA429FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift in Sources */,
 				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
 				CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */,
 				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
 				CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */,
 				CB1A52CD29FB863B00B4FF69 /* BaseCollectionViewCell.swift in Sources */,
+				CBA34DA029FC2C4E002D6ECB /* HelpViewController.swift in Sources */,
 				CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */,
 				CBE688F328B5D7A300720D32 /* UIFont+Extension.swift in Sources */,
 				CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */,
