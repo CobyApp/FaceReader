@@ -11,7 +11,7 @@ import AVFoundation
 import Lottie
 import Vision
 
-class FaceDetectionViewController: BaseViewController {
+final class FaceDetectionViewController: BaseViewController {
     
     private enum Size {
         static let topBackgroundHeight: CGFloat = UIScreen.main.bounds.size.height * 0.18
@@ -90,7 +90,7 @@ class FaceDetectionViewController: BaseViewController {
         session.startRunning()
     }
     
-    override func render() {
+    override func setupLayout() {
         view.addSubviews(topBackgroundView, backgroundView, ratioGuideLabel, levelGuideLabel, photoGuideLabel, cameraButton, coverView, loading)
         loading.isHidden = true
         coverView.isHidden = true

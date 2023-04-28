@@ -7,12 +7,11 @@
 
 import UIKit
 
-class FaceResultViewController: BaseViewController {
+final class FaceResultViewController: BaseViewController {
     
     private enum Size {
         static let wantedWidth: CGFloat = UIScreen.main.bounds.size.width
         static let wantedHeight: CGFloat = wantedWidth * 1.8
-        
         static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
         static let imageHeight: CGFloat = imageWidth * 0.8
     }
@@ -93,7 +92,7 @@ class FaceResultViewController: BaseViewController {
         return label
     }()
     
-    override func render() {
+    override func setupLayout() {
         view.addSubviews(scrollView)
         scrollView.addSubviews(contentView)
         contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)

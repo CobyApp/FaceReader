@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52C429FB849800B4FF69 /* MainViewController.swift */; };
+		CB1A52CD29FB863B00B4FF69 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52CC29FB863B00B4FF69 /* BaseCollectionViewCell.swift */; };
+		CB1A52CF29FB864F00B4FF69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */; };
+		CB1A52D129FB8CBC00B4FF69 /* RankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52D029FB8CBC00B4FF69 /* RankView.swift */; };
 		CB2B2AB728B6A35200EDEC8D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2AB628B6A35200EDEC8D /* Alamofire */; };
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
@@ -30,6 +34,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB1A52C429FB849800B4FF69 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		CB1A52CC29FB863B00B4FF69 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		CB1A52D029FB8CBC00B4FF69 /* RankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankView.swift; sourceTree = "<group>"; };
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		CB9E777E28BBFB000072DB9A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -66,6 +74,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CB1A52C629FB84FE00B4FF69 /* Face */ = {
+			isa = PBXGroup;
+			children = (
+				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
+				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
+			);
+			path = Face;
+			sourceTree = "<group>";
+		};
+		CB1A52C729FB851200B4FF69 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A52C829FB85AD00B4FF69 /* UIComponent */,
+				CB1A52C929FB85C100B4FF69 /* Cell */,
+				CB1A52C429FB849800B4FF69 /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		CB1A52C829FB85AD00B4FF69 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				CB1A52D029FB8CBC00B4FF69 /* RankView.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		CB1A52C929FB85C100B4FF69 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		CBE1A3A828B4542500D173AB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,8 +123,8 @@
 		CBE1A3BB28B47C5800D173AB /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				CBFCDC2128B3684D004BCB27 /* FaceDetectionViewController.swift */,
-				CBE1A3B728B4738C00D173AB /* FaceResultViewController.swift */,
+				CB1A52C729FB851200B4FF69 /* Main */,
+				CB1A52C629FB84FE00B4FF69 /* Face */,
 			);
 			path = Screen;
 			sourceTree = "<group>";
@@ -105,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				CBE1A3B128B4588800D173AB /* BaseViewController.swift */,
+				CB1A52CC29FB863B00B4FF69 /* BaseCollectionViewCell.swift */,
+				CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -229,7 +273,7 @@
 			};
 			buildConfigurationList = CBFCDC1528B3684D004BCB27 /* Build configuration list for PBXProject "FaceReader" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -270,15 +314,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB1A52CF29FB864F00B4FF69 /* BaseTableViewCell.swift in Sources */,
 				CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */,
 				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
 				CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */,
 				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
 				CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */,
+				CB1A52CD29FB863B00B4FF69 /* BaseCollectionViewCell.swift in Sources */,
 				CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */,
 				CBE688F328B5D7A300720D32 /* UIFont+Extension.swift in Sources */,
+				CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */,
 				CBE1A3B428B458E000D173AB /* BackButton.swift in Sources */,
 				CBE1A3BA28B473FB00D173AB /* FaceManager.swift in Sources */,
+				CB1A52D129FB8CBC00B4FF69 /* RankView.swift in Sources */,
 				CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */,
 				CB9E777A28BBE32A0072DB9A /* UIColor+Extension.swift in Sources */,
 				CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */,
@@ -451,6 +499,9 @@
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -483,6 +534,9 @@
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

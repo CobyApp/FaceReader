@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIColor {
-
     static var mainText: UIColor {
         return UIColor(hex: "#4B3E36")
     }

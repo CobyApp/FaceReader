@@ -26,8 +26,8 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        render()
-        configUI()
+        setupLayout()
+        configureUI()
         setupBackButton()
         hidekeyboardWhenTappedAround()
         setupNavigationBar()
@@ -42,18 +42,18 @@ class BaseViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    func render() {
+    func setupLayout() {
         // Override Layout
     }
     
-    func configUI() {
+    func configureUI() {
         view.backgroundColor = .white
     }
     
     func setupNavigationBar() {
         guard let navigationBar = navigationController?.navigationBar else { return }
         let appearance = UINavigationBarAppearance()
-        let font = UIFont.font(.regular, ofSize: 20)
+        let font = UIFont.font(.regular, ofSize: 22)
         let largeFont = UIFont.font(.regular, ofSize: 34)
         
         appearance.titleTextAttributes = [.font: font]
