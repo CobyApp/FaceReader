@@ -14,6 +14,7 @@ final class MainViewController: BaseViewController {
     private var cursor: DocumentSnapshot?
     private var dataMayContinue = true
     private var pages = 20
+    private var refreshControl = UIRefreshControl()
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 20.0
@@ -94,6 +95,7 @@ final class MainViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        setRefreshControl()
     }
     
     override func setupLayout() {
@@ -102,7 +104,7 @@ final class MainViewController: BaseViewController {
         let segControlConstraints = [
             segControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             segControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            segControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -100),
+            segControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             segControl.heightAnchor.constraint(equalToConstant: 44)
         ]
         
@@ -126,6 +128,12 @@ final class MainViewController: BaseViewController {
             }
     }
     
+    private func setRefreshControl() {
+        refreshControl.addTarget(self, action: #selector(refreshTable(refresh:)), for: .valueChanged)
+        refreshControl.tintColor = .black
+        listCollectionView.refreshControl = refreshControl
+    }
+    
     override func setupNavigationBar() {
         super.setupNavigationBar()
         title = "LEADER BOARD"
@@ -144,6 +152,7 @@ final class MainViewController: BaseViewController {
             
             DispatchQueue.main.async {
                 self.listCollectionView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
     }
@@ -164,6 +173,10 @@ final class MainViewController: BaseViewController {
             
             self.dataMayContinue = true
         }
+    }
+    
+    @objc func refreshTable(refresh: UIRefreshControl) {
+        loadData()
     }
 }
 
