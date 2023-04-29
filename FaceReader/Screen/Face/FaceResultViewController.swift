@@ -72,7 +72,7 @@ final class FaceResultViewController: BaseViewController {
         return label
     }()
     
-    private lazy var tipLabel: UILabel = {
+    private lazy var gradeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
@@ -92,10 +92,22 @@ final class FaceResultViewController: BaseViewController {
         return label
     }()
     
+    private lazy var enrollButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .black.withAlphaComponent(0.5)
+        button.setTitle("랭킹 등록하기", for: .normal)
+        button.titleLabel?.font = .font(.regular, ofSize: 20)
+        let action = UIAction { [weak self] _ in
+            self?.enrollButtonTouched(button)
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    
     override func setupLayout() {
-        view.addSubviews(scrollView)
+        view.addSubviews(scrollView, enrollButton)
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, tipLabel, scoreLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)
         contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
@@ -108,7 +120,7 @@ final class FaceResultViewController: BaseViewController {
             scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: enrollButton.topAnchor)
         ]
         
         let contentViewConstraints = [
@@ -140,9 +152,9 @@ final class FaceResultViewController: BaseViewController {
         ]
         
         let gradeLabelConstraints = [
-            tipLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
-            tipLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            tipLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            gradeLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
+            gradeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            gradeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let scoreLabelConstraints = [
@@ -151,7 +163,14 @@ final class FaceResultViewController: BaseViewController {
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
-        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints].forEach { constraints in
+        let enrollButtonConstraints = [
+            enrollButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            enrollButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            enrollButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            enrollButton.heightAnchor.constraint(equalToConstant: 80)
+        ]
+        
+        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints, enrollButtonConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -186,8 +205,6 @@ final class FaceResultViewController: BaseViewController {
         
         let activityViewController = UIActivityViewController(activityItems : shareObject, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
-        
-
         activityViewController.excludedActivityTypes = [
             UIActivity.ActivityType.postToFacebook,
             UIActivity.ActivityType.postToTwitter,
@@ -204,5 +221,34 @@ final class FaceResultViewController: BaseViewController {
         ]
 
         self.present(activityViewController, animated: true)
+    }
+    
+    @IBAction
+    func enrollButtonTouched(_ sender: Any) {
+        let alert = UIAlertController(
+            title: "랭킹 등록",
+            message: """
+닉네임과 비밀번호를 설정해주세요.
+리더보드에서 수배서를 보려면,
+설정한 비밀번호를 입력해야 합니다.
+""",
+            preferredStyle: .alert
+        )
+        let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { (cancel) in }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        alert.addTextField { (nicknameField) in
+            nicknameField.placeholder = "닉네임"
+        }
+        alert.addTextField { (passwordField) in
+            passwordField.keyboardType = .numberPad
+            passwordField.placeholder = "비밀번호"
+        }
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

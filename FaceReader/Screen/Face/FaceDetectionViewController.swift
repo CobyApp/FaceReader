@@ -114,13 +114,13 @@ final class FaceDetectionViewController: BaseViewController {
         ]
         
         let ratioGuideLabelConstraints = [
-            ratioGuideLabel.bottomAnchor.constraint(equalTo: topBackgroundView.topAnchor, constant: 70),
+            ratioGuideLabel.bottomAnchor.constraint(equalTo: topBackgroundView.topAnchor, constant: 66),
             ratioGuideLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             ratioGuideLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ]
         
         let tipLabelConstraints = [
-            tipLabel.bottomAnchor.constraint(equalTo: ratioGuideLabel.bottomAnchor, constant: 60),
+            tipLabel.bottomAnchor.constraint(equalTo: ratioGuideLabel.bottomAnchor, constant: 50),
             tipLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             tipLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ]
