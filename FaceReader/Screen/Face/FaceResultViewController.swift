@@ -7,6 +7,8 @@
 
 import UIKit
 
+import Lottie
+
 final class FaceResultViewController: BaseViewController {
     
     private enum Size {
@@ -15,6 +17,14 @@ final class FaceResultViewController: BaseViewController {
         static let imageWidth: CGFloat = UIScreen.main.bounds.size.width - 40
         static let imageHeight: CGFloat = imageWidth * 0.8
     }
+    
+    private let loading: AnimationView = .init(name: "loading")
+    
+    private let coverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        return view
+    }()
     
     private lazy var backLabel: UILabel = {
         let label = UILabel()
@@ -105,7 +115,9 @@ final class FaceResultViewController: BaseViewController {
     }()
     
     override func setupLayout() {
-        view.addSubviews(scrollView, enrollButton)
+        view.addSubviews(scrollView, enrollButton, coverView, loading)
+        loading.isHidden = true
+        coverView.isHidden = true
         scrollView.addSubviews(contentView)
         contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)
         contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
@@ -170,7 +182,19 @@ final class FaceResultViewController: BaseViewController {
             enrollButton.heightAnchor.constraint(equalToConstant: 80)
         ]
         
-        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints, enrollButtonConstraints].forEach { constraints in
+        let coverViewConstraints = [
+            coverView.topAnchor.constraint(equalTo: view.topAnchor),
+            coverView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            coverView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            coverView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+        
+        let loadingConstraints = [
+            loading.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+        
+        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints, enrollButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -186,11 +210,37 @@ final class FaceResultViewController: BaseViewController {
         title = "괴인 측정 결과"
     }
     
-    func numberFormatter(number: Int) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        return numberFormatter.string(from: NSNumber(value: number))!
+    private func showToast() {
+        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = .font(.regular, ofSize: 20)
+        toastLabel.textAlignment = .center;
+        toastLabel.text = "내용을 채워주세요"
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
+    private func enrollMonster(nickname: String, password: String) {
+        Task { [weak self] in
+
+            self?.coverView.isHidden = false
+            self?.loading.isHidden = false
+            self?.loading.play()
+
+            await FirebaseManager.shared.createMonster(nickname: nickname, password: password, image: (self?.contentView.asImage())!)
+
+            self?.coverView.isHidden = true
+            self?.loading.pause()
+            self?.loading.isHidden = true
+        }
     }
     
     @objc private func didTapBackLabel(sender: UITapGestureRecognizer) {
@@ -235,6 +285,13 @@ final class FaceResultViewController: BaseViewController {
             preferredStyle: .alert
         )
         let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
+            guard let nickname = alert.textFields?[0].text,
+                  let password = alert.textFields?[1].text
+            else {
+                self.showToast()
+                return
+            }
+            self.enrollMonster(nickname: nickname, password: password)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel) { (cancel) in }
