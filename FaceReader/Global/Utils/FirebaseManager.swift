@@ -45,7 +45,7 @@ final class FirebaseManager: NSObject {
 
             try await store.collection("monsters").document(uid).setData(monsterData)
         } catch {
-            print("Failed to create Meeting")
+            print("Failed to create Monster")
         }
     }
 }

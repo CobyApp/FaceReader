@@ -105,7 +105,7 @@ final class FaceResultViewController: BaseViewController {
     private lazy var enrollButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black.withAlphaComponent(0.5)
-        button.setTitle("랭킹 등록하기", for: .normal)
+        button.setTitle("괴인 등록", for: .normal)
         button.titleLabel?.font = .font(.regular, ofSize: 20)
         let action = UIAction { [weak self] _ in
             self?.enrollButtonTouched(button)
@@ -210,13 +210,13 @@ final class FaceResultViewController: BaseViewController {
         title = "괴인 측정 결과"
     }
     
-    private func showToast() {
+    private func showToast(message: String) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white
         toastLabel.font = .font(.regular, ofSize: 20)
         toastLabel.textAlignment = .center;
-        toastLabel.text = "내용을 채워주세요"
+        toastLabel.text = message
         toastLabel.alpha = 1.0
         toastLabel.layer.cornerRadius = 10;
         toastLabel.clipsToBounds  =  true
@@ -240,6 +240,7 @@ final class FaceResultViewController: BaseViewController {
             self?.coverView.isHidden = true
             self?.loading.pause()
             self?.loading.isHidden = true
+            self?.showToast("괴인 등록 완료")
         }
     }
     
@@ -276,7 +277,7 @@ final class FaceResultViewController: BaseViewController {
     @IBAction
     func enrollButtonTouched(_ sender: Any) {
         let alert = UIAlertController(
-            title: "랭킹 등록",
+            title: "괴인 등록",
             message: """
 닉네임과 비밀번호를 설정해주세요.
 리더보드에서 수배서를 보려면,
@@ -286,9 +287,11 @@ final class FaceResultViewController: BaseViewController {
         )
         let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
             guard let nickname = alert.textFields?[0].text,
-                  let password = alert.textFields?[1].text
+                  let password = alert.textFields?[1].text,
+                  nickname.count != 0,
+                  password.count != 0
             else {
-                self.showToast()
+                self.showToast(message: "내용을 채워주세요")
                 return
             }
             self.enrollMonster(nickname: nickname, password: password)
