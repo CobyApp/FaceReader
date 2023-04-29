@@ -51,7 +51,7 @@ final class FirebaseManager: NSObject {
     
     func loadMonsters(term: String, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
-            var querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+            var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
             
 //            switch(term) {
 //            case "일간":
@@ -80,7 +80,7 @@ final class FirebaseManager: NSObject {
     
     func continueMonsters(term: String, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
-            var querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+            var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
             
 //            switch(term) {
 //            case "일간":
