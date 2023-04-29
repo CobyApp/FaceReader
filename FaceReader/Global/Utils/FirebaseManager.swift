@@ -29,7 +29,7 @@ final class FirebaseManager: NSObject {
     
     func createMonster(nickname: String, password: String, image: UIImage) async {
         do {
-            let uid = "\(nickname)_\(FaceManager.totalScore)"
+            let uid = UUID().uuidString
             let ref = storage.reference(withPath: uid)
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
             _ = try await ref.putDataAsync(imageData, metadata: nil)

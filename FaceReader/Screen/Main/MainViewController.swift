@@ -13,7 +13,7 @@ final class MainViewController: BaseViewController {
     private var monsters = [Monster]()
     private var cursor: DocumentSnapshot?
     private var dataMayContinue = true
-    private var pages = 3
+    private var pages = 20
     
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 20.0
@@ -154,7 +154,7 @@ final class MainViewController: BaseViewController {
         
         Task {
             if let result = await FirebaseManager.shared.continueMonsters(term: "", cursor: cursor, pages: pages) {
-                self.monsters = result.monsters
+                self.monsters += result.monsters
                 self.cursor = result.cursor
             }
             
