@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>639433729921-o3vkuef2r0e3ttb6811464le05ncfa68.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.639433729921-o3vkuef2r0e3ttb6811464le05ncfa68</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBp9cVx-Jrn97cCkgGVr0nu8s5BzW8_ZAc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>639433729921</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.coby.FaceReader</string>
+	<key>PROJECT_ID</key>
+	<string>facereader-e8ba8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>facereader-e8ba8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:639433729921:ios:c265336ac3f149c2776a80</string>
+</dict>
+</plist>
