@@ -240,7 +240,7 @@ final class FaceResultViewController: BaseViewController {
             self?.coverView.isHidden = true
             self?.loading.pause()
             self?.loading.isHidden = true
-            self?.showToast("괴인 등록 완료")
+            self?.showToast(message: "괴인 등록 완료")
         }
     }
     
