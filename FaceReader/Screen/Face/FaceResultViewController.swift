@@ -26,17 +26,6 @@ final class FaceResultViewController: BaseViewController {
         return view
     }()
     
-    private lazy var backLabel: UILabel = {
-        let label = UILabel()
-        label.text = "다시 찍기"
-        label.font = .font(.regular, ofSize: 20)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBackLabel))
-        label.isUserInteractionEnabled = true
-        label.addGestureRecognizer(tap)
-        return label
-    }()
-    
     private lazy var shareLabel: UILabel = {
         let label = UILabel()
         label.text = "공유"
@@ -201,11 +190,7 @@ final class FaceResultViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        
-        let backLabelView = makeBarButtonItem(with: backLabel)
         let shareLabelView = makeBarButtonItem(with: shareLabel)
-
-        navigationItem.leftBarButtonItem = backLabelView
         navigationItem.rightBarButtonItem = shareLabelView
         title = "괴인 측정 결과"
     }

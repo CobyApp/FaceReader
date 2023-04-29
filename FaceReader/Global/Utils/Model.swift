@@ -15,6 +15,14 @@ struct Monster: Codable, Identifiable {
     let grade, score: Int
 }
 
+func numberFormatter(number: Int) -> String {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .decimal
+    
+    return numberFormatter.string(from: NSNumber(value: number))!
+}
+
+
 let gradeData: [[String: Any]] = [
     [
         "grade": "낭(狼)",
@@ -47,10 +55,3 @@ let gradeData: [[String: Any]] = [
         "image": ImageLiterals.god
     ],
 ]
-
-func numberFormatter(number: Int) -> String {
-    let numberFormatter = NumberFormatter()
-    numberFormatter.numberStyle = .decimal
-    
-    return numberFormatter.string(from: NSNumber(value: number))!
-}

@@ -9,8 +9,8 @@ import UIKit
 
 import Firebase
 import FirebaseAuth
-import FirebaseFirestore
 import FirebaseStorage
+import FirebaseFirestore
 
 final class FirebaseManager: NSObject {
     static let shared = FirebaseManager()
@@ -46,6 +46,64 @@ final class FirebaseManager: NSObject {
             try await store.collection("monsters").document(uid).setData(monsterData)
         } catch {
             print("Failed to create Monster")
+        }
+    }
+    
+    func loadMonsters(term: String, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
+        do {
+            var querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+            
+//            switch(term) {
+//            case "일간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+//            case "주간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+//            case "월간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+//            case "올타임":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
+//            default: break
+//            }
+            
+            let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
+                try doc.data(as: Monster.self)
+            }
+            
+            let cursor = querySnapshot.count < pages ? nil : querySnapshot.documents.last
+            
+            return (monsters, cursor)
+        } catch {
+            print("error to load Monster")
+            return nil
+        }
+    }
+    
+    func continueMonsters(term: String, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
+        do {
+            var querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+            
+//            switch(term) {
+//            case "일간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+//            case "주간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+//            case "월간":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+//            case "올타임":
+//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
+//            default: break
+//            }
+            
+            let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
+                try doc.data(as: Monster.self)
+            }
+            
+            let cursor = querySnapshot.count < pages ? nil : querySnapshot.documents.last
+            
+            return (monsters, cursor)
+        } catch {
+            print("error to continue Monster")
+            return nil
         }
     }
 }

@@ -7,7 +7,14 @@
 
 import UIKit
 
+import FirebaseFirestore
+
 final class MainViewController: BaseViewController {
+    private var monsters = [Monster]()
+    private var cursor: DocumentSnapshot?
+    private var dataMayContinue = true
+    private var pages = 3
+    
     private enum Size {
         static let collectionHorizontalSpacing: CGFloat = 20.0
         static let collectionVerticalSpacing: CGFloat = 4.0
@@ -84,6 +91,11 @@ final class MainViewController: BaseViewController {
         return collectionView
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        loadData()
+    }
+    
     override func setupLayout() {
         view.addSubviews(segControl, listCollectionView, cameraButton)
         
@@ -122,22 +134,52 @@ final class MainViewController: BaseViewController {
         navigationItem.leftBarButtonItem = logoImageView
         navigationItem.rightBarButtonItem = helpButton
     }
+    
+    private func loadData() {
+        Task {
+            if let result = await FirebaseManager.shared.loadMonsters(term: "", pages: pages) {
+                self.monsters = result.monsters
+                self.cursor = result.cursor
+            }
+            
+            DispatchQueue.main.async {
+                self.listCollectionView.reloadData()
+            }
+        }
+    }
+    
+    private func continueData() {
+        guard dataMayContinue, let cursor = cursor else { return }
+        dataMayContinue = false
+        
+        Task {
+            if let result = await FirebaseManager.shared.continueMonsters(term: "", cursor: cursor, pages: pages) {
+                self.monsters = result.monsters
+                self.cursor = result.cursor
+            }
+            
+            DispatchQueue.main.async {
+                self.listCollectionView.reloadData()
+            }
+            
+            self.dataMayContinue = true
+        }
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
-        return 20
+        return monsters.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: RankCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
 
         cell.rankLabel.text = "\(indexPath.item + 1)"
-        cell.nicknameLabel.text = "바보"
-        cell.gradeLabel.text = "신"
-        cell.moneyLabel.text = "30,000"
-
+        cell.nicknameLabel.text = monsters[indexPath.item].nickname
+        cell.gradeLabel.text = gradeData[monsters[indexPath.item].grade]["grade"]! as? String
+        cell.moneyLabel.text = "\(monsters[indexPath.item].score)"
         return cell
     }
 }
@@ -161,5 +203,20 @@ extension MainViewController: MSegmentedControlDelegate {
         case 3: print("올타임")
         default: break
         }
+    }
+}
+
+extension MainViewController {
+    /* Standard scroll-view delegate */
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentSize = scrollView.contentSize.height
+        
+        if contentSize - scrollView.contentOffset.y <= scrollView.bounds.height {
+            didScrollToBottom()
+        }
+    }
+    
+    private func didScrollToBottom() {
+        continueData()
     }
 }
