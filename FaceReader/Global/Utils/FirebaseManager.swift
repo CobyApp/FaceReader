@@ -40,7 +40,8 @@ final class FirebaseManager: NSObject {
                 "password": password,
                 "imageUrl": imageUrl,
                 "grade": FaceManager.grade,
-                "score": FaceManager.totalScore
+                "score": FaceManager.totalScore,
+                "createdAt": Date()
             ] as [String : Any]
 
             try await store.collection("monsters").document(uid).setData(monsterData)
@@ -49,7 +50,7 @@ final class FirebaseManager: NSObject {
         }
     }
     
-    func loadMonsters(term: String, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
+    func loadMonsters(term: Int, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
             var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
             
@@ -78,7 +79,7 @@ final class FirebaseManager: NSObject {
         }
     }
     
-    func continueMonsters(term: String, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
+    func continueMonsters(term: Int, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
             var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
             

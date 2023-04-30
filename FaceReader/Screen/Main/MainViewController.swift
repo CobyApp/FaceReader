@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestore
 
 final class MainViewController: BaseViewController {
+    private var term: Int = 0
     private var monsters = [Monster]()
     private var cursor: DocumentSnapshot?
     private var dataMayContinue = true
@@ -92,6 +93,12 @@ final class MainViewController: BaseViewController {
         return collectionView
     }()
     
+    private let emptyRankView: UIView = {
+        let view = EmptyRankView()
+        view.isHidden = true
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
@@ -99,7 +106,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func setupLayout() {
-        view.addSubviews(segControl, listCollectionView, cameraButton)
+        view.addSubviews(segControl, listCollectionView, cameraButton, emptyRankView)
         
         let segControlConstraints = [
             segControl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -122,7 +129,12 @@ final class MainViewController: BaseViewController {
             cameraButton.heightAnchor.constraint(equalToConstant: 70)
         ]
         
-        [segControlConstraints, listCollectionViewConstraints, cameraButtonConstraints]
+        let emptyRankViewConstraints = [
+            emptyRankView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            emptyRankView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ]
+        
+        [segControlConstraints, listCollectionViewConstraints, cameraButtonConstraints, emptyRankViewConstraints]
             .forEach { constraints in
                 NSLayoutConstraint.activate(constraints)
             }
@@ -145,7 +157,7 @@ final class MainViewController: BaseViewController {
     
     private func loadData() {
         Task {
-            if let result = await FirebaseManager.shared.loadMonsters(term: "", pages: pages) {
+            if let result = await FirebaseManager.shared.loadMonsters(term: term, pages: pages) {
                 self.monsters = result.monsters
                 self.cursor = result.cursor
             }
@@ -162,7 +174,7 @@ final class MainViewController: BaseViewController {
         dataMayContinue = false
         
         Task {
-            if let result = await FirebaseManager.shared.continueMonsters(term: "", cursor: cursor, pages: pages) {
+            if let result = await FirebaseManager.shared.continueMonsters(term: term, cursor: cursor, pages: pages) {
                 self.monsters += result.monsters
                 self.cursor = result.cursor
             }
@@ -183,6 +195,7 @@ final class MainViewController: BaseViewController {
 // MARK: - UICollectionViewDataSource
 extension MainViewController: UICollectionViewDataSource {
     func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
+        emptyRankView.isHidden = monsters.count == 0 ? false : true
         return monsters.count
     }
 
@@ -209,13 +222,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainViewController: MSegmentedControlDelegate {
     func segSelectedIndexChange(to index: Int) {
-        switch index {
-        case 0: print("일간")
-        case 1: print("주간")
-        case 2: print("월간")
-        case 3: print("올타임")
-        default: break
-        }
+        term = index
+        loadData()
     }
 }
 

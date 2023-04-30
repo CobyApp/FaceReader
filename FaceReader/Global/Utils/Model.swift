@@ -13,6 +13,7 @@ struct Monster: Codable, Identifiable {
     @DocumentID var id: String?
     let nickname, password, imageUrl: String
     let grade, score: Int
+    let createdAt: Date
 }
 
 func numberFormatter(number: Int) -> String {

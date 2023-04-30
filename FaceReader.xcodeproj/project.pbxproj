@@ -32,6 +32,7 @@
 		CBA34DA029FC2C4E002D6ECB /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */; };
 		CBA34DA429FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34DA329FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift */; };
 		CBA34DA629FC319E002D6ECB /* MSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA34DA529FC319E002D6ECB /* MSegmentedControl.swift */; };
+		CBB76A5C29FE1A7B009476CA /* EmptyRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBB76A5B29FE1A7B009476CA /* EmptyRankView.swift */; };
 		CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */; };
 		CBE1A3AC28B4544600D173AB /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */; };
 		CBE1A3B028B457E800D173AB /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */; };
@@ -67,6 +68,7 @@
 		CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
 		CBA34DA329FC2C77002D6ECB /* GradeInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CBA34DA529FC319E002D6ECB /* MSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSegmentedControl.swift; sourceTree = "<group>"; };
+		CBB76A5B29FE1A7B009476CA /* EmptyRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRankView.swift; sourceTree = "<group>"; };
 		CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreGraphicsExtensions.swift; sourceTree = "<group>"; };
 		CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		CB1A52C729FB851200B4FF69 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CBB76A5A29FE1A2F009476CA /* UIComponent */,
 				CB1A52C929FB85C100B4FF69 /* Cell */,
 				CB1A52C429FB849800B4FF69 /* MainViewController.swift */,
 			);
@@ -155,6 +158,14 @@
 			children = (
 			);
 			path = UIComponet;
+			sourceTree = "<group>";
+		};
+		CBB76A5A29FE1A2F009476CA /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				CBB76A5B29FE1A7B009476CA /* EmptyRankView.swift */,
+			);
+			path = UIComponent;
 			sourceTree = "<group>";
 		};
 		CBE1A3A828B4542500D173AB /* Extensions */ = {
@@ -387,6 +398,7 @@
 				CBFCDC2228B3684D004BCB27 /* FaceDetectionViewController.swift in Sources */,
 				CBE1A3B828B4738C00D173AB /* FaceResultViewController.swift in Sources */,
 				CBE1A3AA28B4543400D173AB /* CoreGraphicsExtensions.swift in Sources */,
+				CBB76A5C29FE1A7B009476CA /* EmptyRankView.swift in Sources */,
 				CBFCDC1E28B3684D004BCB27 /* AppDelegate.swift in Sources */,
 				CB1A52CD29FB863B00B4FF69 /* BaseCollectionViewCell.swift in Sources */,
 				CBA34DA029FC2C4E002D6ECB /* HelpViewController.swift in Sources */,
