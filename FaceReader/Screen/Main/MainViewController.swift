@@ -99,8 +99,7 @@ final class MainViewController: BaseViewController {
         return view
     }()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
         loadData()
         setRefreshControl()
     }
