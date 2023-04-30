@@ -52,19 +52,18 @@ final class FirebaseManager: NSObject {
     
     func loadMonsters(term: Int, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
-            var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            var querySnapshot: QuerySnapshot
             
-//            switch(term) {
-//            case "일간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
-//            case "주간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
-//            case "월간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
-//            case "올타임":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").limit(to: pages).getDocuments()
-//            default: break
-//            }
+            switch term {
+            case 0:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            case 1:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            case 2:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            default:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            }
             
             let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
                 try doc.data(as: Monster.self)
@@ -81,19 +80,18 @@ final class FirebaseManager: NSObject {
     
     func continueMonsters(term: Int, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
-            var querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            var querySnapshot: QuerySnapshot
             
-//            switch(term) {
-//            case "일간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
-//            case "주간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
-//            case "월간":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
-//            case "올타임":
-//                querySnapshot = try await store.collection("monsters").order(by: "score").start(afterDocument: cursor).limit(to: pages).getDocuments()
-//            default: break
-//            }
+            switch term {
+            case 0:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            case 1:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            case 2:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            default:
+                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            }
             
             let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
                 try doc.data(as: Monster.self)
