@@ -72,9 +72,18 @@ final class FaceResultViewController: BaseViewController {
         return label
     }()
     
+    private let nicknameLabel: UILabel = {
+        let label = UILabel()
+        label.font = .font(.regular, ofSize: 60)
+        label.textColor = .mainBlack
+        label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
+    
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
-        label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
+        label.text = "\(gradeData[FaceManager.grade]["grade"]!): \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
         label.textColor = .mainBlack
         label.textAlignment = .center
@@ -85,7 +94,7 @@ final class FaceResultViewController: BaseViewController {
     private lazy var scoreLabel: UILabel = {
         let label = UILabel()
         label.text = "$\(numberFormatter(number: FaceManager.totalScore))"
-        label.font = .font(.regular, ofSize: 60)
+        label.font = .font(.regular, ofSize: 50)
         label.textColor = .mainBlack
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -104,12 +113,18 @@ final class FaceResultViewController: BaseViewController {
         return button
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        guard let nickname = UserDefaults.standard.string(forKey: "nickname") else { return }
+        nicknameLabel.text = "「\(nickname)」"
+    }
+    
     override func setupLayout() {
         view.addSubviews(scrollView, enrollButton, coverView, loading)
         loading.isHidden = true
         coverView.isHidden = true
         scrollView.addSubviews(contentView)
-        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, gradeLabel, scoreLabel)
+        contentView.addSubviews(wantedLabel, faceImageView, deadOrLiveLabel, nicknameLabel, gradeLabel, scoreLabel)
         contentView.backgroundColor = UIColor(patternImage: ImageLiterals.background)
         
         let contentViewHeight = contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
@@ -135,32 +150,38 @@ final class FaceResultViewController: BaseViewController {
         ]
         
         let wantedLabelConstraints = [
-            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            wantedLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             wantedLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             wantedLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
         ]
         
         let faceImageViewConstraints = [
-            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor, constant: 4),
+            faceImageView.topAnchor.constraint(equalTo: wantedLabel.bottomAnchor),
             faceImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             faceImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             faceImageView.heightAnchor.constraint(equalToConstant: Size.imageHeight)
         ]
         
         let deadOrLiveLabelConstraints = [
-            deadOrLiveLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor, constant: 4),
+            deadOrLiveLabel.topAnchor.constraint(equalTo: faceImageView.bottomAnchor),
             deadOrLiveLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             deadOrLiveLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
+        let nicknameLabelConstraints = [
+            nicknameLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor),
+            nicknameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            nicknameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+        ]
+        
         let gradeLabelConstraints = [
-            gradeLabel.topAnchor.constraint(equalTo: deadOrLiveLabel.bottomAnchor, constant: 4),
+            gradeLabel.topAnchor.constraint(equalTo: nicknameLabel.bottomAnchor),
             gradeLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             gradeLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
         
         let scoreLabelConstraints = [
-            scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             scoreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
         ]
@@ -184,7 +205,19 @@ final class FaceResultViewController: BaseViewController {
             loading.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ]
         
-        [scrollViewConstraints, contentViewConstraints, wantedLabelConstraints, faceImageViewConstraints, deadOrLiveLabelConstraints, gradeLabelConstraints, scoreLabelConstraints, enrollButtonConstraints, coverViewConstraints, loadingConstraints].forEach { constraints in
+        [
+            scrollViewConstraints,
+            contentViewConstraints,
+            wantedLabelConstraints,
+            faceImageViewConstraints,
+            deadOrLiveLabelConstraints,
+            nicknameLabelConstraints,
+            gradeLabelConstraints,
+            scoreLabelConstraints,
+            enrollButtonConstraints,
+            coverViewConstraints,
+            loadingConstraints
+        ].forEach { constraints in
             NSLayoutConstraint.activate(constraints)
         }
     }
@@ -214,14 +247,14 @@ final class FaceResultViewController: BaseViewController {
         })
     }
     
-    private func enrollMonster(nickname: String, password: String) {
+    private func enrollMonster(password: String) {
         Task { [weak self] in
 
             self?.coverView.isHidden = false
             self?.loading.isHidden = false
             self?.loading.play()
 
-            await FirebaseManager.shared.createMonster(nickname: nickname, password: password, image: (self?.contentView.asImage())!)
+            await FirebaseManager.shared.createMonster(nickname: self?.nicknameLabel.text ?? "무명의 괴인", password: password, image: (self?.contentView.asImage())!)
 
             self?.coverView.isHidden = true
             self?.loading.pause()
@@ -265,31 +298,25 @@ final class FaceResultViewController: BaseViewController {
         let alert = UIAlertController(
             title: "괴인 등록",
             message: """
-닉네임과 비밀번호를 설정해주세요.
 리더보드에서 수배서를 보려면,
 설정한 비밀번호를 입력해야 합니다.
 """,
             preferredStyle: .alert
         )
         let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
-            guard let nickname = alert.textFields?[0].text,
-                  let password = alert.textFields?[1].text,
-                  nickname.count != 0,
+            guard let password = alert.textFields?[0].text,
                   password.count != 0
             else {
-                self.showToast(message: "내용을 채워주세요")
+                self.showToast(message: "비밀번호를 다시 입력해주세요")
                 return
             }
-            self.enrollMonster(nickname: nickname, password: password)
+            self.enrollMonster(password: password)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel) { (cancel) in }
         
         alert.addAction(cancel)
         alert.addAction(ok)
-        alert.addTextField { (nicknameField) in
-            nicknameField.placeholder = "닉네임"
-        }
         alert.addTextField { (passwordField) in
             passwordField.keyboardType = .numberPad
             passwordField.placeholder = "비밀번호"

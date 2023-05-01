@@ -189,7 +189,7 @@ final class MainViewController: BaseViewController {
     }
     
     private func moveToCamera() {
-        guard let nickname = UserDefaults.standard.string(forKey: "nickname") else {
+        guard UserDefaults.standard.string(forKey: "nickname") != nil else {
             setNickname()
             return
         }
