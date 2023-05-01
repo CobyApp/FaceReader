@@ -9,7 +9,19 @@ import UIKit
 
 extension UIColor {
     static var mainText: UIColor {
-        return UIColor(hex: "#4B3E36")
+        return UIColor { traits -> UIColor in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#ffffff")
+                : UIColor(hex: "#000000")
+        }
+    }
+    
+    static var mainBackground: UIColor {
+        return UIColor { traits -> UIColor in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#222222")
+                : UIColor(hex: "#ffffff")
+        }
     }
 }
 

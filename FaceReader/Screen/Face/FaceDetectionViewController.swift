@@ -24,25 +24,26 @@ final class FaceDetectionViewController: BaseViewController {
     
     private let coverView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = .mainText.withAlphaComponent(0.5)
         return view
     }()
     
     private let topBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        view.backgroundColor = .mainBackground.withAlphaComponent(0.7)
         return view
     }()
     
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.7)
+        view.backgroundColor = .mainBackground.withAlphaComponent(0.7)
         return view
     }()
     
     private let ratioGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "얼굴 비율로 괴인 등급을 측정합니다."
+        label.textColor = .mainText
         label.font = .font(.regular, ofSize: 24)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -55,6 +56,7 @@ final class FaceDetectionViewController: BaseViewController {
 눈, 코, 입, 얼굴형 등의 좌표값을 통해 비율을 측정하므로
 얼굴을 망가뜨릴수록 높은 등급을 얻을 수 있습니다.
 """
+        label.textColor = .mainText
         label.font = .font(.regular, ofSize: 17)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
@@ -65,6 +67,7 @@ final class FaceDetectionViewController: BaseViewController {
     private let photoGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "얼굴 사진은 카툰화 이미지로 변경됩니다."
+        label.textColor = .mainText
         label.font = .font(.regular, ofSize: 24)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true

@@ -19,6 +19,7 @@ final class GradeInfoCollectionViewCell: BaseCollectionViewCell {
     let gradeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
+        label.textColor = .mainText
         return label
     }()
     
@@ -26,6 +27,7 @@ final class GradeInfoCollectionViewCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 17)
         label.numberOfLines = 0
+        label.textColor = .mainText
         return label
     }()
 

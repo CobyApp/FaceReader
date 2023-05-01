@@ -22,13 +22,14 @@ final class FaceResultViewController: BaseViewController {
     
     private let coverView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        view.backgroundColor = UIColor.mainText.withAlphaComponent(0.5)
         return view
     }()
     
     private lazy var shareLabel: UILabel = {
         let label = UILabel()
         label.text = "공유"
+        label.textColor = .mainText
         label.font = .font(.regular, ofSize: 20)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapShareLabel))
@@ -44,7 +45,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "WANTED"
         label.font = .font(.regular, ofSize: 100)
-        label.textColor = UIColor.mainText
+        label.textColor = .mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -65,7 +66,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "DEAD OR ALIVE"
         label.font = .font(.regular, ofSize: 60)
-        label.textColor = UIColor.mainText
+        label.textColor = .mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -75,7 +76,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
-        label.textColor = UIColor.mainText
+        label.textColor = .mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -85,7 +86,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "$\(numberFormatter(number: FaceManager.totalScore))"
         label.font = .font(.regular, ofSize: 60)
-        label.textColor = UIColor.mainText
+        label.textColor = .mainText
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label

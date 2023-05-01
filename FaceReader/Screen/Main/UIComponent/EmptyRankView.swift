@@ -12,7 +12,7 @@ final class EmptyRankView: UIView {
     private let guideEmptyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
-        label.textColor = .black
+        label.textColor = .mainText
         label.text = "등록된 괴인이 없습니다."
         return label
     }()

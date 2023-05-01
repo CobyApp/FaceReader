@@ -47,12 +47,12 @@ final class MainViewController: BaseViewController {
     
     private lazy var cameraButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black
+        button.backgroundColor = .mainText
         button.setImage(
             ImageLiterals.btnCamera.resize(to: CGSize(width: 30, height: 30)).withRenderingMode(.alwaysTemplate),
             for: .normal
         )
-        button.tintColor = .white
+        button.tintColor = .mainBackground
         button.layer.cornerRadius = 30
         let action = UIAction { [weak self] _ in
             self?.navigationController?.pushViewController(FaceDetectionViewController(), animated: true)
@@ -65,8 +65,8 @@ final class MainViewController: BaseViewController {
         let segControl = MSegmentedControl(
             frame: CGRect(x: 0, y: 0, width: 0, height: 0),
             buttonTitle: ["일간", "월간", "연간", "올타임"])
-        segControl.textColor = .black
-        segControl.selectorTextColor = .white
+        segControl.textColor = .mainText
+        segControl.selectorTextColor = .mainBackground
         segControl.delegate = self
         return segControl
     }()

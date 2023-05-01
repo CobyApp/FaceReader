@@ -12,27 +12,28 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
     let rankLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
+        label.textColor = .mainText
         return label
     }()
 
     let nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
-        label.text = "도영"
+        label.textColor = .mainText
         return label
     }()
     
     let gradeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
-        label.text = "신"
+        label.textColor = .mainText
         return label
     }()
     
     let moneyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.font(.regular, ofSize: 22)
-        label.text = "₩300,000"
+        label.textColor = .mainText
         return label
     }()
 

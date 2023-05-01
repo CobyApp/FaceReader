@@ -138,7 +138,6 @@
 		CBA34D9E29FC2C3F002D6ECB /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				CBA34DA229FC2C59002D6ECB /* UIComponet */,
 				CBA34DA129FC2C55002D6ECB /* Cell */,
 				CBA34D9F29FC2C4E002D6ECB /* HelpViewController.swift */,
 			);
@@ -153,13 +152,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		CBA34DA229FC2C59002D6ECB /* UIComponet */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIComponet;
-			sourceTree = "<group>";
-		};
 		CBB76A5A29FE1A2F009476CA /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,13 +163,13 @@
 		CBE1A3A828B4542500D173AB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */,
+				CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */,
 				CBE1A3AB28B4544600D173AB /* UIView+Extension.swift */,
 				CBE1A3AF28B457E800D173AB /* UIViewController+Extension.swift */,
 				CBE688F228B5D7A300720D32 /* UIFont+Extension.swift */,
-				CB9E777928BBE32A0072DB9A /* UIColor+Extension.swift */,
 				CBA34D9729FC27B4002D6ECB /* UICollectionView.swift */,
 				CBA34D9929FC27CE002D6ECB /* NSObject+Extension.swift */,
+				CBE1A3A928B4543400D173AB /* CoreGraphicsExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -577,7 +569,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -612,7 +604,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				INFOPLIST_KEY_UIUserInterfaceStyle = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
