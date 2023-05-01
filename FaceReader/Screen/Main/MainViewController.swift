@@ -235,10 +235,10 @@ extension MainViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let viewController = MeetingDetailViewController(meeting: meetings[indexPath.item])
-//        DispatchQueue.main.async {
-//            self.navigationController?.pushViewController(viewController, animated: true)
-//        }
+        let viewController = GetPaperViewController(monster: monsters[indexPath.item])
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 

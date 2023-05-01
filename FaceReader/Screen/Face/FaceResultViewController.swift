@@ -264,10 +264,6 @@ final class FaceResultViewController: BaseViewController {
         }
     }
     
-    @objc private func didTapBackLabel(sender: UITapGestureRecognizer) {
-        navigationController?.popViewController(animated: true)
-    }
-    
     @objc private func didTapShareLabel(sender: UITapGestureRecognizer) {
         let wantedImage = contentView.asImage()
         var shareObject = [UIImage]()

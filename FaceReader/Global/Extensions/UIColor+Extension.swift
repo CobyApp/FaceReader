@@ -19,8 +19,8 @@ extension UIColor {
     static var mainBackground: UIColor {
         return UIColor { traits -> UIColor in
             traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#222222")
-                : UIColor(hex: "#dddddd")
+                ? UIColor(hex: "#111111")
+                : UIColor(hex: "#eeeeee")
         }
     }
     

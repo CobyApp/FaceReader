@@ -12,6 +12,7 @@
 		CB1A52CF29FB864F00B4FF69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */; };
 		CB2A55382A000A3F00708707 /* SetNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A55372A000A3F00708707 /* SetNicknameViewController.swift */; };
 		CB2A553A2A00102D00708707 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A55392A00102D00708707 /* MainButton.swift */; };
+		CB2A553C2A00276300708707 /* GetPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A553B2A00276300708707 /* GetPaperViewController.swift */; };
 		CB2B2AB728B6A35200EDEC8D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2AB628B6A35200EDEC8D /* Alamofire */; };
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
@@ -58,6 +59,7 @@
 		CB1A52CE29FB864F00B4FF69 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		CB2A55372A000A3F00708707 /* SetNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameViewController.swift; sourceTree = "<group>"; };
 		CB2A55392A00102D00708707 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
+		CB2A553B2A00276300708707 /* GetPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPaperViewController.swift; sourceTree = "<group>"; };
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		CB41AB1029FCFB1B00AF5729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CB41AB1229FCFB2B00AF5729 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				CB1A52C929FB85C100B4FF69 /* Cell */,
 				CB1A52C429FB849800B4FF69 /* MainViewController.swift */,
 				CB2A55372A000A3F00708707 /* SetNicknameViewController.swift */,
+				CB2A553B2A00276300708707 /* GetPaperViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				CB41AB1729FCFBCD00AF5729 /* Model.swift in Sources */,
 				CB2A55382A000A3F00708707 /* SetNicknameViewController.swift in Sources */,
 				CBE688F328B5D7A300720D32 /* UIFont+Extension.swift in Sources */,
+				CB2A553C2A00276300708707 /* GetPaperViewController.swift in Sources */,
 				CB1A52C529FB849800B4FF69 /* MainViewController.swift in Sources */,
 				CB41AB1329FCFB2B00AF5729 /* FirebaseManager.swift in Sources */,
 				CB2A553A2A00102D00708707 /* MainButton.swift in Sources */,
