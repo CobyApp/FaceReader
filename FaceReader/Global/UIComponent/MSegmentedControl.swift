@@ -105,7 +105,7 @@ extension MSegmentedControl {
             button.setTitle(buttonTitle, for: .normal)
             button.addTarget(self, action:#selector(MSegmentedControl.buttonAction(sender:)), for: .touchUpInside)
             button.setTitleColor(textColor, for: .normal)
-            button.titleLabel?.font = UIFont.font(.regular, ofSize: 20)
+            button.titleLabel?.font = UIFont.font(.regular, ofSize: 22)
             
             buttons.append(button)
         }

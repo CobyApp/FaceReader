@@ -10,6 +10,7 @@ import UIKit
 import Lottie
 
 final class FaceResultViewController: BaseViewController {
+    var nickname: String = ""
     
     private enum Size {
         static let wantedWidth: CGFloat = UIScreen.main.bounds.size.width
@@ -84,10 +85,9 @@ final class FaceResultViewController: BaseViewController {
     private lazy var gradeLabel: UILabel = {
         let label = UILabel()
         label.text = "\(gradeData[FaceManager.grade]["grade"]!): \(gradeData[FaceManager.grade]["info"]!)"
-        label.font = .font(.regular, ofSize: 40)
+        label.font = .font(.regular, ofSize: 25)
         label.textColor = .mainBlack
         label.textAlignment = .center
-        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -103,9 +103,9 @@ final class FaceResultViewController: BaseViewController {
     
     private lazy var enrollButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .black.withAlphaComponent(0.5)
+        button.backgroundColor = .mainText.withAlphaComponent(0.5)
         button.setTitle("괴인 등록", for: .normal)
-        button.titleLabel?.font = .font(.regular, ofSize: 20)
+        button.titleLabel?.font = .font(.regular, ofSize: 22)
         let action = UIAction { [weak self] _ in
             self?.enrollButtonTouched(button)
         }
@@ -116,6 +116,7 @@ final class FaceResultViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let nickname = UserDefaults.standard.string(forKey: "nickname") else { return }
+        self.nickname = nickname
         nicknameLabel.text = "「\(nickname)」"
     }
     
@@ -254,7 +255,7 @@ final class FaceResultViewController: BaseViewController {
             self?.loading.isHidden = false
             self?.loading.play()
 
-            await FirebaseManager.shared.createMonster(nickname: self?.nicknameLabel.text ?? "무명의 괴인", password: password, image: (self?.contentView.asImage())!)
+            await FirebaseManager.shared.createMonster(nickname: self?.nickname ?? "무명의 괴인", password: password, image: (self?.contentView.asImage())!)
 
             self?.coverView.isHidden = true
             self?.loading.pause()
