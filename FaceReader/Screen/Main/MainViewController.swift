@@ -223,8 +223,8 @@ final class MainViewController: BaseViewController {
         let alert = UIAlertController(
             title: "괴인 정보",
             message: """
-괴인의 수배서를 보기 위해서
-설정된 비밀번호를 입력해야 합니다.
+괴인의 수배서를 보려면
+비밀번호를 입력해야 합니다.
 """,
             preferredStyle: .alert
         )

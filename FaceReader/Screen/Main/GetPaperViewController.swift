@@ -149,8 +149,8 @@ final class GetPaperViewController: BaseViewController {
         let alert = UIAlertController(
             title: "괴인 삭제",
             message: """
-괴인을 삭제하기 위해서
-설정된 비밀번호를 입력해야 합니다.
+괴인을 삭제하려면
+비밀번호를 입력해야 합니다.
 """,
             preferredStyle: .alert
         )
@@ -162,7 +162,10 @@ final class GetPaperViewController: BaseViewController {
                 self.showToast(message: "비밀번호를 다시 입력해주세요")
                 return
             }
-//            self.deleteMonster(password: password)
+            Task {
+                await FirebaseManager.shared.deleteMonster(monster: self.monster)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel) { (cancel) in }

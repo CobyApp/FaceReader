@@ -37,6 +37,7 @@ final class FirebaseManager: NSObject {
             let (year, month, day) = Date().dateToString
 
             let monsterData = [
+                "uid": uid,
                 "nickname": nickname,
                 "password": password,
                 "imageUrl": imageUrl,
@@ -156,6 +157,16 @@ final class FirebaseManager: NSObject {
         } catch {
             print("error to continue Monster")
             return nil
+        }
+    }
+    
+    func deleteMonster(monster: Monster) async {
+        do {
+            let ref = storage.reference(forURL: monster.imageUrl)
+            try await ref.delete()
+            try await store.collection("monsters").document(monster.uid).delete()
+        } catch {
+            print("error to delete Monster")
         }
     }
 }
