@@ -34,6 +34,7 @@ final class FirebaseManager: NSObject {
             guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
             _ = try await ref.putDataAsync(imageData, metadata: nil)
             let imageUrl = try await ref.downloadURL().absoluteString
+            let (year, month, day) = Date().dateToString
 
             let monsterData = [
                 "nickname": nickname,
@@ -41,7 +42,9 @@ final class FirebaseManager: NSObject {
                 "imageUrl": imageUrl,
                 "grade": FaceManager.grade,
                 "score": FaceManager.totalScore,
-                "createdAt": Date()
+                "year": year,
+                "month": month,
+                "day": day
             ] as [String : Any]
 
             try await store.collection("monsters").document(uid).setData(monsterData)
@@ -53,11 +56,30 @@ final class FirebaseManager: NSObject {
     func loadMonsters(term: Int, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
             var querySnapshot: QuerySnapshot
+            let (year, month, day) = Date().dateToString
             
             switch term {
-            case 0, 1, 2:
+            case 0:
                 querySnapshot = try await store
                     .collection("monsters")
+                    .whereField("year", isEqualTo: year)
+                    .whereField("month", isEqualTo: month)
+                    .whereField("day", isEqualTo: day)
+                    .order(by: "score", descending: true)
+                    .limit(to: pages)
+                    .getDocuments()
+            case 1:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .whereField("year", isEqualTo: year)
+                    .whereField("month", isEqualTo: month)
+                    .order(by: "score", descending: true)
+                    .limit(to: pages)
+                    .getDocuments()
+            case 2:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .whereField("year", isEqualTo: year)
                     .order(by: "score", descending: true)
                     .limit(to: pages)
                     .getDocuments()
@@ -85,11 +107,32 @@ final class FirebaseManager: NSObject {
     func continueMonsters(term: Int, cursor: DocumentSnapshot, pages: Int) async -> (monsters: [Monster], cursor: QueryDocumentSnapshot?)? {
         do {
             var querySnapshot: QuerySnapshot
+            let (year, month, day) = Date().dateToString
             
             switch term {
-            case 0, 1, 2:
+            case 0:
                 querySnapshot = try await store
                     .collection("monsters")
+                    .whereField("year", isEqualTo: year)
+                    .whereField("month", isEqualTo: month)
+                    .whereField("day", isEqualTo: day)
+                    .order(by: "score", descending: true)
+                    .start(afterDocument: cursor)
+                    .limit(to: pages)
+                    .getDocuments()
+            case 1:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .whereField("year", isEqualTo: year)
+                    .whereField("month", isEqualTo: month)
+                    .order(by: "score", descending: true)
+                    .start(afterDocument: cursor)
+                    .limit(to: pages)
+                    .getDocuments()
+            case 2:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .whereField("year", isEqualTo: year)
                     .order(by: "score", descending: true)
                     .start(afterDocument: cursor)
                     .limit(to: pages)

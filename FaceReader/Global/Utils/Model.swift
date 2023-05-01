@@ -13,7 +13,7 @@ struct Monster: Codable, Identifiable {
     @DocumentID var id: String?
     let nickname, password, imageUrl: String
     let grade, score: Int
-    let createdAt: Date
+    let year, month, day: String
 }
 
 func numberFormatter(number: Int) -> String {
@@ -56,3 +56,12 @@ let gradeData: [[String: Any]] = [
         "image": ImageLiterals.god
     ],
 ]
+
+extension Date {
+    var dateToString: (year: String, month: String, day: String) {
+        let year = Calendar.current.component(.year, from: self)
+        let month = Calendar.current.component(.month, from: self)
+        let day = Calendar.current.component(.day, from: self)
+        return ("\(year)", "\(month)", "\(day)")
+    }
+}

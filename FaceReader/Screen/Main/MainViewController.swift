@@ -64,7 +64,7 @@ final class MainViewController: BaseViewController {
     private lazy var segControl: MSegmentedControl = {
         let segControl = MSegmentedControl(
             frame: CGRect(x: 0, y: 0, width: 0, height: 0),
-            buttonTitle: ["일간", "주간", "월간", "올타임"])
+            buttonTitle: ["일간", "월간", "연간", "올타임"])
         segControl.textColor = .black
         segControl.selectorTextColor = .white
         segControl.delegate = self
