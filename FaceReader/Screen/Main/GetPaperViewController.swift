@@ -50,7 +50,7 @@ final class GetPaperViewController: BaseViewController {
         button.setTitle("괴인 삭제", for: .normal)
         button.titleLabel?.font = .font(.regular, ofSize: 22)
         let action = UIAction { [weak self] _ in
-            self?.deleteButtonTouched(button)
+            self?.deleteButtonTouched()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -119,24 +119,6 @@ final class GetPaperViewController: BaseViewController {
         title = "괴인 정보"
     }
     
-    private func showToast(message: String) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
-        toastLabel.backgroundColor = .mainText.withAlphaComponent(0.6)
-        toastLabel.textColor = .mainBackground
-        toastLabel.font = .font(.regular, ofSize: 20)
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-    
     @objc private func didTapShareLabel(sender: UITapGestureRecognizer) {
         let wantedImage = contentView.asImage()
         var shareObject = [UIImage]()
@@ -163,8 +145,7 @@ final class GetPaperViewController: BaseViewController {
         self.present(activityViewController, animated: true)
     }
     
-    @IBAction
-    func deleteButtonTouched(_ sender: Any) {
+    private func deleteButtonTouched() {
         let alert = UIAlertController(
             title: "괴인 삭제",
             message: """
@@ -175,7 +156,8 @@ final class GetPaperViewController: BaseViewController {
         )
         let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
             guard let password = alert.textFields?[0].text,
-                  password.count != 0
+                  password.count != 0,
+                  password == self.monster.password
             else {
                 self.showToast(message: "비밀번호를 다시 입력해주세요")
                 return

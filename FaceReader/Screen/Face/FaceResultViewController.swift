@@ -107,7 +107,7 @@ final class FaceResultViewController: BaseViewController {
         button.setTitle("괴인 등록", for: .normal)
         button.titleLabel?.font = .font(.regular, ofSize: 22)
         let action = UIAction { [weak self] _ in
-            self?.enrollButtonTouched(button)
+            self?.enrollButtonTouched()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -230,24 +230,6 @@ final class FaceResultViewController: BaseViewController {
         title = "괴인 측정 결과"
     }
     
-    private func showToast(message: String) {
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
-        toastLabel.backgroundColor = .mainText.withAlphaComponent(0.6)
-        toastLabel.textColor = .mainBackground
-        toastLabel.font = .font(.regular, ofSize: 20)
-        toastLabel.textAlignment = .center;
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-    
     private func enrollMonster(password: String) {
         Task { [weak self] in
 
@@ -290,8 +272,7 @@ final class FaceResultViewController: BaseViewController {
         self.present(activityViewController, animated: true)
     }
     
-    @IBAction
-    func enrollButtonTouched(_ sender: Any) {
+    private func enrollButtonTouched() {
         let alert = UIAlertController(
             title: "괴인 등록",
             message: """

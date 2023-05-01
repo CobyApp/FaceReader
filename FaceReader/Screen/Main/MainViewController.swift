@@ -208,6 +208,52 @@ final class MainViewController: BaseViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    private func goToGetPaperViewController() {
+//        guard let nickname = nicknameField.text,
+//        nicknameField.text?.count != 0 else {
+//            showToast()
+//            return
+//        }
+        
+//        UserDefaults.standard.set(nickname, forKey: "nickname")
+//        dismiss(animated: true, completion: nil)
+    }
+    
+    private func getPaper(monster: Monster) {
+        let alert = UIAlertController(
+            title: "괴인 정보",
+            message: """
+괴인의 수배서를 보기 위해서
+설정된 비밀번호를 입력해야 합니다.
+""",
+            preferredStyle: .alert
+        )
+        let ok = UIAlertAction(title: "확인", style: .default) { (ok) in
+            guard let password = alert.textFields?[0].text,
+                  password.count != 0,
+                  password == monster.password
+            else {
+                self.showToast(message: "비밀번호를 다시 입력해주세요")
+                return
+            }
+            let viewController = GetPaperViewController(monster: monster)
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel) { (cancel) in }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        alert.addTextField { (passwordField) in
+            passwordField.keyboardType = .numberPad
+            passwordField.placeholder = "비밀번호"
+        }
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @objc func refreshTable(refresh: UIRefreshControl) {
         loadData()
     }
@@ -235,10 +281,7 @@ extension MainViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = GetPaperViewController(monster: monsters[indexPath.item])
-        DispatchQueue.main.async {
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
+        getPaper(monster: monsters[indexPath.item])
     }
 }
 
