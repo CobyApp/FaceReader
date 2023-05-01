@@ -12,6 +12,7 @@ enum ImageLiterals {
     
     static var btnBack: UIImage { .load(systemName: "chevron.backward") }
     static var btnHelp: UIImage { .load(systemName: "exclamationmark.circle") }
+    static var btnEdit: UIImage { .load(systemName: "pencil") }
     static var btnCamera: UIImage { .load(name: "camera") }
     static var btnRefresh: UIImage { .load(name: "refresh") }
     

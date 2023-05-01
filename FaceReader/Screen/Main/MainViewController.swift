@@ -14,7 +14,7 @@ final class MainViewController: BaseViewController {
     private var monsters = [Monster]()
     private var cursor: DocumentSnapshot?
     private var dataMayContinue = true
-    private var pages = 20
+    private var pages = 50
     private var refreshControl = UIRefreshControl()
     
     private enum Size {
@@ -149,7 +149,7 @@ final class MainViewController: BaseViewController {
     
     override func setupNavigationBar() {
         super.setupNavigationBar()
-        title = "LEADER BOARD"
+        title = "괴인 랭킹"
         let logoImageView = makeBarButtonItem(with: logoImageView)
         let helpButton = makeBarButtonItem(with: helpButton)
         navigationItem.leftBarButtonItem = logoImageView

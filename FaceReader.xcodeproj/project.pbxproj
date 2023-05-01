@@ -13,6 +13,7 @@
 		CB2A55382A000A3F00708707 /* SetNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A55372A000A3F00708707 /* SetNicknameViewController.swift */; };
 		CB2A553A2A00102D00708707 /* MainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A55392A00102D00708707 /* MainButton.swift */; };
 		CB2A553C2A00276300708707 /* GetPaperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A553B2A00276300708707 /* GetPaperViewController.swift */; };
+		CB2A553E2A002D6600708707 /* EditButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB2A553D2A002D6600708707 /* EditButton.swift */; };
 		CB2B2AB728B6A35200EDEC8D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2AB628B6A35200EDEC8D /* Alamofire */; };
 		CB2B2ABD28B7540200EDEC8D /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = CB2B2ABC28B7540200EDEC8D /* Lottie */; };
 		CB2B2ABF28B754E800EDEC8D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = CB2B2ABE28B754E800EDEC8D /* loading.json */; };
@@ -60,6 +61,7 @@
 		CB2A55372A000A3F00708707 /* SetNicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNicknameViewController.swift; sourceTree = "<group>"; };
 		CB2A55392A00102D00708707 /* MainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButton.swift; sourceTree = "<group>"; };
 		CB2A553B2A00276300708707 /* GetPaperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPaperViewController.swift; sourceTree = "<group>"; };
+		CB2A553D2A002D6600708707 /* EditButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButton.swift; sourceTree = "<group>"; };
 		CB2B2ABE28B754E800EDEC8D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 		CB41AB1029FCFB1B00AF5729 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CB41AB1229FCFB2B00AF5729 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				CB2A55392A00102D00708707 /* MainButton.swift */,
 				CBE1A3B328B458E000D173AB /* BackButton.swift */,
 				CBA34D9C29FC2A34002D6ECB /* HelpButton.swift */,
+				CB2A553D2A002D6600708707 /* EditButton.swift */,
 				CBA34DA529FC319E002D6ECB /* MSegmentedControl.swift */,
 			);
 			path = UIComponent;
@@ -418,6 +421,7 @@
 				CBA34D9629FC24CA002D6ECB /* RankCollectionViewCell.swift in Sources */,
 				CBA34D9A29FC27CE002D6ECB /* NSObject+Extension.swift in Sources */,
 				CBE1A3B228B4588800D173AB /* BaseViewController.swift in Sources */,
+				CB2A553E2A002D6600708707 /* EditButton.swift in Sources */,
 				CBA34D9D29FC2A34002D6ECB /* HelpButton.swift in Sources */,
 				CB9E777A28BBE32A0072DB9A /* UIColor+Extension.swift in Sources */,
 				CBE1A3B628B458F400D173AB /* ImageLiterals.swift in Sources */,

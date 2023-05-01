@@ -37,6 +37,7 @@ final class SetNicknameViewController: BaseViewController {
         textField.clearButtonMode = .always
         textField.makeBorderLayer(color: .mainText.withAlphaComponent(0.5))
         textField.delegate = self
+        textField.font = UIFont.font(.regular, ofSize: 20)
         return textField
     }()
     

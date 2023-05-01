@@ -1,13 +1,13 @@
 //
-//  HelpButton.swift
+//  EditButton.swift
 //  FaceReader
 //
-//  Created by COBY_PRO on 2023/04/29.
+//  Created by COBY_PRO on 2023/05/02.
 //
 
 import UIKit
 
-final class HelpButton: UIButton {
+final class EditButton: UIButton {
 
     // MARK: - init
     
@@ -21,7 +21,7 @@ final class HelpButton: UIButton {
     }
     
     private func configUI() {
-        setImage(ImageLiterals.btnHelp.resize(to: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysTemplate), for: .normal)
+        setImage(ImageLiterals.btnEdit.resize(to: CGSize(width: 25, height: 25)).withRenderingMode(.alwaysTemplate), for: .normal)
         tintColor = .mainText
     }
 }

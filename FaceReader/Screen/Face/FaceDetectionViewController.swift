@@ -81,6 +81,15 @@ final class FaceDetectionViewController: BaseViewController {
         return button
     }()
     
+    private lazy var editButton: EditButton = {
+        let button = EditButton()
+        let action = UIAction { [weak self] _ in
+            self?.setNickname()
+        }
+        button.addAction(action, for: .touchUpInside)
+        return button
+    }()
+    
     let session = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -161,6 +170,8 @@ final class FaceDetectionViewController: BaseViewController {
     override func setupNavigationBar() {
         super.setupNavigationBar()
         title = "괴인 측정기"
+        let editButton = makeBarButtonItem(with: editButton)
+        navigationItem.rightBarButtonItem = editButton
     }
     
     @objc private func didTapCameraButton() {
@@ -208,6 +219,17 @@ final class FaceDetectionViewController: BaseViewController {
         }, completion: {(isCompleted) in
             toastLabel.removeFromSuperview()
         })
+    }
+    
+    private func setNickname() {
+        let vc = SetNicknameViewController()
+        vc.modalPresentationStyle = .pageSheet
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(vc, animated: true, completion: nil)
     }
 }
 
