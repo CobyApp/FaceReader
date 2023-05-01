@@ -55,14 +55,18 @@ final class FirebaseManager: NSObject {
             var querySnapshot: QuerySnapshot
             
             switch term {
-            case 0:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
-            case 1:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
-            case 2:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+            case 0, 1, 2:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .order(by: "score", descending: true)
+                    .limit(to: pages)
+                    .getDocuments()
             default:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).limit(to: pages).getDocuments()
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .order(by: "score", descending: true)
+                    .limit(to: pages)
+                    .getDocuments()
             }
             
             let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
@@ -83,14 +87,20 @@ final class FirebaseManager: NSObject {
             var querySnapshot: QuerySnapshot
             
             switch term {
-            case 0:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
-            case 1:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
-            case 2:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+            case 0, 1, 2:
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .order(by: "score", descending: true)
+                    .start(afterDocument: cursor)
+                    .limit(to: pages)
+                    .getDocuments()
             default:
-                querySnapshot = try await store.collection("monsters").order(by: "score", descending: true).start(afterDocument: cursor).limit(to: pages).getDocuments()
+                querySnapshot = try await store
+                    .collection("monsters")
+                    .order(by: "score", descending: true)
+                    .start(afterDocument: cursor)
+                    .limit(to: pages)
+                    .getDocuments()
             }
             
             let monsters = try querySnapshot.documents.compactMap { doc -> Monster? in
