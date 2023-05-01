@@ -32,7 +32,8 @@ final class MainViewController: BaseViewController {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = ImageLiterals.logo.resize(to: CGSize(width: 30, height: 30))
+        imageView.image = ImageLiterals.logo.resize(to: CGSize(width: 30, height: 30)).withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .mainText
         return imageView
     }()
     
@@ -55,7 +56,7 @@ final class MainViewController: BaseViewController {
         button.tintColor = .mainBackground
         button.layer.cornerRadius = 30
         let action = UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(FaceDetectionViewController(), animated: true)
+            self?.moveToCamera()
         }
         button.addAction(action, for: .touchUpInside)
         return button
@@ -66,7 +67,8 @@ final class MainViewController: BaseViewController {
             frame: CGRect(x: 0, y: 0, width: 0, height: 0),
             buttonTitle: ["일간", "월간", "연간", "올타임"])
         segControl.textColor = .mainText
-        segControl.selectorTextColor = .mainBackground
+        segControl.selectorViewColor = .mainText
+        segControl.selectorTextColor = .mainBackground.withAlphaComponent(0.7)
         segControl.delegate = self
         return segControl
     }()
@@ -186,6 +188,26 @@ final class MainViewController: BaseViewController {
         }
     }
     
+    private func moveToCamera() {
+        guard let nickname = UserDefaults.standard.string(forKey: "nickname") else {
+            setNickname()
+            return
+        }
+        
+        navigationController?.pushViewController(FaceDetectionViewController(), animated: true)
+    }
+    
+    private func setNickname() {
+        let vc = SetNicknameViewController()
+        vc.modalPresentationStyle = .pageSheet
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
     @objc func refreshTable(refresh: UIRefreshControl) {
         loadData()
     }
@@ -204,7 +226,8 @@ extension MainViewController: UICollectionViewDataSource {
         cell.rankLabel.text = "\(indexPath.item + 1)"
         cell.nicknameLabel.text = monsters[indexPath.item].nickname
         cell.gradeLabel.text = gradeData[monsters[indexPath.item].grade]["grade"]! as? String
-        cell.moneyLabel.text = "\(monsters[indexPath.item].score)"
+        cell.moneyLabel.text = "$\(numberFormatter(number: monsters[indexPath.item].score))"
+        
         return cell
     }
 }

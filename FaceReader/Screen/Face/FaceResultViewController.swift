@@ -45,7 +45,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "WANTED"
         label.font = .font(.regular, ofSize: 100)
-        label.textColor = .mainText
+        label.textColor = .mainBlack
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -57,7 +57,7 @@ final class FaceResultViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 5
-        imageView.layer.borderColor = UIColor.mainText.cgColor
+        imageView.layer.borderColor = UIColor.mainBlack.cgColor
         imageView.layer.cornerRadius = 5
         return imageView
     }()
@@ -66,7 +66,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "DEAD OR ALIVE"
         label.font = .font(.regular, ofSize: 60)
-        label.textColor = .mainText
+        label.textColor = .mainBlack
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -76,7 +76,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "\(gradeData[FaceManager.grade]["grade"]!) : \(gradeData[FaceManager.grade]["info"]!)"
         label.font = .font(.regular, ofSize: 40)
-        label.textColor = .mainText
+        label.textColor = .mainBlack
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -86,7 +86,7 @@ final class FaceResultViewController: BaseViewController {
         let label = UILabel()
         label.text = "$\(numberFormatter(number: FaceManager.totalScore))"
         label.font = .font(.regular, ofSize: 60)
-        label.textColor = .mainText
+        label.textColor = .mainBlack
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -198,8 +198,8 @@ final class FaceResultViewController: BaseViewController {
     
     private func showToast(message: String) {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
+        toastLabel.backgroundColor = .mainText.withAlphaComponent(0.6)
+        toastLabel.textColor = .mainBackground
         toastLabel.font = .font(.regular, ofSize: 20)
         toastLabel.textAlignment = .center;
         toastLabel.text = message

@@ -21,6 +21,7 @@ final class HelpButton: UIButton {
     }
     
     private func configUI() {
-        self.setImage(ImageLiterals.btnHelp.resize(to: CGSize(width: 30, height: 30)), for: .normal)
+        setImage(ImageLiterals.btnHelp.resize(to: CGSize(width: 30, height: 30)).withRenderingMode(.alwaysTemplate), for: .normal)
+        tintColor = .mainText
     }
 }

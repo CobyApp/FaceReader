@@ -194,8 +194,8 @@ final class FaceDetectionViewController: BaseViewController {
     
     private func showToast() {
         let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height - 80, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
+        toastLabel.backgroundColor = .mainText.withAlphaComponent(0.6)
+        toastLabel.textColor = .mainBackground
         toastLabel.font = .font(.regular, ofSize: 20)
         toastLabel.textAlignment = .center;
         toastLabel.text = "얼굴을 촬영해주세요"

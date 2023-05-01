@@ -74,6 +74,6 @@ final class RankCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureUI() {
-        makeBorderLayer(color: .black.withAlphaComponent(0.5))
+        makeBorderLayer(color: .mainText.withAlphaComponent(0.5))
     }
 }

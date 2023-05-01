@@ -15,7 +15,7 @@ class MSegmentedControl: UIControl {
     private var buttons: [UIButton]!
     private var selectorView: UIView!
     
-    var textColor:UIColor = .black
+    var textColor: UIColor = .black
     var selectorViewColor: UIColor = .black
     var selectorTextColor: UIColor = .red
     
@@ -30,7 +30,7 @@ class MSegmentedControl: UIControl {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        self.backgroundColor = UIColor.white
+        self.backgroundColor = .mainBackground
         updateView()
     }
     
