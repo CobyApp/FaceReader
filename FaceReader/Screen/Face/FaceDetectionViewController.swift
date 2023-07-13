@@ -179,28 +179,16 @@ final class FaceDetectionViewController: BaseViewController {
             showToast(message: "얼굴을 촬영해주세요")
             return
         }
-        coverView.isHidden = false
-        loading.isHidden = false
-        loading.play()
+        self.coverView.isHidden = false
+        self.loading.isHidden = false
+        self.loading.play()
         
-        FaceManager.shared.postImage() { result in
-            switch result {
-            case .success(let image):
-                FaceManager.cartoonImage = image
-                FaceManager.shared.setValues()
-                self.loading.pause()
-                self.loading.isHidden = true
-                self.coverView.isHidden = true
-                self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
-            case .failure(_):
-                FaceManager.cartoonImage = FaceManager.faceImage
-                FaceManager.shared.setValues()
-                self.loading.pause()
-                self.loading.isHidden = true
-                self.coverView.isHidden = true
-                self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
-            }
-        }
+        FaceManager.cartoonImage = FaceManager.faceImage
+        FaceManager.shared.setValues()
+        self.loading.pause()
+        self.loading.isHidden = true
+        self.coverView.isHidden = true
+        self.navigationController?.pushViewController(FaceResultViewController(), animated: true)
     }
     
     private func setNickname() {
@@ -280,10 +268,11 @@ extension FaceDetectionViewController: AVCaptureVideoDataOutputSampleBufferDeleg
     }
     
     func convert(cmage: CIImage) -> UIImage {
-         let context = CIContext(options: nil)
-         let cgImage = context.createCGImage(cmage, from: cmage.extent)!
-         let image = UIImage(cgImage: cgImage)
-         return image
+        let context = CIContext(options: nil)
+        let cgImage = context.createCGImage(cmage, from: cmage.extent)!
+        let ciImage = CIImage(cgImage: cgImage).applyingFilter("CIComicEffect")
+        let image = UIImage(ciImage: ciImage)
+        return image
     }
 }
 
