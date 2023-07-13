@@ -80,36 +80,5 @@ final class FaceManager {
         }
     }
     
-//    func postImage(completion: @escaping (Result<UIImage, Error>) -> Void) {
-//        let URL = "https://master-white-box-cartoonization-psi1104.endpoint.ainize.ai/predict"
-//        let header : HTTPHeaders = [
-//            "accept": "image/jpg",
-//            "Content-Type" : "multipart/form-data"
-//        ]
-//        let parameters: [String : Any] = [
-//            "file_type" : "image"
-//        ]
-//        
-//        AF.upload(multipartFormData: { multipartFormData in
-//            for (key, value) in parameters {
-//                multipartFormData.append("\(value)".data(using: .utf8)!, withName: key)
-//            }
-//            if let image = FaceManager.faceImage?.pngData() {
-//                multipartFormData.append(image, withName: "source", fileName: "\(image).png", mimeType: "image/png")
-//            }
-//        }, to: URL, usingThreshold: UInt64.init(), method: .post, headers: header).response { response in
-//            switch response.result {
-//            case .success(let value):
-//                guard let cartoonImage = UIImage(data: value!) else {
-//                    completion(.success(FaceManager.faceImage!))
-//                    return
-//                }
-//                completion(.success(cartoonImage))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
-    
     private init() { }
 }
