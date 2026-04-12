@@ -27,9 +27,9 @@ let project = Project(
         disableSynthesizedResourceAccessors: true
     ),
     packages: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: Version(1, 14, 0))),
-        .package(url: "https://github.com/pointfreeco/swift-case-paths", .upToNextMajor(from: Version(1, 5, 0))),
-        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: Version(1, 9, 0))),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: Version(1, 25, 0))),
+        .package(url: "https://github.com/pointfreeco/swift-case-paths", .upToNextMajor(from: Version(1, 7, 0))),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: Version(1, 12, 0))),
         .package(path: "Packages/FaceReaderLocalization"),
     ],
     settings: .settings(base: ["IPHONEOS_DEPLOYMENT_TARGET": "18.0"]),
