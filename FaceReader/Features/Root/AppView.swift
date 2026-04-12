@@ -23,7 +23,7 @@ struct AppView: View {
                 } else {
                     FaceCaptureView(
                         box: store.sessionBox,
-                        onCommitted: { store.send(.faceCaptureCommitted) }
+                        onCommitted: { store.send(.faceCaptureCommitted(posterImageData: $0)) }
                     )
                 }
             }

@@ -17,6 +17,8 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
 
     private let sequenceHandler = VNSequenceRequestHandler()
     private let session = AVCaptureSession()
+    /// Serial queue for `AVCaptureSession` configuration and `startRunning` / `stopRunning` (must not block the main thread).
+    private let sessionQueue = DispatchQueue(label: "face.capture.session", qos: .userInitiated)
     private let dataOutputQueue = DispatchQueue(label: "face.capture.video", qos: .userInitiated)
 
     lazy var previewLayer: AVCaptureVideoPreviewLayer = {
@@ -33,13 +35,29 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
     }
 
     func start() {
-        configureIfNeeded()
-        guard !session.isRunning else { return }
-        session.startRunning()
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            self.configureIfNeeded()
+            guard !self.session.isRunning else { return }
+            self.session.startRunning()
+        }
     }
 
     func stop() {
-        session.stopRunning()
+        sessionQueue.async { [weak self] in
+            guard let self else { return }
+            guard self.session.isRunning else { return }
+            self.session.stopRunning()
+        }
+    }
+
+    /// Latest comic-filtered frame from the video callback. Call from main: uses `dataOutputQueue` so the read matches what the pipeline last wrote (avoids racing `faceImage` updates).
+    func latestCartoonFrameForCapture() -> UIImage? {
+        var image: UIImage?
+        dataOutputQueue.sync { [weak self] in
+            image = self?.measureSession.faceImage
+        }
+        return image
     }
 
     private func configureIfNeeded() {

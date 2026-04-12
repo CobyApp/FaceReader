@@ -20,7 +20,8 @@ struct AppFeature {
     }
 
     enum Action: Equatable {
-        case faceCaptureCommitted
+        /// JPEG/PNG bytes for the poster face (keeps UI in sync; optional if encoding fails).
+        case faceCaptureCommitted(posterImageData: Data?)
         case faceResult(FaceResultFeature.Action)
         case helpFinished
         case settingsButtonTapped
@@ -31,8 +32,8 @@ struct AppFeature {
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .faceCaptureCommitted:
-                state.faceResult = FaceResultFeature.State(box: state.sessionBox)
+            case let .faceCaptureCommitted(data):
+                state.faceResult = FaceResultFeature.State(box: state.sessionBox, posterImageData: data)
                 return .none
 
             case .helpFinished:

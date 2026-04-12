@@ -64,7 +64,7 @@ public final class FaceMeasureSession {
 
         let faceFirst = (nose[4].y - leftEyebrow[3].y) as Double
         let faceSecond = (faceContour[8].y - nose[4].y) as Double
-ㅣ한ㅂ
+
         guard eyeWidth != 0, noseHeight != 0, lipsHeight != 0, faceSecond != 0 else { return }
 
         let eyeRatio = eyeDistance / eyeWidth

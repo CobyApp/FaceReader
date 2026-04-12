@@ -22,7 +22,7 @@ public struct FaceResultView: View {
     public var body: some View {
         ScrollView {
             MonsterPosterView(
-                faceImage: store.box.session.cartoonImage,
+                faceImage: posterUIImage,
                 nicknameLine: store.nicknameLine,
                 posterWantedText: L10n.posterWanted,
                 posterDeadOrAliveText: L10n.posterDeadOrAlive,
@@ -63,6 +63,7 @@ public struct FaceResultView: View {
             }
         }
         .onAppear { store.send(.onAppear) }
+        .id(store.posterImageData)
         .sheet(isPresented: $showShareSheet) {
             if let shareImage {
                 ActivityView(activityItems: [shareImage])
@@ -70,11 +71,18 @@ public struct FaceResultView: View {
         }
     }
 
+    private var posterUIImage: UIImage? {
+        if let data = store.posterImageData, let img = UIImage(data: data) {
+            return img
+        }
+        return store.box.session.cartoonImage
+    }
+
     private func prepareShare() {
         let grade = store.box.session.grade
         let totalScore = store.box.session.totalScore
         let img = PosterImageRenderer.render(
-            faceImage: store.box.session.cartoonImage,
+            faceImage: posterUIImage,
             nicknameLine: store.nicknameLine,
             posterWantedText: L10n.posterWanted,
             posterDeadOrAliveText: L10n.posterDeadOrAlive,

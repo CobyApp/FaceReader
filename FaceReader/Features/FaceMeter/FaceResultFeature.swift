@@ -16,9 +16,12 @@ public struct FaceResultFeature {
     public struct State: Equatable {
         public var box: SessionBox
         public var nicknameLine: String = ""
+        /// Snapshot used for the wanted poster (TCA-visible so the result screen always redraws).
+        public var posterImageData: Data?
 
-        public init(box: SessionBox) {
+        public init(box: SessionBox, posterImageData: Data? = nil) {
             self.box = box
+            self.posterImageData = posterImageData
         }
     }
 

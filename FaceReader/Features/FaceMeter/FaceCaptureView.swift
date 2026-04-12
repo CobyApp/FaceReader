@@ -7,10 +7,11 @@ import FaceReaderCore
 import FaceReaderLocalization
 import FaceReaderUI
 import SwiftUI
+import UIKit
 
 public struct FaceCaptureView: View {
     let box: SessionBox
-    var onCommitted: () -> Void
+    var onCommitted: (Data?) -> Void
 
     @StateObject private var engine: FaceCaptureEngine
     @State private var isProcessing = false
@@ -18,7 +19,7 @@ public struct FaceCaptureView: View {
 
     public init(
         box: SessionBox,
-        onCommitted: @escaping () -> Void
+        onCommitted: @escaping (Data?) -> Void
     ) {
         self.box = box
         self.onCommitted = onCommitted
@@ -90,10 +91,31 @@ public struct FaceCaptureView: View {
             showNeedFaceAlert = true
             return
         }
+        guard let frame = engine.latestCartoonFrameForCapture() else {
+            showNeedFaceAlert = true
+            return
+        }
         isProcessing = true
-        box.session.cartoonImage = box.session.faceImage
+        box.session.cartoonImage = frame
         box.session.recomputeGradeAndScore()
+        let posterData = Self.encodePosterImageData(frame)
+        engine.stop()
         isProcessing = false
-        onCommitted()
+        onCommitted(posterData)
+    }
+
+    /// `UIImage` from `CIImage` often has no `jpegData`; re-render into a bitmap-backed image when needed.
+    private static func encodePosterImageData(_ image: UIImage) -> Data? {
+        if let j = image.jpegData(compressionQuality: 0.9) { return j }
+        if let p = image.pngData() { return p }
+        let size = image.size
+        guard size.width > 1, size.height > 1 else { return nil }
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = image.scale
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
+        let bitmap = renderer.image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+        return bitmap.jpegData(compressionQuality: 0.9) ?? bitmap.pngData()
     }
 }

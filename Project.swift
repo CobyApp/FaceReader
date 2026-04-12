@@ -79,9 +79,11 @@ let project = Project(
             deploymentTargets: .iOS("18.0"),
             infoPlist: .file(path: "FaceReader/Global/Support/Info.plist"),
             sources: [.glob("FaceReader/App/**/*.swift")],
+            // Bundle any `.otf` under Fonts/ (e.g. SangSangAnt.otf) and list it under UIAppFonts to enable Font.app custom typography.
             resources: [
                 "FaceReader/Global/Resource/Assets.xcassets",
                 "FaceReader/Global/Resource/Base.lproj/LaunchScreen.storyboard",
+                "FaceReader/Global/Resource/Fonts/**/*.otf",
                 "FaceReader/Global/Support/PrivacyInfo.xcprivacy",
                 "FaceReader/Global/Support/**/*.strings",
             ],
