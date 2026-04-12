@@ -1,8 +1,4 @@
-/* 
-  InfoPlist.strings
-  FaceReader
-
-  Created by COBY_PRO on 2022/08/29.
-  
-*/
+/* Korean */
 "CFBundleDisplayName" = "괴인 측정기";
+"NSCameraUsageDescription" = "얼굴 비율 측정을 위해 촬영이 필요합니다. 사진은 별도 공간에 저장되지 않습니다.";
+"NSPhotoLibraryAddUsageDescription" = "이미지 저장";

@@ -1,0 +1,66 @@
+/* FaceReader — Simplified Chinese */
+"app_display_name" = "怪人测量仪";
+
+"main_ranking_title" = "怪人排行";
+"term_daily" = "日榜";
+"term_monthly" = "月榜";
+"term_yearly" = "年榜";
+"term_all_time" = "总榜";
+
+"btn_ok" = "确定";
+"btn_cancel" = "取消";
+
+"empty_rank_list" = "暂无登记的怪人。";
+"help_disaster_level_title" = "灾害等级";
+
+"nickname_title" = "设置昵称";
+"nickname_placeholder" = "请输入要使用的怪人昵称。";
+"btn_complete" = "完成";
+"toast_nickname_invalid" = "请输入有效的昵称。";
+
+"nickname_decorated_format" = "「%@」";
+
+"action_share" = "分享";
+"poster_wanted" = "WANTED";
+"poster_dead_or_alive" = "DEAD OR ALIVE";
+"btn_register_monster" = "登记怪人";
+
+"result_screen_title" = "测量结果";
+"anonymous_monster" = "无名怪人";
+"toast_register_done" = "登记完成。";
+
+"face_ratio_intro" = "根据面部比例测量怪人等级。";
+"face_ratio_tip" = "通过眼、鼻、口、脸型等坐标计算比例，\n面部越夸张，越容易获得更高等级。";
+"face_cartoon_notice" = "人脸照片会转换为卡通风格图像。";
+"face_measurer_title" = "怪人测量仪";
+"toast_capture_face" = "请先拍摄面部。";
+
+"btn_delete_monster" = "删除怪人";
+"monster_paper_title" = "怪人信息";
+"alert_delete_title" = "删除怪人";
+"alert_delete_body" = "从排行榜删除此怪人？此操作无法撤销。";
+
+"privacy_camera_usage" = "需要使用相机测量面部比例。照片不会因此单独存储到特定空间。";
+"privacy_photo_library_add" = "用于保存或分享图片。";
+
+"score_display_format" = "$%@";
+
+"grade_wolf_name" = "狼级";
+"grade_wolf_info" = "出现可能成为威胁的群体";
+"grade_wolf_detail" = "C级英雄多人或一名B级英雄可应对的水平。较强的C级可单独应对，较强的B级可对付多只狼级威胁。";
+
+"grade_tiger_name" = "虎级";
+"grade_tiger_info" = "危及大量不特定人群生命";
+"grade_tiger_detail" = "接近一名A级英雄单独应对的上限。强大的虎级可压制偏弱的A级，相性不佳时中位以上A级也可能败北；上位A级也可独自击败多只虎级。";
+
+"grade_demon_name" = "鬼级";
+"grade_demon_info" = "整座城市停摆与毁灭的危机";
+"grade_demon_detail" = "即使一只也需要大量普通英雄周密作战并以命相搏。威胁达到城市规模，需要营级以上或多名的A级乃至S级出动。";
+
+"grade_dragon_name" = "龙级";
+"grade_dragon_info" = "多座城市面临毁灭的危机";
+"grade_dragon_detail" = "损害规模极高的等级。常规军队难以应对，许多S级英雄在1对1时也可能失败或陷入苦战。";
+
+"grade_god_name" = "神级";
+"grade_god_info" = "人类灭亡的危机";
+"grade_god_detail" = "即使人类全力也可能无法战胜的存在。属于灭绝级别的威胁，难以用比较来估算。";

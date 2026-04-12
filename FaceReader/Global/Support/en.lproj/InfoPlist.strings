@@ -1,0 +1,4 @@
+/* English — fallback / base region */
+"CFBundleDisplayName" = "Monster Meter";
+"NSCameraUsageDescription" = "Camera access is used to measure face proportions. Photos are not stored in a private server by this step alone.";
+"NSPhotoLibraryAddUsageDescription" = "Used when you save or share images.";

@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "怪人メーター";
+"NSCameraUsageDescription" = "顔の比率測定のためにカメラを使用します。写真はこの操作だけでは特定のサーバーに保存されません。";
+"NSPhotoLibraryAddUsageDescription" = "画像の保存や共有に使用します。";

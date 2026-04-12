@@ -1,0 +1,20 @@
+# Xcode
+DerivedData/
+build/
+*.xcuserstate
+*.xccheckout
+xcuserdata/
+
+# SwiftPM / local package build artifacts
+.build/
+.swiftpm/configuration/
+Packages/**/.build/
+
+# CocoaPods (if used later)
+Pods/
+
+# Supabase: copy .env.example → repo-root .env (never commit .env)
+.env
+FaceReader/Configuration/Secrets.generated.xcconfig
+# Legacy local xcconfig (optional)
+FaceReader/Configuration/Secrets.xcconfig

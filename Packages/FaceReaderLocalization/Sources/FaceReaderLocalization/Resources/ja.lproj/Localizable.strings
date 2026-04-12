@@ -1,0 +1,66 @@
+/* FaceReader — Japanese */
+"app_display_name" = "怪人メーター";
+
+"main_ranking_title" = "怪人ランキング";
+"term_daily" = "日間";
+"term_monthly" = "月間";
+"term_yearly" = "年間";
+"term_all_time" = "全期間";
+
+"btn_ok" = "OK";
+"btn_cancel" = "キャンセル";
+
+"empty_rank_list" = "登録された怪人はいません。";
+"help_disaster_level_title" = "災害レベル";
+
+"nickname_title" = "ニックネーム";
+"nickname_placeholder" = "使用する怪人のニックネームを入力してください。";
+"btn_complete" = "完了";
+"toast_nickname_invalid" = "ニックネームを入力してください。";
+
+"nickname_decorated_format" = "「%@」";
+
+"action_share" = "共有";
+"poster_wanted" = "WANTED";
+"poster_dead_or_alive" = "DEAD OR ALIVE";
+"btn_register_monster" = "怪人を登録";
+
+"result_screen_title" = "測定結果";
+"anonymous_monster" = "無名の怪人";
+"toast_register_done" = "登録が完了しました。";
+
+"face_ratio_intro" = "顔の比率から怪人の等級を測定します。";
+"face_ratio_tip" = "目・鼻・口・輪郭などの座標から比率を測るため、\n顔を大げさにすると高い等級になりやすくなります。";
+"face_cartoon_notice" = "顔写真はカートゥーン風の画像に変換されます。";
+"face_measurer_title" = "怪人測定器";
+"toast_capture_face" = "まず顔を撮影してください。";
+
+"btn_delete_monster" = "怪人を削除";
+"monster_paper_title" = "怪人情報";
+"alert_delete_title" = "怪人を削除";
+"alert_delete_body" = "この怪人をランキングから削除しますか？元に戻せません。";
+
+"privacy_camera_usage" = "顔の比率測定のためにカメラを使用します。写真はこの操作だけでは特定のサーバーに保存されません。";
+"privacy_photo_library_add" = "画像の保存や共有に使用します。";
+
+"score_display_format" = "$%@";
+
+"grade_wolf_name" = "狼級";
+"grade_wolf_info" = "危険因子となる集団の出現";
+"grade_wolf_detail" = "C級ヒーロー複数、またはB級ヒーロー1人が対処可能なレベル。強いC級なら単独対応、強いB級なら狼級を複数相手にすることもある。";
+
+"grade_tiger_name" = "虎級";
+"grade_tiger_info" = "不特定多数の生命の危機";
+"grade_tiger_detail" = "A級ヒーローが単独で対応できる上限付近。強い虎級は下位A級を圧倒することもあり、相性によっては中位以上のA級も敗北しうる。上位A級が複数体を倒すこともある。";
+
+"grade_demon_name" = "鬼級";
+"grade_demon_info" = "都市全体の機能停止・壊滅の危機";
+"grade_demon_detail" = "一体でも多くの一般ヒーローが準備と作戦を重ねて死力を尽くすレベル。都市規模の脅威のため大隊規模、複数のA級、またはS級の出動が必要になる。";
+
+"grade_dragon_name" = "竜級";
+"grade_dragon_info" = "複数都市が壊滅する危機";
+"grade_dragon_detail" = "極めて甚大な被害が想定される段階。通常の軍隊では対応が難しく、多くのS級ヒーローでも一対一では敗北や苦戦が予想される。";
+
+"grade_god_name" = "神級";
+"grade_god_info" = "人類滅亡の危機";
+"grade_god_detail" = "人類総力をもってしても勝てないかもしれない存在。比較や推定がほぼ意味をなさない、滅亡レベルの脅威。";

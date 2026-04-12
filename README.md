@@ -22,39 +22,32 @@
 * UIKit
 * AVFoundation
 * Vision
-* Alamofire
-* Firebase
+* Supabase (Postgres + Storage)
 * Lottie
-* Github
+* SDWebImage
+* SwiftPM local package (localization)
 
 ### 🎁 Library
 
-| Name              | Version |       |
-| ----------------- | :-----: | ----- |
-| Alamofire | `Up to Next Major Version` | `SPM` |
-| Firebase | `Up to Next Major Version` | `SPM` |
-| Lottie | `Up to Next Major Version` | `SPM` |
+| Name | Version | |
+| ---- | :-----: | ----- |
+| Supabase | `Up to Next Major Version` | `SPM` |
+| Lottie | branch `master` | `SPM` |
 | SDWebImage | `Up to Next Major Version` | `SPM` |
+| FaceReaderLocalization | local `Packages/FaceReaderLocalization` | `SPM` |
+
+### Supabase credentials
+
+Put **Supabase URL and publishable key** in repo-root `.env` (copy from `.env.example`, gitignored). The **FaceReaderEnv** aggregate target runs `scripts/generate-secrets-xcconfig.sh` before the app target and writes `Secrets.generated.xcconfig`, which `FaceReader.*.xcconfig` includes; values flow into `Info.plist` as `$(SUPABASE_URL)` / `$(SUPABASE_PUBLISHABLE_KEY)`. Never bundle the **secret** key in the app. See `supabase/README.md`.
 
 ### 🗂 Folder Structure
 
 ```
 FaceReader
-  |
   └── FaceReader
-          |── 🗂 Screen
-          │   │── 📁 Main
-          │   │── 📁 Help
-          │   └── 📁 Face
-          │
-          └── 🗂 Global
-              │── 📁 Utils
-              │── 📁 Resource
-              │── 📁 Support
-              │── 📁 UIComponent
-              │── 📁 Literal
-              │── 📁 Base
-              └── 📁 Extensions
+        ├── Features/   (stores, clients, factories, sessions)
+        ├── Screen/
+        └── Global/
 ```
 
 <br/>

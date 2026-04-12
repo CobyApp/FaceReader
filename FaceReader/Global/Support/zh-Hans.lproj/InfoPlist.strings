@@ -1,0 +1,3 @@
+"CFBundleDisplayName" = "怪人测量仪";
+"NSCameraUsageDescription" = "需要使用相机测量面部比例。照片不会因此单独存储到特定空间。";
+"NSPhotoLibraryAddUsageDescription" = "用于保存或分享图片。";
