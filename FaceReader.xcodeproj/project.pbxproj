@@ -15,6 +15,7 @@
 		3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E09521ED20047B52D5D57 /* AppTheme.swift */; };
 		4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2A65D9960D3F2DFA25B473 /* CasePaths */; };
 		4713BAF224FF0830D09F6017 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = D70488527B2478B6E684F50D /* FaceReaderLocalization */; };
+		550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */; };
 		55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */; };
 		58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */; };
 		5E72C8B45D9A46E190B9ED6C /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */; };
@@ -22,6 +23,7 @@
 		668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */; };
 		6B9D7FDADA59BDE5F2747478 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */; };
 		70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA9652BD2ABF17D1C0A8819B /* InfoPlist.strings */; };
+		711A9754E107F23035EC5203 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 86B758E732419DD0FE439C4A /* FaceReaderLocalization */; };
 		75D7EA814F488F3D80D15F69 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 1F915D393AADCBCCDCD27DDA /* Dependencies */; };
 		7BB8C208D173C7B5FB16AE42 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112385A22460A0EB40A97CC /* AppFeature.swift */; };
 		7E6575088531B1F4C4815022 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 950B93E3283DC200EEE8B94F /* Dependencies */; };
@@ -156,6 +158,7 @@
 		AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
 		B15D82CED7DE775CA74F0864 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		B87862C5D52286CEF63F108A /* FaceReaderUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderUI-Info.plist"; sourceTree = "<group>"; };
+		B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KosugiMaru-Regular.ttf"; sourceTree = "<group>"; };
 		C38E24F09D630007DBD42EFD /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5BC4855950D0ED97CFB0532 /* FaceReaderFeatures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderFeatures-Info.plist"; sourceTree = "<group>"; };
@@ -196,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				711A9754E107F23035EC5203 /* FaceReaderLocalization in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +268,7 @@
 		72F6056E438925EF05F2473A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */,
 				3CE4EA903B74A423F38E8479 /* SangSangAnt.otf */,
 			);
 			path = Fonts;
@@ -421,6 +426,7 @@
 			);
 			name = FaceReaderUI;
 			packageProductDependencies = (
+				86B758E732419DD0FE439C4A /* FaceReaderLocalization */,
 			);
 			productName = FaceReaderUI;
 			productReference = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */;
@@ -559,6 +565,7 @@
 			files = (
 				359985950C111EE07F23DCEF /* Assets.xcassets in Resources */,
 				93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */,
+				550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */,
 				1C0CDB99AC388FEA383FF8C7 /* SangSangAnt.otf in Resources */,
 				AF85318ABF0CC61F1F305C29 /* PrivacyInfo.xcprivacy in Resources */,
 				70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */,
@@ -1198,6 +1205,10 @@
 		7A2A65D9960D3F2DFA25B473 /* CasePaths */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = CasePaths;
+		};
+		86B758E732419DD0FE439C4A /* FaceReaderLocalization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FaceReaderLocalization;
 		};
 		950B93E3283DC200EEE8B94F /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;

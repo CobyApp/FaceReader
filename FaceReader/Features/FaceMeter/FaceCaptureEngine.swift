@@ -80,14 +80,14 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
         videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         session.addOutput(videoOutput)
 
-        let portrait = AVCaptureVideoOrientation.portrait
+        let rotation = AVCaptureDevice.RotationCoordinator(device: camera, previewLayer: previewLayer)
         if let outConn = videoOutput.connection(with: .video) {
-            outConn.videoOrientation = portrait
+            outConn.videoRotationAngle = rotation.videoRotationAngleForHorizonLevelCapture
             outConn.automaticallyAdjustsVideoMirroring = false
             outConn.isVideoMirrored = true
         }
         if let prevConn = previewLayer.connection {
-            prevConn.videoOrientation = portrait
+            prevConn.videoRotationAngle = rotation.videoRotationAngleForHorizonLevelPreview
             prevConn.automaticallyAdjustsVideoMirroring = false
             prevConn.isVideoMirrored = true
         }

@@ -3,6 +3,7 @@
 //  FaceReader
 //
 
+import FaceReaderLocalization
 import SwiftUI
 import UIKit
 
@@ -56,11 +57,38 @@ extension Color {
 }
 
 extension Font {
-    /// Custom display font scaled for the current iPhone width.
+    /// Japanese UI: rounded gothic (bundled). Matches `LanguageResolver` active tag `ja`.
+    private static let japaneseAppFontCandidates: [String] = [
+        "KosugiMaru-Regular",
+        "MPLUSRounded1c-Bold",
+        "MPLUSRounded1c-Medium",
+        "ZenMaruGothic-Bold",
+        "ZenMaruGothic-Medium",
+        "YuseiMagic-Regular",
+        "SangSangAnt",
+    ]
+
+    /// English / Korean UI: SangSangAnt first; optional extra faces if not bundled.
+    private static let latinKoreanAppFontCandidates: [String] = [
+        "SangSangAnt",
+        "MPLUSRounded1c-Bold",
+        "MPLUSRounded1c-Medium",
+        "ZenMaruGothic-Bold",
+        "ZenMaruGothic-Medium",
+        "YuseiMagic-Regular",
+    ]
+
+    /// Custom display font scaled for the current iPhone width. Font family follows active app language (`LanguageResolver`).
     public static func app(_ size: CGFloat) -> Font {
         let s = PhoneLayout.scaledFontSize(size)
-        if UIFont(name: "SangSangAnt", size: s) != nil {
-            return Font.custom("SangSangAnt", size: s)
+        let candidates: [String] = {
+            switch LanguageResolver.effectiveResourceTag() {
+            case "ja": return japaneseAppFontCandidates
+            default: return latinKoreanAppFontCandidates
+            }
+        }()
+        for name in candidates where UIFont(name: name, size: s) != nil {
+            return Font.custom(name, size: s)
         }
         return Font.system(size: s, weight: .semibold, design: .rounded)
     }
