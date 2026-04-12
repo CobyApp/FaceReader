@@ -5,21 +5,29 @@
 
 import ComposableArchitecture
 import FaceReaderLocalization
+import FaceReaderUI
 import SwiftUI
+import UIKit
 
-struct FaceResultView: View {
+public struct FaceResultView: View {
     @Bindable var store: StoreOf<FaceResultFeature>
 
     @State private var shareImage: UIImage?
     @State private var showShareSheet = false
 
-    var body: some View {
+    public init(store: StoreOf<FaceResultFeature>) {
+        self.store = store
+    }
+
+    public var body: some View {
         ScrollView {
             MonsterPosterView(
                 faceImage: store.box.session.cartoonImage,
                 nicknameLine: store.nicknameLine,
-                grade: store.box.session.grade,
-                totalScore: store.box.session.totalScore
+                posterWantedText: L10n.posterWanted,
+                posterDeadOrAliveText: L10n.posterDeadOrAlive,
+                gradeLineText: L10n.gradeLine(for: store.box.session.grade),
+                formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
             )
             .frame(maxWidth: .infinity)
         }
@@ -44,35 +52,17 @@ struct FaceResultView: View {
         }
         .safeAreaInset(edge: .bottom) {
             Button {
-                store.send(.registerTapped)
+                store.send(.explanationTapped)
             } label: {
-                Text(L10n.btnRegisterMonster)
-                    .font(.app(22))
+                Text(L10n.btnMonsterExplanation)
+                    .font(.app(23))
                     .frame(maxWidth: .infinity)
-                    .padding(.vertical, 20)
+                    .padding(.vertical, 22 * PhoneLayout.metricScale)
                     .background(Color.appText.opacity(0.35))
                     .foregroundStyle(Color.appText)
             }
-            .disabled(store.isWorking)
-        }
-        .overlay {
-            if store.isWorking {
-                ZStack {
-                    Color.black.opacity(0.35)
-                        .ignoresSafeArea()
-                    ProgressView()
-                        .tint(.white)
-                        .scaleEffect(1.3)
-                }
-            }
         }
         .onAppear { store.send(.onAppear) }
-        .alert(L10n.toastRegisterDone, isPresented: Binding(
-            get: { store.showRegisterDone },
-            set: { if !$0 { store.send(.dismissToast) } }
-        )) {
-            Button(L10n.btnOk, role: .cancel) { store.send(.dismissToast) }
-        }
         .sheet(isPresented: $showShareSheet) {
             if let shareImage {
                 ActivityView(activityItems: [shareImage])
@@ -81,11 +71,15 @@ struct FaceResultView: View {
     }
 
     private func prepareShare() {
+        let grade = store.box.session.grade
+        let totalScore = store.box.session.totalScore
         let img = PosterImageRenderer.render(
             faceImage: store.box.session.cartoonImage,
             nicknameLine: store.nicknameLine,
-            grade: store.box.session.grade,
-            totalScore: store.box.session.totalScore
+            posterWantedText: L10n.posterWanted,
+            posterDeadOrAliveText: L10n.posterDeadOrAlive,
+            gradeLineText: L10n.gradeLine(for: grade),
+            formattedScoreText: L10n.formattedScore(totalScore)
         )
         shareImage = img
         showShareSheet = img != nil

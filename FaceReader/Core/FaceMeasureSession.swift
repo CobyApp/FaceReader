@@ -3,50 +3,54 @@
 //  FaceReader
 //
 
+import CoreGraphics
 import UIKit
 
 /// Stable handle for one face-meter flow (TCA-friendly `Equatable` via `id`).
-struct SessionBox: Identifiable, Equatable {
-    let id: UUID
-    let session: FaceMeasureSession
+public struct SessionBox: Identifiable, Equatable {
+    public let id: UUID
+    public let session: FaceMeasureSession
 
-    init(id: UUID = UUID(), session: FaceMeasureSession = FaceMeasureSession()) {
+    public init(id: UUID = UUID(), session: FaceMeasureSession = FaceMeasureSession()) {
         self.id = id
         self.session = session
     }
 
-    static func == (lhs: SessionBox, rhs: SessionBox) -> Bool {
+    public static func == (lhs: SessionBox, rhs: SessionBox) -> Bool {
         lhs.id == rhs.id
     }
 }
 
-final class FaceMeasureSession {
-    var leftEye: [CGPoint]?
-    var rightEye: [CGPoint]?
-    var leftEyebrow: [CGPoint]?
-    var rightEyebrow: [CGPoint]?
-    var nose: [CGPoint]?
-    var outerLips: [CGPoint]?
-    var innerLips: [CGPoint]?
-    var faceContour: [CGPoint]?
+public final class FaceMeasureSession {
+    public var leftEye: [CGPoint]?
+    public var rightEye: [CGPoint]?
+    public var leftEyebrow: [CGPoint]?
+    public var rightEyebrow: [CGPoint]?
+    public var nose: [CGPoint]?
+    public var outerLips: [CGPoint]?
+    public var innerLips: [CGPoint]?
+    public var faceContour: [CGPoint]?
 
-    var faceImage: UIImage?
-    var cartoonImage: UIImage?
+    public var faceImage: UIImage?
+    public var cartoonImage: UIImage?
 
-    private(set) var totalScore: Int = 0
-    private(set) var grade: Int = 0
+    public private(set) var totalScore: Int = 0
+    public private(set) var grade: Int = 0
 
-    var hasMinimumLandmarksForCapture: Bool {
+    public init() {}
+
+    public var hasMinimumLandmarksForCapture: Bool {
         leftEye != nil
     }
 
-    func recomputeGradeAndScore() {
-        guard let leftEyebrow,
-              let rightEye,
-              let leftEye,
-              let nose,
-              let outerLips,
-              let faceContour
+    public func recomputeGradeAndScore() {
+        guard
+            let leftEyebrow, leftEyebrow.count > 3,
+            let rightEye, rightEye.count > 3,
+            let leftEye, leftEye.count > 3,
+            let nose, nose.count > 5,
+            let outerLips, outerLips.count > 13,
+            let faceContour, faceContour.count > 8
         else { return }
 
         let eyeDistance = (rightEye[3].x - leftEye[3].x) as Double
@@ -60,6 +64,8 @@ final class FaceMeasureSession {
 
         let faceFirst = (nose[4].y - leftEyebrow[3].y) as Double
         let faceSecond = (faceContour[8].y - nose[4].y) as Double
+ㅣ한ㅂ
+        guard eyeWidth != 0, noseHeight != 0, lipsHeight != 0, faceSecond != 0 else { return }
 
         let eyeRatio = eyeDistance / eyeWidth
         let noseRatio = noseWidth / noseHeight

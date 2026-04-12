@@ -1,66 +1,39 @@
-/* FaceReader — English (default fallback) */
-"app_display_name" = "Monster Meter";
-
-"main_ranking_title" = "Monster Ranking";
-"term_daily" = "Daily";
-"term_monthly" = "Monthly";
-"term_yearly" = "Yearly";
-"term_all_time" = "All-time";
-
-"btn_ok" = "OK";
-"btn_cancel" = "Cancel";
-
-"empty_rank_list" = "No monsters registered yet.";
-"help_disaster_level_title" = "Disaster level";
-
-"nickname_title" = "Nickname";
-"nickname_placeholder" = "Enter the nickname you will use.";
-"btn_complete" = "Done";
-"toast_nickname_invalid" = "Please enter a valid nickname.";
-
-"nickname_decorated_format" = "「%@」";
-
+/* FaceReader — English */
 "action_share" = "Share";
-"poster_wanted" = "WANTED";
-"poster_dead_or_alive" = "DEAD OR ALIVE";
-"btn_register_monster" = "Register monster";
-
-"result_screen_title" = "Measurement result";
 "anonymous_monster" = "Nameless monster";
-"toast_register_done" = "Monster registered.";
-
-"face_ratio_intro" = "We measure a monster grade from your face proportions.";
-"face_ratio_tip" = "We use landmarks for eyes, nose, mouth, and face shape. The more you exaggerate your face, the higher the grade can go.";
+"app_display_name" = "Monster Meter";
+"btn_back_to_meter" = "Back to monster meter";
+"btn_cancel" = "Cancel";
+"btn_monster_explanation" = "Disaster level guide";
+"btn_ok" = "OK";
 "face_cartoon_notice" = "Your face photo is converted into a cartoon-style image.";
 "face_measurer_title" = "Monster meter";
-"toast_capture_face" = "Please capture your face first.";
-
-"btn_delete_monster" = "Delete monster";
-"monster_paper_title" = "Monster intel";
-"alert_delete_title" = "Delete monster";
-"alert_delete_body" = "Remove this monster from the leaderboard? This cannot be undone.";
-
+"face_ratio_intro" = "We measure a monster grade from your face proportions.";
+"face_ratio_tip" = "We use landmarks for eyes, nose, mouth, and face shape. The more you exaggerate your face, the higher the grade can go.";
+"grade_demon_detail" = "Even one demon-class threat requires careful planning and life-or-death effort from many ordinary heroes. From this tier upward, a battalion-scale response, multiple A-class heroes, or S-class heroes may be required.";
+"grade_demon_info" = "Risk of a whole city shutting down or being wiped out";
+"grade_demon_name" = "Demon";
+"grade_dragon_detail" = "Among the highest damage scales short of the extraordinary. When multiple cities are at risk, the threat is raised to dragon class. Conventional militaries struggle; many S-class heroes may be unable to win 1-on-1 or will struggle severely.";
+"grade_dragon_info" = "Risk of multiple cities being destroyed";
+"grade_dragon_name" = "Dragon";
+"grade_god_detail" = "A being beyond comparison—humanity’s full strength may still be insufficient. God-class threats imply extinction-level stakes; estimates by comparison barely apply.";
+"grade_god_info" = "Risk of human extinction";
+"grade_god_name" = "God";
+"grade_tiger_detail" = "The upper limit of what a single A-class hero can handle alone. Strong tiger-class threats can crush lower A-class heroes depending on matchup, while high A-class heroes may defeat multiple tiger-class threats.";
+"grade_tiger_info" = "Danger to an unspecified large number of lives";
+"grade_tiger_name" = "Tiger";
+"grade_wolf_detail" = "A level C-class heroes or a single B-class hero can handle it. Roughly three C-class heroes or one B-class hero can fight one wolf-class threat; stronger C-class heroes may solo it, and strong B-class heroes can overwhelm several wolf-class threats.";
+"grade_wolf_info" = "Emergence of a group that can become a threat";
+"grade_wolf_name" = "Wolf";
+"help_disaster_level_title" = "Disaster level";
+"language_option_system" = "Same as system";
+"poster_dead_or_alive" = "DEAD OR ALIVE";
+"poster_wanted" = "WANTED";
 "privacy_camera_usage" = "Camera access is used to measure face proportions. Photos are not stored in a private server by this step alone.";
 "privacy_photo_library_add" = "Used when you save or share images.";
-
+"result_screen_title" = "Measurement result";
 "score_display_format" = "$%@";
-
-"grade_wolf_name" = "Wolf";
-"grade_wolf_info" = "Emergence of a group that can become a threat";
-"grade_wolf_detail" = "A level C-class heroes or a single B-class hero can handle it. Roughly three C-class heroes or one B-class hero can fight one wolf-class threat; stronger C-class heroes may solo it, and strong B-class heroes can overwhelm several wolf-class threats.";
-
-"grade_tiger_name" = "Tiger";
-"grade_tiger_info" = "Danger to an unspecified large number of lives";
-"grade_tiger_detail" = "The upper limit of what a single A-class hero can handle alone. Strong tiger-class threats can crush lower A-class heroes depending on matchup, while high A-class heroes may defeat multiple tiger-class threats.";
-
-"grade_demon_name" = "Demon";
-"grade_demon_info" = "Risk of a whole city shutting down or being wiped out";
-"grade_demon_detail" = "Even one demon-class threat requires careful planning and life-or-death effort from many ordinary heroes. From this tier upward, a battalion-scale response, multiple A-class heroes, or S-class heroes may be required.";
-
-"grade_dragon_name" = "Dragon";
-"grade_dragon_info" = "Risk of multiple cities being destroyed";
-"grade_dragon_detail" = "Among the highest damage scales short of the extraordinary. When multiple cities are at risk, the threat is raised to dragon class. Conventional militaries struggle; many S-class heroes may be unable to win 1-on-1 or will struggle severely.";
-
-"grade_god_name" = "God";
-"grade_god_info" = "Risk of human extinction";
-"grade_god_detail" = "A being beyond comparison—humanity’s full strength may still be insufficient. God-class threats imply extinction-level stakes; estimates by comparison barely apply.";
+"settings_done" = "Done";
+"settings_language" = "Language";
+"settings_title" = "Settings";
+"toast_capture_face" = "Please capture your face first.";

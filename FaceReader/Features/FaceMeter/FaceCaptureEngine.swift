@@ -6,6 +6,8 @@
 import AVFoundation
 import Combine
 import CoreImage
+import CoreVideo
+import FaceReaderCore
 import UIKit
 import Vision
 
@@ -59,7 +61,18 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
         videoOutput.setSampleBufferDelegate(self, queue: dataOutputQueue)
         videoOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: kCVPixelFormatType_32BGRA]
         session.addOutput(videoOutput)
-        videoOutput.connection(with: .video)?.videoOrientation = .portrait
+
+        let portrait = AVCaptureVideoOrientation.portrait
+        if let outConn = videoOutput.connection(with: .video) {
+            outConn.videoOrientation = portrait
+            outConn.automaticallyAdjustsVideoMirroring = false
+            outConn.isVideoMirrored = true
+        }
+        if let prevConn = previewLayer.connection {
+            prevConn.videoOrientation = portrait
+            prevConn.automaticallyAdjustsVideoMirroring = false
+            prevConn.isVideoMirrored = true
+        }
     }
 
     func captureOutput(_: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from _: AVCaptureConnection) {
@@ -69,11 +82,20 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
         measureSession.faceImage = Self.convert(cmage: ciimage)
 
         let detectFaceRequest = VNDetectFaceLandmarksRequest(completionHandler: detectedFace)
+        let exifOrientation = Self.visionOrientation(forFrontCameraPixelBuffer: imageBuffer)
         do {
-            try sequenceHandler.perform([detectFaceRequest], on: imageBuffer, orientation: .leftMirrored)
+            try sequenceHandler.perform([detectFaceRequest], on: imageBuffer, orientation: exifOrientation)
         } catch {
             print(error.localizedDescription)
         }
+    }
+
+    /// Vision `orientation` must match how pixel rows map to upright preview. Portrait-sized buffers need `.upMirrored`; landscape buffers (sensor-native) need `.leftMirrored` for front + portrait UI.
+    private static func visionOrientation(forFrontCameraPixelBuffer pixelBuffer: CVPixelBuffer) -> CGImagePropertyOrientation {
+        let w = CVPixelBufferGetWidth(pixelBuffer)
+        let h = CVPixelBufferGetHeight(pixelBuffer)
+        let isPortraitPixels = h > w
+        return isPortraitPixels ? .upMirrored : .leftMirrored
     }
 
     private func detectedFace(request: VNRequest, error: Error?) {
@@ -89,7 +111,9 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
 
     private func landmark(point: CGPoint, to rect: CGRect) -> CGPoint {
         let absolute = point.absolutePoint(in: rect)
-        return previewLayer.layerPointConverted(fromCaptureDevicePoint: absolute)
+        // Vision uses bottom-left origin; `layerPointConverted(fromCaptureDevicePoint:)` expects top-left normalized space.
+        let deviceNormalized = CGPoint(x: absolute.x, y: 1.0 - absolute.y)
+        return previewLayer.layerPointConverted(fromCaptureDevicePoint: deviceNormalized)
     }
 
     private func landmark(points: [CGPoint]?, to rect: CGRect) -> [CGPoint]? {
@@ -124,6 +148,8 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
         if let v = landmark(points: landmarks.faceContour?.normalizedPoints, to: box) {
             measureSession.faceContour = v
         }
+
+        objectWillChange.send()
     }
 
     private static func convert(cmage: CIImage) -> UIImage {

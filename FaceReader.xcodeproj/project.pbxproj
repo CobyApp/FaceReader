@@ -7,435 +7,499 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E8FRB10129FB849800B4FF69 /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00129FB849800B4FF69 /* FaceReaderApp.swift */; };
-		E8FRB10229FB849800B4FF69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00229FB849800B4FF69 /* AppDelegate.swift */; };
-		E8FRB10329FB849800B4FF69 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00329FB849800B4FF69 /* AppFeature.swift */; };
-		E8FRB10429FB849800B4FF69 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00429FB849800B4FF69 /* AppView.swift */; };
-		E8FRB10529FB849800B4FF69 /* SupabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00529FB849800B4FF69 /* SupabaseManager.swift */; };
-		E8FRB10629FB849800B4FF69 /* FaceMeasureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00629FB849800B4FF69 /* FaceMeasureSession.swift */; };
-		E8FRB10729FB849800B4FF69 /* NicknamePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00729FB849800B4FF69 /* NicknamePreferences.swift */; };
-		E8FRB10829FB849800B4FF69 /* RankingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00829FB849800B4FF69 /* RankingClient.swift */; };
-		E8FRB10929FB849800B4FF69 /* MonsterMutationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00929FB849800B4FF69 /* MonsterMutationClient.swift */; };
-		E8FRB10A29FB849800B4FF69 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00A29FB849800B4FF69 /* AppDependencies.swift */; };
-		E8FRB10B29FB849800B4FF69 /* CGPoint+FaceMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00B29FB849800B4FF69 /* CGPoint+FaceMeter.swift */; };
-		E8FRB10C29FB849800B4FF69 /* Monster.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00C29FB849800B4FF69 /* Monster.swift */; };
-		E8FRB10D29FB849800B4FF69 /* RankingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00D29FB849800B4FF69 /* RankingFeature.swift */; };
-		E8FRB10E29FB849800B4FF69 /* RankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00E29FB849800B4FF69 /* RankingView.swift */; };
-		E8FRB10F29FB849800B4FF69 /* FaceCaptureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB00F29FB849800B4FF69 /* FaceCaptureEngine.swift */; };
-		E8FRB11029FB849800B4FF69 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01029FB849800B4FF69 /* PreviewLayerHost.swift */; };
-		E8FRB11129FB849800B4FF69 /* FaceCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01129FB849800B4FF69 /* FaceCaptureView.swift */; };
-		E8FRB11229FB849800B4FF69 /* FaceResultFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01229FB849800B4FF69 /* FaceResultFeature.swift */; };
-		E8FRB11329FB849800B4FF69 /* FaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01329FB849800B4FF69 /* FaceResultView.swift */; };
-		E8FRB11429FB849800B4FF69 /* NicknameFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01429FB849800B4FF69 /* NicknameFeature.swift */; };
-		E8FRB11529FB849800B4FF69 /* NicknameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01529FB849800B4FF69 /* NicknameView.swift */; };
-		E8FRB11629FB849800B4FF69 /* HelpFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01629FB849800B4FF69 /* HelpFeature.swift */; };
-		E8FRB11729FB849800B4FF69 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01729FB849800B4FF69 /* HelpView.swift */; };
-		E8FRB11829FB849800B4FF69 /* MonsterPaperFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01829FB849800B4FF69 /* MonsterPaperFeature.swift */; };
-		E8FRB11929FB849800B4FF69 /* MonsterPaperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01929FB849800B4FF69 /* MonsterPaperView.swift */; };
-		E8FRB11A29FB849800B4FF69 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01A29FB849800B4FF69 /* AppTheme.swift */; };
-		E8FRB11B29FB849800B4FF69 /* GradeAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01B29FB849800B4FF69 /* GradeAssets.swift */; };
-		E8FRB11C29FB849800B4FF69 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01C29FB849800B4FF69 /* ActivityView.swift */; };
-		E8FRB11D29FB849800B4FF69 /* MonsterPosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8FRB01D29FB849800B4FF69 /* MonsterPosterView.swift */; };
-		E8FRB11E29FB849800B4FF69 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = E8FRCA8129FB849800B4FF69 /* ComposableArchitecture */; };
-		E8F1A07729FB849800B4FF69 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = E8F1A07829FB849800B4FF69 /* Supabase */; };
-		E8F1A00229FB849800B4FF69 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = E8F1A00329FB849800B4FF69 /* FaceReaderLocalization */; };
-		CB9E777D28BBFB000072DB9A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB9E777F28BBFB000072DB9A /* InfoPlist.strings */; };
-		CBE688F528B6225C00720D32 /* SangSangAnt.otf in Resources */ = {isa = PBXBuildFile; fileRef = CBE688F428B6225C00720D32 /* SangSangAnt.otf */; };
-		E8F1A07529FB849800B4FF69 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = E8F1A07629FB849800B4FF69 /* PrivacyInfo.xcprivacy */; };
-		CBFCDC2728B3684E004BCB27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CBFCDC2628B3684E004BCB27 /* Assets.xcassets */; };
-		CBFCDC2A28B3684E004BCB27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */; };
+		18B93BD86D70596E3E381755 /* FaceMeasureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */; };
+		2582867324EEC9AFB401CAF0 /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */; };
+		2F315328D73197A7906AA614 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBF33A2EF1A8842422180EB /* ActivityView.swift */; };
+		359985950C111EE07F23DCEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */; };
+		3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E09521ED20047B52D5D57 /* AppTheme.swift */; };
+		4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2A65D9960D3F2DFA25B473 /* CasePaths */; };
+		4713BAF224FF0830D09F6017 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = D70488527B2478B6E684F50D /* FaceReaderLocalization */; };
+		55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */; };
+		58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */; };
+		5E72C8B45D9A46E190B9ED6C /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */; };
+		608297C2417595B4A366123F /* FaceReaderUI.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
+		668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */; };
+		6B9D7FDADA59BDE5F2747478 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */; };
+		70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA9652BD2ABF17D1C0A8819B /* InfoPlist.strings */; };
+		75D7EA814F488F3D80D15F69 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 1F915D393AADCBCCDCD27DDA /* Dependencies */; };
+		7BB8C208D173C7B5FB16AE42 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112385A22460A0EB40A97CC /* AppFeature.swift */; };
+		7E6575088531B1F4C4815022 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 950B93E3283DC200EEE8B94F /* Dependencies */; };
+		83A9979C08ECE64F1077816F /* FaceReaderCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
+		874258CBA72CF1524746F77C /* FaceReaderCore.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
+		93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */; };
+		97BE1651C19A29F2DF973892 /* FaceLandmarkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */; };
+		9FFF1E0140EADA1282F62353 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 12C97552AD3E03B177F0550C /* ComposableArchitecture */; };
+		A247EE3BA8F8F56A9E02D709 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 3C78D1C330C268AB6C3DE2BA /* CasePaths */; };
+		A5639D973ACAEF3E6334A2C2 /* MonsterPosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */; };
+		AEA827060F1B8C248F34CAF7 /* FaceCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C0EDF346B443A6F08734A /* FaceCaptureView.swift */; };
+		AF85318ABF0CC61F1F305C29 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */; };
+		B467891C4D14E9B359801655 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 26C4BBEB73137B4539BEF22E /* ComposableArchitecture */; };
+		B740C5D168284E5591F19697 /* FaceReaderFeatures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */; };
+		BAE00718B6DA6B560E642DFE /* FaceCaptureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C017BB4D1BCEBE5C1C3DE2D /* FaceCaptureEngine.swift */; };
+		CCE7326C58BDD3B9AF7CD05C /* FaceReaderAppRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */; };
+		D63749770D45253BFAB767A3 /* CGPoint+FaceMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */; };
+		DF4B570813FF595FE696A140 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15D82CED7DE775CA74F0864 /* AppView.swift */; };
+		E388C8CA60DF001A502DDE4D /* FaceReaderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
+		E46997EBFA18C825EDECB0C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */; };
+		E4711843BE19D1CB0E5FC56E /* FaceResultFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */; };
+		E7F0E409E0CB8857A832E8D2 /* GradeAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A16EA40C43D0CAF356324 /* GradeAssets.swift */; };
+		F617BCF25038B281952AF910 /* FaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBCF3CAE0637C8BC2AD2204 /* FaceResultView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A18AC73FA5E85C29283E3339 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 197D6B7D27ABE0725D4C962B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BBF3F2D2256DF4366A6ADCA;
+			remoteInfo = FaceReaderUI;
+		};
+		FA97EDC0877D57AB459A7E0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 197D6B7D27ABE0725D4C962B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1953AC88801F91DE8AA85ACB;
+			remoteInfo = FaceReaderFeatures;
+		};
+		FDA8352CAC22A5F4E2429999 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 197D6B7D27ABE0725D4C962B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 89F7B6E5CB162AC088719EAB;
+			remoteInfo = FaceReaderCore;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04E0B0BCCE5DF8A43FA578A6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08FAD01D3A04809823548916 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		78640DD735C5605FD2DFFAC6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF1370750B4587F79888A2BC /* Dependencies */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstSubfolderSpec = 16;
+			files = (
+				874258CBA72CF1524746F77C /* FaceReaderCore.framework in Dependencies */,
+				608297C2417595B4A366123F /* FaceReaderUI.framework in Dependencies */,
+			);
+			name = Dependencies;
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		DEE2CFD4FB1FE83A90DC3418 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		E8FRB00129FB849800B4FF69 /* FaceReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderApp.swift; sourceTree = "<group>"; };
-		E8FRB00229FB849800B4FF69 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E8FRB00329FB849800B4FF69 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
-		E8FRB00429FB849800B4FF69 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		E8FRB00529FB849800B4FF69 /* SupabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseManager.swift; sourceTree = "<group>"; };
-		E8FRB00629FB849800B4FF69 /* FaceMeasureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMeasureSession.swift; sourceTree = "<group>"; };
-		E8FRB00729FB849800B4FF69 /* NicknamePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknamePreferences.swift; sourceTree = "<group>"; };
-		E8FRB00829FB849800B4FF69 /* RankingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingClient.swift; sourceTree = "<group>"; };
-		E8FRB00929FB849800B4FF69 /* MonsterMutationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterMutationClient.swift; sourceTree = "<group>"; };
-		E8FRB00A29FB849800B4FF69 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
-		E8FRB00B29FB849800B4FF69 /* CGPoint+FaceMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FaceMeter.swift"; sourceTree = "<group>"; };
-		E8FRB00C29FB849800B4FF69 /* Monster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monster.swift; sourceTree = "<group>"; };
-		E8FRB00D29FB849800B4FF69 /* RankingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingFeature.swift; sourceTree = "<group>"; };
-		E8FRB00E29FB849800B4FF69 /* RankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankingView.swift; sourceTree = "<group>"; };
-		E8FRB00F29FB849800B4FF69 /* FaceCaptureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureEngine.swift; sourceTree = "<group>"; };
-		E8FRB01029FB849800B4FF69 /* PreviewLayerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLayerHost.swift; sourceTree = "<group>"; };
-		E8FRB01129FB849800B4FF69 /* FaceCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureView.swift; sourceTree = "<group>"; };
-		E8FRB01229FB849800B4FF69 /* FaceResultFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultFeature.swift; sourceTree = "<group>"; };
-		E8FRB01329FB849800B4FF69 /* FaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultView.swift; sourceTree = "<group>"; };
-		E8FRB01429FB849800B4FF69 /* NicknameFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameFeature.swift; sourceTree = "<group>"; };
-		E8FRB01529FB849800B4FF69 /* NicknameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameView.swift; sourceTree = "<group>"; };
-		E8FRB01629FB849800B4FF69 /* HelpFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpFeature.swift; sourceTree = "<group>"; };
-		E8FRB01729FB849800B4FF69 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
-		E8FRB01829FB849800B4FF69 /* MonsterPaperFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterPaperFeature.swift; sourceTree = "<group>"; };
-		E8FRB01929FB849800B4FF69 /* MonsterPaperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterPaperView.swift; sourceTree = "<group>"; };
-		E8FRB01A29FB849800B4FF69 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
-		E8FRB01B29FB849800B4FF69 /* GradeAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeAssets.swift; sourceTree = "<group>"; };
-		E8FRB01C29FB849800B4FF69 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
-		E8FRB01D29FB849800B4FF69 /* MonsterPosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterPosterView.swift; sourceTree = "<group>"; };
-		E8F1A08629FB849800B4FF69 /* FaceReader.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FaceReader.debug.xcconfig; sourceTree = "<group>"; };
-		E8F1A08729FB849800B4FF69 /* FaceReader.release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = FaceReader.release.xcconfig; sourceTree = "<group>"; };
-		E8FENV8829FB849800B4FF69 /* .env.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env.example; sourceTree = "<group>"; };
-		E8FENV8929FB849800B4FF69 /* generate-secrets-xcconfig.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = generate-secrets-xcconfig.sh; sourceTree = "<group>"; };
-		E8F1A02029FB849800B4FF69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E8F1A02129FB849800B4FF69 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E8F1A02229FB849800B4FF69 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		CB9E778028BBFB1C0072DB9A /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E8F1A07629FB849800B4FF69 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		E8F1A06829FB849800B4FF69 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		CBE688F428B6225C00720D32 /* SangSangAnt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SangSangAnt.otf; sourceTree = "<group>"; };
-		CBFCDC1A28B3684D004BCB27 /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CBFCDC2628B3684E004BCB27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CBFCDC2928B3684E004BCB27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		CBFCDC2B28B3684E004BCB27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		037C0EDF346B443A6F08734A /* FaceCaptureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureView.swift; sourceTree = "<group>"; };
+		0968BA8A7138D162C6753956 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		184217E314359BF97CC4BBE2 /* Tuist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuist.swift; sourceTree = "<group>"; };
+		1DD31F553F636B79CAC2ECD5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderFeatures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		293E09521ED20047B52D5D57 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMeasureSession.swift; sourceTree = "<group>"; };
+		3CCB99897CF0718C82D61A99 /* FaceReaderCore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderCore-Info.plist"; sourceTree = "<group>"; };
+		3EBCF3CAE0637C8BC2AD2204 /* FaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultView.swift; sourceTree = "<group>"; };
+		4C017BB4D1BCEBE5C1C3DE2D /* FaceCaptureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureEngine.swift; sourceTree = "<group>"; };
+		4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderAppRoot.swift; sourceTree = "<group>"; };
+		4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		54FF6F79179CD0361E67CF39 /* FaceReaderLocalization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FaceReaderLocalization; path = Packages/FaceReaderLocalization; sourceTree = "<group>"; };
+		5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FaceMeter.swift"; sourceTree = "<group>"; };
+		66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterPosterView.swift; sourceTree = "<group>"; };
+		68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLayerHost.swift; sourceTree = "<group>"; };
+		6DE59FA7C3B3F85618341E7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		7D1E67FFB74A360E02768E65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7E8F64ADB6DE3800B468F410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLandmarkOverlay.swift; sourceTree = "<group>"; };
+		9112385A22460A0EB40A97CC /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
+		945FD9DFE545FE4F68E43A5F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
+		B15D82CED7DE775CA74F0864 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		B87862C5D52286CEF63F108A /* FaceReaderUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderUI-Info.plist"; sourceTree = "<group>"; };
+		C38E24F09D630007DBD42EFD /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C5BC4855950D0ED97CFB0532 /* FaceReaderFeatures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderFeatures-Info.plist"; sourceTree = "<group>"; };
+		CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderApp.swift; sourceTree = "<group>"; };
+		D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultFeature.swift; sourceTree = "<group>"; };
+		E29A16EA40C43D0CAF356324 /* GradeAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeAssets.swift; sourceTree = "<group>"; };
+		EBBF33A2EF1A8842422180EB /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		CBFCDC1728B3684D004BCB27 /* Frameworks */ = {
+		21133AB0F7DD9F730BC7B33A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8FRB11E29FB849800B4FF69 /* ComposableArchitecture in Frameworks */,
-				E8F1A07729FB849800B4FF69 /* Supabase in Frameworks */,
-				E8F1A00229FB849800B4FF69 /* FaceReaderLocalization in Frameworks */,
+				83A9979C08ECE64F1077816F /* FaceReaderCore.framework in Frameworks */,
+				B740C5D168284E5591F19697 /* FaceReaderFeatures.framework in Frameworks */,
+				E388C8CA60DF001A502DDE4D /* FaceReaderUI.framework in Frameworks */,
+				4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */,
+				B467891C4D14E9B359801655 /* ComposableArchitecture in Frameworks */,
+				7E6575088531B1F4C4815022 /* Dependencies in Frameworks */,
+				4713BAF224FF0830D09F6017 /* FaceReaderLocalization in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44A149CD6AB23618A3188997 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A247EE3BA8F8F56A9E02D709 /* CasePaths in Frameworks */,
+				9FFF1E0140EADA1282F62353 /* ComposableArchitecture in Frameworks */,
+				75D7EA814F488F3D80D15F69 /* Dependencies in Frameworks */,
+				5E72C8B45D9A46E190B9ED6C /* FaceReaderLocalization in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A8D09C23065E31C11C8451E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1F5D9BA2D329E46DA58A1A9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E8FRG00129FB849800B4FF69 /* App */ = {
+		2087E4588C050C6556C6F3E1 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
-				E8FRB00129FB849800B4FF69 /* FaceReaderApp.swift */,
-				E8FRB00229FB849800B4FF69 /* AppDelegate.swift */,
-				E8FRB00329FB849800B4FF69 /* AppFeature.swift */,
-				E8FRB00429FB849800B4FF69 /* AppView.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		E8FRG00229FB849800B4FF69 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00629FB849800B4FF69 /* FaceMeasureSession.swift */,
-				E8FRG00329FB849800B4FF69 /* Clients */,
-				E8FRG00429FB849800B4FF69 /* Dependencies */,
-				E8FRG00529FB849800B4FF69 /* Geometry */,
-				E8FRG00629FB849800B4FF69 /* Models */,
-				E8FRG00729FB849800B4FF69 /* Nickname */,
-				E8FRG00829FB849800B4FF69 /* Services */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		E8FRG00329FB849800B4FF69 /* Clients */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00829FB849800B4FF69 /* RankingClient.swift */,
-				E8FRB00929FB849800B4FF69 /* MonsterMutationClient.swift */,
-			);
-			path = Clients;
-			sourceTree = "<group>";
-		};
-		E8FRG00429FB849800B4FF69 /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00A29FB849800B4FF69 /* AppDependencies.swift */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		E8FRG00529FB849800B4FF69 /* Geometry */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00B29FB849800B4FF69 /* CGPoint+FaceMeter.swift */,
+				5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */,
 			);
 			path = Geometry;
 			sourceTree = "<group>";
 		};
-		E8FRG00629FB849800B4FF69 /* Models */ = {
+		324767490CA77F59B5A788F6 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				E8FRB00C29FB849800B4FF69 /* Monster.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		E8FRG00729FB849800B4FF69 /* Nickname */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00729FB849800B4FF69 /* NicknamePreferences.swift */,
-			);
-			path = Nickname;
-			sourceTree = "<group>";
-		};
-		E8FRG00829FB849800B4FF69 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00529FB849800B4FF69 /* SupabaseManager.swift */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		E8FRG00929FB849800B4FF69 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRG00A29FB849800B4FF69 /* Ranking */,
-				E8FRG00B29FB849800B4FF69 /* FaceMeter */,
-				E8FRG00C29FB849800B4FF69 /* Nickname */,
-				E8FRG00D29FB849800B4FF69 /* Help */,
-				E8FRG00E29FB849800B4FF69 /* MonsterPaper */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		E8FRG00A29FB849800B4FF69 /* Ranking */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00D29FB849800B4FF69 /* RankingFeature.swift */,
-				E8FRB00E29FB849800B4FF69 /* RankingView.swift */,
-			);
-			path = Ranking;
-			sourceTree = "<group>";
-		};
-		E8FRG00B29FB849800B4FF69 /* FaceMeter */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB00F29FB849800B4FF69 /* FaceCaptureEngine.swift */,
-				E8FRB01029FB849800B4FF69 /* PreviewLayerHost.swift */,
-				E8FRB01129FB849800B4FF69 /* FaceCaptureView.swift */,
-				E8FRB01229FB849800B4FF69 /* FaceResultFeature.swift */,
-				E8FRB01329FB849800B4FF69 /* FaceResultView.swift */,
-			);
-			path = FaceMeter;
-			sourceTree = "<group>";
-		};
-		E8FRG00C29FB849800B4FF69 /* Nickname */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB01429FB849800B4FF69 /* NicknameFeature.swift */,
-				E8FRB01529FB849800B4FF69 /* NicknameView.swift */,
-			);
-			path = Nickname;
-			sourceTree = "<group>";
-		};
-		E8FRG00D29FB849800B4FF69 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB01629FB849800B4FF69 /* HelpFeature.swift */,
-				E8FRB01729FB849800B4FF69 /* HelpView.swift */,
-			);
-			path = Help;
-			sourceTree = "<group>";
-		};
-		E8FRG00E29FB849800B4FF69 /* MonsterPaper */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB01829FB849800B4FF69 /* MonsterPaperFeature.swift */,
-				E8FRB01929FB849800B4FF69 /* MonsterPaperView.swift */,
-			);
-			path = MonsterPaper;
-			sourceTree = "<group>";
-		};
-		E8FRG00F29FB849800B4FF69 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				E8FRB01A29FB849800B4FF69 /* AppTheme.swift */,
-				E8FRB01B29FB849800B4FF69 /* GradeAssets.swift */,
-				E8FRB01C29FB849800B4FF69 /* ActivityView.swift */,
-				E8FRB01D29FB849800B4FF69 /* MonsterPosterView.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		CBE1A3BC28B47C6E00D173AB /* Global */ = {
-			isa = PBXGroup;
-			children = (
-				CBE1A3C128B47CD300D173AB /* Resource */,
-				CBE1A3BF28B47C9F00D173AB /* Support */,
+				BA8B5F64C76934E46A202C48 /* Resource */,
+				DE7B7AA0B4F7F578EF840612 /* Support */,
 			);
 			path = Global;
 			sourceTree = "<group>";
 		};
-		CBE1A3BF28B47C9F00D173AB /* Support */ = {
+		35A6C37D7C4AEC3BA68787E3 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				CBFCDC2B28B3684E004BCB27 /* Info.plist */,
-				E8F1A07629FB849800B4FF69 /* PrivacyInfo.xcprivacy */,
-				CB9E777F28BBFB000072DB9A /* InfoPlist.strings */,
+				2087E4588C050C6556C6F3E1 /* Geometry */,
+				3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */,
 			);
-			path = Support;
+			path = Core;
 			sourceTree = "<group>";
 		};
-		CBE1A3C128B47CD300D173AB /* Resource */ = {
+		4B60A3861C78EC738974FF7D /* Help */ = {
 			isa = PBXGroup;
 			children = (
-				CBE688F028B5D1B200720D32 /* Fonts */,
-				CBFCDC2628B3684E004BCB27 /* Assets.xcassets */,
-				CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */,
+				7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */,
 			);
-			path = Resource;
+			path = Help;
 			sourceTree = "<group>";
 		};
-		CBE688F028B5D1B200720D32 /* Fonts */ = {
+		56A1651FADD10675AFBC60ED /* InfoPlists */ = {
 			isa = PBXGroup;
 			children = (
-				CBE688F428B6225C00720D32 /* SangSangAnt.otf */,
+				3CCB99897CF0718C82D61A99 /* FaceReaderCore-Info.plist */,
+				C5BC4855950D0ED97CFB0532 /* FaceReaderFeatures-Info.plist */,
+				B87862C5D52286CEF63F108A /* FaceReaderUI-Info.plist */,
 			);
-			path = Fonts;
+			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		CBFCDC1128B3684D004BCB27 = {
+		711C3D61523CD73F0ED12757 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				E8FENV8829FB849800B4FF69 /* .env.example */,
-				E8FENV8A29FB849800B4FF69 /* scripts */,
-				CBFCDC1C28B3684D004BCB27 /* FaceReader */,
-				CBFCDC1B28B3684D004BCB27 /* Products */,
+				5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */,
 			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
-		CBFCDC1B28B3684D004BCB27 /* Products */ = {
+		80CF908881B606729A71EE10 /* FaceReader */ = {
 			isa = PBXGroup;
 			children = (
-				CBFCDC1A28B3684D004BCB27 /* FaceReader.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		CBFCDC1C28B3684D004BCB27 /* FaceReader */ = {
-			isa = PBXGroup;
-			children = (
-				E8F1A08A29FB849800B4FF69 /* Configuration */,
-				E8FRG00129FB849800B4FF69 /* App */,
-				E8FRG00229FB849800B4FF69 /* Core */,
-				E8FRG00929FB849800B4FF69 /* Features */,
-				E8FRG00F29FB849800B4FF69 /* UI */,
-				CBE1A3BC28B47C6E00D173AB /* Global */,
+				D9209E8B1CD57C91EA3E7341 /* App */,
+				35A6C37D7C4AEC3BA68787E3 /* Core */,
+				DC0DC7C99B8C21579BEEE452 /* Features */,
+				324767490CA77F59B5A788F6 /* Global */,
+				C55AA19F9674FA709C6ABC8C /* UI */,
 			);
 			path = FaceReader;
 			sourceTree = "<group>";
 		};
-		E8F1A08A29FB849800B4FF69 /* Configuration */ = {
+		9C5418F22AA42EE23091D83A /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				E8F1A08629FB849800B4FF69 /* FaceReader.debug.xcconfig */,
-				E8F1A08729FB849800B4FF69 /* FaceReader.release.xcconfig */,
+				9112385A22460A0EB40A97CC /* AppFeature.swift */,
+				B15D82CED7DE775CA74F0864 /* AppView.swift */,
+				4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */,
 			);
-			path = Configuration;
+			path = Root;
 			sourceTree = "<group>";
 		};
-		E8FENV8A29FB849800B4FF69 /* scripts */ = {
+		9FC65ABD378E38421E1C15D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E8FENV8929FB849800B4FF69 /* generate-secrets-xcconfig.sh */,
+				C38E24F09D630007DBD42EFD /* FaceReader.app */,
+				FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */,
+				20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */,
+				A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */,
 			);
-			path = scripts;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A43A1F9C651881A9F1321898 /* FaceMeter */ = {
+			isa = PBXGroup;
+			children = (
+				4C017BB4D1BCEBE5C1C3DE2D /* FaceCaptureEngine.swift */,
+				037C0EDF346B443A6F08734A /* FaceCaptureView.swift */,
+				84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */,
+				D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */,
+				3EBCF3CAE0637C8BC2AD2204 /* FaceResultView.swift */,
+				68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */,
+			);
+			path = FaceMeter;
+			sourceTree = "<group>";
+		};
+		BA8B5F64C76934E46A202C48 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */,
+				4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		C55AA19F9674FA709C6ABC8C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				EBBF33A2EF1A8842422180EB /* ActivityView.swift */,
+				293E09521ED20047B52D5D57 /* AppTheme.swift */,
+				E29A16EA40C43D0CAF356324 /* GradeAssets.swift */,
+				66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */,
+				AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C7BAA66152D9A7591647008E /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				54FF6F79179CD0361E67CF39 /* FaceReaderLocalization */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		CE03121635A06282A77CD136 /* Derived */ = {
+			isa = PBXGroup;
+			children = (
+				56A1651FADD10675AFBC60ED /* InfoPlists */,
+			);
+			path = Derived;
+			sourceTree = "<group>";
+		};
+		D9209E8B1CD57C91EA3E7341 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */,
+				CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		DC0DC7C99B8C21579BEEE452 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				A43A1F9C651881A9F1321898 /* FaceMeter */,
+				4B60A3861C78EC738974FF7D /* Help */,
+				9C5418F22AA42EE23091D83A /* Root */,
+				711C3D61523CD73F0ED12757 /* Settings */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		DE7B7AA0B4F7F578EF840612 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				FA9652BD2ABF17D1C0A8819B /* InfoPlist.strings */,
+				7D1E67FFB74A360E02768E65 /* Info.plist */,
+				2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		E1BE3519824CC9A97BB61E6D = {
+			isa = PBXGroup;
+			children = (
+				9FC65ABD378E38421E1C15D8 /* Products */,
+				E8FCFD18FC7D990DF02C7C1A /* Project */,
+				C7BAA66152D9A7591647008E /* Packages */,
+			);
+			sourceTree = "<group>";
+		};
+		E8FCFD18FC7D990DF02C7C1A /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				CE03121635A06282A77CD136 /* Derived */,
+				80CF908881B606729A71EE10 /* FaceReader */,
+				945FD9DFE545FE4F68E43A5F /* Project.swift */,
+				184217E314359BF97CC4BBE2 /* Tuist.swift */,
+			);
+			name = Project;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CBFCDC1928B3684D004BCB27 /* FaceReader */ = {
+		0BBF3F2D2256DF4366A6ADCA /* FaceReaderUI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CBFCDC2E28B3684E004BCB27 /* Build configuration list for PBXNativeTarget "FaceReader" */;
+			buildConfigurationList = 986DCEA37AFC48EA1400C2E4 /* Build configuration list for PBXNativeTarget "FaceReaderUI" */;
 			buildPhases = (
-				CBFCDC1628B3684D004BCB27 /* Sources */,
-				CBFCDC1728B3684D004BCB27 /* Frameworks */,
-				CBFCDC1828B3684D004BCB27 /* Resources */,
+				509ADF9D9B2C592A2E0A4760 /* Sources */,
+				B3174EB34003DE0B6290080A /* Resources */,
+				8A8D09C23065E31C11C8451E /* Frameworks */,
+				08FAD01D3A04809823548916 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E8FENV8329FB849800B4FF69 /* PBXTargetDependency */,
+			);
+			name = FaceReaderUI;
+			packageProductDependencies = (
+			);
+			productName = FaceReaderUI;
+			productReference = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1953AC88801F91DE8AA85ACB /* FaceReaderFeatures */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BF20739C1AE70915AFAD310 /* Build configuration list for PBXNativeTarget "FaceReaderFeatures" */;
+			buildPhases = (
+				B12321BAAF9AE0B741B45DAF /* Sources */,
+				5ABEE09D17ADBBBA594138FD /* Resources */,
+				44A149CD6AB23618A3188997 /* Frameworks */,
+				78640DD735C5605FD2DFFAC6 /* Embed Frameworks */,
+				BF1370750B4587F79888A2BC /* Dependencies */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1C2905E6A18EF727CE55663B /* PBXTargetDependency */,
+				0E6E4885CE9E97B1760C0D04 /* PBXTargetDependency */,
+			);
+			name = FaceReaderFeatures;
+			packageProductDependencies = (
+				3C78D1C330C268AB6C3DE2BA /* CasePaths */,
+				12C97552AD3E03B177F0550C /* ComposableArchitecture */,
+				1F915D393AADCBCCDCD27DDA /* Dependencies */,
+				26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */,
+			);
+			productName = FaceReaderFeatures;
+			productReference = 20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4FEC9A9E1BE0C2CEBAA849C9 /* FaceReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F837B708E842F05FFD7A779 /* Build configuration list for PBXNativeTarget "FaceReader" */;
+			buildPhases = (
+				D651D948F45BEBB983200E4E /* Sources */,
+				A86EBD8AD38E72BB1D1C8FAA /* Resources */,
+				21133AB0F7DD9F730BC7B33A /* Frameworks */,
+				DEE2CFD4FB1FE83A90DC3418 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E3EEC0F2122D528508F4E334 /* PBXTargetDependency */,
 			);
 			name = FaceReader;
 			packageProductDependencies = (
-				E8FRCA8129FB849800B4FF69 /* ComposableArchitecture */,
-				E8F1A07829FB849800B4FF69 /* Supabase */,
-				E8F1A00329FB849800B4FF69 /* FaceReaderLocalization */,
+				7A2A65D9960D3F2DFA25B473 /* CasePaths */,
+				26C4BBEB73137B4539BEF22E /* ComposableArchitecture */,
+				950B93E3283DC200EEE8B94F /* Dependencies */,
+				D70488527B2478B6E684F50D /* FaceReaderLocalization */,
 			);
 			productName = FaceReader;
-			productReference = CBFCDC1A28B3684D004BCB27 /* FaceReader.app */;
+			productReference = C38E24F09D630007DBD42EFD /* FaceReader.app */;
 			productType = "com.apple.product-type.application";
 		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXAggregateTarget section */
-		E8FENV8229FB849800B4FF69 /* FaceReaderEnv */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = E8FENV8729FB849800B4FF69 /* Build configuration list for PBXAggregateTarget "FaceReaderEnv" */;
+		89F7B6E5CB162AC088719EAB /* FaceReaderCore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC583A292D9F1EF02CC1295A /* Build configuration list for PBXNativeTarget "FaceReaderCore" */;
 			buildPhases = (
-				E8FENV8129FB849800B4FF69 /* Generate secrets xcconfig */,
+				D2A3BA21209978873CF5D991 /* Sources */,
+				3281570A8FA4C660A80AC0DA /* Resources */,
+				F1F5D9BA2D329E46DA58A1A9 /* Frameworks */,
+				04E0B0BCCE5DF8A43FA578A6 /* Embed Frameworks */,
+			);
+			buildRules = (
 			);
 			dependencies = (
 			);
-			name = FaceReaderEnv;
-			productName = FaceReaderEnv;
+			name = FaceReaderCore;
+			packageProductDependencies = (
+			);
+			productName = FaceReaderCore;
+			productReference = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-/* End PBXAggregateTarget section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		E8FENV8129FB849800B4FF69 /* Generate secrets xcconfig */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Generate secrets xcconfig";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "exec \"${SRCROOT}/scripts/generate-secrets-xcconfig.sh\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
-/* Begin PBXContainerItemProxy section */
-		E8FENV8429FB849800B4FF69 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CBFCDC1228B3684D004BCB27 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E8FENV8229FB849800B4FF69;
-			remoteInfo = FaceReaderEnv;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXTargetDependency section */
-		E8FENV8329FB849800B4FF69 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E8FENV8229FB849800B4FF69 /* FaceReaderEnv */;
-			targetProxy = E8FENV8429FB849800B4FF69 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
+/* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		CBFCDC1228B3684D004BCB27 /* Project object */ = {
+		197D6B7D27ABE0725D4C962B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = com.coby;
 				TargetAttributes = {
-					E8FENV8229FB849800B4FF69 = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
-					CBFCDC1928B3684D004BCB27 = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
 				};
 			};
-			buildConfigurationList = CBFCDC1528B3684D004BCB27 /* Build configuration list for PBXProject "FaceReader" */;
-			compatibilityVersion = "Xcode 13.0";
+			buildConfigurationList = D5EFCA345A816E226F4D1C4D /* Build configuration list for PBXProject "FaceReader" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -443,111 +507,283 @@
 				en,
 				ja,
 				ko,
-				"zh-Hans",
-				"zh-Hant",
 			);
-			mainGroup = CBFCDC1128B3684D004BCB27;
+			mainGroup = E1BE3519824CC9A97BB61E6D;
 			packageReferences = (
-				E8F1A00129FB849800B4FF69 /* XCLocalSwiftPackageReference "Packages/FaceReaderLocalization" */,
-				E8F1A07929FB849800B4FF69 /* XCRemoteSwiftPackageReference "supabase-swift" */,
-				E8FRCA8229FB849800B4FF69 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				A96814F437C3D57C6F21CCD0 /* XCRemoteSwiftPackageReference "swift-case-paths" */,
+				0A6EFA21D5947CA354D9422F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				75DA1EF638FD34A5343FDFC0 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				CA35EDD5E63F690A0FD3DFAC /* XCLocalSwiftPackageReference "Packages/FaceReaderLocalization" */,
 			);
-			productRefGroup = CBFCDC1B28B3684D004BCB27 /* Products */;
+			productRefGroup = 9FC65ABD378E38421E1C15D8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E8FENV8229FB849800B4FF69 /* FaceReaderEnv */,
-				CBFCDC1928B3684D004BCB27 /* FaceReader */,
+				4FEC9A9E1BE0C2CEBAA849C9 /* FaceReader */,
+				89F7B6E5CB162AC088719EAB /* FaceReaderCore */,
+				1953AC88801F91DE8AA85ACB /* FaceReaderFeatures */,
+				0BBF3F2D2256DF4366A6ADCA /* FaceReaderUI */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		CBFCDC1828B3684D004BCB27 /* Resources */ = {
+		3281570A8FA4C660A80AC0DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBE688F528B6225C00720D32 /* SangSangAnt.otf in Resources */,
-				CBFCDC2A28B3684E004BCB27 /* LaunchScreen.storyboard in Resources */,
-				CBFCDC2728B3684E004BCB27 /* Assets.xcassets in Resources */,
-				CB9E777D28BBFB000072DB9A /* InfoPlist.strings in Resources */,
-				E8F1A07529FB849800B4FF69 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5ABEE09D17ADBBBA594138FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A86EBD8AD38E72BB1D1C8FAA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				359985950C111EE07F23DCEF /* Assets.xcassets in Resources */,
+				93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */,
+				AF85318ABF0CC61F1F305C29 /* PrivacyInfo.xcprivacy in Resources */,
+				70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3174EB34003DE0B6290080A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CBFCDC1628B3684D004BCB27 /* Sources */ = {
+		509ADF9D9B2C592A2E0A4760 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E8FRB10129FB849800B4FF69 /* FaceReaderApp.swift in Sources */,
-				E8FRB10229FB849800B4FF69 /* AppDelegate.swift in Sources */,
-				E8FRB10329FB849800B4FF69 /* AppFeature.swift in Sources */,
-				E8FRB10429FB849800B4FF69 /* AppView.swift in Sources */,
-				E8FRB10529FB849800B4FF69 /* SupabaseManager.swift in Sources */,
-				E8FRB10629FB849800B4FF69 /* FaceMeasureSession.swift in Sources */,
-				E8FRB10729FB849800B4FF69 /* NicknamePreferences.swift in Sources */,
-				E8FRB10829FB849800B4FF69 /* RankingClient.swift in Sources */,
-				E8FRB10929FB849800B4FF69 /* MonsterMutationClient.swift in Sources */,
-				E8FRB10A29FB849800B4FF69 /* AppDependencies.swift in Sources */,
-				E8FRB10B29FB849800B4FF69 /* CGPoint+FaceMeter.swift in Sources */,
-				E8FRB10C29FB849800B4FF69 /* Monster.swift in Sources */,
-				E8FRB10D29FB849800B4FF69 /* RankingFeature.swift in Sources */,
-				E8FRB10E29FB849800B4FF69 /* RankingView.swift in Sources */,
-				E8FRB10F29FB849800B4FF69 /* FaceCaptureEngine.swift in Sources */,
-				E8FRB11029FB849800B4FF69 /* PreviewLayerHost.swift in Sources */,
-				E8FRB11129FB849800B4FF69 /* FaceCaptureView.swift in Sources */,
-				E8FRB11229FB849800B4FF69 /* FaceResultFeature.swift in Sources */,
-				E8FRB11329FB849800B4FF69 /* FaceResultView.swift in Sources */,
-				E8FRB11429FB849800B4FF69 /* NicknameFeature.swift in Sources */,
-				E8FRB11529FB849800B4FF69 /* NicknameView.swift in Sources */,
-				E8FRB11629FB849800B4FF69 /* HelpFeature.swift in Sources */,
-				E8FRB11729FB849800B4FF69 /* HelpView.swift in Sources */,
-				E8FRB11829FB849800B4FF69 /* MonsterPaperFeature.swift in Sources */,
-				E8FRB11929FB849800B4FF69 /* MonsterPaperView.swift in Sources */,
-				E8FRB11A29FB849800B4FF69 /* AppTheme.swift in Sources */,
-				E8FRB11B29FB849800B4FF69 /* GradeAssets.swift in Sources */,
-				E8FRB11C29FB849800B4FF69 /* ActivityView.swift in Sources */,
-				E8FRB11D29FB849800B4FF69 /* MonsterPosterView.swift in Sources */,
+				2F315328D73197A7906AA614 /* ActivityView.swift in Sources */,
+				3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */,
+				E7F0E409E0CB8857A832E8D2 /* GradeAssets.swift in Sources */,
+				A5639D973ACAEF3E6334A2C2 /* MonsterPosterView.swift in Sources */,
+				2582867324EEC9AFB401CAF0 /* PhoneLayout.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B12321BAAF9AE0B741B45DAF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BAE00718B6DA6B560E642DFE /* FaceCaptureEngine.swift in Sources */,
+				AEA827060F1B8C248F34CAF7 /* FaceCaptureView.swift in Sources */,
+				97BE1651C19A29F2DF973892 /* FaceLandmarkOverlay.swift in Sources */,
+				E4711843BE19D1CB0E5FC56E /* FaceResultFeature.swift in Sources */,
+				F617BCF25038B281952AF910 /* FaceResultView.swift in Sources */,
+				58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */,
+				6B9D7FDADA59BDE5F2747478 /* HelpView.swift in Sources */,
+				7BB8C208D173C7B5FB16AE42 /* AppFeature.swift in Sources */,
+				DF4B570813FF595FE696A140 /* AppView.swift in Sources */,
+				CCE7326C58BDD3B9AF7CD05C /* FaceReaderAppRoot.swift in Sources */,
+				E46997EBFA18C825EDECB0C7 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2A3BA21209978873CF5D991 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18B93BD86D70596E3E381755 /* FaceMeasureSession.swift in Sources */,
+				D63749770D45253BFAB767A3 /* CGPoint+FaceMeter.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D651D948F45BEBB983200E4E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */,
+				55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		CB9E777F28BBFB000072DB9A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E8F1A02029FB849800B4FF69 /* en */,
-				E8F1A02129FB849800B4FF69 /* ja */,
-				CB9E778028BBFB1C0072DB9A /* ko */,
-				E8F1A02229FB849800B4FF69 /* zh-Hans */,
-				E8F1A06829FB849800B4FF69 /* zh-Hant */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		0E6E4885CE9E97B1760C0D04 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FaceReaderUI;
+			target = 0BBF3F2D2256DF4366A6ADCA /* FaceReaderUI */;
+			targetProxy = A18AC73FA5E85C29283E3339 /* PBXContainerItemProxy */;
 		};
-		CBFCDC2828B3684E004BCB27 /* LaunchScreen.storyboard */ = {
+		1C2905E6A18EF727CE55663B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FaceReaderCore;
+			target = 89F7B6E5CB162AC088719EAB /* FaceReaderCore */;
+			targetProxy = FDA8352CAC22A5F4E2429999 /* PBXContainerItemProxy */;
+		};
+		E3EEC0F2122D528508F4E334 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FaceReaderFeatures;
+			target = 1953AC88801F91DE8AA85ACB /* FaceReaderFeatures */;
+			targetProxy = FA97EDC0877D57AB459A7E0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				CBFCDC2928B3684E004BCB27 /* Base */,
+				6DE59FA7C3B3F85618341E7B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		FA9652BD2ABF17D1C0A8819B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7E8F64ADB6DE3800B468F410 /* en */,
+				0968BA8A7138D162C6753956 /* ja */,
+				1DD31F553F636B79CAC2ECD5 /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		CBFCDC2C28B3684E004BCB27 /* Debug */ = {
+		085EA8872B08B2315CDA4297 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
+				PRODUCT_NAME = FaceReaderUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		53894CBE4E2740DCA892A98C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
+				PRODUCT_NAME = FaceReaderFeatures;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6CBD3F439BDD1116F53D4A0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
+				PRODUCT_NAME = FaceReader;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		80970EC53AEBC5B86A8AE8F1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -574,6 +810,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -592,23 +829,95 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		CBFCDC2D28B3684E004BCB27 /* Release */ = {
+		818A6B691308C35B67A9E6A6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.1.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
+				PRODUCT_NAME = FaceReader;
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		892895A00FD0A7E158260792 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
+				PRODUCT_NAME = FaceReaderCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		9E804A6BC12A97C9B5A95CC3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -635,6 +944,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -648,124 +958,170 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		CBFCDC2F28B3684E004BCB27 /* Debug */ = {
+		B95158B00463ED7C4A5E2FDC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8F1A08629FB849800B4FF69 /* FaceReader.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Filming is required to measure the face ratio. Pictures are not stored in a specific space.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save Image";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
 				);
+				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
+				PRODUCT_NAME = FaceReaderFeatures;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Debug;
-		};
-		CBFCDC3028B3684E004BCB27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E8F1A08729FB849800B4FF69 /* FaceReader.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 202209021;
-				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Filming is required to measure the face ratio. Pictures are not stored in a specific space.";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save Image";
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 2.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		E8FENV8529FB849800B4FF69 /* Debug */ = {
+		C94B5E85854ECDC55FA9A53B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
+				PRODUCT_NAME = FaceReaderCore;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
+				SWIFT_COMPILATION_MODE = singlefile;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		E8FENV8629FB849800B4FF69 /* Release */ = {
+		E46E4DB257A4E1F0061940ED /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 202209021;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = 2.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
+				PRODUCT_NAME = FaceReaderUI;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CBFCDC1528B3684D004BCB27 /* Build configuration list for PBXProject "FaceReader" */ = {
+		2BF20739C1AE70915AFAD310 /* Build configuration list for PBXNativeTarget "FaceReaderFeatures" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CBFCDC2C28B3684E004BCB27 /* Debug */,
-				CBFCDC2D28B3684E004BCB27 /* Release */,
+				53894CBE4E2740DCA892A98C /* Debug */,
+				B95158B00463ED7C4A5E2FDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CBFCDC2E28B3684E004BCB27 /* Build configuration list for PBXNativeTarget "FaceReader" */ = {
+		2F837B708E842F05FFD7A779 /* Build configuration list for PBXNativeTarget "FaceReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				CBFCDC2F28B3684E004BCB27 /* Debug */,
-				CBFCDC3028B3684E004BCB27 /* Release */,
+				818A6B691308C35B67A9E6A6 /* Debug */,
+				6CBD3F439BDD1116F53D4A0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E8FENV8729FB849800B4FF69 /* Build configuration list for PBXAggregateTarget "FaceReaderEnv" */ = {
+		986DCEA37AFC48EA1400C2E4 /* Build configuration list for PBXNativeTarget "FaceReaderUI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				E8FENV8529FB849800B4FF69 /* Debug */,
-				E8FENV8629FB849800B4FF69 /* Release */,
+				085EA8872B08B2315CDA4297 /* Debug */,
+				E46E4DB257A4E1F0061940ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC583A292D9F1EF02CC1295A /* Build configuration list for PBXNativeTarget "FaceReaderCore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C94B5E85854ECDC55FA9A53B /* Debug */,
+				892895A00FD0A7E158260792 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5EFCA345A816E226F4D1C4D /* Build configuration list for PBXProject "FaceReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80970EC53AEBC5B86A8AE8F1 /* Debug */,
+				9E804A6BC12A97C9B5A95CC3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -773,22 +1129,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		E8F1A00129FB849800B4FF69 /* XCLocalSwiftPackageReference "Packages/FaceReaderLocalization" */ = {
+		CA35EDD5E63F690A0FD3DFAC /* XCLocalSwiftPackageReference "Packages/FaceReaderLocalization" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = Packages/FaceReaderLocalization;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E8F1A07929FB849800B4FF69 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/supabase/supabase-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-		E8FRCA8229FB849800B4FF69 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+		0A6EFA21D5947CA354D9422F /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
@@ -796,25 +1144,58 @@
 				minimumVersion = 1.14.0;
 			};
 		};
+		75DA1EF638FD34A5343FDFC0 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
+		A96814F437C3D57C6F21CCD0 /* XCRemoteSwiftPackageReference "swift-case-paths" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-case-paths";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E8FRCA8129FB849800B4FF69 /* ComposableArchitecture */ = {
+		12C97552AD3E03B177F0550C /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E8FRCA8229FB849800B4FF69 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
 		};
-		E8F1A07829FB849800B4FF69 /* Supabase */ = {
+		1F915D393AADCBCCDCD27DDA /* Dependencies */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E8F1A07929FB849800B4FF69 /* XCRemoteSwiftPackageReference "supabase-swift" */;
-			productName = Supabase;
+			productName = Dependencies;
 		};
-		E8F1A00329FB849800B4FF69 /* FaceReaderLocalization */ = {
+		26C4BBEB73137B4539BEF22E /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E8F1A00129FB849800B4FF69 /* XCLocalSwiftPackageReference "Packages/FaceReaderLocalization" */;
+			productName = ComposableArchitecture;
+		};
+		26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FaceReaderLocalization;
+		};
+		3C78D1C330C268AB6C3DE2BA /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CasePaths;
+		};
+		7A2A65D9960D3F2DFA25B473 /* CasePaths */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CasePaths;
+		};
+		950B93E3283DC200EEE8B94F /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dependencies;
+		};
+		D70488527B2478B6E684F50D /* FaceReaderLocalization */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = FaceReaderLocalization;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = CBFCDC1228B3684D004BCB27 /* Project object */;
+	rootObject = 197D6B7D27ABE0725D4C962B /* Project object */;
 }

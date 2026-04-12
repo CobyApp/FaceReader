@@ -3,42 +3,56 @@
 //  FaceReader
 //
 
-import FaceReaderLocalization
 import SwiftUI
+import UIKit
 
 /// Poster layout used for share / upload (matches legacy scroll content).
-struct MonsterPosterView: View {
+/// Localized strings are passed in so `FaceReaderUI` does not depend on `FaceReaderLocalization`.
+public struct MonsterPosterView: View {
     let faceImage: UIImage?
     let nicknameLine: String
-    let grade: Int
-    let totalScore: Int
+    let posterWantedText: String
+    let posterDeadOrAliveText: String
+    let gradeLineText: String
+    let formattedScoreText: String
 
     private let contentWidth: CGFloat
-    private let imageHeight: CGFloat
 
-    init(faceImage: UIImage?, nicknameLine: String, grade: Int, totalScore: Int, screenWidth: CGFloat = UIScreen.main.bounds.width) {
+    public init(
+        faceImage: UIImage?,
+        nicknameLine: String,
+        posterWantedText: String,
+        posterDeadOrAliveText: String,
+        gradeLineText: String,
+        formattedScoreText: String,
+        screenWidth: CGFloat = PhoneLayout.width
+    ) {
         self.faceImage = faceImage
         self.nicknameLine = nicknameLine
-        self.grade = grade
-        self.totalScore = totalScore
+        self.posterWantedText = posterWantedText
+        self.posterDeadOrAliveText = posterDeadOrAliveText
+        self.gradeLineText = gradeLineText
+        self.formattedScoreText = formattedScoreText
         contentWidth = screenWidth
-        imageHeight = (screenWidth - 40) * 0.8
     }
 
-    var body: some View {
-        let imageWidth = contentWidth - 40
+    public var body: some View {
+        let pad: CGFloat = 20 * PhoneLayout.metricScale
+        let imageWidth = contentWidth - pad * 2
+        let imageHeight = imageWidth * 0.82
+        let border: CGFloat = max(4, 5 * PhoneLayout.metricScale)
         ZStack {
             Image("background")
                 .resizable(resizingMode: .tile)
             VStack(spacing: 0) {
-                Text(L10n.posterWanted)
+                Text(posterWantedText)
                     .font(.app(100))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.3)
+                    .minimumScaleFactor(0.35)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
-                    .padding(.top, 10)
-                    .padding(.horizontal, 10)
+                    .padding(.top, 12 * PhoneLayout.metricScale)
+                    .padding(.horizontal, pad * 0.5)
 
                 Group {
                     if let faceImage {
@@ -53,38 +67,38 @@ struct MonsterPosterView: View {
                 .clipped()
                 .overlay(
                     RoundedRectangle(cornerRadius: 5)
-                        .stroke(Color.appBrown, lineWidth: 5)
+                        .stroke(Color.appBrown, lineWidth: border)
                 )
-                .padding(.horizontal, 20)
+                .padding(.horizontal, pad)
 
-                Text(L10n.posterDeadOrAlive)
+                Text(posterDeadOrAliveText)
                     .font(.app(60))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.4)
+                    .minimumScaleFactor(0.45)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, pad)
 
                 Text(nicknameLine)
                     .font(.app(60))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.4)
+                    .minimumScaleFactor(0.45)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, pad)
 
-                Text(L10n.gradeLine(for: grade))
+                Text(gradeLineText)
                     .font(.app(25))
                     .foregroundStyle(Color.appBrown)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, 20)
+                    .padding(.horizontal, pad)
 
                 Spacer(minLength: 0)
 
-                Text(L10n.formattedScore(totalScore))
+                Text(formattedScoreText)
                     .font(.app(50))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.4)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, 10)
+                    .minimumScaleFactor(0.45)
+                    .padding(.horizontal, pad)
+                    .padding(.bottom, 12 * PhoneLayout.metricScale)
             }
             .frame(width: contentWidth, height: contentWidth * 1.8, alignment: .top)
         }
@@ -92,15 +106,24 @@ struct MonsterPosterView: View {
     }
 }
 
-enum PosterImageRenderer {
+public enum PosterImageRenderer {
     @MainActor
-    static func render(
+    public static func render(
         faceImage: UIImage?,
         nicknameLine: String,
-        grade: Int,
-        totalScore: Int
+        posterWantedText: String,
+        posterDeadOrAliveText: String,
+        gradeLineText: String,
+        formattedScoreText: String
     ) -> UIImage? {
-        let view = MonsterPosterView(faceImage: faceImage, nicknameLine: nicknameLine, grade: grade, totalScore: totalScore)
+        let view = MonsterPosterView(
+            faceImage: faceImage,
+            nicknameLine: nicknameLine,
+            posterWantedText: posterWantedText,
+            posterDeadOrAliveText: posterDeadOrAliveText,
+            gradeLineText: gradeLineText,
+            formattedScoreText: formattedScoreText
+        )
         let renderer = ImageRenderer(content: view)
         renderer.scale = UIScreen.main.scale
         return renderer.uiImage

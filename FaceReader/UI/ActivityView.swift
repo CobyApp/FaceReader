@@ -6,11 +6,16 @@
 import SwiftUI
 import UIKit
 
-struct ActivityView: UIViewControllerRepresentable {
-    var activityItems: [Any]
-    var applicationActivities: [UIActivity]? = nil
+public struct ActivityView: UIViewControllerRepresentable {
+    public var activityItems: [Any]
+    public var applicationActivities: [UIActivity]?
 
-    func makeUIViewController(context: Context) -> UIActivityViewController {
+    public init(activityItems: [Any], applicationActivities: [UIActivity]? = nil) {
+        self.activityItems = activityItems
+        self.applicationActivities = applicationActivities
+    }
+
+    public func makeUIViewController(context: Context) -> UIActivityViewController {
         let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
         controller.excludedActivityTypes = [
             .postToFacebook,
@@ -29,5 +34,5 @@ struct ActivityView: UIViewControllerRepresentable {
         return controller
     }
 
-    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+    public func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

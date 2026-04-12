@@ -3,7 +3,7 @@
 //  FaceReader
 //
 
-import ComposableArchitecture
+import FaceReaderFeatures
 import SwiftUI
 
 @main
@@ -12,11 +12,7 @@ struct FaceReaderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AppView(
-                store: Store(initialState: AppFeature.State()) {
-                    AppFeature()
-                }
-            )
+            FaceReaderAppRoot()
         }
     }
 }

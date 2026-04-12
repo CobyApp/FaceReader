@@ -5,8 +5,8 @@
 
 import SwiftUI
 
-enum GradeAssets {
-    static func imageName(for grade: Int) -> String {
+public enum GradeAssets {
+    public static func imageName(for grade: Int) -> String {
         switch grade {
         case 0: return "wolf"
         case 1: return "tiger"

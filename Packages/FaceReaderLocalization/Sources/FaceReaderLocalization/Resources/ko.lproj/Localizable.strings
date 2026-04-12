@@ -1,66 +1,39 @@
 /* FaceReader — Korean */
-"app_display_name" = "괴인 측정기";
-
-"main_ranking_title" = "괴인 랭킹";
-"term_daily" = "일간";
-"term_monthly" = "월간";
-"term_yearly" = "연간";
-"term_all_time" = "올타임";
-
-"btn_ok" = "확인";
-"btn_cancel" = "취소";
-
-"empty_rank_list" = "등록된 괴인이 없습니다.";
-"help_disaster_level_title" = "재해 레벨";
-
-"nickname_title" = "닉네임 설정";
-"nickname_placeholder" = "사용할 괴인 닉네임을 등록해주세요.";
-"btn_complete" = "완료";
-"toast_nickname_invalid" = "닉네임을 다시 입력해주세요";
-
-"nickname_decorated_format" = "「%@」";
-
 "action_share" = "공유";
-"poster_wanted" = "WANTED";
-"poster_dead_or_alive" = "DEAD OR ALIVE";
-"btn_register_monster" = "괴인 등록";
-
-"result_screen_title" = "괴인 측정 결과";
 "anonymous_monster" = "무명의 괴인";
-"toast_register_done" = "괴인 등록 완료";
-
-"face_ratio_intro" = "얼굴 비율로 괴인 등급을 측정합니다.";
-"face_ratio_tip" = "눈, 코, 입, 얼굴형 등의 좌표값을 통해 비율을 측정하므로\n얼굴을 망가뜨릴수록 높은 등급을 얻을 수 있습니다.";
+"app_display_name" = "괴인 측정기";
+"btn_back_to_meter" = "측정으로 돌아가기";
+"btn_cancel" = "취소";
+"btn_monster_explanation" = "재해 레벨 설명";
+"btn_ok" = "확인";
 "face_cartoon_notice" = "얼굴 사진은 카툰화 이미지로 변경됩니다.";
 "face_measurer_title" = "괴인 측정기";
-"toast_capture_face" = "얼굴을 촬영해주세요";
-
-"btn_delete_monster" = "괴인 삭제";
-"monster_paper_title" = "괴인 정보";
-"alert_delete_title" = "괴인 삭제";
-"alert_delete_body" = "이 괴인을 리더보드에서 삭제할까요? 되돌릴 수 없습니다.";
-
+"face_ratio_intro" = "얼굴 비율로 괴인 등급을 측정합니다.";
+"face_ratio_tip" = "눈, 코, 입, 얼굴형 등의 좌표값을 통해 비율을 측정하므로\n얼굴을 망가뜨릴수록 높은 등급을 얻을 수 있습니다.";
+"grade_demon_detail" = "한 체만으로도 많은 일반 히어로가 준비와 작전을 거쳐 전력을 다하는 수준. 도시 규모의 위협으로 대대 규모, 복수의 A급 또는 S급 투입이 필요해진다.";
+"grade_demon_info" = "도시 전체 기능 정지·괴멸의 위기";
+"grade_demon_name" = "귀급";
+"grade_dragon_detail" = "매우 큰 피해가 예상되는 단계. 통상 군대로는 대응이 어렵고, 많은 S급 히어로도 일대일로는 패배나 고전이 예상된다.";
+"grade_dragon_info" = "복수 도시가 괴멸할 위기";
+"grade_dragon_name" = "용급";
+"grade_god_detail" = "인류 총력으로도 이기지 못할 수 있는 존재. 비교나 추정이 거의 의미 없는 멸망 수준의 위협.";
+"grade_god_info" = "인류 멸망의 위기";
+"grade_god_name" = "신급";
+"grade_tiger_detail" = "A급 히어로가 단독으로 대응할 수 있는 상한선 부근. 강한 호랑이급은 하위 A급을 압도할 수 있으며, 상성에 따라 중위 이상 A급도 패배할 수 있다.";
+"grade_tiger_info" = "불특정 다수 생명의 위기";
+"grade_tiger_name" = "호랑이급";
+"grade_wolf_detail" = "C급 히어로 여러 명 또는 B급 히어로 1명이 대응 가능한 수준. 강한 C급은 단독 대응, 강한 B급은 늑대급을 여러 처치할 수도 있다.";
+"grade_wolf_info" = "위험 요인이 될 집단의 출현";
+"grade_wolf_name" = "늑대급";
+"help_disaster_level_title" = "재해 레벨";
+"language_option_system" = "시스템과 동일";
+"poster_dead_or_alive" = "DEAD OR ALIVE";
+"poster_wanted" = "WANTED";
 "privacy_camera_usage" = "얼굴 비율 측정을 위해 촬영이 필요합니다. 사진은 별도 공간에 저장되지 않습니다.";
 "privacy_photo_library_add" = "이미지 저장";
-
+"result_screen_title" = "괴인 측정 결과";
 "score_display_format" = "$%@";
-
-"grade_wolf_name" = "낭(狼)";
-"grade_wolf_info" = "위험인자가 될 집단의 출현";
-"grade_wolf_detail" = "C급 히어로들 혹은 B급 히어로 선에서 처리가 가능한 레벨. 히어로 협회에서 공표한 계급별 전투력 비교에 따르면 C급 히어로 3인, B급 히어로 1인이 상대 가능한 레벨. C급 중에서도 강한 히어로는 단독으로 상대가 가능하며 B급 중에서도 강한 경우 낭급 다수를 상대로 무쌍을 찍을 수 있다.";
-
-"grade_tiger_name" = "호(虎)";
-"grade_tiger_info" = "불특정 다수의 생명의 위기";
-"grade_tiger_detail" = "A급 히어로가 단신으로 감당할 수 있는 레벨 한계선. 다만 호급 괴인들 중에서도 강한 녀석들은 웬만한 A급 중하위권 히어로쯤은 가볍게 압도할 수 있으며 상성에 따라서는 A급 중위권 이상의 히어로도 패배할 수 있다. 반대로 A급 상위권이 호급 여러 마리를 혼자서 처치하는 일도 있긴 하다.";
-
-"grade_demon_name" = "귀(鬼)";
-"grade_demon_info" = "도시 전체의 기능정지 및 괴멸 위기";
-"grade_demon_detail" = "한 마리로도 상당한 수의 통상적인 히어로들이 철저한 준비와 작전을 세워서 목숨 걸고 싸워야 하는 레벨. 귀급부터는 전투력이 도시 하나를 위협할 만큼 강해지기에 1개 사단 이상, 혹은 다수의 A급 히어로나 S급 히어로가 출동해야 한다.";
-
-"grade_dragon_name" = "용(龍)";
-"grade_dragon_info" = "도시 여러개가 괴멸 당할 위기";
-"grade_dragon_detail" = "전례가 없는 신을 제외하면 가장 피해 규모가 높은 레벨. 도시 여럿을 위협하는 단계의 피해가 예상되면 용급으로 격상한다. 여기서부턴 통상적인 재래식 군대로는 대응이 어렵고, S급 히어로들 조차도 대부분 상대가 되지 않거나 되더라도 1:1에서 패배하거나 상당히 고전할 정도로 강한 등급이다.";
-
-"grade_god_name" = "신(神)";
-"grade_god_info" = "인류멸망의 위기";
-"grade_god_detail" = "S급은 커녕 현존 인류 전원이 달려들어도 이길 수 없는 말그대로 신이나 다름없는 존재. 신급의 경우 '인류 멸망의 위기'라는 단서가 붙어있는 전무후무한 괴인이기 때문에 비교를 통한 추정조차 불가능하다. 어쩌면 인류멸망 직전에서야 붙혀지는 등급일지도 모른다.";
+"settings_done" = "완료";
+"settings_language" = "언어";
+"settings_title" = "설정";
+"toast_capture_face" = "얼굴을 촬영해주세요";
