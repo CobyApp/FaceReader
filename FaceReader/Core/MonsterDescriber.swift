@@ -176,14 +176,32 @@ public actor MonsterDescriber {
 
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
-        // 수치/점수/비율 + 닉네임 일체 미전달 — 닉네임은 포스터에 따로 있어 본문에서 다시 언급 불필요.
+        // 수치/점수/비율 + 닉네임 미전달. 등급 라벨은 톤 결정을 위해 전달하되, 본문에는 절대 쓰지 말 것 지시.
         switch input.language {
         case .ko:
-            return "재해 등급 \(grade) 인 가상 괴인 캐릭터의 도감 한 줄을 한국어로 짧고 재밌게 써라. 이름은 언급하지 마라. 캐릭터의 외형·분위기·능력 위주로만."
+            return """
+            내부 참고용 등급: \(grade) (이 단어는 본문에 절대 쓰지 마라).
+
+            등급의 위협 수준 분위기를 가공의 괴인 캐릭터에 녹여 짧고 재밌는 도감 한 줄을 한국어로 써라.
+            금지: 이름, 등급 라벨(늑대급/호랑이급/귀급/용급/신급), 숫자.
+            캐릭터의 외형·분위기·능력만으로 묘사하라.
+            """
         case .ja:
-            return "災害等級 \(grade) の架空怪人キャラクターの図鑑コメント一行を日本語で短く面白く書け。名前は出さない。外見・雰囲気・能力のみで。"
+            return """
+            内部参考用の等級: \(grade)（この単語は本文に絶対書くな）。
+
+            等級の脅威水準の雰囲気を架空怪人キャラクターに込めて、短く面白い図鑑コメント一行を日本語で書け。
+            禁止: 名前、等級ラベル(狼級/虎級/鬼級/竜級/神級)、数字。
+            キャラクターの外見・雰囲気・能力のみで描写せよ。
+            """
         case .en:
-            return "Write one short, witty bestiary line in English for a fictional Disaster level \(grade) mysterious being. Do not mention any name. Focus on appearance, vibe, and powers only."
+            return """
+            Internal reference grade: \(grade) (do NOT use this word in the body).
+
+            Channel the threat level's vibe into a fictional mysterious being and write one short, witty bestiary line in English.
+            Forbidden: names, grade labels (Wolf/Tiger/Demon/Dragon/God class), numbers.
+            Describe only by appearance, atmosphere, and powers.
+            """
         }
     }
 }

@@ -35,8 +35,6 @@ public struct FaceResultView: View {
                     faceImage: posterUIImage,
                     nicknameLine: nicknameDisplay,
                     posterWantedText: L10n.posterWanted,
-                    posterDeadOrAliveText: L10n.posterDeadOrAlive,
-                    gradeLineText: L10n.gradeLine(for: store.box.session.grade),
                     formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
                     descriptionText: loadedDescription,
                     gradeStamp: gradeStamp
@@ -166,8 +164,6 @@ public struct FaceResultView: View {
             faceImage: posterUIImage,
             nicknameLine: nicknameDisplay,
             posterWantedText: L10n.posterWanted,
-            posterDeadOrAliveText: L10n.posterDeadOrAlive,
-            gradeLineText: L10n.gradeLine(for: grade),
             formattedScoreText: L10n.formattedScore(totalScore),
             descriptionText: loadedDescription,
             gradeStamp: gradeStamp

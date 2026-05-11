@@ -22,8 +22,6 @@ public struct MonsterPosterView: View {
     let faceImage: UIImage?
     let nicknameLine: String
     let posterWantedText: String
-    let posterDeadOrAliveText: String
-    let gradeLineText: String
     let formattedScoreText: String
     let descriptionText: String?
     let gradeStamp: PosterGradeStamp?
@@ -35,8 +33,6 @@ public struct MonsterPosterView: View {
         faceImage: UIImage?,
         nicknameLine: String,
         posterWantedText: String,
-        posterDeadOrAliveText: String,
-        gradeLineText: String,
         formattedScoreText: String,
         descriptionText: String? = nil,
         gradeStamp: PosterGradeStamp? = nil,
@@ -46,8 +42,6 @@ public struct MonsterPosterView: View {
         self.faceImage = faceImage
         self.nicknameLine = nicknameLine
         self.posterWantedText = posterWantedText
-        self.posterDeadOrAliveText = posterDeadOrAliveText
-        self.gradeLineText = gradeLineText
         self.formattedScoreText = formattedScoreText
         self.descriptionText = descriptionText
         self.gradeStamp = gradeStamp
@@ -97,29 +91,17 @@ public struct MonsterPosterView: View {
                 }
                 .padding(.horizontal, pad)
 
-                Text(posterDeadOrAliveText)
-                    .font(.app(60))
-                    .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.45)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, pad)
-
                 Text(nicknameLine)
                     .font(.app(60))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.45)
                     .multilineTextAlignment(.center)
-                    .padding(.horizontal, pad)
-
-                Text(gradeLineText)
-                    .font(.app(25))
-                    .foregroundStyle(Color.appBrown)
-                    .multilineTextAlignment(.center)
+                    .padding(.top, 10 * PhoneLayout.metricScale)
                     .padding(.horizontal, pad)
 
                 if let descriptionText, !descriptionText.isEmpty {
                     Text(descriptionText)
-                        .font(.app(18))
+                        .font(.app(20))
                         .foregroundStyle(Color.appBrown.opacity(0.9))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
@@ -173,8 +155,6 @@ public enum PosterImageRenderer {
         faceImage: UIImage?,
         nicknameLine: String,
         posterWantedText: String,
-        posterDeadOrAliveText: String,
-        gradeLineText: String,
         formattedScoreText: String,
         descriptionText: String? = nil,
         gradeStamp: PosterGradeStamp? = nil,
@@ -184,8 +164,6 @@ public enum PosterImageRenderer {
             faceImage: faceImage,
             nicknameLine: nicknameLine,
             posterWantedText: posterWantedText,
-            posterDeadOrAliveText: posterDeadOrAliveText,
-            gradeLineText: gradeLineText,
             formattedScoreText: formattedScoreText,
             descriptionText: descriptionText,
             gradeStamp: gradeStamp,
