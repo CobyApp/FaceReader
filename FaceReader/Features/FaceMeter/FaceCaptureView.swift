@@ -68,6 +68,8 @@ public struct FaceCaptureView: View {
             }
         }
         .ignoresSafeArea()
+        .onAppear { engine.start() }
+        .onDisappear { engine.stop() }
         .alert(L10n.toastCaptureFace, isPresented: $showNeedFaceAlert) {
             Button(L10n.btnOk, role: .cancel) {}
         }
