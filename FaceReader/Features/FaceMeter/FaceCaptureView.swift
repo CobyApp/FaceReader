@@ -27,54 +27,31 @@ public struct FaceCaptureView: View {
     }
 
     public var body: some View {
-        ZStack {
-            PreviewLayerHost(previewLayer: engine.previewLayer)
-                .ignoresSafeArea()
-
-            FaceLandmarkOverlay(engine: engine)
-                .ignoresSafeArea()
-
-            CRTFrame()
-
-            VStack {
-                Spacer()
-                SubtitleBox(L10n.faceRatioIntro, size: 22)
-                SubtitleBox(L10n.faceRatioTip, size: 16)
-                    .padding(.top, 8 * PhoneLayout.metricScale)
-
-                Spacer()
-
-                SubtitleBox(L10n.faceCartoonNotice, size: 18)
-                    .padding(.bottom, 14 * PhoneLayout.metricScale)
-
-                Button {
-                    captureTapped()
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(Color.vhsBase)
-                            .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
-                        Circle()
-                            .stroke(Color.vhsInk, lineWidth: 4 * PhoneLayout.metricScale)
-                            .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
-                        Image("camera")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 48 * PhoneLayout.metricScale, height: 48 * PhoneLayout.metricScale)
-                    }
-                }
-                .disabled(isProcessing)
-                .glitchRGB(active: isProcessing, intensity: 1.2, duration: 0.35)
-                .padding(.bottom, max(72, 56 * PhoneLayout.metricScale + 24))
-            }
-            .padding(.horizontal, 22 * PhoneLayout.metricScale)
-
-            if isProcessing {
-                Color.black.opacity(0.55)
+        GeometryReader { geo in
+            let viewport = Self.viewportRect(in: geo.size)
+            ZStack(alignment: .top) {
+                PreviewLayerHost(previewLayer: engine.previewLayer)
                     .ignoresSafeArea()
-                ProgressView()
-                    .tint(.white)
-                    .scaleEffect(1.4)
+
+                FaceLandmarkOverlay(engine: engine)
+                    .ignoresSafeArea()
+
+                CaptureViewportFrame(
+                    viewport: viewport,
+                    canvasSize: geo.size,
+                    dimOpacity: 0.78
+                )
+
+                topInstructions(viewport: viewport)
+                bottomControls(viewport: viewport, screenHeight: geo.size.height)
+
+                if isProcessing {
+                    Color.black.opacity(0.55)
+                        .ignoresSafeArea()
+                    ProgressView()
+                        .tint(.white)
+                        .scaleEffect(1.4)
+                }
             }
         }
         .navigationTitle(L10n.faceMeasurerTitle)
@@ -85,6 +62,82 @@ public struct FaceCaptureView: View {
             Button(L10n.btnOk, role: .cancel) {}
         }
     }
+
+    // MARK: - Layout
+
+    /// 포스터 face 프레임 비율(1 : 0.82)을 화면 가운데에 맞춤.
+    private static func viewportRect(in size: CGSize) -> CGRect {
+        let padX: CGFloat = 16 * PhoneLayout.metricScale
+        let width = size.width - padX * 2
+        let height = width * 0.82
+        let x = padX
+        let y = (size.height - height) / 2
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+
+    @ViewBuilder
+    private func topInstructions(viewport: CGRect) -> some View {
+        let ink = Color(white: 0.96)
+        VStack(spacing: 10 * PhoneLayout.metricScale) {
+            Text(L10n.faceRatioIntro)
+                .font(.app(22))
+                .fontWeight(.heavy)
+                .foregroundStyle(ink)
+            Text(L10n.faceRatioTip)
+                .font(.app(14))
+                .foregroundStyle(ink.opacity(0.85))
+        }
+        .multilineTextAlignment(.center)
+        .padding(.horizontal, 28 * PhoneLayout.metricScale)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 12 * PhoneLayout.metricScale)
+        .frame(height: viewport.minY, alignment: .center)
+    }
+
+    @ViewBuilder
+    private func bottomControls(viewport: CGRect, screenHeight: CGFloat) -> some View {
+        let ink = Color(white: 0.96)
+        VStack(spacing: 18 * PhoneLayout.metricScale) {
+            Text(L10n.faceCartoonNotice)
+                .font(.app(15))
+                .foregroundStyle(ink.opacity(0.85))
+                .multilineTextAlignment(.center)
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 16 * PhoneLayout.metricScale)
+
+            Button {
+                captureTapped()
+            } label: {
+                ZStack {
+                    Circle()
+                        .fill(Color.black.opacity(0.7))
+                        .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
+                    Circle()
+                        .stroke(ink, lineWidth: 4 * PhoneLayout.metricScale)
+                        .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
+                    Image("camera")
+                        .resizable()
+                        .renderingMode(.template)
+                        .scaledToFit()
+                        .foregroundStyle(ink)
+                        .frame(width: 44 * PhoneLayout.metricScale, height: 44 * PhoneLayout.metricScale)
+                }
+            }
+            .disabled(isProcessing)
+            .glitchRGB(active: isProcessing, intensity: 1.2, duration: 0.35)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 24 * PhoneLayout.metricScale)
+        .padding(.bottom, 40 * PhoneLayout.metricScale)
+        .frame(
+            height: max(screenHeight - viewport.maxY, 200),
+            alignment: .top
+        )
+        .offset(y: viewport.maxY)
+    }
+
+    // MARK: - Capture
 
     private func captureTapped() {
         guard box.session.hasMinimumLandmarksForCapture else {

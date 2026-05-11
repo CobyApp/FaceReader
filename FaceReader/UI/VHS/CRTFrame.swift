@@ -3,84 +3,20 @@
 //  FaceReader
 //
 
-import FaceReaderLocalization
 import SwiftUI
 
-/// 카메라 프리뷰 위 4 코너 갈고리 가이드 + 좌상단 REC 깜빡임.
-/// VHSOverlay와 달리 프리뷰 위에 직접 올라가지만, 가벼운 도형만 사용해 FPS 영향 최소화.
-public struct CRTFrame: View {
-    @ObservedObject private var prefs = VHSEffectsPreferences.shared
-    @State private var recBlink: Bool = false
+/// 직사각형의 4 모서리에 갈고리 가이드 마크.
+public struct CornerHook: Shape {
+    public enum Corner { case topLeading, topTrailing, bottomLeading, bottomTrailing }
+    public let corner: Corner
+    public let armLength: CGFloat
 
-    public init() {}
-
-    public var body: some View {
-        ZStack {
-            corners
-            recBadge
-        }
-        .allowsHitTesting(false)
-        .onAppear {
-            withAnimation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true)) {
-                recBlink = true
-            }
-        }
+    public init(corner: Corner, armLength: CGFloat) {
+        self.corner = corner
+        self.armLength = armLength
     }
 
-    private var inkColor: Color { Color(white: 0.96) }
-
-    @ViewBuilder private var corners: some View {
-        GeometryReader { geo in
-            let inset: CGFloat = 14 * PhoneLayout.metricScale
-            let armLength: CGFloat = 32 * PhoneLayout.metricScale
-            let lineWidth: CGFloat = 3
-            ZStack {
-                CornerHook(corner: .topLeading, armLength: armLength)
-                    .stroke(inkColor, lineWidth: lineWidth)
-                    .frame(width: armLength, height: armLength)
-                    .position(x: inset + armLength / 2, y: inset + armLength / 2)
-                CornerHook(corner: .topTrailing, armLength: armLength)
-                    .stroke(inkColor, lineWidth: lineWidth)
-                    .frame(width: armLength, height: armLength)
-                    .position(x: geo.size.width - inset - armLength / 2, y: inset + armLength / 2)
-                CornerHook(corner: .bottomLeading, armLength: armLength)
-                    .stroke(inkColor, lineWidth: lineWidth)
-                    .frame(width: armLength, height: armLength)
-                    .position(x: inset + armLength / 2, y: geo.size.height - inset - armLength / 2)
-                CornerHook(corner: .bottomTrailing, armLength: armLength)
-                    .stroke(inkColor, lineWidth: lineWidth)
-                    .frame(width: armLength, height: armLength)
-                    .position(x: geo.size.width - inset - armLength / 2, y: geo.size.height - inset - armLength / 2)
-            }
-        }
-    }
-
-    @ViewBuilder private var recBadge: some View {
-        VStack {
-            HStack(spacing: 8) {
-                Circle()
-                    .fill(Color.vhsRed)
-                    .frame(width: 12, height: 12)
-                    .opacity(prefs.reducedEffects ? 1.0 : (recBlink ? 1.0 : 0.25))
-                Text(L10n.vhsRec)
-                    .font(.app(16))
-                    .fontWeight(.black)
-                    .foregroundStyle(Color(white: 0.96))
-                Spacer()
-            }
-            .padding(.horizontal, 24 * PhoneLayout.metricScale)
-            .padding(.top, 8 * PhoneLayout.metricScale)
-            Spacer()
-        }
-    }
-}
-
-private struct CornerHook: Shape {
-    enum Corner { case topLeading, topTrailing, bottomLeading, bottomTrailing }
-    let corner: Corner
-    let armLength: CGFloat
-
-    func path(in rect: CGRect) -> Path {
+    public func path(in rect: CGRect) -> Path {
         var p = Path()
         let c: CGPoint
         let h1: CGPoint
@@ -110,9 +46,49 @@ private struct CornerHook: Shape {
     }
 }
 
-#Preview("CRT") {
-    ZStack {
-        Color.black.ignoresSafeArea()
-        CRTFrame()
+/// 화면 일부만 카메라가 보이도록 외곽을 어둡게 마스킹하고, 그 viewport 사각형에 4 코너 가이드.
+public struct CaptureViewportFrame: View {
+    let viewport: CGRect
+    let canvasSize: CGSize
+    let dimOpacity: Double
+
+    public init(viewport: CGRect, canvasSize: CGSize, dimOpacity: Double = 0.78) {
+        self.viewport = viewport
+        self.canvasSize = canvasSize
+        self.dimOpacity = dimOpacity
+    }
+
+    public var body: some View {
+        ZStack {
+            // 외곽 어둡게 (even-odd fill로 viewport 부분만 뚫음)
+            Path { path in
+                path.addRect(CGRect(origin: .zero, size: canvasSize))
+                path.addRect(viewport)
+            }
+            .fill(Color.black.opacity(dimOpacity), style: FillStyle(eoFill: true))
+
+            // 4 코너 갈고리
+            let armLength: CGFloat = 28 * PhoneLayout.metricScale
+            let lineWidth: CGFloat = 3
+            let ink = Color(white: 0.96)
+
+            CornerHook(corner: .topLeading, armLength: armLength)
+                .stroke(ink, lineWidth: lineWidth)
+                .frame(width: armLength, height: armLength)
+                .position(x: viewport.minX + armLength / 2, y: viewport.minY + armLength / 2)
+            CornerHook(corner: .topTrailing, armLength: armLength)
+                .stroke(ink, lineWidth: lineWidth)
+                .frame(width: armLength, height: armLength)
+                .position(x: viewport.maxX - armLength / 2, y: viewport.minY + armLength / 2)
+            CornerHook(corner: .bottomLeading, armLength: armLength)
+                .stroke(ink, lineWidth: lineWidth)
+                .frame(width: armLength, height: armLength)
+                .position(x: viewport.minX + armLength / 2, y: viewport.maxY - armLength / 2)
+            CornerHook(corner: .bottomTrailing, armLength: armLength)
+                .stroke(ink, lineWidth: lineWidth)
+                .frame(width: armLength, height: armLength)
+                .position(x: viewport.maxX - armLength / 2, y: viewport.maxY - armLength / 2)
+        }
+        .allowsHitTesting(false)
     }
 }
