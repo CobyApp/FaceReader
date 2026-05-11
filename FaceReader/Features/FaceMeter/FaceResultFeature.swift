@@ -59,9 +59,9 @@ public struct FaceResultFeature {
                 return .none
 
             case let .requestDescription(nickname):
-                // Apple Intelligence 비활성 / 미지원 디바이스에서는 카드 자체를 숨기기 위해 idle 유지.
-                guard MonsterDescriber.isAvailable else {
-                    state.descriptionStatus = .idle
+                // Apple Intelligence 가용성 사유를 사용자에게 그대로 노출 (idle 로 숨겨버리면 안 보여 디버깅 불가).
+                if let unavailableReason = MonsterDescriber.unavailableReason {
+                    state.descriptionStatus = .failed(unavailableReason)
                     return .none
                 }
                 state.descriptionStatus = .loading

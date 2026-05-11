@@ -49,6 +49,27 @@ public actor MonsterDescriber {
         }
     }
 
+    /// 모델 사용 불가시 사람 친화 사유 메시지. 사용 가능하면 nil.
+    public static var unavailableReason: String? {
+        switch SystemLanguageModel.default.availability {
+        case .available:
+            return nil
+        case .unavailable(let reason):
+            switch reason {
+            case .appleIntelligenceNotEnabled:
+                return "Apple Intelligence가 꺼져있어요. 설정 → Apple Intelligence에서 켠 뒤 다시 시도해주세요."
+            case .deviceNotEligible:
+                return "이 기기는 Apple Intelligence를 지원하지 않아요. (iPhone 15 Pro 이상)"
+            case .modelNotReady:
+                return "Apple Intelligence 모델을 다운로드 중이에요. 잠시 후 다시 열어주세요."
+            @unknown default:
+                return "Apple Intelligence를 지금 사용할 수 없어요."
+            }
+        @unknown default:
+            return "Apple Intelligence 상태를 확인할 수 없어요."
+        }
+    }
+
     /// 입력값으로 짧은 (1~3문장) 원펀맨 풍자 보고서 생성.
     public func generate(_ input: Input) async throws -> String {
         switch SystemLanguageModel.default.availability {

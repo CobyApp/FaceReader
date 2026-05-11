@@ -111,11 +111,11 @@ public struct FaceResultView: View {
         .background(Color.appBackground)
     }
 
-    /// 카드를 렌더할 가치가 있는 상태인지. idle 과 failed 는 숨김(지원/생성 실패 케이스 동일하게 처리).
+    /// 카드 표시 여부. idle 만 숨김 (아직 요청 전). 실패 사유는 사용자에게 보여줘야 디버깅/안내 가능.
     private var shouldShowDescription: Bool {
         switch store.descriptionStatus {
-        case .loading, .loaded: return true
-        case .idle, .failed: return false
+        case .loading, .loaded, .failed: return true
+        case .idle: return false
         }
     }
 
@@ -154,7 +154,14 @@ public struct FaceResultView: View {
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            case .idle, .failed:
+            case .failed(let reason):
+                Text(reason)
+                    .font(.app(13))
+                    .foregroundStyle(ink.opacity(0.6))
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            case .idle:
                 EmptyView()
             }
         }
