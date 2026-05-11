@@ -153,6 +153,7 @@ public struct FaceCaptureView: View {
     @ViewBuilder
     private func topBar(m: Metrics) -> some View {
         let ink = Color(white: 0.96)
+        let badgeSize: CGFloat = 38 * PhoneLayout.metricScale
         ZStack {
             Text(L10n.faceMeasurerTitle)
                 .font(.app(16))
@@ -162,20 +163,17 @@ public struct FaceCaptureView: View {
 
             HStack {
                 Spacer()
-                ZStack {
-                    Rectangle()
-                        .fill(ink)
-                        .frame(width: 44 * PhoneLayout.metricScale, height: 30 * PhoneLayout.metricScale)
-                    Text("VHS")
-                        .font(.app(12))
-                        .fontWeight(.black)
-                        .foregroundStyle(Color.black)
-                }
-                .contentShape(Rectangle())
-                .onTapGesture { onSettingsTapped() }
-                .padding(.trailing, 12)
-                .accessibilityAddTraits(.isButton)
-                .accessibilityLabel(L10n.settingsTitle)
+                Image(systemName: "gearshape.fill")
+                    .font(.system(size: 17 * PhoneLayout.metricScale, weight: .semibold))
+                    .foregroundStyle(ink)
+                    .frame(width: badgeSize, height: badgeSize)
+                    .background(Circle().fill(Color.black.opacity(0.45)))
+                    .overlay(Circle().stroke(ink.opacity(0.55), lineWidth: 1))
+                    .contentShape(Circle())
+                    .onTapGesture { onSettingsTapped() }
+                    .padding(.trailing, 12)
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityLabel(L10n.settingsTitle)
             }
         }
         .frame(width: m.topBarRect.width, height: m.topBarRect.height)
