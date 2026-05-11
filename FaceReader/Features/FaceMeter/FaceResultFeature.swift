@@ -15,18 +15,17 @@ public struct FaceResultFeature {
     @ObservableState
     public struct State: Equatable {
         public var box: SessionBox
-        public var nicknameLine: String = ""
         /// Snapshot used for the wanted poster (TCA-visible so the result screen always redraws).
         public var posterImageData: Data?
 
-        public enum DescriptionStatus: Equatable {
+        public enum ReportStatus: Equatable {
             case idle
             case loading
-            case loaded(String)
+            case loaded(codename: String, description: String)
             case failed(String)
         }
 
-        public var descriptionStatus: DescriptionStatus = .idle
+        public var reportStatus: ReportStatus = .idle
 
         public init(box: SessionBox, posterImageData: Data? = nil) {
             self.box = box
@@ -37,13 +36,18 @@ public struct FaceResultFeature {
     public enum Action: Equatable {
         case onAppear
         case dismissTapped
-        case requestDescription(nickname: String)
-        case descriptionLoaded(Result<String, FailureMessage>)
+        case requestReport
+        case reportLoaded(Result<ReportPayload, FailureMessage>)
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
             case dismiss
         }
+    }
+
+    public struct ReportPayload: Equatable, Sendable {
+        public let codename: String
+        public let description: String
     }
 
     public struct FailureMessage: Equatable, Error {
@@ -55,20 +59,15 @@ public struct FaceResultFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
-                state.nicknameLine = L10n.anonymousMonster
                 return .none
 
-            case let .requestDescription(nickname):
-                // Apple Intelligence 가용성 사유를 사용자에게 그대로 노출 (idle 로 숨겨버리면 안 보여 디버깅 불가).
+            case .requestReport:
                 if let unavailableReason = MonsterDescriber.unavailableReason {
-                    state.descriptionStatus = .failed(unavailableReason)
+                    state.reportStatus = .failed(unavailableReason)
                     return .none
                 }
-                state.descriptionStatus = .loading
-                let session = state.box.session
-                let grade = session.grade
-                let score = session.totalScore
-                let ratios = session.lastRatios
+                state.reportStatus = .loading
+                let grade = state.box.session.grade
                 let language: MonsterDescriber.DescriptionLanguage = {
                     switch LanguageResolver.effectiveResourceTag() {
                     case "ko": return .ko
@@ -78,36 +77,27 @@ public struct FaceResultFeature {
                 }()
                 return .run { send in
                     let describer = MonsterDescriber()
-                    let input = MonsterDescriber.Input(
-                        grade: grade,
-                        totalScore: score,
-                        eyeRatio: ratios?.eyeRatio,
-                        noseRatio: ratios?.noseRatio,
-                        lipsRatio: ratios?.lipsRatio,
-                        faceRatio: ratios?.faceRatio,
-                        nickname: nickname,
-                        language: language
-                    )
+                    let input = MonsterDescriber.Input(grade: grade, language: language)
                     do {
-                        let text = try await describer.generate(input)
-                        await send(.descriptionLoaded(.success(text)))
+                        let report = try await describer.generate(input)
+                        await send(.reportLoaded(.success(ReportPayload(codename: report.codename, description: report.description))))
                     } catch MonsterDescriber.DescribeError.guardrailBlocked {
-                        await send(.descriptionLoaded(.failure(FailureMessage("분석관이 평가를 거부했어요. (안전 가드레일) 다른 표정 / 닉네임으로 다시 시도해보세요."))))
+                        await send(.reportLoaded(.failure(FailureMessage("분석관이 평가를 거부했어요. (안전 가드레일)"))))
                     } catch MonsterDescriber.DescribeError.unavailable(let reason) {
-                        await send(.descriptionLoaded(.failure(FailureMessage(reason))))
+                        await send(.reportLoaded(.failure(FailureMessage(reason))))
                     } catch MonsterDescriber.DescribeError.generationFailed(let reason) {
-                        await send(.descriptionLoaded(.failure(FailureMessage("분석 중 오류: \(reason)"))))
+                        await send(.reportLoaded(.failure(FailureMessage("분석 중 오류: \(reason)"))))
                     } catch {
-                        await send(.descriptionLoaded(.failure(FailureMessage(String(describing: error)))))
+                        await send(.reportLoaded(.failure(FailureMessage(String(describing: error)))))
                     }
                 }
 
-            case let .descriptionLoaded(.success(text)):
-                state.descriptionStatus = .loaded(text)
+            case let .reportLoaded(.success(payload)):
+                state.reportStatus = .loaded(codename: payload.codename, description: payload.description)
                 return .none
 
-            case let .descriptionLoaded(.failure(failure)):
-                state.descriptionStatus = .failed(failure.message)
+            case let .reportLoaded(.failure(failure)):
+                state.reportStatus = .failed(failure.message)
                 return .none
 
             case .dismissTapped:

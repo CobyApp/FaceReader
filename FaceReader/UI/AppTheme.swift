@@ -80,15 +80,25 @@ extension Font {
     /// Custom display font scaled for the current iPhone width. Font family follows active app language (`LanguageResolver`).
     public static func app(_ size: CGFloat) -> Font {
         let s = PhoneLayout.scaledFontSize(size)
+        return appUnscaled(s)
+    }
+
+    /// Same font family selection but no per-device scaling. Used for fixed-size canvases (e.g., 현상금 포스터)
+    /// so output looks identical on every iPhone.
+    public static func posterApp(_ size: CGFloat) -> Font {
+        return appUnscaled(size)
+    }
+
+    private static func appUnscaled(_ size: CGFloat) -> Font {
         let candidates: [String] = {
             switch LanguageResolver.effectiveResourceTag() {
             case "ja": return japaneseAppFontCandidates
             default: return latinKoreanAppFontCandidates
             }
         }()
-        for name in candidates where UIFont(name: name, size: s) != nil {
-            return Font.custom(name, size: s)
+        for name in candidates where UIFont(name: name, size: size) != nil {
+            return Font.custom(name, size: size)
         }
-        return Font.system(size: s, weight: .semibold, design: .rounded)
+        return Font.system(size: size, weight: .semibold, design: .rounded)
     }
 }

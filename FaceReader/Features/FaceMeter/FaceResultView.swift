@@ -11,7 +11,6 @@ import UIKit
 
 public struct FaceResultView: View {
     @Bindable var store: StoreOf<FaceResultFeature>
-    @ObservedObject private var prefs = VHSEffectsPreferences.shared
 
     @State private var shareImage: UIImage?
     @State private var showShareSheet = false
@@ -21,37 +20,68 @@ public struct FaceResultView: View {
         self.store = store
     }
 
+    /// AI 가 생성한 codename, 없으면 익명 폴백.
     private var nicknameDisplay: String {
-        let trimmed = prefs.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? L10n.anonymousMonster : trimmed
+        if case let .loaded(codename, _) = store.reportStatus, !codename.isEmpty {
+            return codename
+        }
+        return L10n.anonymousMonster
+    }
+
+    /// AI 가 생성한 description, loaded 일 때만.
+    private var loadedDescription: String? {
+        if case let .loaded(_, description) = store.reportStatus, !description.isEmpty {
+            return description
+        }
+        return nil
+    }
+
+    private var gradeStamp: PosterGradeStamp {
+        let grade = store.box.session.grade
+        let tone: KitschStamp.Tone = {
+            switch grade {
+            case 0: return .cyan
+            case 1: return .magenta
+            case 2: return .red
+            case 3: return .magenta
+            default: return .red
+            }
+        }()
+        return PosterGradeStamp(text: L10n.gradeName(for: grade), tone: tone)
     }
 
     public var body: some View {
         VStack(spacing: 0) {
             customTopBar
 
-            ScrollView {
-                MonsterPosterView(
-                    faceImage: posterUIImage,
-                    nicknameLine: nicknameDisplay,
-                    posterWantedText: L10n.posterWanted,
-                    formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
-                    descriptionText: loadedDescription,
-                    gradeStamp: gradeStamp
-                )
-                .frame(maxWidth: .infinity)
-                .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
+            GeometryReader { proxy in
+                ScrollView([.vertical, .horizontal], showsIndicators: false) {
+                    let posterWidth = MonsterPosterView.canvasWidth
+                    let availableWidth = proxy.size.width
+                    let shrinkScale = min(1.0, availableWidth / posterWidth)
+                    let scaledWidth = posterWidth * shrinkScale
+                    let scaledHeight = MonsterPosterView.canvasHeight * shrinkScale
+
+                    MonsterPosterView(
+                        faceImage: posterUIImage,
+                        nicknameLine: nicknameDisplay,
+                        posterWantedText: L10n.posterWanted,
+                        formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
+                        descriptionText: loadedDescription,
+                        gradeStamp: gradeStamp
+                    )
+                    .scaleEffect(shrinkScale, anchor: .topLeading)
+                    .frame(width: scaledWidth, height: scaledHeight)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
+                }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(Color.appBackground.ignoresSafeArea())
         .onAppear {
             store.send(.onAppear)
             triggerReveal()
-            requestDescriptionIfNeeded()
-        }
-        .onChange(of: prefs.nickname) { _, _ in
-            requestDescriptionIfNeeded(force: true)
+            requestReportIfNeeded()
         }
         .id(store.posterImageData)
         .sheet(isPresented: $showShareSheet) {
@@ -103,37 +133,13 @@ public struct FaceResultView: View {
         .background(Color.appBackground)
     }
 
-    /// 포스터 내부에 표시할 텍스트. loaded 상태일 때만 값 반환.
-    private var loadedDescription: String? {
-        if case let .loaded(text) = store.descriptionStatus { return text }
-        return nil
-    }
-
-    /// 등급별 스탬프 (이름 + 톤). 위협도가 올라갈수록 시안→마젠타→레드.
-    private var gradeStamp: PosterGradeStamp {
-        let grade = store.box.session.grade
-        let tone: KitschStamp.Tone = {
-            switch grade {
-            case 0: return .cyan
-            case 1: return .magenta
-            case 2: return .red
-            case 3: return .magenta
-            default: return .red
-            }
-        }()
-        return PosterGradeStamp(text: L10n.gradeName(for: grade), tone: tone)
-    }
-
-    private func requestDescriptionIfNeeded(force: Bool = false) {
-        switch store.descriptionStatus {
-        case .loading:
-            return
-        case .loaded:
-            guard force else { return }
+    private func requestReportIfNeeded() {
+        switch store.reportStatus {
         case .idle, .failed:
+            store.send(.requestReport)
+        case .loading, .loaded:
             break
         }
-        store.send(.requestDescription(nickname: nicknameDisplay))
     }
 
     private var revealIntensity: Double {
@@ -158,7 +164,6 @@ public struct FaceResultView: View {
     }
 
     private func prepareShare() {
-        let grade = store.box.session.grade
         let totalScore = store.box.session.totalScore
         let img = PosterImageRenderer.render(
             faceImage: posterUIImage,

@@ -16,9 +16,12 @@ public struct PosterGradeStamp: Equatable, Sendable {
     }
 }
 
-/// Poster layout used for share / upload (matches legacy scroll content).
-/// Localized strings are passed in so `FaceReaderUI` does not depend on `FaceReaderLocalization`.
+/// 현상금 포스터 — 디바이스 무관 고정 캔버스(canvasWidth × canvasHeight) 로 렌더링.
+/// 다른 아이폰에서도 같은 모양/비율로 보이도록 모든 내부 치수와 폰트가 metricScale 영향을 안 받음.
 public struct MonsterPosterView: View {
+    public static let canvasWidth: CGFloat = 390
+    public static let canvasHeight: CGFloat = canvasWidth * 1.8 // 702
+
     let faceImage: UIImage?
     let nicknameLine: String
     let posterWantedText: String
@@ -27,8 +30,6 @@ public struct MonsterPosterView: View {
     let gradeStamp: PosterGradeStamp?
     let showVHSAccents: Bool
 
-    private let contentWidth: CGFloat
-
     public init(
         faceImage: UIImage?,
         nicknameLine: String,
@@ -36,7 +37,6 @@ public struct MonsterPosterView: View {
         formattedScoreText: String,
         descriptionText: String? = nil,
         gradeStamp: PosterGradeStamp? = nil,
-        screenWidth: CGFloat = PhoneLayout.width,
         showVHSAccents: Bool = false
     ) {
         self.faceImage = faceImage
@@ -45,26 +45,25 @@ public struct MonsterPosterView: View {
         self.formattedScoreText = formattedScoreText
         self.descriptionText = descriptionText
         self.gradeStamp = gradeStamp
-        self.contentWidth = screenWidth
         self.showVHSAccents = showVHSAccents
     }
 
     public var body: some View {
-        let pad: CGFloat = 20 * PhoneLayout.metricScale
-        let imageWidth = contentWidth - pad * 2
+        let pad: CGFloat = 20
+        let imageWidth = Self.canvasWidth - pad * 2
         let imageHeight = imageWidth * 0.82
-        let border: CGFloat = max(4, 5 * PhoneLayout.metricScale)
+        let border: CGFloat = 5
         ZStack {
             Image("background")
                 .resizable(resizingMode: .tile)
             VStack(spacing: 0) {
                 Text(posterWantedText)
-                    .font(.app(100))
+                    .font(.posterApp(100))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.35)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
-                    .padding(.top, 12 * PhoneLayout.metricScale)
+                    .padding(.top, 12)
                     .padding(.horizontal, pad * 0.5)
 
                 Group {
@@ -84,7 +83,7 @@ public struct MonsterPosterView: View {
                 )
                 .overlay(alignment: .bottomTrailing) {
                     if let gradeStamp {
-                        KitschStamp(gradeStamp.text, tone: gradeStamp.tone, rotation: -12)
+                        posterStamp(text: gradeStamp.text, tone: gradeStamp.tone)
                             .padding(.trailing, -10)
                             .padding(.bottom, -8)
                     }
@@ -92,40 +91,68 @@ public struct MonsterPosterView: View {
                 .padding(.horizontal, pad)
 
                 Text(nicknameLine)
-                    .font(.app(60))
+                    .font(.posterApp(60))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.45)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 10 * PhoneLayout.metricScale)
+                    .padding(.top, 10)
                     .padding(.horizontal, pad)
 
                 if let descriptionText, !descriptionText.isEmpty {
                     Text(descriptionText)
-                        .font(.app(20))
+                        .font(.posterApp(20))
                         .foregroundStyle(Color.appBrown.opacity(0.9))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, pad)
-                        .padding(.top, 10 * PhoneLayout.metricScale)
+                        .padding(.top, 10)
                 }
 
                 Spacer(minLength: 0)
 
                 Text(formattedScoreText)
-                    .font(.app(50))
+                    .font(.posterApp(50))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.45)
                     .padding(.horizontal, pad)
-                    .padding(.bottom, 12 * PhoneLayout.metricScale)
+                    .padding(.bottom, 12)
             }
-            .frame(width: contentWidth, height: contentWidth * 1.8, alignment: .top)
+            .frame(width: Self.canvasWidth, height: Self.canvasHeight, alignment: .top)
 
             if showVHSAccents {
                 vhsAccents(pad: pad)
             }
         }
-        .frame(width: contentWidth, height: contentWidth * 1.8)
+        .frame(width: Self.canvasWidth, height: Self.canvasHeight)
+    }
+
+    /// 포스터 안쪽에 사용하는 KitschStamp 의 고정-사이즈 버전.
+    @ViewBuilder
+    private func posterStamp(text: String, tone: KitschStamp.Tone) -> some View {
+        let color = toneColor(tone)
+        Text(text)
+            .font(.posterApp(20))
+            .fontWeight(.black)
+            .foregroundStyle(Color(white: 0.97))
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(color)
+            .overlay(
+                Rectangle()
+                    .stroke(Color.black.opacity(0.55), lineWidth: 2)
+            )
+            .shadow(color: Color.black.opacity(0.2), radius: 1, x: 1, y: 1)
+            .rotationEffect(.degrees(-12))
+    }
+
+    private func toneColor(_ tone: KitschStamp.Tone) -> Color {
+        switch tone {
+        case .red: return Color.vhsRed
+        case .cyan: return Color.vhsCyan
+        case .magenta: return Color.vhsMagenta
+        case .ink: return Color.vhsInk
+        }
     }
 
     @ViewBuilder
@@ -145,7 +172,7 @@ public struct MonsterPosterView: View {
             }
             .padding(.bottom, pad * 0.4)
         }
-        .frame(width: contentWidth, height: contentWidth * 1.8)
+        .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 }
 
@@ -170,7 +197,8 @@ public enum PosterImageRenderer {
             showVHSAccents: showVHSAccents
         )
         let renderer = ImageRenderer(content: view)
-        renderer.scale = UIScreen.main.scale
+        // 디바이스 무관 고정 출력 (≈ 3x retina). 결과: 1170 × 2106 px.
+        renderer.scale = 3.0
         return renderer.uiImage
     }
 }

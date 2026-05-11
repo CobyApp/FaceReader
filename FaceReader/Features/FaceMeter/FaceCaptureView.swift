@@ -21,13 +21,6 @@ public struct FaceCaptureView: View {
     @ObservedObject private var prefs = VHSEffectsPreferences.shared
     @State private var isProcessing = false
     @State private var showNeedFaceAlert = false
-    @State private var isEditingNickname = false
-    @State private var nicknameDraft: String = ""
-
-    private var nicknameDisplay: String {
-        let trimmed = prefs.nickname.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? L10n.anonymousMonster : trimmed
-    }
 
     public init(
         box: SessionBox,
@@ -82,15 +75,6 @@ public struct FaceCaptureView: View {
         .onDisappear { engine.stop() }
         .alert(L10n.toastCaptureFace, isPresented: $showNeedFaceAlert) {
             Button(L10n.btnOk, role: .cancel) {}
-        }
-        .alert(L10n.nicknameEditTitle, isPresented: $isEditingNickname) {
-            TextField(L10n.nicknameEditPlaceholder, text: $nicknameDraft)
-                .textInputAutocapitalization(.never)
-            Button(L10n.btnOk) {
-                let trimmed = nicknameDraft.trimmingCharacters(in: .whitespacesAndNewlines)
-                prefs.nickname = trimmed
-            }
-            Button(L10n.btnCancel, role: .cancel) {}
         }
     }
 
@@ -216,53 +200,15 @@ public struct FaceCaptureView: View {
     @ViewBuilder
     private func topInstruction(m: Metrics) -> some View {
         let ink = Color(white: 0.96)
-        VStack(spacing: 12 * PhoneLayout.metricScale) {
-            Text(L10n.faceRatioIntro)
-                .font(.app(20))
-                .fontWeight(.heavy)
-                .foregroundStyle(ink)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
-
-            nicknamePill
-        }
-        .frame(width: m.topAreaRect.width, alignment: .center)
-        .position(x: m.topAreaRect.midX, y: m.topAreaRect.midY)
-    }
-
-    @ViewBuilder
-    private var nicknamePill: some View {
-        let ink = Color(white: 0.96)
-        HStack(spacing: 8) {
-            Image(systemName: "person.fill")
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(ink)
-            Text(nicknameDisplay)
-                .font(.app(14))
-                .fontWeight(.semibold)
-                .foregroundStyle(ink)
-                .lineLimit(1)
-            Image(systemName: "pencil")
-                .font(.system(size: 11, weight: .semibold))
-                .foregroundStyle(ink.opacity(0.7))
-        }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 7)
-        .background(
-            Capsule().fill(Color.black.opacity(0.45))
-        )
-        .overlay(
-            Capsule().stroke(ink.opacity(0.55), lineWidth: 1)
-        )
-        .contentShape(Capsule())
-        .onTapGesture {
-            nicknameDraft = prefs.nickname
-            isEditingNickname = true
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isButton)
-        .accessibilityLabel("\(L10n.nicknameTitle): \(nicknameDisplay)")
+        Text(L10n.faceRatioIntro)
+            .font(.app(20))
+            .fontWeight(.heavy)
+            .foregroundStyle(ink)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(width: m.topAreaRect.width, alignment: .center)
+            .position(x: m.topAreaRect.midX, y: m.topAreaRect.midY)
     }
 
     @ViewBuilder
