@@ -23,32 +23,13 @@ struct AppView: View {
                 } else {
                     FaceCaptureView(
                         box: store.sessionBox,
-                        onCommitted: { store.send(.faceCaptureCommitted(posterImageData: $0)) }
+                        onCommitted: { store.send(.faceCaptureCommitted(posterImageData: $0)) },
+                        onSettingsTapped: { store.send(.settingsButtonTapped) }
                     )
                 }
             }
             .id(store.languageRefreshToken)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        store.send(.settingsButtonTapped)
-                    } label: {
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.vhsBase)
-                                .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
-                            Rectangle()
-                                .stroke(Color.vhsInk, lineWidth: 2)
-                                .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
-                            Text("VHS")
-                                .font(.app(10))
-                                .fontWeight(.black)
-                                .foregroundStyle(Color.vhsInk)
-                        }
-                    }
-                    .accessibilityLabel(L10n.settingsTitle)
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
         }
         .tint(Color.vhsInk)
         .background(Color.vhsBase.ignoresSafeArea())

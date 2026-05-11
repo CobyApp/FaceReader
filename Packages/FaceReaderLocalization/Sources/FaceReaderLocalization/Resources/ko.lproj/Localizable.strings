@@ -46,3 +46,9 @@
 "vhs_level_format" = "LEVEL %02d";
 "vhs_reduce_effects_title" = "VHS 효과 줄이기";
 "vhs_reduce_effects_footer" = "스캔라인·노이즈·글리치 강도를 낮춥니다. (시스템 '모션 줄이기' 설정도 함께 반영됩니다.)";
+
+/* Nickname & Toggles */
+"nickname_title" = "닉네임";
+"nickname_edit_title" = "닉네임 변경";
+"nickname_edit_placeholder" = "닉네임 입력";
+"btn_landmarks_toggle" = "랜드마크 표시";

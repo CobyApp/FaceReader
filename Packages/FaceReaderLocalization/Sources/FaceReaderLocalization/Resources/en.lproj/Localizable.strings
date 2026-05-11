@@ -46,3 +46,9 @@
 "vhs_level_format" = "LEVEL %02d";
 "vhs_reduce_effects_title" = "Reduce VHS Effects";
 "vhs_reduce_effects_footer" = "Lowers scanline, grain, and glitch intensity. Honors the system Reduce Motion setting as well.";
+
+/* Nickname & Toggles */
+"nickname_title" = "Nickname";
+"nickname_edit_title" = "Edit Nickname";
+"nickname_edit_placeholder" = "Enter nickname";
+"btn_landmarks_toggle" = "Face Landmarks";

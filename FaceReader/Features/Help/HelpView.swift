@@ -34,15 +34,32 @@ public struct HelpView: View {
             .padding(18 * PhoneLayout.metricScale)
         }
         .background(Color.vhsBase)
-        .navigationTitle(L10n.helpDisasterLevelTitle)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .confirmationAction) {
-                Button(L10n.btnBackToMeter) {
-                    onFinished()
+        .safeAreaInset(edge: .top, spacing: 0) {
+            ZStack {
+                Text(L10n.helpDisasterLevelTitle)
+                    .font(.app(16))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(Color.vhsInk)
+                    .frame(maxWidth: .infinity)
+
+                HStack {
+                    Spacer()
+                    Text(L10n.btnBackToMeter)
+                        .font(.app(15))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.vhsInk)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onFinished()
+                        }
+                        .accessibilityAddTraits(.isButton)
+                        .padding(.trailing, 6)
                 }
-                .foregroundStyle(Color.vhsInk)
             }
+            .frame(height: 44)
+            .background(Color.vhsBase)
         }
     }
 

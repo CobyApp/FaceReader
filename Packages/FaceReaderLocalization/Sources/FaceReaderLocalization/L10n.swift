@@ -83,6 +83,11 @@ public enum L10n {
         String(format: tr("vhs_level_format"), index + 1)
     }
 
+    public static var nicknameTitle: String { tr("nickname_title") }
+    public static var nicknameEditTitle: String { tr("nickname_edit_title") }
+    public static var nicknameEditPlaceholder: String { tr("nickname_edit_placeholder") }
+    public static var btnLandmarksToggle: String { tr("btn_landmarks_toggle") }
+
     /// Localized “bounty” style score using the active app language’s locale.
     public static func formattedScore(_ value: Int) -> String {
         let nf = NumberFormatter()

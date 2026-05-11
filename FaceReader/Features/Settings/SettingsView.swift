@@ -105,10 +105,17 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(L10n.settingsDone) {
-                        onCancel()
-                    }
-                    .foregroundStyle(Color.vhsInk)
+                    Text(L10n.settingsDone)
+                        .font(.app(16))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.vhsInk)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 4)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            onCancel()
+                        }
+                        .accessibilityAddTraits(.isButton)
                 }
             }
         }

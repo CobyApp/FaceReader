@@ -46,3 +46,9 @@
 "vhs_level_format" = "LEVEL %02d";
 "vhs_reduce_effects_title" = "VHSエフェクト軽減";
 "vhs_reduce_effects_footer" = "スキャンライン・ノイズ・グリッチの強度を下げます。（システムの「視差効果を減らす」設定も反映されます。）";
+
+/* Nickname & Toggles */
+"nickname_title" = "ニックネーム";
+"nickname_edit_title" = "ニックネーム変更";
+"nickname_edit_placeholder" = "ニックネームを入力";
+"btn_landmarks_toggle" = "ランドマーク表示";
