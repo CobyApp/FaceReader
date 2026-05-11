@@ -27,13 +27,11 @@ public struct FaceResultFeature {
 
     public enum Action: Equatable {
         case onAppear
-        case explanationTapped
         case dismissTapped
         case delegate(Delegate)
 
         public enum Delegate: Equatable {
             case dismiss
-            case showHelp
         }
     }
 
@@ -43,9 +41,6 @@ public struct FaceResultFeature {
             case .onAppear:
                 state.nicknameLine = L10n.anonymousMonster
                 return .none
-
-            case .explanationTapped:
-                return .send(.delegate(.showHelp))
 
             case .dismissTapped:
                 return .send(.delegate(.dismiss))

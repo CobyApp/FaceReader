@@ -24,7 +24,8 @@ struct AppView: View {
                     FaceCaptureView(
                         box: store.sessionBox,
                         onCommitted: { store.send(.faceCaptureCommitted(posterImageData: $0)) },
-                        onSettingsTapped: { store.send(.settingsButtonTapped) }
+                        onSettingsTapped: { store.send(.settingsButtonTapped) },
+                        onHelpTapped: { store.send(.helpButtonTapped) }
                     )
                 }
             }

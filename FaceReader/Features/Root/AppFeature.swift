@@ -23,6 +23,7 @@ struct AppFeature {
         /// JPEG/PNG bytes for the poster face (keeps UI in sync; optional if encoding fails).
         case faceCaptureCommitted(posterImageData: Data?)
         case faceResult(FaceResultFeature.Action)
+        case helpButtonTapped
         case helpFinished
         case settingsButtonTapped
         case settingsDismissed
@@ -36,19 +37,17 @@ struct AppFeature {
                 state.faceResult = FaceResultFeature.State(box: state.sessionBox, posterImageData: data)
                 return .none
 
+            case .helpButtonTapped:
+                state.isShowingHelp = true
+                return .none
+
             case .helpFinished:
                 state.isShowingHelp = false
-                state.sessionBox = SessionBox()
                 return .none
 
             case .faceResult(.delegate(.dismiss)):
                 state.faceResult = nil
                 state.sessionBox = SessionBox()
-                return .none
-
-            case .faceResult(.delegate(.showHelp)):
-                state.faceResult = nil
-                state.isShowingHelp = true
                 return .none
 
             case .faceResult:

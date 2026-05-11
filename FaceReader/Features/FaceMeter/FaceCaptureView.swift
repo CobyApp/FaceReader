@@ -15,6 +15,7 @@ public struct FaceCaptureView: View {
     let box: SessionBox
     var onCommitted: (Data?) -> Void
     var onSettingsTapped: () -> Void
+    var onHelpTapped: () -> Void
 
     @StateObject private var engine: FaceCaptureEngine
     @ObservedObject private var prefs = VHSEffectsPreferences.shared
@@ -31,11 +32,13 @@ public struct FaceCaptureView: View {
     public init(
         box: SessionBox,
         onCommitted: @escaping (Data?) -> Void,
-        onSettingsTapped: @escaping () -> Void
+        onSettingsTapped: @escaping () -> Void,
+        onHelpTapped: @escaping () -> Void
     ) {
         self.box = box
         self.onCommitted = onCommitted
         self.onSettingsTapped = onSettingsTapped
+        self.onHelpTapped = onHelpTapped
         _engine = StateObject(wrappedValue: FaceCaptureEngine(measureSession: box.session))
     }
 
@@ -178,22 +181,36 @@ public struct FaceCaptureView: View {
                 .frame(maxWidth: .infinity)
 
             HStack {
+                circleBadge(systemImage: "info.circle.fill", size: badgeSize, ink: ink) {
+                    onHelpTapped()
+                }
+                .padding(.leading, 12)
+                .accessibilityLabel(L10n.btnMonsterExplanation)
+
                 Spacer()
-                Image(systemName: "gearshape.fill")
-                    .font(.system(size: 17 * PhoneLayout.metricScale, weight: .semibold))
-                    .foregroundStyle(ink)
-                    .frame(width: badgeSize, height: badgeSize)
-                    .background(Circle().fill(Color.black.opacity(0.45)))
-                    .overlay(Circle().stroke(ink.opacity(0.55), lineWidth: 1))
-                    .contentShape(Circle())
-                    .onTapGesture { onSettingsTapped() }
-                    .padding(.trailing, 12)
-                    .accessibilityAddTraits(.isButton)
-                    .accessibilityLabel(L10n.settingsTitle)
+
+                circleBadge(systemImage: "gearshape.fill", size: badgeSize, ink: ink) {
+                    onSettingsTapped()
+                }
+                .padding(.trailing, 12)
+                .accessibilityLabel(L10n.settingsTitle)
             }
         }
         .frame(width: m.topBarRect.width, height: m.topBarRect.height)
         .position(x: m.topBarRect.midX, y: m.topBarRect.midY)
+    }
+
+    @ViewBuilder
+    private func circleBadge(systemImage: String, size: CGFloat, ink: Color, action: @escaping () -> Void) -> some View {
+        Image(systemName: systemImage)
+            .font(.system(size: 17 * PhoneLayout.metricScale, weight: .semibold))
+            .foregroundStyle(ink)
+            .frame(width: size, height: size)
+            .background(Circle().fill(Color.black.opacity(0.45)))
+            .overlay(Circle().stroke(ink.opacity(0.55), lineWidth: 1))
+            .contentShape(Circle())
+            .onTapGesture { action() }
+            .accessibilityAddTraits(.isButton)
     }
 
     @ViewBuilder

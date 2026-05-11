@@ -43,8 +43,6 @@ public struct FaceResultView: View {
                 .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-            actionBar
         }
         .background(Color.appBackground.ignoresSafeArea())
         .onAppear {
@@ -80,64 +78,25 @@ public struct FaceResultView: View {
                     .accessibilityAddTraits(.isButton)
                     .accessibilityLabel(L10n.btnCancel)
                     .padding(.leading, 6)
+
                 Spacer()
+
+                Image(systemName: "square.and.arrow.up")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(Color.appText)
+                    .frame(width: 36, height: 36)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        prepareShare()
+                    }
+                    .accessibilityAddTraits(.isButton)
+                    .accessibilityLabel(L10n.actionShare)
+                    .padding(.trailing, 6)
             }
         }
         .frame(height: 44)
         .frame(maxWidth: .infinity)
         .background(Color.appBackground)
-    }
-
-    @ViewBuilder
-    private var actionBar: some View {
-        VStack(spacing: 0) {
-            Rectangle()
-                .fill(Color.appText.opacity(0.18))
-                .frame(height: 1)
-
-            HStack(spacing: 12) {
-                iconButton(
-                    icon: "info.circle",
-                    label: L10n.btnMonsterExplanation,
-                    primary: false
-                ) {
-                    store.send(.explanationTapped)
-                }
-
-                iconButton(
-                    icon: "square.and.arrow.up",
-                    label: L10n.actionShare,
-                    primary: true
-                ) {
-                    prepareShare()
-                }
-            }
-            .padding(.horizontal, 16)
-            .padding(.top, 12)
-            .padding(.bottom, 6)
-        }
-        .frame(maxWidth: .infinity)
-        .background(Color.appBackground)
-    }
-
-    @ViewBuilder
-    private func iconButton(icon: String, label: String, primary: Bool, action: @escaping () -> Void) -> some View {
-        let fg = primary ? Color.appBackground : Color.appText
-        let bg = primary ? Color.appText : Color.vhsSurface
-        Image(systemName: icon)
-            .font(.system(size: 22, weight: .semibold))
-            .foregroundStyle(fg)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 18)
-            .background(bg)
-            .overlay(
-                Rectangle()
-                    .stroke(Color.appText, lineWidth: 1.5)
-            )
-            .contentShape(Rectangle())
-            .onTapGesture { action() }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(label)
     }
 
     private var revealIntensity: Double {
