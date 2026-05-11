@@ -14,6 +14,7 @@ public struct FaceResultView: View {
 
     @State private var shareImage: UIImage?
     @State private var showShareSheet = false
+    @State private var revealActive: Bool = false
 
     public init(store: StoreOf<FaceResultFeature>) {
         self.store = store
@@ -27,11 +28,14 @@ public struct FaceResultView: View {
                 posterWantedText: L10n.posterWanted,
                 posterDeadOrAliveText: L10n.posterDeadOrAlive,
                 gradeLineText: L10n.gradeLine(for: store.box.session.grade),
-                formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
+                formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
+                showVHSAccents: true
             )
             .frame(maxWidth: .infinity)
+            .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
         }
         .background(Color.appBackground)
+        .vhsOverlay()
         .navigationTitle(L10n.resultScreenTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -56,17 +60,40 @@ public struct FaceResultView: View {
             } label: {
                 Text(L10n.btnMonsterExplanation)
                     .font(.app(23))
+                    .fontWeight(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 22 * PhoneLayout.metricScale)
-                    .background(Color.appText.opacity(0.35))
-                    .foregroundStyle(Color.appText)
+                    .background(Color.vhsRed)
+                    .foregroundStyle(Color(white: 0.96))
+                    .overlay(
+                        Rectangle()
+                            .stroke(Color.vhsInk, lineWidth: 3)
+                    )
             }
         }
-        .onAppear { store.send(.onAppear) }
+        .onAppear {
+            store.send(.onAppear)
+            triggerReveal()
+        }
         .id(store.posterImageData)
         .sheet(isPresented: $showShareSheet) {
             if let shareImage {
                 ActivityView(activityItems: [shareImage])
+            }
+        }
+    }
+
+    private var revealIntensity: Double {
+        // 등급이 높을수록 강한 글리치 (wolf=0 → god=4 ⇒ 0.4~1.6)
+        0.4 + Double(store.box.session.grade) * 0.3
+    }
+
+    private func triggerReveal() {
+        revealActive = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            revealActive = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                revealActive = false
             }
         }
     }
@@ -87,7 +114,8 @@ public struct FaceResultView: View {
             posterWantedText: L10n.posterWanted,
             posterDeadOrAliveText: L10n.posterDeadOrAlive,
             gradeLineText: L10n.gradeLine(for: grade),
-            formattedScoreText: L10n.formattedScore(totalScore)
+            formattedScoreText: L10n.formattedScore(totalScore),
+            showVHSAccents: true
         )
         shareImage = img
         showShareSheet = img != nil

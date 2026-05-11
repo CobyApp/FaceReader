@@ -15,6 +15,7 @@ public struct MonsterPosterView: View {
     let posterDeadOrAliveText: String
     let gradeLineText: String
     let formattedScoreText: String
+    let showVHSAccents: Bool
 
     private let contentWidth: CGFloat
 
@@ -25,7 +26,8 @@ public struct MonsterPosterView: View {
         posterDeadOrAliveText: String,
         gradeLineText: String,
         formattedScoreText: String,
-        screenWidth: CGFloat = PhoneLayout.width
+        screenWidth: CGFloat = PhoneLayout.width,
+        showVHSAccents: Bool = false
     ) {
         self.faceImage = faceImage
         self.nicknameLine = nicknameLine
@@ -33,7 +35,8 @@ public struct MonsterPosterView: View {
         self.posterDeadOrAliveText = posterDeadOrAliveText
         self.gradeLineText = gradeLineText
         self.formattedScoreText = formattedScoreText
-        contentWidth = screenWidth
+        self.contentWidth = screenWidth
+        self.showVHSAccents = showVHSAccents
     }
 
     public var body: some View {
@@ -101,6 +104,30 @@ public struct MonsterPosterView: View {
                     .padding(.bottom, 12 * PhoneLayout.metricScale)
             }
             .frame(width: contentWidth, height: contentWidth * 1.8, alignment: .top)
+
+            if showVHSAccents {
+                vhsAccents(pad: pad)
+            }
+        }
+        .frame(width: contentWidth, height: contentWidth * 1.8)
+    }
+
+    @ViewBuilder
+    private func vhsAccents(pad: CGFloat) -> some View {
+        VStack {
+            HStack {
+                Spacer()
+                KitschStamp("TRACKING ERROR", tone: .red, rotation: -10)
+                    .padding(.trailing, pad)
+                    .padding(.top, pad * 0.6)
+            }
+            Spacer()
+            HStack {
+                KitschStamp("DANGER", tone: .red, rotation: 6)
+                    .padding(.leading, pad)
+                Spacer()
+            }
+            .padding(.bottom, pad * 0.4)
         }
         .frame(width: contentWidth, height: contentWidth * 1.8)
     }
@@ -114,7 +141,8 @@ public enum PosterImageRenderer {
         posterWantedText: String,
         posterDeadOrAliveText: String,
         gradeLineText: String,
-        formattedScoreText: String
+        formattedScoreText: String,
+        showVHSAccents: Bool = false
     ) -> UIImage? {
         let view = MonsterPosterView(
             faceImage: faceImage,
@@ -122,7 +150,8 @@ public enum PosterImageRenderer {
             posterWantedText: posterWantedText,
             posterDeadOrAliveText: posterDeadOrAliveText,
             gradeLineText: gradeLineText,
-            formattedScoreText: formattedScoreText
+            formattedScoreText: formattedScoreText,
+            showVHSAccents: showVHSAccents
         )
         let renderer = ImageRenderer(content: view)
         renderer.scale = UIScreen.main.scale
