@@ -34,43 +34,44 @@ public struct FaceCaptureView: View {
             FaceLandmarkOverlay(engine: engine)
                 .ignoresSafeArea()
 
+            CRTFrame()
+                .ignoresSafeArea()
+
             VStack {
                 Spacer()
-                Text(L10n.faceRatioIntro)
-                    .font(.app(26))
-                    .foregroundStyle(Color.appText)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 22 * PhoneLayout.metricScale)
-                Text(L10n.faceRatioTip)
-                    .font(.app(18))
-                    .foregroundStyle(Color.appText)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 22 * PhoneLayout.metricScale)
-                    .padding(.top, 10 * PhoneLayout.metricScale)
+                SubtitleBox(L10n.faceRatioIntro, size: 22)
+                SubtitleBox(L10n.faceRatioTip, size: 16)
+                    .padding(.top, 8 * PhoneLayout.metricScale)
 
                 Spacer()
 
-                Text(L10n.faceCartoonNotice)
-                    .font(.app(26))
-                    .foregroundStyle(Color.appText)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 22 * PhoneLayout.metricScale)
-                    .padding(.bottom, 18 * PhoneLayout.metricScale)
+                SubtitleBox(L10n.faceCartoonNotice, size: 18)
+                    .padding(.bottom, 14 * PhoneLayout.metricScale)
 
                 Button {
                     captureTapped()
                 } label: {
-                    Image("camera")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 64 * PhoneLayout.metricScale, height: 64 * PhoneLayout.metricScale)
+                    ZStack {
+                        Circle()
+                            .fill(Color.vhsBase)
+                            .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
+                        Circle()
+                            .stroke(Color.vhsInk, lineWidth: 4 * PhoneLayout.metricScale)
+                            .frame(width: 84 * PhoneLayout.metricScale, height: 84 * PhoneLayout.metricScale)
+                        Image("camera")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 48 * PhoneLayout.metricScale, height: 48 * PhoneLayout.metricScale)
+                    }
                 }
                 .disabled(isProcessing)
+                .glitchRGB(active: isProcessing, intensity: 1.2, duration: 0.35)
                 .padding(.bottom, max(72, 56 * PhoneLayout.metricScale + 24))
             }
+            .padding(.horizontal, 22 * PhoneLayout.metricScale)
 
             if isProcessing {
-                Color.black.opacity(0.45)
+                Color.black.opacity(0.55)
                     .ignoresSafeArea()
                 ProgressView()
                     .tint(.white)
