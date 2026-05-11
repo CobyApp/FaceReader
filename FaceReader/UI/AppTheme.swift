@@ -21,64 +21,13 @@ extension Color {
 }
 
 extension UIColor {
-    public static var vhsBase: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#0a0808")
-                : UIColor(hex: "#f1e8d0")
-        }
-    }
-    public static var vhsSurface: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#1a1414")
-                : UIColor(hex: "#e2d4b2")
-        }
-    }
-    public static var vhsInk: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#f4e9d3")
-                : UIColor(hex: "#1a1414")
-        }
-    }
-    public static var vhsRed: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#d6433a")
-                : UIColor(hex: "#b8362d")
-        }
-    }
-    public static var vhsCyan: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#48b8c4")
-                : UIColor(hex: "#3a96a2")
-        }
-    }
-    public static var vhsMagenta: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#c34d8a")
-                : UIColor(hex: "#a83d72")
-        }
-    }
-
-    public static var appMainText: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#eeeeee")
-                : UIColor(hex: "#111111")
-        }
-    }
-
-    public static var appMainBackground: UIColor {
-        UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(hex: "#111111")
-                : UIColor(hex: "#eeeeee")
-        }
-    }
+    /// 단일 톤 팔레트 — 시스템 라이트/다크 모드와 무관하게 항상 동일.
+    public static let vhsBase = UIColor(hex: "#0a0808")
+    public static let vhsSurface = UIColor(hex: "#1a1414")
+    public static let vhsInk = UIColor(hex: "#f4e9d3")
+    public static let vhsRed = UIColor(hex: "#d6433a")
+    public static let vhsCyan = UIColor(hex: "#48b8c4")
+    public static let vhsMagenta = UIColor(hex: "#c34d8a")
 
     public convenience init(hex: String, alpha: CGFloat = 1.0) {
         var hexFormatted = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()

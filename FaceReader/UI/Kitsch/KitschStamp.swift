@@ -47,7 +47,7 @@ public struct KitschStamp: View {
                 Rectangle()
                     .stroke(solid ? Color.black.opacity(0.55) : color, lineWidth: solid ? 2 : 3 * PhoneLayout.metricScale)
             )
-            .shadow(color: Color.black.opacity(0.35), radius: 2, x: 1, y: 2)
+            .shadow(color: Color.black.opacity(0.2), radius: 1, x: 1, y: 1)
             .rotationEffect(.degrees(rotation))
             .accessibilityLabel(text)
     }

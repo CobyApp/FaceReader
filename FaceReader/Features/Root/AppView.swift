@@ -34,6 +34,7 @@ struct AppView: View {
         }
         .tint(Color.vhsInk)
         .background(Color.vhsBase.ignoresSafeArea())
+        .preferredColorScheme(.dark)
         .sheet(isPresented: Binding(
             get: { store.settingsPresented },
             set: { presented in

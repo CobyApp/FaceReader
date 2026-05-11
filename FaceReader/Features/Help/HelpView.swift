@@ -91,7 +91,6 @@ public struct HelpView: View {
             Rectangle()
                 .stroke(Color.vhsInk, lineWidth: 1.5)
         )
-        .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 3)
     }
 
     @ViewBuilder
@@ -103,8 +102,8 @@ public struct HelpView: View {
                 .frame(width: 24, alignment: .center)
                 .padding(.top, 2)
             Text(text)
-                .font(.app(14))
-                .foregroundStyle(Color.vhsInk.opacity(0.9))
+                .font(.app(15))
+                .foregroundStyle(Color.vhsInk)
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -160,7 +159,7 @@ public struct HelpView: View {
 
             Text(L10n.gradeDetail(for: index))
                 .font(.app(15))
-                .foregroundStyle(Color.vhsInk.opacity(0.85))
+                .foregroundStyle(Color.vhsInk.opacity(0.95))
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -174,10 +173,9 @@ public struct HelpView: View {
         )
         .overlay(alignment: spec.alignment) {
             KitschStamp(L10n.vhsLevelLabel(index), tone: spec.tone, rotation: spec.rotation)
-                .offset(y: -18 * PhoneLayout.metricScale)
+                .offset(y: -10 * PhoneLayout.metricScale)
                 .padding(.horizontal, 16 * PhoneLayout.metricScale)
         }
-        .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 3)
     }
 
     private struct StampSpec {
