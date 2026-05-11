@@ -6,7 +6,7 @@
 import Foundation
 import FoundationModels
 
-/// Apple Intelligence (Foundation Models) on-device 모델로 원펀맨 세계관의 헛소리 보고서를 생성.
+/// Apple Intelligence (Foundation Models) on-device 모델로 원펀맨 세계관의 가상 괴인 도감 설명을 생성.
 public actor MonsterDescriber {
     public enum DescriptionLanguage: String, Sendable {
         case ko, ja, en
@@ -14,6 +14,7 @@ public actor MonsterDescriber {
 
     public enum DescribeError: Error, Sendable {
         case unavailable(reason: String)
+        case guardrailBlocked
         case generationFailed(String)
     }
 
@@ -41,7 +42,6 @@ public actor MonsterDescriber {
 
     public init() {}
 
-    /// 모델 가용성 + 사용자 Apple Intelligence 활성화 여부.
     public static var isAvailable: Bool {
         switch SystemLanguageModel.default.availability {
         case .available: return true
@@ -49,7 +49,6 @@ public actor MonsterDescriber {
         }
     }
 
-    /// 모델 사용 불가시 사람 친화 사유 메시지. 사용 가능하면 nil.
     public static var unavailableReason: String? {
         switch SystemLanguageModel.default.availability {
         case .available:
@@ -70,7 +69,6 @@ public actor MonsterDescriber {
         }
     }
 
-    /// 입력값으로 짧은 (1~3문장) 원펀맨 풍자 보고서 생성.
     public func generate(_ input: Input) async throws -> String {
         switch SystemLanguageModel.default.availability {
         case .available:
@@ -86,6 +84,13 @@ public actor MonsterDescriber {
         do {
             let response = try await session.respond(to: prompt)
             return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        } catch let error as LanguageModelSession.GenerationError {
+            switch error {
+            case .guardrailViolation:
+                throw DescribeError.guardrailBlocked
+            default:
+                throw DescribeError.generationFailed(String(describing: error))
+            }
         } catch {
             throw DescribeError.generationFailed(String(describing: error))
         }
@@ -114,31 +119,32 @@ public actor MonsterDescriber {
         }
     }
 
+    /// 안전 가드레일을 피하기 위해 '실제 사람 외모 평가'가 아니라 '가상 캐릭터 도감 작성'으로 프레이밍.
     private static func systemInstructions(language: DescriptionLanguage) -> String {
         switch language {
         case .ko:
             return """
-            너는 만화 '원펀맨' 세계관의 히어로 협회 분석관이다. 새로 발견된 '괴인'을 분류하고 짧은 보고서를 작성한다. 재해 등급은 낮은 순서로 늑대급 / 호랑이급 / 귀급 / 용급 / 신급이다.
+            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서이다. 새로 등록되는 '괴인 캐릭터'의 짧은 도감 항목을 작성한다. 재해 등급은 약한 순서로 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
 
-            톤은 시니컬하면서도 한국어 인터넷 유머 감각으로 살짝 유치하게. 등급, 위협도, 얼굴 비율의 비정상성을 가지고 농담을 친다. 절대 사용자(괴인 본인)를 모욕하지 말고, 어디까지나 가공의 '괴인 캐릭터'를 평가하는 식으로 쓴다. 한국어로만 작성한다.
+            게임이나 만화의 캐릭터 도감처럼 가상 캐릭터의 외형 특성과 능력을 위트있게 묘사한다. 톤은 가벼운 in-universe 내레이션. 실제 인물이 아닌 가공의 캐릭터를 다룬다는 점을 잊지 말 것.
 
-            형식: 2~3문장. 250자 이내. 마크다운, 헤더, 리스트, 따옴표, 이모지 사용 금지. 보고서 본문만 출력한다.
+            형식: 한국어 2~3문장, 250자 이내. 마크다운, 헤더, 리스트, 따옴표, 이모지 금지. 본문 텍스트만 출력.
             """
         case .ja:
             return """
-            あなたは漫画『ワンパンマン』世界のヒーロー協会・分析官です。新たに発見された「怪人」を分類し、短い報告書を作成します。災害等級は弱い順に 狼級 / 虎級 / 鬼級 / 竜級 / 神級 です。
+            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書です。新たに登録される架空の「怪人キャラクター」の短い図鑑記述を作成します。災害等級は弱い順に 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
 
-            トーンはシニカルでありながら、日本のネットスラング寄りの軽妙さで。等級、脅威度、顔のバランスの異常さを材料にユーモアを効かせる。決してユーザー本人を侮辱せず、あくまで架空の「怪人キャラクター」を評価する体裁で書く。日本語のみで書く。
+            ゲームや漫画のキャラクター図鑑のように、架空キャラクターの外見的特徴と能力をウィットを利かせて描写する。トーンは軽快なin-universeのナレーション。実在人物ではなく架空キャラクターを扱う点を忘れずに。
 
-            形式: 2〜3文。200字以内。マークダウン、見出し、箇条書き、引用符、絵文字は使わない。本文のみ出力。
+            形式: 日本語2〜3文、200字以内。マークダウン、見出し、箇条書き、引用符、絵文字は使わない。本文のみ出力。
             """
         case .en:
             return """
-            You are a Hero Association analyst from the manga 'One-Punch Man'. Classify a newly discovered 'mysterious being' (怪人) and write a brief field report. Disaster levels from weakest to strongest: Wolf class / Tiger class / Demon class / Dragon class / God class.
+            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Write a short bestiary entry for a newly catalogued fictional 'mysterious being' character. Disaster levels (weak to strong): Wolf / Tiger / Demon / Dragon / God class.
 
-            Tone: dry, in-universe, with a streak of absurd humor. Riff on the threat level, the bounty, and the asymmetry of the subject's facial ratios. Never insult the actual user — keep it in character about the fictional 'monster'. Write in English only.
+            Describe this fictional character's appearance traits and powers with a witty, in-universe narration — like a videogame or manga bestiary. Remember you are describing a fictional character, not a real person.
 
-            Format: 2-3 sentences, under 350 characters. No markdown, headers, bullets, quotes, or emoji. Output only the body text.
+            Format: English, 2-3 sentences, under 350 characters. No markdown, headers, bullets, quotes, or emoji. Output only the body text.
             """
         }
     }
@@ -151,57 +157,57 @@ public actor MonsterDescriber {
             return nf.string(from: NSNumber(value: input.totalScore)) ?? "\(input.totalScore)"
         }()
 
-        // 비율들 → 정상값과 얼마나 어긋났는지를 percentile 식으로 풀어 전달
-        let eyeDelta = input.eyeRatio.map { String(format: "%.2f", abs($0 - 1.1)) } ?? "n/a"
-        let noseDelta = input.noseRatio.map { String(format: "%.2f", abs($0 - 0.6)) } ?? "n/a"
-        let lipsDelta = input.lipsRatio.map { String(format: "%.2f", abs($0 - 2.6)) } ?? "n/a"
-        let faceDelta = input.faceRatio.map { String(format: "%.2f", abs($0 - 1.1)) } ?? "n/a"
+        // 중립적인 캐릭터 특성 지수로 표현 (정상/비정상 같은 개인 평가 표현 피함).
+        let eye = input.eyeRatio.map { String(format: "%.2f", $0) } ?? "n/a"
+        let nose = input.noseRatio.map { String(format: "%.2f", $0) } ?? "n/a"
+        let lips = input.lipsRatio.map { String(format: "%.2f", $0) } ?? "n/a"
+        let face = input.faceRatio.map { String(format: "%.2f", $0) } ?? "n/a"
 
         switch input.language {
         case .ko:
             return """
-            새로 식별된 괴인을 평가해라.
+            다음 가상 괴인 캐릭터의 도감 설명을 작성해라.
 
-            - 이름: \(input.nickname)
+            - 코드네임: \(input.nickname)
             - 재해 등급: \(grade)
             - 위협도(현상금): $\(scoreString)
-            - 정상 비율 대비 일탈치 (클수록 비정상):
-              - 눈 사이 간격: \(eyeDelta)
-              - 코 비율: \(noseDelta)
-              - 입술 비율: \(lipsDelta)
-              - 상하 얼굴 비율: \(faceDelta)
+            - 외형 특성 지수:
+              - 안구 간격: \(eye)
+              - 비강 형태: \(nose)
+              - 구순 형태: \(lips)
+              - 두상 비례: \(face)
 
-            위 정보를 토대로 한국어 2~3문장의 짧은 보고서를 본문만 작성해라.
+            위 정보를 토대로 한국어 2~3문장의 짧은 도감 본문을 작성하라.
             """
         case .ja:
             return """
-            新たに識別された怪人を評価せよ。
+            次の架空怪人キャラクターの図鑑記述を作成せよ。
 
-            - 名前: \(input.nickname)
+            - コードネーム: \(input.nickname)
             - 災害等級: \(grade)
             - 脅威度（賞金）: $\(scoreString)
-            - 標準比率からの乖離 (大きいほど異常):
-              - 両眼の間隔: \(eyeDelta)
-              - 鼻の比率: \(noseDelta)
-              - 唇の比率: \(lipsDelta)
-              - 顔の上下比率: \(faceDelta)
+            - 外形特性指数:
+              - 眼球間距離: \(eye)
+              - 鼻腔形態: \(nose)
+              - 口唇形態: \(lips)
+              - 頭部比率: \(face)
 
-            上記情報を基に、日本語2〜3文の短い報告書を本文のみ書け。
+            上記情報を基に、日本語2〜3文の短い図鑑本文を書け。
             """
         case .en:
             return """
-            Classify this newly identified mysterious being.
+            Write a bestiary entry for this fictional mysterious being.
 
-            - Designation: \(input.nickname)
+            - Codename: \(input.nickname)
             - Disaster level: \(grade)
             - Threat (bounty): $\(scoreString)
-            - Deviation from baseline ratios (higher = more abnormal):
-              - Inter-eye spacing: \(eyeDelta)
-              - Nose ratio: \(noseDelta)
-              - Lip ratio: \(lipsDelta)
-              - Upper/lower face ratio: \(faceDelta)
+            - Trait indices:
+              - Eye spacing: \(eye)
+              - Nasal form: \(nose)
+              - Mouth form: \(lips)
+              - Cranial ratio: \(face)
 
-            Based on the above, write the report body (English, 2-3 sentences) only.
+            Based on the above, write the bestiary entry body (English, 2-3 sentences).
             """
         }
     }

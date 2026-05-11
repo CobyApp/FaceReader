@@ -91,6 +91,12 @@ public struct FaceResultFeature {
                     do {
                         let text = try await describer.generate(input)
                         await send(.descriptionLoaded(.success(text)))
+                    } catch MonsterDescriber.DescribeError.guardrailBlocked {
+                        await send(.descriptionLoaded(.failure(FailureMessage("분석관이 평가를 거부했어요. (안전 가드레일) 다른 표정 / 닉네임으로 다시 시도해보세요."))))
+                    } catch MonsterDescriber.DescribeError.unavailable(let reason) {
+                        await send(.descriptionLoaded(.failure(FailureMessage(reason))))
+                    } catch MonsterDescriber.DescribeError.generationFailed(let reason) {
+                        await send(.descriptionLoaded(.failure(FailureMessage("분석 중 오류: \(reason)"))))
                     } catch {
                         await send(.descriptionLoaded(.failure(FailureMessage(String(describing: error)))))
                     }
