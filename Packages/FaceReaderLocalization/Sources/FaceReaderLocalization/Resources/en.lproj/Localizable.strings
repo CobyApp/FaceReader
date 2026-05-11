@@ -37,3 +37,12 @@
 "settings_language" = "Language";
 "settings_title" = "Settings";
 "toast_capture_face" = "Please capture your face first.";
+
+/* VHS / Kitsch */
+"vhs_rec" = "REC";
+"vhs_tracking_error" = "TRACKING ERROR";
+"vhs_danger" = "DANGER";
+"vhs_ch_select" = "CH SELECT";
+"vhs_level_format" = "LEVEL %02d";
+"vhs_reduce_effects_title" = "Reduce VHS Effects";
+"vhs_reduce_effects_footer" = "Lowers scanline, grain, and glitch intensity. Honors the system Reduce Motion setting as well.";

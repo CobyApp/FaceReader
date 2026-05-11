@@ -37,3 +37,12 @@
 "settings_language" = "言語";
 "settings_title" = "設定";
 "toast_capture_face" = "まず顔を撮影してください。";
+
+/* VHS / Kitsch */
+"vhs_rec" = "REC";
+"vhs_tracking_error" = "TRACKING ERROR";
+"vhs_danger" = "DANGER";
+"vhs_ch_select" = "CH SELECT";
+"vhs_level_format" = "LEVEL %02d";
+"vhs_reduce_effects_title" = "VHSエフェクト軽減";
+"vhs_reduce_effects_footer" = "スキャンライン・ノイズ・グリッチの強度を下げます。（システムの「視差効果を減らす」設定も反映されます。）";

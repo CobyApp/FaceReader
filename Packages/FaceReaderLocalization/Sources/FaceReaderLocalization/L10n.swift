@@ -71,6 +71,18 @@ public enum L10n {
         "\(gradeName(for: index)): \(gradeInfo(for: index))"
     }
 
+    // VHS / Kitsch — 일부는 일부러 영문 유지 (VHS 미감의 일부)
+    public static var vhsRec: String { tr("vhs_rec") }
+    public static var vhsTrackingError: String { tr("vhs_tracking_error") }
+    public static var vhsDanger: String { tr("vhs_danger") }
+    public static var vhsChSelect: String { tr("vhs_ch_select") }
+    public static var vhsReduceEffectsTitle: String { tr("vhs_reduce_effects_title") }
+    public static var vhsReduceEffectsFooter: String { tr("vhs_reduce_effects_footer") }
+
+    public static func vhsLevelLabel(_ index: Int) -> String {
+        String(format: tr("vhs_level_format"), index + 1)
+    }
+
     /// Localized “bounty” style score using the active app language’s locale.
     public static func formattedScore(_ value: Int) -> String {
         let nf = NumberFormatter()

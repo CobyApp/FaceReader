@@ -37,3 +37,12 @@
 "settings_language" = "언어";
 "settings_title" = "설정";
 "toast_capture_face" = "얼굴을 촬영해주세요";
+
+/* VHS / Kitsch */
+"vhs_rec" = "REC";
+"vhs_tracking_error" = "TRACKING ERROR";
+"vhs_danger" = "DANGER";
+"vhs_ch_select" = "CH SELECT";
+"vhs_level_format" = "LEVEL %02d";
+"vhs_reduce_effects_title" = "VHS 효과 줄이기";
+"vhs_reduce_effects_footer" = "스캔라인·노이즈·글리치 강도를 낮춥니다. (시스템 '모션 줄이기' 설정도 함께 반영됩니다.)";
