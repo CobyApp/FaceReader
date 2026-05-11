@@ -33,16 +33,25 @@ struct AppView: View {
                     Button {
                         store.send(.settingsButtonTapped)
                     } label: {
-                        Image(systemName: "gearshape.fill")
-                            .font(.system(size: 20 * PhoneLayout.metricScale))
-                            .foregroundStyle(Color.appText)
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.vhsBase)
+                                .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
+                            Rectangle()
+                                .stroke(Color.vhsInk, lineWidth: 2)
+                                .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
+                            Text("VHS")
+                                .font(.app(10))
+                                .fontWeight(.black)
+                                .foregroundStyle(Color.vhsInk)
+                        }
                     }
                     .accessibilityLabel(L10n.settingsTitle)
                 }
             }
         }
-        .tint(Color.appText)
-        .background(Color.appBackground.ignoresSafeArea())
+        .tint(Color.vhsInk)
+        .background(Color.vhsBase.ignoresSafeArea())
         .sheet(isPresented: Binding(
             get: { store.settingsPresented },
             set: { presented in
