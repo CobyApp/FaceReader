@@ -6,6 +6,16 @@
 import SwiftUI
 import UIKit
 
+/// 포스터에 박힐 등급 스탬프. text 는 등급명 (예: '신급'), tone 은 색.
+public struct PosterGradeStamp: Equatable, Sendable {
+    public let text: String
+    public let tone: KitschStamp.Tone
+    public init(text: String, tone: KitschStamp.Tone) {
+        self.text = text
+        self.tone = tone
+    }
+}
+
 /// Poster layout used for share / upload (matches legacy scroll content).
 /// Localized strings are passed in so `FaceReaderUI` does not depend on `FaceReaderLocalization`.
 public struct MonsterPosterView: View {
@@ -16,6 +26,7 @@ public struct MonsterPosterView: View {
     let gradeLineText: String
     let formattedScoreText: String
     let descriptionText: String?
+    let gradeStamp: PosterGradeStamp?
     let showVHSAccents: Bool
 
     private let contentWidth: CGFloat
@@ -28,6 +39,7 @@ public struct MonsterPosterView: View {
         gradeLineText: String,
         formattedScoreText: String,
         descriptionText: String? = nil,
+        gradeStamp: PosterGradeStamp? = nil,
         screenWidth: CGFloat = PhoneLayout.width,
         showVHSAccents: Bool = false
     ) {
@@ -38,6 +50,7 @@ public struct MonsterPosterView: View {
         self.gradeLineText = gradeLineText
         self.formattedScoreText = formattedScoreText
         self.descriptionText = descriptionText
+        self.gradeStamp = gradeStamp
         self.contentWidth = screenWidth
         self.showVHSAccents = showVHSAccents
     }
@@ -75,6 +88,13 @@ public struct MonsterPosterView: View {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color.appBrown, lineWidth: border)
                 )
+                .overlay(alignment: .bottomTrailing) {
+                    if let gradeStamp {
+                        KitschStamp(gradeStamp.text, tone: gradeStamp.tone, rotation: -12)
+                            .padding(.trailing, -10)
+                            .padding(.bottom, -8)
+                    }
+                }
                 .padding(.horizontal, pad)
 
                 Text(posterDeadOrAliveText)
@@ -157,6 +177,7 @@ public enum PosterImageRenderer {
         gradeLineText: String,
         formattedScoreText: String,
         descriptionText: String? = nil,
+        gradeStamp: PosterGradeStamp? = nil,
         showVHSAccents: Bool = false
     ) -> UIImage? {
         let view = MonsterPosterView(
@@ -167,6 +188,7 @@ public enum PosterImageRenderer {
             gradeLineText: gradeLineText,
             formattedScoreText: formattedScoreText,
             descriptionText: descriptionText,
+            gradeStamp: gradeStamp,
             showVHSAccents: showVHSAccents
         )
         let renderer = ImageRenderer(content: view)

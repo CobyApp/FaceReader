@@ -176,14 +176,14 @@ public actor MonsterDescriber {
 
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
-        // 수치/점수/비율 일체 미전달 — LLM 이 우연히라도 출력에 인용하지 못하도록.
+        // 수치/점수/비율 + 닉네임 일체 미전달 — 닉네임은 포스터에 따로 있어 본문에서 다시 언급 불필요.
         switch input.language {
         case .ko:
-            return "코드네임 '\(input.nickname)', 재해 등급 \(grade) 인 가상 괴인 캐릭터의 도감 한 줄을 한국어로 짧고 재밌게 써라."
+            return "재해 등급 \(grade) 인 가상 괴인 캐릭터의 도감 한 줄을 한국어로 짧고 재밌게 써라. 이름은 언급하지 마라. 캐릭터의 외형·분위기·능력 위주로만."
         case .ja:
-            return "コードネーム『\(input.nickname)』、災害等級 \(grade) の架空怪人キャラクターの図鑑コメント一行を日本語で短く面白く書け。"
+            return "災害等級 \(grade) の架空怪人キャラクターの図鑑コメント一行を日本語で短く面白く書け。名前は出さない。外見・雰囲気・能力のみで。"
         case .en:
-            return "Write one short, witty bestiary line in English for a fictional mysterious being. Codename: '\(input.nickname)'. Disaster level: \(grade)."
+            return "Write one short, witty bestiary line in English for a fictional Disaster level \(grade) mysterious being. Do not mention any name. Focus on appearance, vibe, and powers only."
         }
     }
 }

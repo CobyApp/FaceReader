@@ -38,7 +38,8 @@ public struct FaceResultView: View {
                     posterDeadOrAliveText: L10n.posterDeadOrAlive,
                     gradeLineText: L10n.gradeLine(for: store.box.session.grade),
                     formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
-                    descriptionText: loadedDescription
+                    descriptionText: loadedDescription,
+                    gradeStamp: gradeStamp
                 )
                 .frame(maxWidth: .infinity)
                 .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
@@ -110,6 +111,21 @@ public struct FaceResultView: View {
         return nil
     }
 
+    /// 등급별 스탬프 (이름 + 톤). 위협도가 올라갈수록 시안→마젠타→레드.
+    private var gradeStamp: PosterGradeStamp {
+        let grade = store.box.session.grade
+        let tone: KitschStamp.Tone = {
+            switch grade {
+            case 0: return .cyan
+            case 1: return .magenta
+            case 2: return .red
+            case 3: return .magenta
+            default: return .red
+            }
+        }()
+        return PosterGradeStamp(text: L10n.gradeName(for: grade), tone: tone)
+    }
+
     private func requestDescriptionIfNeeded(force: Bool = false) {
         switch store.descriptionStatus {
         case .loading:
@@ -153,7 +169,8 @@ public struct FaceResultView: View {
             posterDeadOrAliveText: L10n.posterDeadOrAlive,
             gradeLineText: L10n.gradeLine(for: grade),
             formattedScoreText: L10n.formattedScore(totalScore),
-            descriptionText: loadedDescription
+            descriptionText: loadedDescription,
+            gradeStamp: gradeStamp
         )
         shareImage = img
         showShareSheet = img != nil
