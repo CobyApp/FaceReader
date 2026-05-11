@@ -185,7 +185,7 @@ public struct FaceCaptureView: View {
                     onHelpTapped()
                 }
                 .padding(.leading, 12)
-                .accessibilityLabel(L10n.btnMonsterExplanation)
+                .accessibilityLabel(L10n.helpScreenTitle)
 
                 Spacer()
 

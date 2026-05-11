@@ -52,3 +52,11 @@
 "nickname_edit_title" = "ニックネーム変更";
 "nickname_edit_placeholder" = "ニックネームを入力";
 "btn_landmarks_toggle" = "ランドマーク表示";
+
+/* Help Screen */
+"help_screen_title" = "怪人図鑑";
+"help_intro_title" = "測定方法";
+"help_intro_bullet_1" = "顔の比率で怪人等級を測定します。";
+"help_intro_bullet_2" = "Apple Vision で目・鼻・口・顔の輪郭の座標を抽出。";
+"help_intro_bullet_3" = "比率をくずすほど点数が上がります。";
+"help_grades_section_title" = "等級別ガイド";

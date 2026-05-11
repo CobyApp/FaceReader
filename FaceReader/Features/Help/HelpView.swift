@@ -17,19 +17,27 @@ public struct HelpView: View {
 
     public var body: some View {
         ScrollView {
-            VStack(spacing: 26 * PhoneLayout.metricScale) {
-                ForEach(0 ..< 5, id: \.self) { index in
-                    gradeCard(index: index)
-                        .padding(.top, 16 * PhoneLayout.metricScale)  // 위로 튀어나온 스탬프 공간
+            VStack(alignment: .leading, spacing: 22 * PhoneLayout.metricScale) {
+                introCard
+
+                sectionHeader(L10n.helpGradesSectionTitle)
+                    .padding(.top, 4)
+
+                VStack(spacing: 26 * PhoneLayout.metricScale) {
+                    ForEach(0 ..< 5, id: \.self) { index in
+                        gradeCard(index: index)
+                            .padding(.top, 16 * PhoneLayout.metricScale)
+                    }
                 }
             }
             .padding(.horizontal, 18 * PhoneLayout.metricScale)
-            .padding(.bottom, 24 * PhoneLayout.metricScale)
+            .padding(.top, 16 * PhoneLayout.metricScale)
+            .padding(.bottom, 28 * PhoneLayout.metricScale)
         }
         .background(Color.vhsBase)
         .safeAreaInset(edge: .top, spacing: 0) {
             ZStack {
-                Text(L10n.helpDisasterLevelTitle)
+                Text(L10n.helpScreenTitle)
                     .font(.app(16))
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.vhsInk)
@@ -54,6 +62,74 @@ public struct HelpView: View {
             .background(Color.vhsBase)
         }
     }
+
+    // MARK: - Intro
+
+    @ViewBuilder
+    private var introCard: some View {
+        VStack(alignment: .leading, spacing: 14 * PhoneLayout.metricScale) {
+            HStack(spacing: 10) {
+                Image(systemName: "info.circle.fill")
+                    .font(.system(size: 18, weight: .bold))
+                    .foregroundStyle(Color.vhsCyan)
+                Text(L10n.helpIntroTitle)
+                    .font(.app(20))
+                    .fontWeight(.heavy)
+                    .foregroundStyle(Color.vhsInk)
+            }
+
+            VStack(alignment: .leading, spacing: 12 * PhoneLayout.metricScale) {
+                introBullet(icon: "ruler", color: .vhsCyan, text: L10n.helpIntroBullet1)
+                introBullet(icon: "viewfinder", color: .vhsMagenta, text: L10n.helpIntroBullet2)
+                introBullet(icon: "arrow.up.right.circle.fill", color: .vhsRed, text: L10n.helpIntroBullet3)
+            }
+        }
+        .padding(16 * PhoneLayout.metricScale)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.vhsSurface)
+        .overlay(
+            Rectangle()
+                .stroke(Color.vhsInk, lineWidth: 1.5)
+        )
+        .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 3)
+    }
+
+    @ViewBuilder
+    private func introBullet(icon: String, color: Color, text: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(color)
+                .frame(width: 24, alignment: .center)
+                .padding(.top, 2)
+            Text(text)
+                .font(.app(14))
+                .foregroundStyle(Color.vhsInk.opacity(0.9))
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    private func sectionHeader(_ text: String) -> some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .fill(Color.vhsInk.opacity(0.4))
+                .frame(width: 18, height: 2)
+            Text(text)
+                .font(.app(13))
+                .fontWeight(.heavy)
+                .foregroundStyle(Color.vhsInk.opacity(0.8))
+                .textCase(.uppercase)
+            Rectangle()
+                .fill(Color.vhsInk.opacity(0.4))
+                .frame(maxWidth: .infinity, maxHeight: 1)
+                .frame(height: 1)
+        }
+    }
+
+    // MARK: - Grade card
 
     @ViewBuilder
     private func gradeCard(index: Int) -> some View {
@@ -111,7 +187,6 @@ public struct HelpView: View {
         let rotation: Double
     }
 
-    /// 등급별 스탬프 색상/위치/회전. 좌우 교대 + 위협도 색상.
     private static func stampSpec(for index: Int) -> StampSpec {
         let left = (index % 2 == 0)
         let alignment: Alignment = left ? .topLeading : .topTrailing

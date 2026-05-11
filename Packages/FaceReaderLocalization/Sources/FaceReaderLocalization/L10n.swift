@@ -88,6 +88,13 @@ public enum L10n {
     public static var nicknameEditPlaceholder: String { tr("nickname_edit_placeholder") }
     public static var btnLandmarksToggle: String { tr("btn_landmarks_toggle") }
 
+    public static var helpScreenTitle: String { tr("help_screen_title") }
+    public static var helpIntroTitle: String { tr("help_intro_title") }
+    public static var helpIntroBullet1: String { tr("help_intro_bullet_1") }
+    public static var helpIntroBullet2: String { tr("help_intro_bullet_2") }
+    public static var helpIntroBullet3: String { tr("help_intro_bullet_3") }
+    public static var helpGradesSectionTitle: String { tr("help_grades_section_title") }
+
     /// Localized “bounty” style score using the active app language’s locale.
     public static func formattedScore(_ value: Int) -> String {
         let nf = NumberFormatter()

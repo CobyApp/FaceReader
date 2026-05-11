@@ -52,3 +52,11 @@
 "nickname_edit_title" = "닉네임 변경";
 "nickname_edit_placeholder" = "닉네임 입력";
 "btn_landmarks_toggle" = "랜드마크 표시";
+
+/* Help Screen */
+"help_screen_title" = "괴인 도감";
+"help_intro_title" = "측정 방식";
+"help_intro_bullet_1" = "얼굴 비율로 괴인 등급을 측정해요.";
+"help_intro_bullet_2" = "Apple Vision 으로 눈·코·입·얼굴 윤곽 좌표를 추출합니다.";
+"help_intro_bullet_3" = "비율을 망가뜨릴수록 점수가 올라가요.";
+"help_grades_section_title" = "등급별 안내";

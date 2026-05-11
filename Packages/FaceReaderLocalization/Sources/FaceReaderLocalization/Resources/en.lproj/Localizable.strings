@@ -52,3 +52,11 @@
 "nickname_edit_title" = "Edit Nickname";
 "nickname_edit_placeholder" = "Enter nickname";
 "btn_landmarks_toggle" = "Face Landmarks";
+
+/* Help Screen */
+"help_screen_title" = "Monster Codex";
+"help_intro_title" = "How It Works";
+"help_intro_bullet_1" = "Your monster grade is measured from facial ratios.";
+"help_intro_bullet_2" = "Apple Vision extracts landmarks for eyes, nose, lips, and face contour.";
+"help_intro_bullet_3" = "The more you distort your features, the higher your score.";
+"help_grades_section_title" = "Grade Reference";
