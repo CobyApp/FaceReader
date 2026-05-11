@@ -8,12 +8,62 @@ import SwiftUI
 import UIKit
 
 extension Color {
-    public static let appText = Color(uiColor: .appMainText)
-    public static let appBackground = Color(uiColor: .appMainBackground)
+    public static let appText = Color(uiColor: .vhsInk)
+    public static let appBackground = Color(uiColor: .vhsBase)
     public static let appBrown = Color(hex: 0x4B3E36)
+
+    public static let vhsBase = Color(uiColor: .vhsBase)
+    public static let vhsSurface = Color(uiColor: .vhsSurface)
+    public static let vhsInk = Color(uiColor: .vhsInk)
+    public static let vhsRed = Color(uiColor: .vhsRed)
+    public static let vhsCyan = Color(uiColor: .vhsCyan)
+    public static let vhsMagenta = Color(uiColor: .vhsMagenta)
 }
 
 extension UIColor {
+    public static var vhsBase: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#0a0808")
+                : UIColor(hex: "#f1e8d0")
+        }
+    }
+    public static var vhsSurface: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#1a1414")
+                : UIColor(hex: "#e2d4b2")
+        }
+    }
+    public static var vhsInk: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#f4e9d3")
+                : UIColor(hex: "#1a1414")
+        }
+    }
+    public static var vhsRed: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#d6433a")
+                : UIColor(hex: "#b8362d")
+        }
+    }
+    public static var vhsCyan: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#48b8c4")
+                : UIColor(hex: "#3a96a2")
+        }
+    }
+    public static var vhsMagenta: UIColor {
+        UIColor { traits in
+            traits.userInterfaceStyle == .dark
+                ? UIColor(hex: "#c34d8a")
+                : UIColor(hex: "#a83d72")
+        }
+    }
+
     public static var appMainText: UIColor {
         UIColor { traits in
             traits.userInterfaceStyle == .dark
