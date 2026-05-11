@@ -16,8 +16,6 @@ public struct FaceResultView: View {
     @State private var shareImage: UIImage?
     @State private var showShareSheet = false
     @State private var revealActive: Bool = false
-    @State private var isEditingNickname = false
-    @State private var nicknameDraft: String = ""
 
     public init(store: StoreOf<FaceResultFeature>) {
         self.store = store
@@ -59,15 +57,6 @@ public struct FaceResultView: View {
                 ActivityView(activityItems: [shareImage])
             }
         }
-        .alert(L10n.nicknameEditTitle, isPresented: $isEditingNickname) {
-            TextField(L10n.nicknameEditPlaceholder, text: $nicknameDraft)
-                .textInputAutocapitalization(.never)
-            Button(L10n.btnOk) {
-                let trimmed = nicknameDraft.trimmingCharacters(in: .whitespacesAndNewlines)
-                prefs.nickname = trimmed
-            }
-            Button(L10n.btnCancel, role: .cancel) {}
-        }
     }
 
     @ViewBuilder
@@ -106,58 +95,52 @@ public struct FaceResultView: View {
                 .fill(Color.appText.opacity(0.18))
                 .frame(height: 1)
 
-            HStack(spacing: 0) {
-                actionButton(
-                    icon: "person.text.rectangle",
-                    label: L10n.nicknameTitle
-                ) {
-                    nicknameDraft = prefs.nickname
-                    isEditingNickname = true
-                }
-
-                Rectangle()
-                    .fill(Color.appText.opacity(0.18))
-                    .frame(width: 1)
-                    .padding(.vertical, 12)
-
-                actionButton(
-                    icon: "square.and.arrow.up",
-                    label: L10n.actionShare
-                ) {
-                    prepareShare()
-                }
-
-                Rectangle()
-                    .fill(Color.appText.opacity(0.18))
-                    .frame(width: 1)
-                    .padding(.vertical, 12)
-
+            HStack(spacing: 10) {
                 actionButton(
                     icon: "info.circle",
-                    label: L10n.btnMonsterExplanation
+                    label: L10n.btnMonsterExplanation,
+                    primary: false
                 ) {
                     store.send(.explanationTapped)
                 }
+
+                actionButton(
+                    icon: "square.and.arrow.up",
+                    label: L10n.actionShare,
+                    primary: true
+                ) {
+                    prepareShare()
+                }
             }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 6)
         }
         .frame(maxWidth: .infinity)
-        .background(Color.vhsSurface)
+        .background(Color.appBackground)
     }
 
     @ViewBuilder
-    private func actionButton(icon: String, label: String, action: @escaping () -> Void) -> some View {
-        VStack(spacing: 6) {
+    private func actionButton(icon: String, label: String, primary: Bool, action: @escaping () -> Void) -> some View {
+        let fg = primary ? Color.appBackground : Color.appText
+        let bg = primary ? Color.appText : Color.vhsSurface
+        HStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.system(size: 19, weight: .semibold))
-                .foregroundStyle(Color.appText)
+                .font(.system(size: 15, weight: .semibold))
             Text(label)
-                .font(.app(12))
+                .font(.app(15))
+                .fontWeight(.semibold)
                 .lineLimit(1)
-                .minimumScaleFactor(0.7)
-                .foregroundStyle(Color.appText)
+                .minimumScaleFactor(0.75)
         }
+        .foregroundStyle(fg)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
+        .padding(.vertical, 14)
+        .background(bg)
+        .overlay(
+            Rectangle()
+                .stroke(Color.appText, lineWidth: 1.5)
+        )
         .contentShape(Rectangle())
         .onTapGesture { action() }
         .accessibilityAddTraits(.isButton)

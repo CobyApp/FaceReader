@@ -18,86 +18,64 @@ struct SettingsView: View {
         let id: String
         let storageTag: String?
         let title: String
-        let channel: String
     }
 
     private var languageRows: [LanguageRow] {
         [
-            LanguageRow(id: "system", storageTag: nil, title: L10n.languageOptionSystem, channel: "CH 00"),
-            LanguageRow(id: "en", storageTag: "en", title: "English", channel: "CH 01"),
-            LanguageRow(id: "ja", storageTag: "ja", title: "日本語", channel: "CH 02"),
-            LanguageRow(id: "ko", storageTag: "ko", title: "한국어", channel: "CH 03"),
+            LanguageRow(id: "system", storageTag: nil, title: L10n.languageOptionSystem),
+            LanguageRow(id: "en", storageTag: "en", title: "English"),
+            LanguageRow(id: "ja", storageTag: "ja", title: "日本語"),
+            LanguageRow(id: "ko", storageTag: "ko", title: "한국어"),
         ]
     }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 20 * PhoneLayout.metricScale) {
-                    KitschStamp(L10n.vhsChSelect, tone: .red, rotation: -4)
-                        .padding(.top, 12)
-                        .frame(maxWidth: .infinity, alignment: .center)
-
-                    VStack(spacing: 0) {
-                        ForEach(Array(languageRows.enumerated()), id: \.element.id) { idx, row in
-                            Button {
-                                onSelect(row.storageTag)
-                            } label: {
-                                HStack {
-                                    Text(row.channel)
-                                        .font(.app(14))
-                                        .fontWeight(.black)
-                                        .foregroundStyle(Color.vhsRed)
-                                        .frame(width: 56 * PhoneLayout.metricScale, alignment: .leading)
-                                    Text(row.title)
-                                        .font(.app(18))
-                                        .foregroundStyle(Color.vhsInk)
-                                    Spacer()
-                                    if isSelected(row) {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .foregroundStyle(Color.vhsRed)
-                                    }
+                VStack(alignment: .leading, spacing: 24 * PhoneLayout.metricScale) {
+                    section(header: L10n.settingsLanguage) {
+                        VStack(spacing: 0) {
+                            ForEach(Array(languageRows.enumerated()), id: \.element.id) { idx, row in
+                                languageCell(row)
+                                if idx < languageRows.count - 1 {
+                                    Rectangle()
+                                        .fill(Color.vhsInk.opacity(0.18))
+                                        .frame(height: 1)
+                                        .padding(.horizontal, 12 * PhoneLayout.metricScale)
                                 }
-                                .padding(.horizontal, 16 * PhoneLayout.metricScale)
-                                .padding(.vertical, 14 * PhoneLayout.metricScale)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            if idx < languageRows.count - 1 {
-                                Rectangle()
-                                    .fill(Color.vhsInk.opacity(0.25))
-                                    .frame(height: 1)
-                                    .padding(.horizontal, 12 * PhoneLayout.metricScale)
                             }
                         }
+                        .background(Color.vhsSurface)
+                        .overlay(
+                            Rectangle()
+                                .stroke(Color.vhsInk, lineWidth: 1.5)
+                        )
                     }
-                    .background(Color.vhsSurface)
-                    .overlay(
-                        Rectangle()
-                            .stroke(Color.vhsInk, lineWidth: 2)
-                    )
 
-                    VStack(alignment: .leading, spacing: 8) {
+                    section(header: L10n.vhsReduceEffectsTitle) {
                         Toggle(isOn: $prefs.reducedEffects) {
                             Text(L10n.vhsReduceEffectsTitle)
-                                .font(.app(17))
+                                .font(.app(16))
                                 .foregroundStyle(Color.vhsInk)
                         }
                         .tint(Color.vhsRed)
                         .padding(.horizontal, 16 * PhoneLayout.metricScale)
-                        .padding(.vertical, 14 * PhoneLayout.metricScale)
+                        .padding(.vertical, 12 * PhoneLayout.metricScale)
                         .background(Color.vhsSurface)
                         .overlay(
                             Rectangle()
-                                .stroke(Color.vhsInk, lineWidth: 2)
+                                .stroke(Color.vhsInk, lineWidth: 1.5)
                         )
 
                         Text(L10n.vhsReduceEffectsFooter)
-                            .font(.app(13))
+                            .font(.app(12))
                             .foregroundStyle(Color.vhsInk.opacity(0.7))
                             .padding(.horizontal, 4)
+                            .padding(.top, 6)
                     }
                 }
-                .padding(18 * PhoneLayout.metricScale)
+                .padding(.horizontal, 18 * PhoneLayout.metricScale)
+                .padding(.vertical, 20 * PhoneLayout.metricScale)
             }
             .scrollContentBackground(.hidden)
             .background(Color.vhsBase)
@@ -121,6 +99,42 @@ struct SettingsView: View {
         }
         .presentationDetents([.medium, .large])
         .tint(Color.vhsInk)
+    }
+
+    @ViewBuilder
+    private func section<Content: View>(header: String, @ViewBuilder content: () -> Content) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(header)
+                .font(.app(13))
+                .fontWeight(.heavy)
+                .foregroundStyle(Color.vhsInk.opacity(0.7))
+                .textCase(.uppercase)
+                .padding(.horizontal, 4)
+            content()
+        }
+    }
+
+    @ViewBuilder
+    private func languageCell(_ row: LanguageRow) -> some View {
+        HStack {
+            Text(row.title)
+                .font(.app(17))
+                .foregroundStyle(Color.vhsInk)
+            Spacer()
+            if isSelected(row) {
+                Image(systemName: "checkmark")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(Color.vhsRed)
+            }
+        }
+        .padding(.horizontal, 16 * PhoneLayout.metricScale)
+        .padding(.vertical, 14 * PhoneLayout.metricScale)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            onSelect(row.storageTag)
+        }
+        .accessibilityAddTraits(.isButton)
     }
 
     private func isSelected(_ row: LanguageRow) -> Bool {
