@@ -83,17 +83,16 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Text(L10n.settingsDone)
-                        .font(.app(16))
-                        .fontWeight(.semibold)
+                    Image(systemName: "xmark")
+                        .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(Color.vhsInk)
-                        .padding(.horizontal, 4)
-                        .padding(.vertical, 4)
+                        .frame(width: 36, height: 36)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             onCancel()
                         }
                         .accessibilityAddTraits(.isButton)
+                        .accessibilityLabel(L10n.settingsDone)
                 }
             }
         }

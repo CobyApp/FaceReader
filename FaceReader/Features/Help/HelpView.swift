@@ -17,13 +17,13 @@ public struct HelpView: View {
 
     public var body: some View {
         ScrollView {
-            VStack(spacing: 18 * PhoneLayout.metricScale) {
+            VStack(spacing: 26 * PhoneLayout.metricScale) {
                 ForEach(0 ..< 5, id: \.self) { index in
                     gradeCard(index: index)
+                        .padding(.top, 16 * PhoneLayout.metricScale)  // 위로 튀어나온 스탬프 공간
                 }
             }
             .padding(.horizontal, 18 * PhoneLayout.metricScale)
-            .padding(.top, 8 * PhoneLayout.metricScale)
             .padding(.bottom, 24 * PhoneLayout.metricScale)
         }
         .background(Color.vhsBase)
@@ -37,17 +37,16 @@ public struct HelpView: View {
 
                 HStack {
                     Spacer()
-                    Text(L10n.btnBackToMeter)
-                        .font(.app(15))
-                        .fontWeight(.semibold)
+                    Image(systemName: "xmark")
+                        .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(Color.vhsInk)
-                        .padding(.horizontal, 10)
-                        .padding(.vertical, 6)
+                        .frame(width: 36, height: 36)
                         .contentShape(Rectangle())
                         .onTapGesture {
                             onFinished()
                         }
                         .accessibilityAddTraits(.isButton)
+                        .accessibilityLabel(L10n.btnBackToMeter)
                         .padding(.trailing, 6)
                 }
             }
@@ -78,7 +77,7 @@ public struct HelpView: View {
                 Text(L10n.gradeInfo(for: index))
                     .font(.app(14))
                     .fontWeight(.semibold)
-                    .foregroundStyle(spec.tone == .ink ? Color.vhsRed : spec.color)
+                    .foregroundStyle(spec.color)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
             }
@@ -99,8 +98,8 @@ public struct HelpView: View {
         )
         .overlay(alignment: spec.alignment) {
             KitschStamp(L10n.vhsLevelLabel(index), tone: spec.tone, rotation: spec.rotation)
-                .padding(.top, 14 * PhoneLayout.metricScale)
-                .padding(.horizontal, 14 * PhoneLayout.metricScale)
+                .offset(y: -18 * PhoneLayout.metricScale)
+                .padding(.horizontal, 16 * PhoneLayout.metricScale)
         }
         .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 3)
     }
@@ -112,11 +111,11 @@ public struct HelpView: View {
         let rotation: Double
     }
 
-    /// 등급별 스탬프 색상/위치/회전. 좌우 교대 + 위협도에 따라 색온도 상승.
+    /// 등급별 스탬프 색상/위치/회전. 좌우 교대 + 위협도 색상.
     private static func stampSpec(for index: Int) -> StampSpec {
         let left = (index % 2 == 0)
         let alignment: Alignment = left ? .topLeading : .topTrailing
-        let rotation: Double = left ? -7 : 7
+        let rotation: Double = left ? -8 : 8
         switch index {
         case 0: return StampSpec(tone: .cyan, color: .vhsCyan, alignment: alignment, rotation: rotation)
         case 1: return StampSpec(tone: .magenta, color: .vhsMagenta, alignment: alignment, rotation: rotation)

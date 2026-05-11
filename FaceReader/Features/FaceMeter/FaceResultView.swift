@@ -95,8 +95,8 @@ public struct FaceResultView: View {
                 .fill(Color.appText.opacity(0.18))
                 .frame(height: 1)
 
-            HStack(spacing: 10) {
-                actionButton(
+            HStack(spacing: 12) {
+                iconButton(
                     icon: "info.circle",
                     label: L10n.btnMonsterExplanation,
                     primary: false
@@ -104,7 +104,7 @@ public struct FaceResultView: View {
                     store.send(.explanationTapped)
                 }
 
-                actionButton(
+                iconButton(
                     icon: "square.and.arrow.up",
                     label: L10n.actionShare,
                     primary: true
@@ -121,30 +121,23 @@ public struct FaceResultView: View {
     }
 
     @ViewBuilder
-    private func actionButton(icon: String, label: String, primary: Bool, action: @escaping () -> Void) -> some View {
+    private func iconButton(icon: String, label: String, primary: Bool, action: @escaping () -> Void) -> some View {
         let fg = primary ? Color.appBackground : Color.appText
         let bg = primary ? Color.appText : Color.vhsSurface
-        HStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 15, weight: .semibold))
-            Text(label)
-                .font(.app(15))
-                .fontWeight(.semibold)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-        }
-        .foregroundStyle(fg)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 14)
-        .background(bg)
-        .overlay(
-            Rectangle()
-                .stroke(Color.appText, lineWidth: 1.5)
-        )
-        .contentShape(Rectangle())
-        .onTapGesture { action() }
-        .accessibilityAddTraits(.isButton)
-        .accessibilityLabel(label)
+        Image(systemName: icon)
+            .font(.system(size: 22, weight: .semibold))
+            .foregroundStyle(fg)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 18)
+            .background(bg)
+            .overlay(
+                Rectangle()
+                    .stroke(Color.appText, lineWidth: 1.5)
+            )
+            .contentShape(Rectangle())
+            .onTapGesture { action() }
+            .accessibilityAddTraits(.isButton)
+            .accessibilityLabel(label)
     }
 
     private var revealIntensity: Double {
