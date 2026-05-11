@@ -200,15 +200,17 @@ public struct FaceCaptureView: View {
         onCommitted(posterData)
     }
 
-    /// viewport (preview layer 좌표) 영역에 해당하는 capture 출력 부분만 잘라 반환.
+    /// viewport (preview layer 좌표) 영역에 해당하는 cartoon 이미지 픽셀 영역을 직접 계산해서 잘라 반환.
+    /// `.resizeAspectFill` 매핑을 명시적으로 풀어, 화면에서 보이는 viewport 영역과 동일한
+    /// 픽셀 범위를 정확히 잘라낸다.
     private static func cropToViewport(
         image: UIImage,
         viewport: CGRect,
         previewLayer: AVCaptureVideoPreviewLayer
     ) -> UIImage? {
         guard viewport.width > 1, viewport.height > 1 else { return nil }
-        let normalized = previewLayer.metadataOutputRectConverted(fromLayerRect: viewport)
-        guard normalized.width > 0, normalized.height > 0 else { return nil }
+        let layerBounds = previewLayer.bounds
+        guard layerBounds.width > 1, layerBounds.height > 1 else { return nil }
 
         let cgImage: CGImage? = {
             if let cg = image.cgImage { return cg }
@@ -223,18 +225,27 @@ public struct FaceCaptureView: View {
                 image.draw(in: CGRect(origin: .zero, size: image.size))
             }.cgImage
         }()
-
         guard let cg = cgImage else { return nil }
-        let w = CGFloat(cg.width)
-        let h = CGFloat(cg.height)
-        let rawCrop = CGRect(
-            x: normalized.origin.x * w,
-            y: normalized.origin.y * h,
-            width: normalized.width * w,
-            height: normalized.height * h
-        )
-        let clamped = rawCrop.intersection(CGRect(x: 0, y: 0, width: w, height: h))
-        guard clamped.width > 1, clamped.height > 1, let cropped = cg.cropping(to: clamped) else { return nil }
+        let imgW = CGFloat(cg.width)
+        let imgH = CGFloat(cg.height)
+
+        // `.resizeAspectFill`: 이미지를 layer 에 꽉 채우도록 max scale 로 키움.
+        let scale = max(layerBounds.width / imgW, layerBounds.height / imgH)
+        let displayedW = imgW * scale
+        let displayedH = imgH * scale
+        // 키운 이미지가 layer 보다 클 때 음수 offset (양쪽으로 잘려나가는 양만큼).
+        let offsetX = (layerBounds.width - displayedW) / 2
+        let offsetY = (layerBounds.height - displayedH) / 2
+
+        // viewport (layer 좌표) → 키운 이미지 좌표 → 원본 픽셀 좌표.
+        let cropX = (viewport.minX - offsetX) / scale
+        let cropY = (viewport.minY - offsetY) / scale
+        let cropW = viewport.width / scale
+        let cropH = viewport.height / scale
+
+        let cropRect = CGRect(x: cropX, y: cropY, width: cropW, height: cropH)
+            .intersection(CGRect(x: 0, y: 0, width: imgW, height: imgH))
+        guard cropRect.width > 1, cropRect.height > 1, let cropped = cg.cropping(to: cropRect) else { return nil }
         return UIImage(cgImage: cropped, scale: image.scale, orientation: image.imageOrientation)
     }
 
