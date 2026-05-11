@@ -34,7 +34,6 @@ public struct HelpView: View {
             .padding(18 * PhoneLayout.metricScale)
         }
         .background(Color.vhsBase)
-        .vhsOverlay()
         .navigationTitle(L10n.helpDisasterLevelTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

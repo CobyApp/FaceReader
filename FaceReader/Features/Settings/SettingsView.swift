@@ -101,7 +101,6 @@ struct SettingsView: View {
             }
             .scrollContentBackground(.hidden)
             .background(Color.vhsBase)
-            .vhsOverlay()
             .navigationTitle(L10n.settingsTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

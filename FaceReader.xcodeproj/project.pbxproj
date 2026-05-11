@@ -3,22 +3,25 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		18B93BD86D70596E3E381755 /* FaceMeasureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */; };
 		1C0CDB99AC388FEA383FF8C7 /* SangSangAnt.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3CE4EA903B74A423F38E8479 /* SangSangAnt.otf */; };
 		2582867324EEC9AFB401CAF0 /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */; };
+		2E63D896D83164B392098719 /* GlitchEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67951918438FC72E91ACEE /* GlitchEffect.swift */; };
 		2F315328D73197A7906AA614 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBF33A2EF1A8842422180EB /* ActivityView.swift */; };
 		359985950C111EE07F23DCEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */; };
 		3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E09521ED20047B52D5D57 /* AppTheme.swift */; };
 		4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2A65D9960D3F2DFA25B473 /* CasePaths */; };
 		4713BAF224FF0830D09F6017 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = D70488527B2478B6E684F50D /* FaceReaderLocalization */; };
+		4C0E5E85CCE255678F219878 /* ComicBurst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3159F5E4ABCCDE24208F05 /* ComicBurst.swift */; };
 		550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */; };
 		55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */; };
 		58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */; };
 		5E72C8B45D9A46E190B9ED6C /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */; };
+		5FD1139F0CF7503797CF555E /* VHSOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E66851EE925D1BC0366806 /* VHSOverlay.swift */; };
 		608297C2417595B4A366123F /* FaceReaderUI.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
 		668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */; };
 		6B9D7FDADA59BDE5F2747478 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */; };
@@ -28,9 +31,12 @@
 		7BB8C208D173C7B5FB16AE42 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9112385A22460A0EB40A97CC /* AppFeature.swift */; };
 		7E6575088531B1F4C4815022 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 950B93E3283DC200EEE8B94F /* Dependencies */; };
 		83A9979C08ECE64F1077816F /* FaceReaderCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
+		861E57327D0DE0EEC6B51516 /* SubtitleBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B877F63DBBBA251E35FA1D /* SubtitleBox.swift */; };
 		874258CBA72CF1524746F77C /* FaceReaderCore.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
 		93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */; };
+		967A1298C9BFDC596570ED56 /* KitschStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D385D7B5F5080032A72004B /* KitschStamp.swift */; };
 		97BE1651C19A29F2DF973892 /* FaceLandmarkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */; };
+		9A8E157449E1ACA2CC186F78 /* VHSEffectsPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44161C2C204B7CB4146E17C /* VHSEffectsPreferences.swift */; };
 		9FFF1E0140EADA1282F62353 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 12C97552AD3E03B177F0550C /* ComposableArchitecture */; };
 		A247EE3BA8F8F56A9E02D709 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 3C78D1C330C268AB6C3DE2BA /* CasePaths */; };
 		A5639D973ACAEF3E6334A2C2 /* MonsterPosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */; };
@@ -46,6 +52,7 @@
 		E46997EBFA18C825EDECB0C7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */; };
 		E4711843BE19D1CB0E5FC56E /* FaceResultFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */; };
 		E7F0E409E0CB8857A832E8D2 /* GradeAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29A16EA40C43D0CAF356324 /* GradeAssets.swift */; };
+		EE9FD0404AFECE195795AF79 /* CRTFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E1A1E79395D06500879EBD9 /* CRTFrame.swift */; };
 		F617BCF25038B281952AF910 /* FaceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBCF3CAE0637C8BC2AD2204 /* FaceResultView.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,14 +139,16 @@
 		0968BA8A7138D162C6753956 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		184217E314359BF97CC4BBE2 /* Tuist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuist.swift; sourceTree = "<group>"; };
 		1DD31F553F636B79CAC2ECD5 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1E1A1E79395D06500879EBD9 /* CRTFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CRTFrame.swift; sourceTree = "<group>"; };
 		20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderFeatures.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		293E09521ED20047B52D5D57 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
-		2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMeasureSession.swift; sourceTree = "<group>"; };
 		3CCB99897CF0718C82D61A99 /* FaceReaderCore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderCore-Info.plist"; sourceTree = "<group>"; };
 		3CE4EA903B74A423F38E8479 /* SangSangAnt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SangSangAnt.otf; sourceTree = "<group>"; };
 		3EBCF3CAE0637C8BC2AD2204 /* FaceResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultView.swift; sourceTree = "<group>"; };
 		4C017BB4D1BCEBE5C1C3DE2D /* FaceCaptureEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceCaptureEngine.swift; sourceTree = "<group>"; };
+		4C3159F5E4ABCCDE24208F05 /* ComicBurst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBurst.swift; sourceTree = "<group>"; };
 		4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderAppRoot.swift; sourceTree = "<group>"; };
 		4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54FF6F79179CD0361E67CF39 /* FaceReaderLocalization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FaceReaderLocalization; path = Packages/FaceReaderLocalization; sourceTree = "<group>"; };
@@ -150,21 +159,26 @@
 		6DE59FA7C3B3F85618341E7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		7D1E67FFB74A360E02768E65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7D385D7B5F5080032A72004B /* KitschStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitschStamp.swift; sourceTree = "<group>"; };
 		7E8F64ADB6DE3800B468F410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLandmarkOverlay.swift; sourceTree = "<group>"; };
 		9112385A22460A0EB40A97CC /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		945FD9DFE545FE4F68E43A5F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		A1E66851EE925D1BC0366806 /* VHSOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHSOverlay.swift; sourceTree = "<group>"; };
 		A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC67951918438FC72E91ACEE /* GlitchEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchEffect.swift; sourceTree = "<group>"; };
 		AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
 		B15D82CED7DE775CA74F0864 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		B87862C5D52286CEF63F108A /* FaceReaderUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderUI-Info.plist"; sourceTree = "<group>"; };
 		B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KosugiMaru-Regular.ttf"; sourceTree = "<group>"; };
+		C0B877F63DBBBA251E35FA1D /* SubtitleBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleBox.swift; sourceTree = "<group>"; };
 		C38E24F09D630007DBD42EFD /* FaceReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C5BC4855950D0ED97CFB0532 /* FaceReaderFeatures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderFeatures-Info.plist"; sourceTree = "<group>"; };
 		CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderApp.swift; sourceTree = "<group>"; };
 		D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultFeature.swift; sourceTree = "<group>"; };
 		E29A16EA40C43D0CAF356324 /* GradeAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeAssets.swift; sourceTree = "<group>"; };
+		E44161C2C204B7CB4146E17C /* VHSEffectsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHSEffectsPreferences.swift; sourceTree = "<group>"; };
 		EBBF33A2EF1A8842422180EB /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -213,6 +227,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		136064663B69E0EFC3D2F0AB /* Kitsch */ = {
+			isa = PBXGroup;
+			children = (
+				4C3159F5E4ABCCDE24208F05 /* ComicBurst.swift */,
+				7D385D7B5F5080032A72004B /* KitschStamp.swift */,
+				C0B877F63DBBBA251E35FA1D /* SubtitleBox.swift */,
+			);
+			path = Kitsch;
+			sourceTree = "<group>";
+		};
+		1516A1EA92FE026F34628EDB /* VHS */ = {
+			isa = PBXGroup;
+			children = (
+				1E1A1E79395D06500879EBD9 /* CRTFrame.swift */,
+				AC67951918438FC72E91ACEE /* GlitchEffect.swift */,
+				E44161C2C204B7CB4146E17C /* VHSEffectsPreferences.swift */,
+				A1E66851EE925D1BC0366806 /* VHSOverlay.swift */,
+			);
+			path = VHS;
+			sourceTree = "<group>";
+		};
 		2087E4588C050C6556C6F3E1 /* Geometry */ = {
 			isa = PBXGroup;
 			children = (
@@ -333,6 +368,8 @@
 		C55AA19F9674FA709C6ABC8C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				136064663B69E0EFC3D2F0AB /* Kitsch */,
+				1516A1EA92FE026F34628EDB /* VHS */,
 				EBBF33A2EF1A8842422180EB /* ActivityView.swift */,
 				293E09521ED20047B52D5D57 /* AppTheme.swift */,
 				E29A16EA40C43D0CAF356324 /* GradeAssets.swift */,
@@ -511,8 +548,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
-				LastUpgradeCheck = 2640;
 				ORGANIZATIONNAME = com.coby;
+				TargetAttributes = {
+				};
 			};
 			buildConfigurationList = D5EFCA345A816E226F4D1C4D /* Build configuration list for PBXProject "FaceReader" */;
 			compatibilityVersion = "Xcode 14.0";
@@ -588,8 +626,15 @@
 				2F315328D73197A7906AA614 /* ActivityView.swift in Sources */,
 				3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */,
 				E7F0E409E0CB8857A832E8D2 /* GradeAssets.swift in Sources */,
+				4C0E5E85CCE255678F219878 /* ComicBurst.swift in Sources */,
+				967A1298C9BFDC596570ED56 /* KitschStamp.swift in Sources */,
+				861E57327D0DE0EEC6B51516 /* SubtitleBox.swift in Sources */,
 				A5639D973ACAEF3E6334A2C2 /* MonsterPosterView.swift in Sources */,
 				2582867324EEC9AFB401CAF0 /* PhoneLayout.swift in Sources */,
+				EE9FD0404AFECE195795AF79 /* CRTFrame.swift in Sources */,
+				2E63D896D83164B392098719 /* GlitchEffect.swift in Sources */,
+				9A8E157449E1ACA2CC186F78 /* VHSEffectsPreferences.swift in Sources */,
+				5FD1139F0CF7503797CF555E /* VHSOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,10 +726,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -695,7 +740,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
 				PRODUCT_NAME = FaceReaderUI;
 				SDKROOT = iphoneos;
@@ -703,7 +747,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -720,10 +767,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -734,7 +781,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
 				PRODUCT_NAME = FaceReaderFeatures;
 				SDKROOT = iphoneos;
@@ -742,7 +788,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -760,6 +809,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
@@ -825,10 +875,8 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -847,7 +895,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -859,6 +906,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
@@ -894,10 +942,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -908,7 +956,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
 				PRODUCT_NAME = FaceReaderCore;
 				SDKROOT = iphoneos;
@@ -962,10 +1009,8 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -977,7 +1022,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -989,10 +1033,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -1003,7 +1047,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
 				PRODUCT_NAME = FaceReaderFeatures;
 				SDKROOT = iphoneos;
@@ -1027,10 +1070,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -1041,7 +1084,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
 				PRODUCT_NAME = FaceReaderCore;
 				SDKROOT = iphoneos;
@@ -1049,7 +1091,10 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
+					"$(inherited)",
+					DEBUG,
+				);
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1066,10 +1111,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 202209021;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -1080,7 +1125,6 @@
 				);
 				MACH_O_TYPE = staticlib;
 				MARKETING_VERSION = 2.1.0;
-				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
 				PRODUCT_NAME = FaceReaderUI;
 				SDKROOT = iphoneos;

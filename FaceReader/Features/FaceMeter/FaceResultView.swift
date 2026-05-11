@@ -28,14 +28,12 @@ public struct FaceResultView: View {
                 posterWantedText: L10n.posterWanted,
                 posterDeadOrAliveText: L10n.posterDeadOrAlive,
                 gradeLineText: L10n.gradeLine(for: store.box.session.grade),
-                formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
-                showVHSAccents: true
+                formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
             )
             .frame(maxWidth: .infinity)
             .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
         }
         .background(Color.appBackground)
-        .vhsOverlay()
         .navigationTitle(L10n.resultScreenTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -60,15 +58,10 @@ public struct FaceResultView: View {
             } label: {
                 Text(L10n.btnMonsterExplanation)
                     .font(.app(23))
-                    .fontWeight(.black)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 22 * PhoneLayout.metricScale)
-                    .background(Color.vhsRed)
-                    .foregroundStyle(Color(white: 0.96))
-                    .overlay(
-                        Rectangle()
-                            .stroke(Color.vhsInk, lineWidth: 3)
-                    )
+                    .background(Color.appText.opacity(0.35))
+                    .foregroundStyle(Color.appText)
             }
         }
         .onAppear {
@@ -84,8 +77,8 @@ public struct FaceResultView: View {
     }
 
     private var revealIntensity: Double {
-        // 등급이 높을수록 강한 글리치 (wolf=0 → god=4 ⇒ 0.4~1.6)
-        0.4 + Double(store.box.session.grade) * 0.3
+        // 등급에 따라 약하게 (wolf=0 → god=4 ⇒ 0.15~0.55)
+        0.15 + Double(store.box.session.grade) * 0.1
     }
 
     private func triggerReveal() {
@@ -114,8 +107,7 @@ public struct FaceResultView: View {
             posterWantedText: L10n.posterWanted,
             posterDeadOrAliveText: L10n.posterDeadOrAlive,
             gradeLineText: L10n.gradeLine(for: grade),
-            formattedScoreText: L10n.formattedScore(totalScore),
-            showVHSAccents: true
+            formattedScoreText: L10n.formattedScore(totalScore)
         )
         shareImage = img
         showShareSheet = img != nil
