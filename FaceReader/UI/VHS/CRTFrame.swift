@@ -31,21 +31,25 @@ public struct CRTFrame: View {
 
     @ViewBuilder private var corners: some View {
         GeometryReader { geo in
-            let inset: CGFloat = 24 * PhoneLayout.metricScale
-            let armLength: CGFloat = 28 * PhoneLayout.metricScale
+            let inset: CGFloat = 14 * PhoneLayout.metricScale
+            let armLength: CGFloat = 32 * PhoneLayout.metricScale
             let lineWidth: CGFloat = 3
             ZStack {
                 CornerHook(corner: .topLeading, armLength: armLength)
                     .stroke(inkColor, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
                     .position(x: inset + armLength / 2, y: inset + armLength / 2)
                 CornerHook(corner: .topTrailing, armLength: armLength)
                     .stroke(inkColor, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
                     .position(x: geo.size.width - inset - armLength / 2, y: inset + armLength / 2)
                 CornerHook(corner: .bottomLeading, armLength: armLength)
                     .stroke(inkColor, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
                     .position(x: inset + armLength / 2, y: geo.size.height - inset - armLength / 2)
                 CornerHook(corner: .bottomTrailing, armLength: armLength)
                     .stroke(inkColor, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
                     .position(x: geo.size.width - inset - armLength / 2, y: geo.size.height - inset - armLength / 2)
             }
         }
@@ -64,8 +68,8 @@ public struct CRTFrame: View {
                     .foregroundStyle(Color(white: 0.96))
                 Spacer()
             }
-            .padding(.horizontal, 36 * PhoneLayout.metricScale)
-            .padding(.top, 30 * PhoneLayout.metricScale)
+            .padding(.horizontal, 24 * PhoneLayout.metricScale)
+            .padding(.top, 8 * PhoneLayout.metricScale)
             Spacer()
         }
     }

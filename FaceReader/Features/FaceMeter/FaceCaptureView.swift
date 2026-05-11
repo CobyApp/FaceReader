@@ -35,7 +35,6 @@ public struct FaceCaptureView: View {
                 .ignoresSafeArea()
 
             CRTFrame()
-                .ignoresSafeArea()
 
             VStack {
                 Spacer()
