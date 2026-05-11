@@ -29,8 +29,8 @@ public struct FaceResultView: View {
     }
 
     public var body: some View {
-        ZStack {
-            Color.appBackground.ignoresSafeArea()
+        VStack(spacing: 0) {
+            customTopBar
 
             ScrollView {
                 MonsterPosterView(
@@ -44,13 +44,11 @@ public struct FaceResultView: View {
                 .frame(maxWidth: .infinity)
                 .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
             }
-        }
-        .safeAreaInset(edge: .top, spacing: 0) {
-            customTopBar
-        }
-        .safeAreaInset(edge: .bottom) {
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
             actionBar
         }
+        .background(Color.appBackground.ignoresSafeArea())
         .onAppear {
             store.send(.onAppear)
             triggerReveal()
@@ -97,71 +95,73 @@ public struct FaceResultView: View {
             }
         }
         .frame(height: 44)
+        .frame(maxWidth: .infinity)
         .background(Color.appBackground)
     }
 
     @ViewBuilder
     private var actionBar: some View {
-        HStack(spacing: 0) {
-            actionButton(
-                icon: "person.text.rectangle",
-                label: L10n.nicknameTitle
-            ) {
-                nicknameDraft = prefs.nickname
-                isEditingNickname = true
-            }
-
+        VStack(spacing: 0) {
             Rectangle()
                 .fill(Color.appText.opacity(0.18))
-                .frame(width: 1)
-                .padding(.vertical, 14)
+                .frame(height: 1)
 
-            actionButton(
-                icon: "square.and.arrow.up",
-                label: L10n.actionShare
-            ) {
-                prepareShare()
-            }
+            HStack(spacing: 0) {
+                actionButton(
+                    icon: "person.text.rectangle",
+                    label: L10n.nicknameTitle
+                ) {
+                    nicknameDraft = prefs.nickname
+                    isEditingNickname = true
+                }
 
-            Rectangle()
-                .fill(Color.appText.opacity(0.18))
-                .frame(width: 1)
-                .padding(.vertical, 14)
+                Rectangle()
+                    .fill(Color.appText.opacity(0.18))
+                    .frame(width: 1)
+                    .padding(.vertical, 12)
 
-            actionButton(
-                icon: "info.circle",
-                label: L10n.btnMonsterExplanation
-            ) {
-                store.send(.explanationTapped)
+                actionButton(
+                    icon: "square.and.arrow.up",
+                    label: L10n.actionShare
+                ) {
+                    prepareShare()
+                }
+
+                Rectangle()
+                    .fill(Color.appText.opacity(0.18))
+                    .frame(width: 1)
+                    .padding(.vertical, 12)
+
+                actionButton(
+                    icon: "info.circle",
+                    label: L10n.btnMonsterExplanation
+                ) {
+                    store.send(.explanationTapped)
+                }
             }
         }
+        .frame(maxWidth: .infinity)
         .background(Color.vhsSurface)
-        .overlay(
-            Rectangle()
-                .fill(Color.appText.opacity(0.18))
-                .frame(height: 1),
-            alignment: .top
-        )
     }
 
     @ViewBuilder
     private func actionButton(icon: String, label: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            VStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 19, weight: .semibold))
-                    .foregroundStyle(Color.appText)
-                Text(label)
-                    .font(.app(12))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                    .foregroundStyle(Color.appText)
-            }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .contentShape(Rectangle())
+        VStack(spacing: 6) {
+            Image(systemName: icon)
+                .font(.system(size: 19, weight: .semibold))
+                .foregroundStyle(Color.appText)
+            Text(label)
+                .font(.app(12))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+                .foregroundStyle(Color.appText)
         }
-        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 12)
+        .contentShape(Rectangle())
+        .onTapGesture { action() }
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel(label)
     }
 
     private var revealIntensity: Double {

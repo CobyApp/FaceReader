@@ -164,15 +164,12 @@ public struct FaceCaptureView: View {
                 Spacer()
                 ZStack {
                     Rectangle()
-                        .fill(Color.vhsBase)
-                        .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
-                    Rectangle()
-                        .stroke(ink, lineWidth: 2)
-                        .frame(width: 36 * PhoneLayout.metricScale, height: 28 * PhoneLayout.metricScale)
+                        .fill(ink)
+                        .frame(width: 44 * PhoneLayout.metricScale, height: 30 * PhoneLayout.metricScale)
                     Text("VHS")
-                        .font(.app(10))
+                        .font(.app(12))
                         .fontWeight(.black)
-                        .foregroundStyle(ink)
+                        .foregroundStyle(Color.black)
                 }
                 .contentShape(Rectangle())
                 .onTapGesture { onSettingsTapped() }
