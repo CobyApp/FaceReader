@@ -60,3 +60,8 @@
 "help_intro_bullet_2" = "Apple Vision extracts landmarks for eyes, nose, lips, and face contour.";
 "help_intro_bullet_3" = "The more you distort your features, the higher your score.";
 "help_grades_section_title" = "Grade Reference";
+
+/* AI Report */
+"ai_report_title" = "Mysterious Being Report";
+"ai_report_loading" = "Hero Association analyst evaluating...";
+"ai_report_unavailable" = "Apple Intelligence isn't available, so the analyst stayed home. Enable Apple Intelligence in Settings and try again.";

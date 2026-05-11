@@ -31,16 +31,22 @@ public struct FaceResultView: View {
             customTopBar
 
             ScrollView {
-                MonsterPosterView(
-                    faceImage: posterUIImage,
-                    nicknameLine: nicknameDisplay,
-                    posterWantedText: L10n.posterWanted,
-                    posterDeadOrAliveText: L10n.posterDeadOrAlive,
-                    gradeLineText: L10n.gradeLine(for: store.box.session.grade),
-                    formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
-                )
-                .frame(maxWidth: .infinity)
-                .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
+                VStack(spacing: 16 * PhoneLayout.metricScale) {
+                    MonsterPosterView(
+                        faceImage: posterUIImage,
+                        nicknameLine: nicknameDisplay,
+                        posterWantedText: L10n.posterWanted,
+                        posterDeadOrAliveText: L10n.posterDeadOrAlive,
+                        gradeLineText: L10n.gradeLine(for: store.box.session.grade),
+                        formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
+                    )
+                    .frame(maxWidth: .infinity)
+                    .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
+
+                    descriptionCard
+                        .padding(.horizontal, 18 * PhoneLayout.metricScale)
+                        .padding(.bottom, 16 * PhoneLayout.metricScale)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -48,6 +54,10 @@ public struct FaceResultView: View {
         .onAppear {
             store.send(.onAppear)
             triggerReveal()
+            requestDescriptionIfNeeded()
+        }
+        .onChange(of: prefs.nickname) { _, _ in
+            requestDescriptionIfNeeded(force: true)
         }
         .id(store.posterImageData)
         .sheet(isPresented: $showShareSheet) {
@@ -97,6 +107,71 @@ public struct FaceResultView: View {
         .frame(height: 44)
         .frame(maxWidth: .infinity)
         .background(Color.appBackground)
+    }
+
+    @ViewBuilder
+    private var descriptionCard: some View {
+        let ink = Color.appText
+        let surface = Color.vhsSurface
+        VStack(alignment: .leading, spacing: 10 * PhoneLayout.metricScale) {
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(Color.vhsMagenta)
+                Text(L10n.aiReportTitle)
+                    .font(.app(13))
+                    .fontWeight(.heavy)
+                    .foregroundStyle(ink.opacity(0.7))
+                    .textCase(.uppercase)
+            }
+
+            switch store.descriptionStatus {
+            case .idle, .loading:
+                HStack(spacing: 10) {
+                    ProgressView()
+                        .controlSize(.small)
+                        .tint(ink)
+                    Text(L10n.aiReportLoading)
+                        .font(.app(14))
+                        .foregroundStyle(ink.opacity(0.7))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 8)
+            case .loaded(let text):
+                Text(text)
+                    .font(.app(15))
+                    .foregroundStyle(ink)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            case .failed:
+                Text(L10n.aiReportUnavailable)
+                    .font(.app(14))
+                    .foregroundStyle(ink.opacity(0.6))
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .padding(14 * PhoneLayout.metricScale)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(surface)
+        .overlay(
+            Rectangle()
+                .stroke(ink, lineWidth: 1.5)
+        )
+    }
+
+    private func requestDescriptionIfNeeded(force: Bool = false) {
+        switch store.descriptionStatus {
+        case .loading:
+            return
+        case .loaded:
+            guard force else { return }
+        case .idle, .failed:
+            break
+        }
+        store.send(.requestDescription(nickname: nicknameDisplay))
     }
 
     private var revealIntensity: Double {

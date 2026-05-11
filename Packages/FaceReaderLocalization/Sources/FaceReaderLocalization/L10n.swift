@@ -95,6 +95,10 @@ public enum L10n {
     public static var helpIntroBullet3: String { tr("help_intro_bullet_3") }
     public static var helpGradesSectionTitle: String { tr("help_grades_section_title") }
 
+    public static var aiReportTitle: String { tr("ai_report_title") }
+    public static var aiReportLoading: String { tr("ai_report_loading") }
+    public static var aiReportUnavailable: String { tr("ai_report_unavailable") }
+
     /// Localized “bounty” style score using the active app language’s locale.
     public static func formattedScore(_ value: Int) -> String {
         let nf = NumberFormatter()

@@ -17,6 +17,7 @@
 		4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2A65D9960D3F2DFA25B473 /* CasePaths */; };
 		4713BAF224FF0830D09F6017 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = D70488527B2478B6E684F50D /* FaceReaderLocalization */; };
 		4C0E5E85CCE255678F219878 /* ComicBurst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3159F5E4ABCCDE24208F05 /* ComicBurst.swift */; };
+		4FA82201B969768135DB1897 /* MonsterDescriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB29490CBA58C09D1DA69357 /* MonsterDescriber.swift */; };
 		550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */; };
 		55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */; };
 		58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */; };
@@ -177,6 +178,7 @@
 		C5BC4855950D0ED97CFB0532 /* FaceReaderFeatures-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderFeatures-Info.plist"; sourceTree = "<group>"; };
 		CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderApp.swift; sourceTree = "<group>"; };
 		D18CFF61C5630110B2B7FC35 /* FaceResultFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceResultFeature.swift; sourceTree = "<group>"; };
+		DB29490CBA58C09D1DA69357 /* MonsterDescriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterDescriber.swift; sourceTree = "<group>"; };
 		E29A16EA40C43D0CAF356324 /* GradeAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeAssets.swift; sourceTree = "<group>"; };
 		E44161C2C204B7CB4146E17C /* VHSEffectsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHSEffectsPreferences.swift; sourceTree = "<group>"; };
 		EBBF33A2EF1A8842422180EB /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			children = (
 				2087E4588C050C6556C6F3E1 /* Geometry */,
 				3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */,
+				DB29490CBA58C09D1DA69357 /* MonsterDescriber.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 			files = (
 				18B93BD86D70596E3E381755 /* FaceMeasureSession.swift in Sources */,
 				D63749770D45253BFAB767A3 /* CGPoint+FaceMeter.swift in Sources */,
+				4FA82201B969768135DB1897 /* MonsterDescriber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -732,7 +736,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -773,7 +777,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -814,7 +818,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -891,10 +895,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -911,7 +916,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceReader/Global/Support/Info.plist;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -948,7 +953,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1019,9 +1024,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1039,7 +1045,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderFeatures-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1076,7 +1082,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderCore-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1117,7 +1123,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Derived/InfoPlists/FaceReaderUI-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

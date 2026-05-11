@@ -7,7 +7,7 @@ import SwiftUI
 
 /// 직사각형의 4 모서리에 갈고리 가이드 마크.
 public struct CornerHook: Shape {
-    public enum Corner { case topLeading, topTrailing, bottomLeading, bottomTrailing }
+    public enum Corner: Sendable { case topLeading, topTrailing, bottomLeading, bottomTrailing }
     public let corner: Corner
     public let armLength: CGFloat
 

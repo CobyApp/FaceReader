@@ -32,14 +32,17 @@ let project = Project(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: Version(1, 12, 0))),
         .package(path: "Packages/FaceReaderLocalization"),
     ],
-    settings: .settings(base: ["IPHONEOS_DEPLOYMENT_TARGET": "18.0"]),
+    settings: .settings(base: [
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "SWIFT_VERSION": "5.0",
+    ]),
     targets: [
         .target(
             name: "FaceReaderCore",
             destinations: .iOS,
             product: .staticFramework,
             bundleId: "com.coby.FaceReader.core",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: [.glob("FaceReader/Core/**/*.swift")],
             dependencies: [],
             settings: frameworkSettings
@@ -49,7 +52,7 @@ let project = Project(
             destinations: .iOS,
             product: .staticFramework,
             bundleId: "com.coby.FaceReader.ui",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: [.glob("FaceReader/UI/**/*.swift")],
             dependencies: [
                 .package(product: "FaceReaderLocalization"),
@@ -61,7 +64,7 @@ let project = Project(
             destinations: .iOS,
             product: .staticFramework,
             bundleId: "com.coby.FaceReader.features",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             sources: [.glob("FaceReader/Features/**/*.swift")],
             dependencies: [
                 .target(name: "FaceReaderCore"),
@@ -78,7 +81,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.coby.FaceReader",
-            deploymentTargets: .iOS("18.0"),
+            deploymentTargets: .iOS("26.0"),
             infoPlist: .file(path: "FaceReader/Global/Support/Info.plist"),
             sources: [.glob("FaceReader/App/**/*.swift")],
             // Bundle fonts under Fonts/ and list them in `UIAppFonts` for `Font.app`.

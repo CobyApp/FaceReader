@@ -37,6 +37,16 @@ public final class FaceMeasureSession {
     public private(set) var totalScore: Int = 0
     public private(set) var grade: Int = 0
 
+    /// 마지막 `recomputeGradeAndScore` 시 산출된 비율값들 — 정상 비율과 얼마나 어긋났는지를 LLM 프롬프트에 넘기기 위한 스냅샷.
+    public struct RatioSnapshot: Equatable, Sendable {
+        public let eyeRatio: Double         // 양안거리 / 한쪽 눈 폭 (정상≈1.1)
+        public let noseRatio: Double        // 코폭 / 코높이 (정상≈0.6)
+        public let lipsRatio: Double        // 입가로 / 입세로 (정상≈2.6)
+        public let faceRatio: Double        // 윗얼굴 / 아래얼굴 길이 (정상≈1.1)
+    }
+
+    public private(set) var lastRatios: RatioSnapshot?
+
     public init() {}
 
     public var hasMinimumLandmarksForCapture: Bool {
@@ -71,6 +81,13 @@ public final class FaceMeasureSession {
         let noseRatio = noseWidth / noseHeight
         let lipsRatio = lipsWidth / lipsHeight
         let faceRatio = faceFirst / faceSecond
+
+        lastRatios = RatioSnapshot(
+            eyeRatio: eyeRatio,
+            noseRatio: noseRatio,
+            lipsRatio: lipsRatio,
+            faceRatio: faceRatio
+        )
 
         let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 20_000) * 1_000
         let noseRatioScore = Int(abs(noseRatio - 0.6) * 20_000) * 1_000

@@ -1,12 +1,12 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.2
 import PackageDescription
 
 let package = Package(
     name: "FaceReaderLocalization",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v15),
-        .macOS(.v12),
+        .iOS(.v26),
+        .macOS(.v15),
     ],
     products: [
         .library(name: "FaceReaderLocalization", targets: ["FaceReaderLocalization"]),
