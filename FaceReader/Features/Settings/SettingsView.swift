@@ -12,8 +12,6 @@ struct SettingsView: View {
     let onSelect: (String?) -> Void
     let onCancel: () -> Void
 
-    @ObservedObject private var prefs = VHSEffectsPreferences.shared
-
     private struct LanguageRow: Identifiable {
         let id: String
         let storageTag: String?
@@ -50,28 +48,6 @@ struct SettingsView: View {
                             Rectangle()
                                 .stroke(Color.vhsInk, lineWidth: 1.5)
                         )
-                    }
-
-                    section(header: L10n.vhsReduceEffectsTitle) {
-                        Toggle(isOn: $prefs.reducedEffects) {
-                            Text(L10n.vhsReduceEffectsTitle)
-                                .font(.app(16))
-                                .foregroundStyle(Color.vhsInk)
-                        }
-                        .tint(Color.vhsRed)
-                        .padding(.horizontal, 16 * PhoneLayout.metricScale)
-                        .padding(.vertical, 12 * PhoneLayout.metricScale)
-                        .background(Color.vhsSurface)
-                        .overlay(
-                            Rectangle()
-                                .stroke(Color.vhsInk, lineWidth: 1.5)
-                        )
-
-                        Text(L10n.vhsReduceEffectsFooter)
-                            .font(.app(12))
-                            .foregroundStyle(Color.vhsInk.opacity(0.7))
-                            .padding(.horizontal, 4)
-                            .padding(.top, 6)
                     }
                 }
                 .padding(.horizontal, 18 * PhoneLayout.metricScale)
