@@ -43,9 +43,11 @@ public struct FaceResultView: View {
                     .frame(maxWidth: .infinity)
                     .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
 
-                    descriptionCard
-                        .padding(.horizontal, 18 * PhoneLayout.metricScale)
-                        .padding(.bottom, 16 * PhoneLayout.metricScale)
+                    if shouldShowDescription {
+                        descriptionCard
+                            .padding(.horizontal, 18 * PhoneLayout.metricScale)
+                            .padding(.bottom, 16 * PhoneLayout.metricScale)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -109,6 +111,14 @@ public struct FaceResultView: View {
         .background(Color.appBackground)
     }
 
+    /// 카드를 렌더할 가치가 있는 상태인지. idle 과 failed 는 숨김(지원/생성 실패 케이스 동일하게 처리).
+    private var shouldShowDescription: Bool {
+        switch store.descriptionStatus {
+        case .loading, .loaded: return true
+        case .idle, .failed: return false
+        }
+    }
+
     @ViewBuilder
     private var descriptionCard: some View {
         let ink = Color.appText
@@ -126,7 +136,7 @@ public struct FaceResultView: View {
             }
 
             switch store.descriptionStatus {
-            case .idle, .loading:
+            case .loading:
                 HStack(spacing: 10) {
                     ProgressView()
                         .controlSize(.small)
@@ -144,13 +154,8 @@ public struct FaceResultView: View {
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
                     .frame(maxWidth: .infinity, alignment: .leading)
-            case .failed:
-                Text(L10n.aiReportUnavailable)
-                    .font(.app(14))
-                    .foregroundStyle(ink.opacity(0.6))
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+            case .idle, .failed:
+                EmptyView()
             }
         }
         .padding(14 * PhoneLayout.metricScale)
