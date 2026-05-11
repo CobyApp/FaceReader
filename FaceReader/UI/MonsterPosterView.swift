@@ -15,6 +15,7 @@ public struct MonsterPosterView: View {
     let posterDeadOrAliveText: String
     let gradeLineText: String
     let formattedScoreText: String
+    let descriptionText: String?
     let showVHSAccents: Bool
 
     private let contentWidth: CGFloat
@@ -26,6 +27,7 @@ public struct MonsterPosterView: View {
         posterDeadOrAliveText: String,
         gradeLineText: String,
         formattedScoreText: String,
+        descriptionText: String? = nil,
         screenWidth: CGFloat = PhoneLayout.width,
         showVHSAccents: Bool = false
     ) {
@@ -35,6 +37,7 @@ public struct MonsterPosterView: View {
         self.posterDeadOrAliveText = posterDeadOrAliveText
         self.gradeLineText = gradeLineText
         self.formattedScoreText = formattedScoreText
+        self.descriptionText = descriptionText
         self.contentWidth = screenWidth
         self.showVHSAccents = showVHSAccents
     }
@@ -94,6 +97,17 @@ public struct MonsterPosterView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, pad)
 
+                if let descriptionText, !descriptionText.isEmpty {
+                    Text(descriptionText)
+                        .font(.app(18))
+                        .foregroundStyle(Color.appBrown.opacity(0.9))
+                        .multilineTextAlignment(.center)
+                        .lineLimit(nil)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, pad)
+                        .padding(.top, 10 * PhoneLayout.metricScale)
+                }
+
                 Spacer(minLength: 0)
 
                 Text(formattedScoreText)
@@ -142,6 +156,7 @@ public enum PosterImageRenderer {
         posterDeadOrAliveText: String,
         gradeLineText: String,
         formattedScoreText: String,
+        descriptionText: String? = nil,
         showVHSAccents: Bool = false
     ) -> UIImage? {
         let view = MonsterPosterView(
@@ -151,6 +166,7 @@ public enum PosterImageRenderer {
             posterDeadOrAliveText: posterDeadOrAliveText,
             gradeLineText: gradeLineText,
             formattedScoreText: formattedScoreText,
+            descriptionText: descriptionText,
             showVHSAccents: showVHSAccents
         )
         let renderer = ImageRenderer(content: view)

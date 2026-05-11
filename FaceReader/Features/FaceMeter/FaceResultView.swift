@@ -31,24 +31,17 @@ public struct FaceResultView: View {
             customTopBar
 
             ScrollView {
-                VStack(spacing: 16 * PhoneLayout.metricScale) {
-                    MonsterPosterView(
-                        faceImage: posterUIImage,
-                        nicknameLine: nicknameDisplay,
-                        posterWantedText: L10n.posterWanted,
-                        posterDeadOrAliveText: L10n.posterDeadOrAlive,
-                        gradeLineText: L10n.gradeLine(for: store.box.session.grade),
-                        formattedScoreText: L10n.formattedScore(store.box.session.totalScore)
-                    )
-                    .frame(maxWidth: .infinity)
-                    .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
-
-                    if shouldShowDescription {
-                        descriptionCard
-                            .padding(.horizontal, 18 * PhoneLayout.metricScale)
-                            .padding(.bottom, 16 * PhoneLayout.metricScale)
-                    }
-                }
+                MonsterPosterView(
+                    faceImage: posterUIImage,
+                    nicknameLine: nicknameDisplay,
+                    posterWantedText: L10n.posterWanted,
+                    posterDeadOrAliveText: L10n.posterDeadOrAlive,
+                    gradeLineText: L10n.gradeLine(for: store.box.session.grade),
+                    formattedScoreText: L10n.formattedScore(store.box.session.totalScore),
+                    descriptionText: loadedDescription
+                )
+                .frame(maxWidth: .infinity)
+                .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -111,67 +104,10 @@ public struct FaceResultView: View {
         .background(Color.appBackground)
     }
 
-    /// 카드 표시 여부. idle 만 숨김 (아직 요청 전). 실패 사유는 사용자에게 보여줘야 디버깅/안내 가능.
-    private var shouldShowDescription: Bool {
-        switch store.descriptionStatus {
-        case .loading, .loaded, .failed: return true
-        case .idle: return false
-        }
-    }
-
-    @ViewBuilder
-    private var descriptionCard: some View {
-        let ink = Color.appText
-        let surface = Color.vhsSurface
-        VStack(alignment: .leading, spacing: 10 * PhoneLayout.metricScale) {
-            HStack(spacing: 8) {
-                Image(systemName: "sparkles")
-                    .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(Color.vhsMagenta)
-                Text(L10n.aiReportTitle)
-                    .font(.app(13))
-                    .fontWeight(.heavy)
-                    .foregroundStyle(ink.opacity(0.7))
-                    .textCase(.uppercase)
-            }
-
-            switch store.descriptionStatus {
-            case .loading:
-                HStack(spacing: 10) {
-                    ProgressView()
-                        .controlSize(.small)
-                        .tint(ink)
-                    Text(L10n.aiReportLoading)
-                        .font(.app(14))
-                        .foregroundStyle(ink.opacity(0.7))
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.vertical, 8)
-            case .loaded(let text):
-                Text(text)
-                    .font(.app(15))
-                    .foregroundStyle(ink)
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            case .failed(let reason):
-                Text(reason)
-                    .font(.app(13))
-                    .foregroundStyle(ink.opacity(0.6))
-                    .lineLimit(nil)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            case .idle:
-                EmptyView()
-            }
-        }
-        .padding(14 * PhoneLayout.metricScale)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(surface)
-        .overlay(
-            Rectangle()
-                .stroke(ink, lineWidth: 1.5)
-        )
+    /// 포스터 내부에 표시할 텍스트. loaded 상태일 때만 값 반환.
+    private var loadedDescription: String? {
+        if case let .loaded(text) = store.descriptionStatus { return text }
+        return nil
     }
 
     private func requestDescriptionIfNeeded(force: Bool = false) {
@@ -216,7 +152,8 @@ public struct FaceResultView: View {
             posterWantedText: L10n.posterWanted,
             posterDeadOrAliveText: L10n.posterDeadOrAlive,
             gradeLineText: L10n.gradeLine(for: grade),
-            formattedScoreText: L10n.formattedScore(totalScore)
+            formattedScoreText: L10n.formattedScore(totalScore),
+            descriptionText: loadedDescription
         )
         shareImage = img
         showShareSheet = img != nil

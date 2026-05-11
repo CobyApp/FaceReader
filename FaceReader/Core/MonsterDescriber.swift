@@ -83,7 +83,7 @@ public actor MonsterDescriber {
         let prompt = Self.userPrompt(input)
         do {
             let response = try await session.respond(to: prompt)
-            return response.content.trimmingCharacters(in: .whitespacesAndNewlines)
+            return Self.sanitize(response.content)
         } catch let error as LanguageModelSession.GenerationError {
             switch error {
             case .guardrailViolation:
@@ -94,6 +94,24 @@ public actor MonsterDescriber {
         } catch {
             throw DescribeError.generationFailed(String(describing: error))
         }
+    }
+
+    /// LLM 이 가끔 무시하는 마크다운 기호와 인용부호를 제거. 빈 줄 정리도.
+    private static func sanitize(_ raw: String) -> String {
+        var text = raw
+        for token in ["**", "__", "~~", "```", "`"] {
+            text = text.replacingOccurrences(of: token, with: "")
+        }
+        // 단일 * 또는 _ 가 문장에 박혀있으면 같이 제거 (의도 없는 강조 마커일 가능성).
+        text = text.replacingOccurrences(of: "*", with: "")
+        // 따옴표/홑따옴표 양 끝만 제거 (도감 인용형으로 감싸는 경우)
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let openClose: [(Character, Character)] = [("\"", "\""), ("“", "”"), ("「", "」"), ("『", "』")]
+        if let first = trimmed.first, let last = trimmed.last,
+           openClose.contains(where: { $0.0 == first && $0.1 == last }) {
+            return String(trimmed.dropFirst().dropLast()).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return trimmed
     }
 
     // MARK: - Prompt building
@@ -120,95 +138,52 @@ public actor MonsterDescriber {
     }
 
     /// 안전 가드레일을 피하기 위해 '실제 사람 외모 평가'가 아니라 '가상 캐릭터 도감 작성'으로 프레이밍.
+    /// 출력에 숫자/측정값 절대 노출 금지 + 마크다운 기호 금지를 명시.
     private static func systemInstructions(language: DescriptionLanguage) -> String {
         switch language {
         case .ko:
             return """
-            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서이다. 새로 등록되는 '괴인 캐릭터'의 짧은 도감 항목을 작성한다. 재해 등급은 약한 순서로 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
+            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서야. 새로 등록된 가상의 '괴인 캐릭터'에 대해 짧고 재밌는 도감 한 줄을 쓴다. 재해 등급은 약한 순서로 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
 
-            게임이나 만화의 캐릭터 도감처럼 가상 캐릭터의 외형 특성과 능력을 위트있게 묘사한다. 톤은 가벼운 in-universe 내레이션. 실제 인물이 아닌 가공의 캐릭터를 다룬다는 점을 잊지 말 것.
+            톤: 만화 도감 같은 가벼운 in-universe 내레이션, 짧고 위트있게. 실제 사람이 아닌 가공의 캐릭터를 다룬다.
 
-            형식: 한국어 2~3문장, 250자 이내. 마크다운, 헤더, 리스트, 따옴표, 이모지 금지. 본문 텍스트만 출력.
+            금지: 숫자, 점수, 측정값, 비율, 지수, 통계, 데이터, 단위(달러 $, %) — 어떤 정량 표현도 본문에 등장시키지 마라. 캐릭터의 분위기·특성·능력 위주로만 풀어쓴다. 마크다운(**, *, _, __, ~, `, #, -, > 등), 따옴표, 이모지, 줄바꿈, 리스트, 헤더 일체 금지.
+
+            형식: 한국어 평문 1~2문장, 120자 이내. 본문만 출력.
             """
         case .ja:
             return """
-            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書です。新たに登録される架空の「怪人キャラクター」の短い図鑑記述を作成します。災害等級は弱い順に 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
+            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書。新たに登録された架空の「怪人キャラクター」について、短くて面白い図鑑コメントを一行書く。災害等級は弱い順に 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
 
-            ゲームや漫画のキャラクター図鑑のように、架空キャラクターの外見的特徴と能力をウィットを利かせて描写する。トーンは軽快なin-universeのナレーション。実在人物ではなく架空キャラクターを扱う点を忘れずに。
+            トーン: マンガ図鑑のような軽快なin-universeナレーション、短く小粋に。実在人物ではなく架空キャラクターを扱う。
 
-            形式: 日本語2〜3文、200字以内。マークダウン、見出し、箇条書き、引用符、絵文字は使わない。本文のみ出力。
+            禁止: 数字、点数、測定値、比率、指数、統計、データ、単位(ドル$、%) など、いかなる定量表現も本文に出さない。キャラクターの雰囲気・特性・能力のみで書く。マークダウン(**, *, _, __, ~, `, #, -, > 等)、引用符、絵文字、改行、リスト、見出し一切禁止。
+
+            形式: 日本語平文1〜2文、100字以内。本文のみ出力。
             """
         case .en:
             return """
-            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Write a short bestiary entry for a newly catalogued fictional 'mysterious being' character. Disaster levels (weak to strong): Wolf / Tiger / Demon / Dragon / God class.
+            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Write one short, witty bestiary line for a newly catalogued fictional 'mysterious being' character. Disaster levels (weak to strong): Wolf / Tiger / Demon / Dragon / God class.
 
-            Describe this fictional character's appearance traits and powers with a witty, in-universe narration — like a videogame or manga bestiary. Remember you are describing a fictional character, not a real person.
+            Tone: light in-universe narration like a manga bestiary, short and punchy. Remember you describe a fictional character, not a real person.
 
-            Format: English, 2-3 sentences, under 350 characters. No markdown, headers, bullets, quotes, or emoji. Output only the body text.
+            Forbidden: numbers, scores, measurements, ratios, indices, statistics, data, units (dollar $, %) — no quantitative expression of any kind in the body. Describe only the character's vibe, traits, and powers. No markdown (**, *, _, __, ~, `, #, -, > etc.), no quotes, no emoji, no line breaks, no lists, no headers.
+
+            Format: plain English, 1-2 sentences, under 200 characters. Output body text only.
             """
         }
     }
 
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
-        let scoreString: String = {
-            let nf = NumberFormatter()
-            nf.numberStyle = .decimal
-            return nf.string(from: NSNumber(value: input.totalScore)) ?? "\(input.totalScore)"
-        }()
-
-        // 중립적인 캐릭터 특성 지수로 표현 (정상/비정상 같은 개인 평가 표현 피함).
-        let eye = input.eyeRatio.map { String(format: "%.2f", $0) } ?? "n/a"
-        let nose = input.noseRatio.map { String(format: "%.2f", $0) } ?? "n/a"
-        let lips = input.lipsRatio.map { String(format: "%.2f", $0) } ?? "n/a"
-        let face = input.faceRatio.map { String(format: "%.2f", $0) } ?? "n/a"
-
+        // 수치/점수/비율 일체 미전달 — LLM 이 우연히라도 출력에 인용하지 못하도록.
         switch input.language {
         case .ko:
-            return """
-            다음 가상 괴인 캐릭터의 도감 설명을 작성해라.
-
-            - 코드네임: \(input.nickname)
-            - 재해 등급: \(grade)
-            - 위협도(현상금): $\(scoreString)
-            - 외형 특성 지수:
-              - 안구 간격: \(eye)
-              - 비강 형태: \(nose)
-              - 구순 형태: \(lips)
-              - 두상 비례: \(face)
-
-            위 정보를 토대로 한국어 2~3문장의 짧은 도감 본문을 작성하라.
-            """
+            return "코드네임 '\(input.nickname)', 재해 등급 \(grade) 인 가상 괴인 캐릭터의 도감 한 줄을 한국어로 짧고 재밌게 써라."
         case .ja:
-            return """
-            次の架空怪人キャラクターの図鑑記述を作成せよ。
-
-            - コードネーム: \(input.nickname)
-            - 災害等級: \(grade)
-            - 脅威度（賞金）: $\(scoreString)
-            - 外形特性指数:
-              - 眼球間距離: \(eye)
-              - 鼻腔形態: \(nose)
-              - 口唇形態: \(lips)
-              - 頭部比率: \(face)
-
-            上記情報を基に、日本語2〜3文の短い図鑑本文を書け。
-            """
+            return "コードネーム『\(input.nickname)』、災害等級 \(grade) の架空怪人キャラクターの図鑑コメント一行を日本語で短く面白く書け。"
         case .en:
-            return """
-            Write a bestiary entry for this fictional mysterious being.
-
-            - Codename: \(input.nickname)
-            - Disaster level: \(grade)
-            - Threat (bounty): $\(scoreString)
-            - Trait indices:
-              - Eye spacing: \(eye)
-              - Nasal form: \(nose)
-              - Mouth form: \(lips)
-              - Cranial ratio: \(face)
-
-            Based on the above, write the bestiary entry body (English, 2-3 sentences).
-            """
+            return "Write one short, witty bestiary line in English for a fictional mysterious being. Codename: '\(input.nickname)'. Disaster level: \(grade)."
         }
     }
 }
