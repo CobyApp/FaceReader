@@ -171,9 +171,14 @@ final class FaceCaptureEngine: NSObject, ObservableObject, AVCaptureVideoDataOut
     }
 
     private static func convert(cmage: CIImage) -> UIImage {
+        let originalExtent = cmage.extent
         let context = CIContext(options: nil)
-        let cgImage = context.createCGImage(cmage, from: cmage.extent)!
-        let ciImage = CIImage(cgImage: cgImage).applyingFilter("CIComicEffect")
+        let cgImage = context.createCGImage(cmage, from: originalExtent)!
+        // CIComicEffect는 가장자리 처리 때문에 약간 확장된 extent 를 반환할 수 있어,
+        // 잘라서 원본 버퍼 extent 와 동일하게 맞춰야 viewport 크롭 좌표가 정확히 들어맞음.
+        let ciImage = CIImage(cgImage: cgImage)
+            .applyingFilter("CIComicEffect")
+            .cropped(to: originalExtent)
         return UIImage(ciImage: ciImage)
     }
 }

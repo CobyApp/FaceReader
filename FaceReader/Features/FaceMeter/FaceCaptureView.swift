@@ -41,10 +41,10 @@ public struct FaceCaptureView: View {
                 CaptureViewportFrame(
                     viewport: m.viewport,
                     canvasSize: m.fullSize,
-                    dimOpacity: 0.78
+                    dimOpacity: 0.45
                 )
 
-                topInstructions(m: m)
+                topInstruction(m: m)
                 bottomControls(m: m)
 
                 if isProcessing {
@@ -78,26 +78,31 @@ public struct FaceCaptureView: View {
 
     private static func metrics(in geo: GeometryProxy) -> Metrics {
         let full = geo.size
-        // 초기 레이아웃 패스 가드: 크기가 사실상 0 이면 zero metrics 로 폴백.
         guard full.width > 1, full.height > 1 else {
             return Metrics(fullSize: full, viewport: .zero, topAreaRect: .zero, bottomAreaRect: .zero)
         }
         let safe = geo.safeAreaInsets
         let availTop = max(0, safe.top)
         let availBottom = max(availTop, full.height - max(0, safe.bottom))
-
-        let padX: CGFloat = 18 * PhoneLayout.metricScale
-        let viewportWidth = max(0, full.width - padX * 2)
-        let viewportHeight = max(0, viewportWidth * 0.82)
         let availHeight = max(0, availBottom - availTop)
-        let rawY = availTop + (availHeight - viewportHeight) / 2
-        let pushDown: CGFloat = max(0, (availHeight - viewportHeight) * 0.15)
-        let minY = availTop + 80
-        let maxY = max(availTop, availBottom - viewportHeight - 12)
-        let viewportY = max(availTop, min(max(rawY + pushDown, minY), maxY))
-        let viewport = CGRect(x: padX, y: viewportY, width: viewportWidth, height: viewportHeight)
 
-        let textPadX: CGFloat = 22 * PhoneLayout.metricScale
+        // viewport: 가로 90% · 1:0.82 (포스터 face 프레임 비율)
+        // 위/아래 컨트롤 공간을 위해 viewport height 상한 둠.
+        let padX: CGFloat = 18 * PhoneLayout.metricScale
+        let widthBase = max(0, full.width - padX * 2)
+        let heightFromWidth = widthBase * 0.82
+        // 위 약 100pt(타이틀), 아래 약 180pt(셔터+여백) 확보
+        let maxByHeight = max(0, availHeight - 280)
+        let viewportHeight = min(heightFromWidth, maxByHeight)
+        let viewportWidth = viewportHeight / 0.82  // aspect 유지
+
+        // 세이프 영역 안에서 중앙 정렬, 하단 컨트롤 공간이 조금 더 크도록 살짝 위로
+        let rawY = availTop + (availHeight - viewportHeight) / 2
+        let viewportY = max(availTop + 12, min(rawY - 10 * PhoneLayout.metricScale, availBottom - viewportHeight - 12))
+        let viewportX = (full.width - viewportWidth) / 2
+        let viewport = CGRect(x: viewportX, y: viewportY, width: viewportWidth, height: viewportHeight)
+
+        let textPadX: CGFloat = 24 * PhoneLayout.metricScale
         let topRect = CGRect(
             x: textPadX,
             y: availTop,
@@ -120,32 +125,27 @@ public struct FaceCaptureView: View {
     }
 
     @ViewBuilder
-    private func topInstructions(m: Metrics) -> some View {
+    private func topInstruction(m: Metrics) -> some View {
         let ink = Color(white: 0.96)
-        VStack(spacing: 8 * PhoneLayout.metricScale) {
-            Text(L10n.faceRatioIntro)
-                .font(.app(22))
-                .fontWeight(.heavy)
-                .foregroundStyle(ink)
-            Text(L10n.faceRatioTip)
-                .font(.app(13))
-                .foregroundStyle(ink.opacity(0.85))
-                .lineLimit(nil)
-                .fixedSize(horizontal: false, vertical: true)
-        }
-        .multilineTextAlignment(.center)
-        .frame(width: m.topAreaRect.width, alignment: .center)
-        .position(x: m.topAreaRect.midX, y: m.topAreaRect.midY)
+        Text(L10n.faceRatioIntro)
+            .font(.app(20))
+            .fontWeight(.heavy)
+            .foregroundStyle(ink)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(width: m.topAreaRect.width, alignment: .center)
+            .position(x: m.topAreaRect.midX, y: m.topAreaRect.midY)
     }
 
     @ViewBuilder
     private func bottomControls(m: Metrics) -> some View {
         let ink = Color(white: 0.96)
         let viewport = m.viewport
-        VStack(spacing: 16 * PhoneLayout.metricScale) {
+        VStack(spacing: 14 * PhoneLayout.metricScale) {
             Text(L10n.faceCartoonNotice)
-                .font(.app(14))
-                .foregroundStyle(ink.opacity(0.85))
+                .font(.app(13))
+                .foregroundStyle(ink.opacity(0.7))
                 .multilineTextAlignment(.center)
                 .lineLimit(nil)
                 .fixedSize(horizontal: false, vertical: true)
@@ -155,17 +155,17 @@ public struct FaceCaptureView: View {
             } label: {
                 ZStack {
                     Circle()
-                        .fill(Color.black.opacity(0.7))
-                        .frame(width: 80 * PhoneLayout.metricScale, height: 80 * PhoneLayout.metricScale)
+                        .fill(Color.black.opacity(0.55))
+                        .frame(width: 82 * PhoneLayout.metricScale, height: 82 * PhoneLayout.metricScale)
                     Circle()
-                        .stroke(ink, lineWidth: 4 * PhoneLayout.metricScale)
-                        .frame(width: 80 * PhoneLayout.metricScale, height: 80 * PhoneLayout.metricScale)
+                        .stroke(ink, lineWidth: 3.5 * PhoneLayout.metricScale)
+                        .frame(width: 82 * PhoneLayout.metricScale, height: 82 * PhoneLayout.metricScale)
                     Image("camera")
                         .resizable()
                         .renderingMode(.template)
                         .scaledToFit()
                         .foregroundStyle(ink)
-                        .frame(width: 42 * PhoneLayout.metricScale, height: 42 * PhoneLayout.metricScale)
+                        .frame(width: 40 * PhoneLayout.metricScale, height: 40 * PhoneLayout.metricScale)
                 }
             }
             .disabled(isProcessing)
@@ -201,7 +201,6 @@ public struct FaceCaptureView: View {
     }
 
     /// viewport (preview layer 좌표) 영역에 해당하는 capture 출력 부분만 잘라 반환.
-    /// `metadataOutputRectConverted`가 `videoGravity = .resizeAspectFill`을 고려해 정규화 좌표를 계산.
     private static func cropToViewport(
         image: UIImage,
         viewport: CGRect,
