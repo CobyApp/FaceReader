@@ -78,31 +78,36 @@ public struct FaceCaptureView: View {
 
     private static func metrics(in geo: GeometryProxy) -> Metrics {
         let full = geo.size
+        // 초기 레이아웃 패스 가드: 크기가 사실상 0 이면 zero metrics 로 폴백.
+        guard full.width > 1, full.height > 1 else {
+            return Metrics(fullSize: full, viewport: .zero, topAreaRect: .zero, bottomAreaRect: .zero)
+        }
         let safe = geo.safeAreaInsets
-        let availTop = safe.top
-        let availBottom = full.height - safe.bottom
+        let availTop = max(0, safe.top)
+        let availBottom = max(availTop, full.height - max(0, safe.bottom))
 
         let padX: CGFloat = 18 * PhoneLayout.metricScale
-        let viewportWidth = full.width - padX * 2
-        let viewportHeight = viewportWidth * 0.82
-        let availHeight = availBottom - availTop
+        let viewportWidth = max(0, full.width - padX * 2)
+        let viewportHeight = max(0, viewportWidth * 0.82)
+        let availHeight = max(0, availBottom - availTop)
         let rawY = availTop + (availHeight - viewportHeight) / 2
-        // 위 텍스트가 최소 한 줄 공간 확보되도록 살짝 아래로 (1/3 지점 부근)
         let pushDown: CGFloat = max(0, (availHeight - viewportHeight) * 0.15)
-        let viewportY = min(max(rawY + pushDown, availTop + 80), availBottom - viewportHeight - 12)
+        let minY = availTop + 80
+        let maxY = max(availTop, availBottom - viewportHeight - 12)
+        let viewportY = max(availTop, min(max(rawY + pushDown, minY), maxY))
         let viewport = CGRect(x: padX, y: viewportY, width: viewportWidth, height: viewportHeight)
 
         let textPadX: CGFloat = 22 * PhoneLayout.metricScale
         let topRect = CGRect(
             x: textPadX,
             y: availTop,
-            width: full.width - textPadX * 2,
+            width: max(0, full.width - textPadX * 2),
             height: max(0, viewport.minY - availTop)
         )
         let bottomRect = CGRect(
             x: textPadX,
             y: viewport.maxY,
-            width: full.width - textPadX * 2,
+            width: max(0, full.width - textPadX * 2),
             height: max(0, availBottom - viewport.maxY)
         )
 

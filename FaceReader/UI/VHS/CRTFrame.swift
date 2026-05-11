@@ -59,36 +59,41 @@ public struct CaptureViewportFrame: View {
     }
 
     public var body: some View {
-        ZStack {
-            // 외곽 어둡게 (even-odd fill로 viewport 부분만 뚫음)
-            Path { path in
-                path.addRect(CGRect(origin: .zero, size: canvasSize))
-                path.addRect(viewport)
+        // 초기 레이아웃에서 size가 0이거나 viewport가 비어있으면 그리지 않음.
+        if canvasSize.width <= 1 || canvasSize.height <= 1 || viewport.width <= 1 || viewport.height <= 1 {
+            Color.clear
+        } else {
+            ZStack {
+                // 외곽 어둡게 (even-odd fill로 viewport 부분만 뚫음)
+                Path { path in
+                    path.addRect(CGRect(origin: .zero, size: canvasSize))
+                    path.addRect(viewport)
+                }
+                .fill(Color.black.opacity(dimOpacity), style: FillStyle(eoFill: true))
+
+                // 4 코너 갈고리
+                let armLength: CGFloat = 28 * PhoneLayout.metricScale
+                let lineWidth: CGFloat = 3
+                let ink = Color(white: 0.96)
+
+                CornerHook(corner: .topLeading, armLength: armLength)
+                    .stroke(ink, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
+                    .position(x: viewport.minX + armLength / 2, y: viewport.minY + armLength / 2)
+                CornerHook(corner: .topTrailing, armLength: armLength)
+                    .stroke(ink, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
+                    .position(x: viewport.maxX - armLength / 2, y: viewport.minY + armLength / 2)
+                CornerHook(corner: .bottomLeading, armLength: armLength)
+                    .stroke(ink, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
+                    .position(x: viewport.minX + armLength / 2, y: viewport.maxY - armLength / 2)
+                CornerHook(corner: .bottomTrailing, armLength: armLength)
+                    .stroke(ink, lineWidth: lineWidth)
+                    .frame(width: armLength, height: armLength)
+                    .position(x: viewport.maxX - armLength / 2, y: viewport.maxY - armLength / 2)
             }
-            .fill(Color.black.opacity(dimOpacity), style: FillStyle(eoFill: true))
-
-            // 4 코너 갈고리
-            let armLength: CGFloat = 28 * PhoneLayout.metricScale
-            let lineWidth: CGFloat = 3
-            let ink = Color(white: 0.96)
-
-            CornerHook(corner: .topLeading, armLength: armLength)
-                .stroke(ink, lineWidth: lineWidth)
-                .frame(width: armLength, height: armLength)
-                .position(x: viewport.minX + armLength / 2, y: viewport.minY + armLength / 2)
-            CornerHook(corner: .topTrailing, armLength: armLength)
-                .stroke(ink, lineWidth: lineWidth)
-                .frame(width: armLength, height: armLength)
-                .position(x: viewport.maxX - armLength / 2, y: viewport.minY + armLength / 2)
-            CornerHook(corner: .bottomLeading, armLength: armLength)
-                .stroke(ink, lineWidth: lineWidth)
-                .frame(width: armLength, height: armLength)
-                .position(x: viewport.minX + armLength / 2, y: viewport.maxY - armLength / 2)
-            CornerHook(corner: .bottomTrailing, armLength: armLength)
-                .stroke(ink, lineWidth: lineWidth)
-                .frame(width: armLength, height: armLength)
-                .position(x: viewport.maxX - armLength / 2, y: viewport.maxY - armLength / 2)
+            .allowsHitTesting(false)
         }
-        .allowsHitTesting(false)
     }
 }
