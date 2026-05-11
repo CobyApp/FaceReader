@@ -58,50 +58,71 @@ public struct HelpView: View {
 
     @ViewBuilder
     private func gradeCard(index: Int) -> some View {
-        ZStack(alignment: .topTrailing) {
-            VStack(alignment: .leading, spacing: 10 * PhoneLayout.metricScale) {
-                Image(GradeAssets.imageName(for: index))
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 160 * PhoneLayout.metricScale)
-                    .clipped()
+        let spec = Self.stampSpec(for: index)
+        VStack(alignment: .leading, spacing: 10 * PhoneLayout.metricScale) {
+            Image(GradeAssets.imageName(for: index))
+                .resizable()
+                .scaledToFill()
+                .frame(maxWidth: .infinity)
+                .frame(height: 160 * PhoneLayout.metricScale)
+                .clipped()
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(L10n.gradeName(for: index))
-                        .font(.app(22))
-                        .fontWeight(.heavy)
-                        .foregroundStyle(Color.vhsInk)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.8)
+            VStack(alignment: .leading, spacing: 4) {
+                Text(L10n.gradeName(for: index))
+                    .font(.app(22))
+                    .fontWeight(.heavy)
+                    .foregroundStyle(Color.vhsInk)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
 
-                    Text(L10n.gradeInfo(for: index))
-                        .font(.app(14))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(Color.vhsRed)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-
-                Text(L10n.gradeDetail(for: index))
-                    .font(.app(15))
-                    .foregroundStyle(Color.vhsInk.opacity(0.85))
+                Text(L10n.gradeInfo(for: index))
+                    .font(.app(14))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(spec.tone == .ink ? Color.vhsRed : spec.color)
                     .lineLimit(nil)
                     .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .padding(14 * PhoneLayout.metricScale)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color.vhsSurface)
-            .overlay(
-                Rectangle()
-                    .stroke(Color.vhsInk, lineWidth: 1.5)
-            )
 
-            KitschStamp(L10n.vhsLevelLabel(index), tone: .ink, rotation: 6)
-                .padding(.top, 12)
-                .padding(.trailing, 12)
+            Text(L10n.gradeDetail(for: index))
+                .font(.app(15))
+                .foregroundStyle(Color.vhsInk.opacity(0.85))
+                .lineLimit(nil)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(14 * PhoneLayout.metricScale)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.vhsSurface)
+        .overlay(
+            Rectangle()
+                .stroke(Color.vhsInk, lineWidth: 1.5)
+        )
+        .overlay(alignment: spec.alignment) {
+            KitschStamp(L10n.vhsLevelLabel(index), tone: spec.tone, rotation: spec.rotation)
+                .padding(.top, 14 * PhoneLayout.metricScale)
+                .padding(.horizontal, 14 * PhoneLayout.metricScale)
         }
         .shadow(color: Color.black.opacity(0.35), radius: 5, x: 0, y: 3)
+    }
+
+    private struct StampSpec {
+        let tone: KitschStamp.Tone
+        let color: Color
+        let alignment: Alignment
+        let rotation: Double
+    }
+
+    /// 등급별 스탬프 색상/위치/회전. 좌우 교대 + 위협도에 따라 색온도 상승.
+    private static func stampSpec(for index: Int) -> StampSpec {
+        let left = (index % 2 == 0)
+        let alignment: Alignment = left ? .topLeading : .topTrailing
+        let rotation: Double = left ? -7 : 7
+        switch index {
+        case 0: return StampSpec(tone: .cyan, color: .vhsCyan, alignment: alignment, rotation: rotation)
+        case 1: return StampSpec(tone: .magenta, color: .vhsMagenta, alignment: alignment, rotation: rotation)
+        case 2: return StampSpec(tone: .red, color: .vhsRed, alignment: alignment, rotation: rotation)
+        case 3: return StampSpec(tone: .magenta, color: .vhsMagenta, alignment: alignment, rotation: rotation)
+        default: return StampSpec(tone: .red, color: .vhsRed, alignment: alignment, rotation: rotation)
+        }
     }
 }
