@@ -47,6 +47,12 @@ platform :ios do
       xcargs: [
         "CURRENT_PROJECT_VERSION=#{build_number}",
         "-allowProvisioningUpdates",
+        # TCA 가 의존하는 swift-syntax 603 은 Swift 매크로(@Reducer, @ObservableState 등)를 사용.
+        # Xcode 16+ 는 매크로/플러그인을 처음 본 빌드에서 'Trust' GUI 프롬프트로 확인을 요구하는데
+        # 헤드리스 CI 에선 그 프롬프트가 영원히 뜨지 않아 showBuildSettings / ComputeTargetDependencyGraph
+        # 가 멈춤. 두 플래그로 검증을 통째로 스킵.
+        "-skipPackagePluginValidation",
+        "-skipMacroValidation",
         "-authenticationKeyPath \"#{ENV.fetch("AUTH_KEY_PATH")}\"",
         "-authenticationKeyID \"#{ENV.fetch("APPSTORE_KEY_ID")}\"",
         "-authenticationKeyIssuerID \"#{ENV.fetch("APPSTORE_ISSUER_ID")}\""
