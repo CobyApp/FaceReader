@@ -17,7 +17,12 @@ public enum FallbackMonsterLibrary {
         let clamped = max(0, min(4, grade))
         let table = library[language] ?? [:]
         let pool = table[clamped] ?? []
-        return pool.randomElement() ?? Entry(codename: "???", description: "")
+        guard let raw = pool.randomElement() else { return Entry(codename: "???", description: "") }
+        // 폴백도 LLM 결과와 동일한 길이 cap 통과 — 포스터 한두 줄에 맞춰.
+        return Entry(
+            codename: raw.codename,
+            description: MonsterDescriber.clampDescription(raw.description, language: language)
+        )
     }
 
     private static let library: [MonsterDescriber.DescriptionLanguage: [Int: [Entry]]] = [

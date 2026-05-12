@@ -114,10 +114,10 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// 너무 길게 뱉을 때만 마지막 단어 경계에서 자름. 종결부호 컷팅은 빈 결과(한국어 첫 글자가 부호인 경우 등)
-    /// 을 만들 수 있어 폐기. 프롬프트에 '한 문장만' 이 박혀 있어 보통은 한 문장.
-    private static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 100 : 50
+    /// 포스터 한두 줄에 들어가도록 길이 cap. 폴백 라이브러리에도 동일하게 적용 가능.
+    /// ko/ja: 36자, en: 80자.
+    public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
+        let limit: Int = (language == .en) ? 80 : 36
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)

@@ -69,12 +69,16 @@ extension Font {
         "BradleyHandITCTT-Bold",
     ]
 
-    /// 일본어 본문 — iOS 시스템 ヒラギノ丸ゴ 우선, 번들 KosugiMaru 폴백.
+    /// 일본어 본문 — 손글씨 톤(Klee) → 둥글한 츠쿠시 → 히라기노 마루 → 번들 폴백.
+    /// Klee 와 TsukushiAMaruGothic 은 iOS 시스템 번들 (사용자 디바이스에 따라 가용 여부 다름).
     private static let japaneseAppFontCandidates: [String] = [
-        "HiraMaruProN-W4",
+        "Klee-Medium",                          // 손글씨 풍 — 매우 귀여움
+        "Klee-DemiBold",
+        "TsukushiAMaruGothic-Bold",             // 둥글둥글 진한 톤
+        "TsukushiAMaruGothic-Regular",
+        "HiraMaruProN-W4",                      // 시스템 폴백
         "ToppanBunkyuMidashiGothicStdN-ExtraBold",
-        "TsukushiAMaruGothic-Bold",
-        "KosugiMaru-Regular",
+        "KosugiMaru-Regular",                   // 번들 최종 폴백
     ]
 
     /// 포스터의 WANTED · 현상금 디스플레이 — 언어 무관 코믹 마커펜 톤.

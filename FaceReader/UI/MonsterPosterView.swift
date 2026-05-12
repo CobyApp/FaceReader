@@ -49,6 +49,14 @@ public struct MonsterPosterView: View {
     }
 
     public var body: some View {
+        posterBody
+            // 시스템의 글자 크기/Bold Text 같은 접근성 설정과 무관하게 항상 동일 사이즈.
+            .dynamicTypeSize(.large)
+            .environment(\.legibilityWeight, nil)
+    }
+
+    @ViewBuilder
+    private var posterBody: some View {
         let pad: CGFloat = 20
         let imageWidth = Self.canvasWidth - pad * 2
         let imageHeight = imageWidth * 0.82
