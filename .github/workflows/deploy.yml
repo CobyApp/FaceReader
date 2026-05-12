@@ -93,6 +93,45 @@ jobs:
             echo "BUILD_NUMBER=${{ github.run_number }}" >> "$GITHUB_ENV"
           fi
 
+      - name: Diagnose signing/API key setup
+        env:
+          APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+          APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
+        run: |
+          echo "::group::Xcode"
+          xcode-select -p
+          xcodebuild -version
+          echo "::endgroup::"
+
+          echo "::group::Available signing identities"
+          security find-identity -v -p codesigning || true
+          echo "::endgroup::"
+
+          echo "::group::Certificate details"
+          security find-certificate -a -p "$RUNNER_TEMP/app.keychain-db" \
+            | openssl x509 -noout -subject -issuer -dates 2>/dev/null || true
+          echo "::endgroup::"
+
+          echo "::group::API key file sanity"
+          KEY_FILE="$AUTH_KEY_PATH"
+          echo "Path: $KEY_FILE"
+          echo "Size: $(wc -c < "$KEY_FILE") bytes"
+          # only print the first/last line — never the key body
+          head -1 "$KEY_FILE"
+          tail -1 "$KEY_FILE"
+          if grep -q "BEGIN PRIVATE KEY" "$KEY_FILE" && grep -q "END PRIVATE KEY" "$KEY_FILE"; then
+            echo "✓ PEM markers present"
+          else
+            echo "✗ MISSING PEM markers — secret newlines likely lost"
+            exit 1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Env (lengths only, never values)"
+          echo "APPSTORE_KEY_ID length: ${#APPSTORE_KEY_ID}"
+          echo "APPSTORE_ISSUER_ID length: ${#APPSTORE_ISSUER_ID}"
+          echo "::endgroup::"
+
       - name: Deploy to TestFlight
         env:
           APPSTORE_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
