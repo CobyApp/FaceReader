@@ -44,7 +44,6 @@ public struct HelpView: View {
                     .frame(maxWidth: .infinity)
 
                 HStack {
-                    Spacer()
                     Image(systemName: "xmark")
                         .font(.system(size: 17, weight: .semibold))
                         .foregroundStyle(Color.vhsInk)
@@ -55,7 +54,8 @@ public struct HelpView: View {
                         }
                         .accessibilityAddTraits(.isButton)
                         .accessibilityLabel(L10n.btnBackToMeter)
-                        .padding(.trailing, 6)
+                        .padding(.leading, 6)
+                    Spacer()
                 }
             }
             .frame(height: 44)

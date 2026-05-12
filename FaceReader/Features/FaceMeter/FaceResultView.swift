@@ -96,8 +96,8 @@ public struct FaceResultView: View {
                 .frame(maxWidth: .infinity)
 
             HStack {
-                Image(systemName: "xmark")
-                    .font(.system(size: 17, weight: .semibold))
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(Color.appText)
                     .frame(width: 36, height: 36)
                     .contentShape(Rectangle())
