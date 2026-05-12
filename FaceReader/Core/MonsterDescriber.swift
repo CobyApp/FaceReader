@@ -114,15 +114,15 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// 포스터 한 줄에 들어가도록 짧게 cap. 줄임표(…) 안 붙임 — 사용자가 끝까지 보길 원함.
-    /// ko/ja: 30자, en: 60자.
+    /// 포스터 2~3줄에 자연스럽게 들어갈 길이 cap. 줄임표(…) 안 붙임.
+    /// 포스터 너비 350pt, 글자 22pt 기준 한국어/일본어 ~15자/줄, 영어 ~30자/줄.
+    /// ko/ja: 45자(약 3줄), en: 100자(약 3줄).
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 60 : 30
+        let limit: Int = (language == .en) ? 100 : 45
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
         guard collapsed.count > limit else { return collapsed }
-        // 단어 경계에서 끊되, 줄임표 없이 깔끔하게 마무리.
         let head = String(collapsed.prefix(limit))
         if let lastSpace = head.lastIndex(of: " ") {
             return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines)

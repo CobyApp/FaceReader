@@ -110,13 +110,13 @@ public struct MonsterPosterView: View {
 
                 if let descriptionText, !descriptionText.isEmpty {
                     Text(descriptionText)
-                        .font(.posterApp(22))
+                        .font(.posterApp(20))
                         .foregroundStyle(Color.appBrown.opacity(0.92))
                         .multilineTextAlignment(.center)
-                        .lineLimit(2)
+                        .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, pad)
-                        .padding(.top, 6)
+                        .padding(.top, 8)
                 }
 
                 Spacer(minLength: 0)
