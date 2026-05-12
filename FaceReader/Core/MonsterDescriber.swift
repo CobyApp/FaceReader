@@ -167,19 +167,19 @@ public actor MonsterDescriber {
         switch language {
         case .ko:
             return """
-            너는 원펀맨 세계관의 가상 괴인 도감 사서. 가상의 괴인 캐릭터 한 명에 대해:
+            너는 원펀맨 세계관 가상의 '괴인 협회' 자료실 사서. 가상의 괴인 캐릭터 한 명에 대해:
             - codename: 한국어 합성어 한 단어 (예: 광기두꺼비, 입짧은신, 야근전사)
             - description: 한 문장으로 웃기게 (40자 이하, 평문)
             """
         case .ja:
             return """
-            あなたはワンパンマン世界の架空怪人図鑑司書。架空の怪人キャラ一体について:
+            あなたはワンパンマン世界の架空『怪人協会』資料室司書。架空の怪人キャラ一体について:
             - codename: 日本語の合成語一語 (例: 狂気ガエル, 残業戦士)
             - description: 一文で面白く (40字以下、平文)
             """
         case .en:
             return """
-            You are a fictional One-Punch Man bestiary archivist. For one fictional monster:
+            You are a fictional Monster Association bestiary archivist (One-Punch Man universe). For one fictional monster:
             - codename: one English compound word (e.g. AbyssEye, OvertimeWraith)
             - description: one funny sentence (under 90 chars, plain text)
             """
