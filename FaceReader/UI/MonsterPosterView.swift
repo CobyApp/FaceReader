@@ -159,17 +159,36 @@ public struct MonsterPosterView: View {
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 
-    /// 설명 텍스트 길이에 따라 폰트 크기를 자동 결정. 다른 요소는 고정 위치 유지.
-    /// 2문장(35~65자 한국/일본, 70~110자 영문) 기본 가정.
+    /// 설명 텍스트 길이에 따라 폰트 크기 자동 결정.
+    /// 라틴 글자(영어) 는 CJK 보다 한 글자 폭이 절반 정도라 같은 문자 수여도 훨씬 적게 차지 →
+    /// ASCII 비율로 두 트랙 분리해 영어는 더 큰 폰트로 시작.
     private static func descriptionFontSize(for text: String) -> CGFloat {
         let count = text.count
-        switch count {
-        case 0 ... 25:  return 22
-        case 26 ... 40: return 19
-        case 41 ... 55: return 17
-        case 56 ... 75: return 15
-        case 76 ... 95: return 13
-        default:        return 12
+        guard count > 0 else { return 22 }
+        let asciiCount = text.unicodeScalars.reduce(0) { acc, scalar in
+            acc + (scalar.value < 128 ? 1 : 0)
+        }
+        let isMostlyLatin = Double(asciiCount) / Double(count) > 0.5
+
+        if isMostlyLatin {
+            // 영문 — 글자 폭 좁아서 같은 줄에 ~2 배 들어감.
+            switch count {
+            case 0 ... 40:   return 24
+            case 41 ... 70:  return 21
+            case 71 ... 100: return 19
+            case 101 ... 130: return 17
+            default:         return 15
+            }
+        } else {
+            // CJK (한국어/일본어) — 글자 폭 넓음.
+            switch count {
+            case 0 ... 18:  return 22
+            case 19 ... 30: return 19
+            case 31 ... 45: return 17
+            case 46 ... 60: return 15
+            case 61 ... 75: return 13
+            default:        return 12
+            }
         }
     }
 
