@@ -121,11 +121,11 @@ public struct MonsterPosterView: View {
                             .font(.posterApp(Self.descriptionFontSize(for: descriptionText)))
                             .foregroundStyle(Color.appBrown.opacity(0.92))
                             .multilineTextAlignment(.center)
-                            .lineLimit(4)
+                            .lineLimit(5)
                             .minimumScaleFactor(0.5)
                     }
                 }
-                .frame(height: 104, alignment: .center)
+                .frame(height: 124, alignment: .center)
                 .padding(.horizontal, 28)
                 .padding(.top, 8)
 
@@ -172,20 +172,20 @@ public struct MonsterPosterView: View {
 
         if isMostlyLatin {
             switch count {
-            case 0 ... 40:    return 26
-            case 41 ... 70:   return 22
-            case 71 ... 100:  return 20
-            case 101 ... 130: return 18
-            default:          return 16
+            case 0 ... 35:    return 30
+            case 36 ... 65:   return 26
+            case 66 ... 95:   return 23
+            case 96 ... 125:  return 20
+            default:          return 18
             }
         } else {
             switch count {
-            case 0 ... 18:  return 26
-            case 19 ... 30: return 22
-            case 31 ... 45: return 19
-            case 46 ... 60: return 17
-            case 61 ... 75: return 15
-            default:        return 14
+            case 0 ... 15:  return 30
+            case 16 ... 25: return 26
+            case 26 ... 40: return 22
+            case 41 ... 55: return 19
+            case 56 ... 70: return 17
+            default:        return 15
             }
         }
     }
