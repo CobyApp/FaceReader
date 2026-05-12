@@ -1,11 +1,13 @@
 import ProjectDescription
 
-// Shared build settings for modular frameworks
+// Shared build settings for modular frameworks.
+// 정적 프레임워크는 codesign 불필요 → 자동 프로비저닝 시도가 78-타깃 그래프 계산에서
+// 막히지 않도록 사이닝을 끈다. 마케팅/빌드 버전과 Swift 버전만 공유.
 private let frameworkSettings: Settings = .settings(
     base: [
-        "CODE_SIGN_STYLE": "Automatic",
+        "CODE_SIGNING_ALLOWED": "NO",
+        "CODE_SIGNING_REQUIRED": "NO",
         "CURRENT_PROJECT_VERSION": "202209021",
-        "DEVELOPMENT_TEAM": "3Y8YH8GWMM",
         "MARKETING_VERSION": "3.0.0",
         "SWIFT_VERSION": "5.0",
     ]

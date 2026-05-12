@@ -37,12 +37,15 @@ platform :ios do
       configuration: "Release",
       export_method: "app-store",
       output_directory: output_directory,
-      clean: true,
+      # clean: 정적 fw 사이닝 비활성화 전 단계서 clean 도 그래프 계산이 필요해 같이 죽었던 흔적이 있어 끔.
+      # 매번 새 러너라 build dir 도 항상 fresh.
+      clean: false,
       buildlog_path: ENV["RUNNER_TEMP"] || File.expand_path("../build", __dir__),
+      # CODE_SIGN_STYLE / DEVELOPMENT_TEAM 은 Project.swift 의 app target 에만 설정 → xcargs 로 전역
+      # 강제하지 않음. 강제하면 정적 fw 들도 자동 사이닝이 켜져 자동 프로비저닝이 78-타깃 그래프
+      # 계산에서 막힘.
       xcargs: [
         "CURRENT_PROJECT_VERSION=#{build_number}",
-        "CODE_SIGN_STYLE=Automatic",
-        "DEVELOPMENT_TEAM=#{TEAM_ID}",
         "-allowProvisioningUpdates",
         "-authenticationKeyPath \"#{ENV.fetch("AUTH_KEY_PATH")}\"",
         "-authenticationKeyID \"#{ENV.fetch("APPSTORE_KEY_ID")}\"",
