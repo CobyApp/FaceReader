@@ -159,4 +159,4 @@ git tag v2.1.0 && git push origin v2.1.0
 |:---:|
 | <img width="100" alt="Coby" src="https://user-images.githubusercontent.com/55099365/225215430-0c1fc8ad-6e28-48c2-9473-4f943dd320f8.png"> |
 
-問い合わせ: <doyoung@minami-hd.co.jp>
+問い合わせ: <coby5502@gmail.com>
