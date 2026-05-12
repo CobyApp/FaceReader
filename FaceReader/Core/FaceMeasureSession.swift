@@ -89,24 +89,27 @@ public final class FaceMeasureSession {
             faceRatio: faceRatio
         )
 
-        let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 20_000) * 1_000
-        let noseRatioScore = Int(abs(noseRatio - 0.6) * 20_000) * 1_000
-        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 10_000) * 1_000
-        let faceRatioScore = Int(abs(faceRatio - 1.1) * 20_000) * 1_000
+        // 기존 가중치(20_000 / 20_000 / 10_000 / 20_000)는 정상 얼굴도 즉시 30M+ 로 치솟아
+        // 거의 모두 신급/용급으로 가는 문제 → ~25% 수준으로 낮춰 보수적으로 계산.
+        let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 5_000) * 1_000
+        let noseRatioScore = Int(abs(noseRatio - 0.6) * 5_000) * 1_000
+        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 2_500) * 1_000
+        let faceRatioScore = Int(abs(faceRatio - 1.1) * 5_000) * 1_000
 
         let score = eyeRatioScore + noseRatioScore + lipsRatioScore + faceRatioScore
         totalScore = score
 
-        if score < 10_000_000 {
-            grade = 0
+        // 임계값도 같이 조정: 가만히 있으면 늑대/호랑이, 일그러뜨려야 위로 올라감.
+        if score < 2_000_000 {
+            grade = 0       // 늑대급
+        } else if score < 5_000_000 {
+            grade = 1       // 호랑이급
+        } else if score < 9_000_000 {
+            grade = 2       // 귀급
         } else if score < 15_000_000 {
-            grade = 1
-        } else if score < 20_000_000 {
-            grade = 2
-        } else if score < 30_000_000 {
-            grade = 3
+            grade = 3       // 용급
         } else {
-            grade = 4
+            grade = 4       // 신급
         }
     }
 }
