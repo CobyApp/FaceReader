@@ -20,20 +20,14 @@ public struct FaceResultView: View {
         self.store = store
     }
 
-    /// AI 가 생성한 codename, 없으면 익명 폴백.
     private var nicknameDisplay: String {
-        if case let .loaded(codename, _) = store.reportStatus, !codename.isEmpty {
-            return codename
-        }
-        return L10n.anonymousMonster
+        let trimmed = (store.report?.codename ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? L10n.anonymousMonster : trimmed
     }
 
-    /// AI 가 생성한 description, loaded 일 때만.
     private var loadedDescription: String? {
-        if case let .loaded(_, description) = store.reportStatus, !description.isEmpty {
-            return description
-        }
-        return nil
+        let trimmed = (store.report?.description ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
     }
 
     private var gradeStamp: PosterGradeStamp {
@@ -56,12 +50,6 @@ public struct FaceResultView: View {
 
             GeometryReader { proxy in
                 ScrollView([.vertical, .horizontal], showsIndicators: false) {
-                    let posterWidth = MonsterPosterView.canvasWidth
-                    let availableWidth = proxy.size.width
-                    let shrinkScale = min(1.0, availableWidth / posterWidth)
-                    let scaledWidth = posterWidth * shrinkScale
-                    let scaledHeight = MonsterPosterView.canvasHeight * shrinkScale
-
                     MonsterPosterView(
                         faceImage: posterUIImage,
                         nicknameLine: nicknameDisplay,
@@ -70,9 +58,9 @@ public struct FaceResultView: View {
                         descriptionText: loadedDescription,
                         gradeStamp: gradeStamp
                     )
-                    .scaleEffect(shrinkScale, anchor: .topLeading)
-                    .frame(width: scaledWidth, height: scaledHeight)
-                    .frame(maxWidth: .infinity, alignment: .center)
+                    .frame(width: MonsterPosterView.canvasWidth, height: MonsterPosterView.canvasHeight)
+                    .padding(.horizontal, max(0, (proxy.size.width - MonsterPosterView.canvasWidth) / 2))
+                    .padding(.vertical, max(0, (proxy.size.height - MonsterPosterView.canvasHeight) / 2))
                     .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
                 }
             }
@@ -81,7 +69,6 @@ public struct FaceResultView: View {
         .onAppear {
             store.send(.onAppear)
             triggerReveal()
-            requestReportIfNeeded()
         }
         .id(store.posterImageData)
         .sheet(isPresented: $showShareSheet) {
@@ -131,15 +118,6 @@ public struct FaceResultView: View {
         .frame(height: 44)
         .frame(maxWidth: .infinity)
         .background(Color.appBackground)
-    }
-
-    private func requestReportIfNeeded() {
-        switch store.reportStatus {
-        case .idle, .failed:
-            store.send(.requestReport)
-        case .loading, .loaded:
-            break
-        }
     }
 
     private var revealIntensity: Double {

@@ -23,7 +23,7 @@ public actor MonsterDescriber {
         @Guide(description: "Short fictional villain codename. 2 to 12 characters. One word or compound. No real personal names. Match the requested language. Examples: 광기두꺼비, 심연안구, 狂気ガエル, AbyssEye.")
         public var codename: String
 
-        @Guide(description: "One short, witty bestiary line for the fictional being. 1-2 sentences, plain text. Do not repeat the codename. Do not include grade labels, names, numbers, units, or markdown. Match the requested language.")
+        @Guide(description: "Punchy bestiary blurb for a fictional being. About 2-3 short sentences, totaling roughly 60-90 characters. Plain text. Funny, manga-bestiary tone. Do not repeat the codename. Do not include grade labels, names, numbers, units, or markdown. Match the requested language.")
         public var description: String
     }
 
@@ -150,30 +150,30 @@ public actor MonsterDescriber {
         switch language {
         case .ko:
             return """
-            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서야. 새로 등록되는 가상의 '괴인 캐릭터'의 코드네임(별명)과 짧은 도감 한 줄을 동시에 생성한다. 재해 등급은 약한 순서로 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
+            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서다. 새로 등록된 가상의 '괴인 캐릭터'의 코드네임(별명)과 짧은 도감 본문을 동시에 만든다. 재해 등급: 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
 
-            톤: 만화 도감 같은 가벼운 in-universe 내레이션, 짧고 위트있게. 실제 사람이 아닌 가공의 캐릭터.
+            톤: 한국 인터넷 유머 + 만화 도감 패러디. 박장대소 가능한 어이없음/시니컬/과장. 실명이 아닌 가공 캐릭터. 절대 진지하게 쓰지 마라.
 
-            codename(별명): 한국어 2~12자, 1~2 단어 또는 합성어. 분위기/특성을 살린 별명. 실명/일반 인명 금지. 공백·줄바꿈·구두점 없이 단일 토큰.
-            description(도감 본문): 1~2문장 / 100자 이내. codename, 등급 라벨(늑대급/호랑이급 등), 숫자, 측정값, 단위 일체 출력 금지. 마크다운/이모지/줄바꿈/리스트/따옴표 금지. 캐릭터의 외형·분위기·능력만으로 풀어쓴다.
+            codename(별명): 한국어 2~12자 단일 토큰(공백/구두점/줄바꿈 없음). 분위기 + 특이점 살린 합성어. 예시: 광기두꺼비, 절망꼬마, 멸망연골, 입짧은신, 야근전사, 우울메기.
+            description(도감 본문): 2~3 짧은 문장, 총 60~90자. 한국어 평문. 코드네임, 등급 라벨(늑대급/호랑이급 등), 숫자, 측정값, 단위, 마크다운, 이모지, 따옴표 일체 금지. 캐릭터의 외형/분위기/능력으로만 풀어 쓰되 웃겨야 한다.
             """
         case .ja:
             return """
-            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書。新たに登録される架空の「怪人キャラクター」のコードネーム(別名)と短い図鑑コメント一行を同時に生成する。災害等級は弱い順に 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
+            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書。新たに登録された架空「怪人キャラクター」のコードネーム(別名)と短い図鑑本文を同時に作る。災害等級: 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
 
-            トーン: マンガ図鑑のような軽快なin-universeナレーション、短く小粋に。実在人物ではなく架空キャラクター。
+            トーン: 日本のネットスラング寄りのおふざけ+マンガ図鑑パロディ。爆笑できる呆れ/シニカル/誇張。実在人物ではなく架空キャラ。決して真面目に書くな。
 
-            codename(別名): 日本語2〜12文字、1〜2語または合成語。雰囲気・特性を活かした呼び名。実名・一般人名禁止。空白・改行・句読点なしの単一トークン。
-            description(図鑑本文): 1〜2文 / 100字以内。codename、等級ラベル(狼級/虎級など)、数字、測定値、単位は一切出力禁止。マークダウン/絵文字/改行/リスト/引用符禁止。キャラクターの外見・雰囲気・能力のみで描写。
+            codename(別名): 日本語2〜12文字の単一トークン(空白/句読点/改行なし)。雰囲気と特異点を活かした合成語。例: 狂気ガエル, 絶望チビ, 滅亡軟骨, 残業戦士, 鬱ナマズ。
+            description(図鑑本文): 2〜3 短文、合計60〜90字。日本語平文。コードネーム、等級ラベル(狼級/虎級など)、数字、測定値、単位、マークダウン、絵文字、引用符は一切出力禁止。キャラの外見/雰囲気/能力のみで、必ず笑えるよう書け。
             """
         case .en:
             return """
-            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Generate both a codename and a short bestiary line for a newly catalogued fictional 'mysterious being'. Disaster levels (weak to strong): Wolf / Tiger / Demon / Dragon / God class.
+            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Generate a codename and a short bestiary blurb for a newly catalogued fictional 'mysterious being'. Disaster levels: Wolf / Tiger / Demon / Dragon / God class.
 
-            Tone: light in-universe narration like a manga bestiary, short and witty. The subject is a fictional character, not a real person.
+            Tone: dry comedic, manga bestiary parody, absurd and snarky. The subject is a fictional character, not a real person. Never play it straight — be funny.
 
-            codename: English 2-12 chars, 1-2 words or compound. Evocative villain handle. No real personal names. Single token, no spaces, line breaks, or punctuation.
-            description: 1-2 sentences, under 200 characters. Do NOT output the codename, any grade label (Wolf/Tiger/Demon/Dragon/God class), numbers, measurements, units. No markdown, emoji, line breaks, lists, quotes. Describe only by appearance, atmosphere, and powers.
+            codename: English 2-12 chars, single token (no spaces, punctuation, line breaks). Evocative compound handle. Examples: AbyssEye, DespairTot, RuinCartilage, OvertimeWraith, SadCatfish.
+            description: 2-3 short sentences, 60-90 characters total. Plain English. Do NOT output the codename, any grade label (Wolf/Tiger/Demon/Dragon/God class), numbers, measurements, units, markdown, emoji, quotes. Describe only by appearance, atmosphere, and powers — make it funny.
             """
         }
     }

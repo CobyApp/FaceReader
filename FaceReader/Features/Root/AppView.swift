@@ -14,7 +14,9 @@ struct AppView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if store.isShowingHelp {
+                if store.pendingReport != nil {
+                    pendingLoadingView
+                } else if store.isShowingHelp {
                     HelpView {
                         store.send(.helpFinished)
                     }
@@ -35,6 +37,23 @@ struct AppView: View {
         .tint(Color.vhsInk)
         .background(Color.vhsBase.ignoresSafeArea())
         .preferredColorScheme(.dark)
+    }
+
+    @ViewBuilder
+    private var pendingLoadingView: some View {
+        VStack(spacing: 24) {
+            ProgressView()
+                .controlSize(.large)
+                .tint(Color.vhsInk)
+            Text(L10n.aiReportLoading)
+                .font(.app(16))
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.vhsInk.opacity(0.9))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.vhsBase.ignoresSafeArea())
         .sheet(isPresented: Binding(
             get: { store.settingsPresented },
             set: { presented in
