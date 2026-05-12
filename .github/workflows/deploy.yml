@@ -99,6 +99,22 @@ jobs:
           APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
         run: bundle exec fastlane beta
 
+      - name: Dump xcodebuild log on failure
+        if: failure()
+        run: |
+          echo "::group::xcodebuild logs in $RUNNER_TEMP"
+          ls -la "$RUNNER_TEMP" || true
+          echo "::endgroup::"
+          for f in "$RUNNER_TEMP"/*.log; do
+            [ -f "$f" ] || continue
+            echo "::group::tail -200 $f"
+            tail -n 200 "$f" || true
+            echo "::endgroup::"
+            echo "::group::grep 'error:|warning:|FAILED' $f"
+            grep -nE "error:|warning:|FAILED|\\*\\* (ARCHIVE|BUILD) FAILED \\*\\*" "$f" | tail -n 80 || true
+            echo "::endgroup::"
+          done
+
       - name: Upload gym/xcodebuild log
         if: always()
         uses: actions/upload-artifact@v4
