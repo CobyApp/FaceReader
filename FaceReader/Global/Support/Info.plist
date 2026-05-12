@@ -8,6 +8,10 @@
 		<string>ko</string>
 		<string>ja</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is used to measure face proportions. Photos are processed entirely on-device and are not stored or sent to any server.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Used when you save or share the generated monster poster image to your photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>KosugiMaru-Regular.ttf</string>
