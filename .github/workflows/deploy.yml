@@ -99,6 +99,18 @@ jobs:
           APPSTORE_ISSUER_ID: ${{ secrets.APPSTORE_ISSUER_ID }}
         run: bundle exec fastlane beta
 
+      - name: Upload gym/xcodebuild log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs
+          path: |
+            ${{ runner.temp }}/*.log
+            ${{ runner.temp }}/gym
+            /Users/runner/Library/Logs/gym
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Cleanup
         if: always()
         run: |

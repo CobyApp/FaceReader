@@ -38,6 +38,7 @@ platform :ios do
       export_method: "app-store",
       output_directory: output_directory,
       clean: true,
+      buildlog_path: ENV["RUNNER_TEMP"] || File.expand_path("../build", __dir__),
       xcargs: [
         "CURRENT_PROJECT_VERSION=#{build_number}",
         "CODE_SIGN_STYLE=Automatic",
