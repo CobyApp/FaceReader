@@ -48,9 +48,11 @@ private struct BurstShape: Shape {
         for i in 0..<total {
             let radius = i.isMultiple(of: 2) ? outerR : innerR
             let angle = (Double(i) / Double(total)) * .pi * 2 - .pi / 2
+            let c: Double = cos(angle)
+            let s: Double = sin(angle)
             let point = CGPoint(
-                x: center.x + radius * cos(angle),
-                y: center.y + radius * sin(angle)
+                x: center.x + radius * c,
+                y: center.y + radius * s
             )
             if i == 0 { path.move(to: point) } else { path.addLine(to: point) }
         }
