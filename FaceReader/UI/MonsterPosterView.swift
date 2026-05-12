@@ -159,17 +159,26 @@ public struct MonsterPosterView: View {
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 
-    /// 설명 폰트 크기 — ASCII 비율로 영문/CJK 두 트랙. 한국어(Jua) 와 일본어(Yusei Magic)
-    /// 둘 다 박스를 잘 채우는 폰트라 동일 단계.
+    /// 설명 폰트 크기 — 영문/한국어가 같은 트랙(영문 기준), 일본어만 별도 CJK 트랙.
     private static func descriptionFontSize(for text: String) -> CGFloat {
         let count = text.count
         guard count > 0 else { return 24 }
-        let asciiCount = text.unicodeScalars.reduce(0) { acc, s in
-            acc + (s.value < 128 ? 1 : 0)
-        }
-        let isMostlyLatin = Double(asciiCount) / Double(count) > 0.5
 
-        if isMostlyLatin {
+        var asciiCount = 0
+        var hangulCount = 0
+        for scalar in text.unicodeScalars {
+            let v = scalar.value
+            if v < 128 {
+                asciiCount += 1
+            } else if v >= 0xAC00 && v <= 0xD7A3 {
+                hangulCount += 1
+            }
+        }
+        let followsLatinTrack = Double(asciiCount) / Double(count) > 0.5
+            || Double(hangulCount) / Double(count) > 0.3
+
+        if followsLatinTrack {
+            // 영문 + 한국어 — 한국어도 영어 기준 사이즈 단계를 따름.
             switch count {
             case 0 ... 35:    return 30
             case 36 ... 65:   return 26
@@ -178,6 +187,7 @@ public struct MonsterPosterView: View {
             default:          return 18
             }
         } else {
+            // 일본어 (Yusei Magic / Hira Maru) — CJK 단계.
             switch count {
             case 0 ... 15:  return 30
             case 16 ... 25: return 26
