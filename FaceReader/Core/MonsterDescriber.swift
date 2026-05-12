@@ -201,7 +201,9 @@ public actor MonsterDescriber {
         OUTPUT LANGUAGE: \(langName) ONLY. Both fields in \(langName).
 
         codename: short \(langName) compound. Mash mundane stuff with cosmic threat for absurd contrast.
-        description: \(descGuide). Manga-bestiary tone, dry and stupid-funny. Combine TWO different vibes — e.g. one mundane habit + one threat detail, or one appearance trait + one weird power. Reference OPM tropes if natural — hero class letters (C/B/A/S), normal punch series, 영웅 협회 / ヒーロー協会 / Hero Association. Plain text only — no markdown, no quotes, no emoji, no numbers like '12345', no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. EACH sentence MUST end with a period — never dangling.
+        description: \(descGuide). Manga-bestiary tone, dry and stupid-funny. Each sentence is a different absurd habit, threat, or situation — e.g. one mundane behavior + one hero-response detail. Reference OPM tropes if natural — hero class letters (C/B/A/S), 영웅 협회 / ヒーロー協会 / Hero Association.
+        STRICT: describe what the monster DOES, not what it LOOKS like. Do NOT list or enumerate body parts (eyes/nose/mouth/forehead/chin/face shape). If a 'Vibe' field is given, treat it as a faint atmosphere hint only — do NOT echo or describe the body part literally; bake it into a behavior or codename feel at most.
+        Plain text only — no markdown, no quotes, no emoji, no numbers like '12345', no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. EACH sentence MUST end with a period — never dangling.
 
         Example output (\(langName)):
         codename: \(exCodename)
@@ -210,13 +212,19 @@ public actor MonsterDescriber {
     }
 
     /// userPrompt 도 영문으로 통일 — 메타 지시는 영어, 값은 타깃 언어로 들어옴.
-    /// hints 는 이미 타깃 언어로 변환된 키워드라 그대로 전달.
+    /// hints 는 이미 타깃 언어로 변환된 키워드. 최대 1개만 전달 — 'Vibe' 라벨로 부드럽게 힌트만.
+    /// 신체 묘사를 그대로 박지 못하게 시스템 지시와 함께 톤을 조절.
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
-        let hints = input.ratios.map { featureHints(for: $0, language: input.language) } ?? []
-        let hintsLine = hints.isEmpty ? "" : "\nFeatures: \(hints.joined(separator: ", "))"
+        let allHints = input.ratios.map { featureHints(for: $0, language: input.language) } ?? []
+        let vibeLine: String
+        if let pick = allHints.randomElement() {
+            vibeLine = "\nVibe (atmosphere hint — do NOT mention literally): \(pick)"
+        } else {
+            vibeLine = ""
+        }
         return """
-        Threat tier: \(grade)\(hintsLine)
+        Threat tier: \(grade)\(vibeLine)
         Generate the monster now.
         """
     }

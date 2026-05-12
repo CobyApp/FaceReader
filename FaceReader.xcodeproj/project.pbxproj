@@ -12,6 +12,7 @@
 		2582867324EEC9AFB401CAF0 /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */; };
 		2E63D896D83164B392098719 /* GlitchEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC67951918438FC72E91ACEE /* GlitchEffect.swift */; };
 		2F315328D73197A7906AA614 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBF33A2EF1A8842422180EB /* ActivityView.swift */; };
+		33C8A73319D3DB4D6F375964 /* fallback_monsters_en.json in Resources */ = {isa = PBXBuildFile; fileRef = 589255A7DB130978FB35F521 /* fallback_monsters_en.json */; };
 		359985950C111EE07F23DCEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */; };
 		3C9B580210065DE5E803A25F /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 293E09521ED20047B52D5D57 /* AppTheme.swift */; };
 		4149CD6D9A59A950D86DAA05 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 7A2A65D9960D3F2DFA25B473 /* CasePaths */; };
@@ -36,6 +37,7 @@
 		83A9979C08ECE64F1077816F /* FaceReaderCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
 		861E57327D0DE0EEC6B51516 /* SubtitleBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B877F63DBBBA251E35FA1D /* SubtitleBox.swift */; };
 		874258CBA72CF1524746F77C /* FaceReaderCore.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */; };
+		8C37224F8A5D1531E6AB6383 /* fallback_monsters_ja.json in Resources */ = {isa = PBXBuildFile; fileRef = FAF342D6C73FC8DE150ACFA0 /* fallback_monsters_ja.json */; };
 		93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */; };
 		967A1298C9BFDC596570ED56 /* KitschStamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D385D7B5F5080032A72004B /* KitschStamp.swift */; };
 		97BE1651C19A29F2DF973892 /* FaceLandmarkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */; };
@@ -50,6 +52,7 @@
 		B740C5D168284E5591F19697 /* FaceReaderFeatures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20B8890E0640B5E1DDD8B14D /* FaceReaderFeatures.framework */; };
 		BAE00718B6DA6B560E642DFE /* FaceCaptureEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C017BB4D1BCEBE5C1C3DE2D /* FaceCaptureEngine.swift */; };
 		CCE7326C58BDD3B9AF7CD05C /* FaceReaderAppRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */; };
+		D03A37FDE6703324DD99AF37 /* fallback_monsters_ko.json in Resources */ = {isa = PBXBuildFile; fileRef = 83FA2940335C5427CDC3444B /* fallback_monsters_ko.json */; };
 		D63749770D45253BFAB767A3 /* CGPoint+FaceMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */; };
 		DF4B570813FF595FE696A140 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B15D82CED7DE775CA74F0864 /* AppView.swift */; };
 		E388C8CA60DF001A502DDE4D /* FaceReaderUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
@@ -157,6 +160,7 @@
 		4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E67D81BDCEB04E21391CBE3 /* Jua-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jua-Regular.ttf"; sourceTree = "<group>"; };
 		54FF6F79179CD0361E67CF39 /* FaceReaderLocalization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FaceReaderLocalization; path = Packages/FaceReaderLocalization; sourceTree = "<group>"; };
+		589255A7DB130978FB35F521 /* fallback_monsters_en.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fallback_monsters_en.json; sourceTree = "<group>"; };
 		5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FaceMeter.swift"; sourceTree = "<group>"; };
 		66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonsterPosterView.swift; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		7D1E67FFB74A360E02768E65 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7D385D7B5F5080032A72004B /* KitschStamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KitschStamp.swift; sourceTree = "<group>"; };
 		7E8F64ADB6DE3800B468F410 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		83FA2940335C5427CDC3444B /* fallback_monsters_ko.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fallback_monsters_ko.json; sourceTree = "<group>"; };
 		84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLandmarkOverlay.swift; sourceTree = "<group>"; };
 		9112385A22460A0EB40A97CC /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		945FD9DFE545FE4F68E43A5F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -189,6 +194,7 @@
 		E44161C2C204B7CB4146E17C /* VHSEffectsPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHSEffectsPreferences.swift; sourceTree = "<group>"; };
 		EBBF33A2EF1A8842422180EB /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
 		FAE08D6C64A88BCBCD7F9A8C /* FaceReaderCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAF342D6C73FC8DE150ACFA0 /* fallback_monsters_ja.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fallback_monsters_ja.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +290,16 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		3740B5E3AF82BFEB3DA73513 /* FallbackMonsters */ = {
+			isa = PBXGroup;
+			children = (
+				589255A7DB130978FB35F521 /* fallback_monsters_en.json */,
+				FAF342D6C73FC8DE150ACFA0 /* fallback_monsters_ja.json */,
+				83FA2940335C5427CDC3444B /* fallback_monsters_ko.json */,
+			);
+			path = FallbackMonsters;
+			sourceTree = "<group>";
+		};
 		4B60A3861C78EC738974FF7D /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +386,7 @@
 		BA8B5F64C76934E46A202C48 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				3740B5E3AF82BFEB3DA73513 /* FallbackMonsters */,
 				72F6056E438925EF05F2473A /* Fonts */,
 				2BBE1D01D405C80BC2677D35 /* LaunchScreen.storyboard */,
 				4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */,
@@ -614,6 +631,9 @@
 			files = (
 				359985950C111EE07F23DCEF /* Assets.xcassets in Resources */,
 				93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */,
+				33C8A73319D3DB4D6F375964 /* fallback_monsters_en.json in Resources */,
+				8C37224F8A5D1531E6AB6383 /* fallback_monsters_ja.json in Resources */,
+				D03A37FDE6703324DD99AF37 /* fallback_monsters_ko.json in Resources */,
 				5F439B1155F0F747D625A884 /* Jua-Regular.ttf in Resources */,
 				550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */,
 				1C0CDB99AC388FEA383FF8C7 /* SangSangAnt.otf in Resources */,

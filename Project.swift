@@ -90,6 +90,7 @@ let project = Project(
                 "FaceReader/Global/Resource/Base.lproj/LaunchScreen.storyboard",
                 "FaceReader/Global/Resource/Fonts/**/*.otf",
                 "FaceReader/Global/Resource/Fonts/**/*.ttf",
+                "FaceReader/Global/Resource/FallbackMonsters/**/*.json",
                 "FaceReader/Global/Support/PrivacyInfo.xcprivacy",
                 "FaceReader/Global/Support/**/*.strings",
             ],
