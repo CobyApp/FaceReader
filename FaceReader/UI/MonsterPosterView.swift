@@ -125,7 +125,7 @@ public struct MonsterPosterView: View {
                             .minimumScaleFactor(0.5)
                     }
                 }
-                .frame(height: 96, alignment: .center)
+                .frame(height: 104, alignment: .center)
                 .padding(.horizontal, 28)
                 .padding(.top, 8)
 
@@ -171,23 +171,21 @@ public struct MonsterPosterView: View {
         let isMostlyLatin = Double(asciiCount) / Double(count) > 0.5
 
         if isMostlyLatin {
-            // 영문 — 글자 폭 좁아서 같은 줄에 ~2 배 들어감.
             switch count {
-            case 0 ... 40:   return 24
-            case 41 ... 70:  return 21
-            case 71 ... 100: return 19
-            case 101 ... 130: return 17
-            default:         return 15
+            case 0 ... 40:    return 26
+            case 41 ... 70:   return 22
+            case 71 ... 100:  return 20
+            case 101 ... 130: return 18
+            default:          return 16
             }
         } else {
-            // CJK (한국어/일본어) — 글자 폭 넓음.
             switch count {
-            case 0 ... 18:  return 22
-            case 19 ... 30: return 19
-            case 31 ... 45: return 17
-            case 46 ... 60: return 15
-            case 61 ... 75: return 13
-            default:        return 12
+            case 0 ... 18:  return 26
+            case 19 ... 30: return 22
+            case 31 ... 45: return 19
+            case 46 ... 60: return 17
+            case 61 ... 75: return 15
+            default:        return 14
             }
         }
     }
