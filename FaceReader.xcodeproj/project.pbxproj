@@ -26,6 +26,7 @@
 		608297C2417595B4A366123F /* FaceReaderUI.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
 		668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */; };
 		6B9D7FDADA59BDE5F2747478 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE4A02E6C01B44AD519BCF0 /* HelpView.swift */; };
+		7015E953AA756C5E68F8DFC7 /* FallbackMonsterLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E851978B13977652F3353C2 /* FallbackMonsterLibrary.swift */; };
 		70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA9652BD2ABF17D1C0A8819B /* InfoPlist.strings */; };
 		711A9754E107F23035EC5203 /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 86B758E732419DD0FE439C4A /* FaceReaderLocalization */; };
 		75D7EA814F488F3D80D15F69 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 1F915D393AADCBCCDCD27DDA /* Dependencies */; };
@@ -165,6 +166,7 @@
 		84490846208163881CCA5B2C /* FaceLandmarkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLandmarkOverlay.swift; sourceTree = "<group>"; };
 		9112385A22460A0EB40A97CC /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
 		945FD9DFE545FE4F68E43A5F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		9E851978B13977652F3353C2 /* FallbackMonsterLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FallbackMonsterLibrary.swift; sourceTree = "<group>"; };
 		A1E66851EE925D1BC0366806 /* VHSOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHSOverlay.swift; sourceTree = "<group>"; };
 		A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FaceReaderUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC67951918438FC72E91ACEE /* GlitchEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchEffect.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 			children = (
 				2087E4588C050C6556C6F3E1 /* Geometry */,
 				3126A90662C32ACC4FB46AB7 /* FaceMeasureSession.swift */,
+				9E851978B13977652F3353C2 /* FallbackMonsterLibrary.swift */,
 				DB29490CBA58C09D1DA69357 /* MonsterDescriber.swift */,
 			);
 			path = Core;
@@ -664,6 +667,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				18B93BD86D70596E3E381755 /* FaceMeasureSession.swift in Sources */,
+				7015E953AA756C5E68F8DFC7 /* FallbackMonsterLibrary.swift in Sources */,
 				D63749770D45253BFAB767A3 /* CGPoint+FaceMeter.swift in Sources */,
 				4FA82201B969768135DB1897 /* MonsterDescriber.swift in Sources */,
 			);

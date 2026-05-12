@@ -20,10 +20,10 @@ public actor MonsterDescriber {
 
     @Generable
     public struct MonsterReport: Equatable, Sendable {
-        @Guide(description: "Villain codename. 2-10 characters, single word or compound, no spaces or punctuation. Match the requested language.")
+        @Guide(description: "Villain codename: one short word.")
         public var codename: String
 
-        @Guide(description: "One funny sentence about the monster. Max 40 characters. Plain text, no quotes, no numbers, no codename.")
+        @Guide(description: "One funny sentence describing the monster.")
         public var description: String
     }
 

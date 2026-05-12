@@ -30,6 +30,19 @@ struct AppFeature {
         let message: String
     }
 
+    private static func activeLanguage() -> MonsterDescriber.DescriptionLanguage {
+        switch LanguageResolver.effectiveResourceTag() {
+        case "ko": return .ko
+        case "ja": return .ja
+        default: return .en
+        }
+    }
+
+    private static func fallbackPayload(grade: Int, language: MonsterDescriber.DescriptionLanguage) -> FaceResultFeature.ReportPayload {
+        let entry = FallbackMonsterLibrary.pick(grade: grade, language: language)
+        return FaceResultFeature.ReportPayload(codename: entry.codename, description: entry.description)
+    }
+
     enum Action: Equatable {
         case faceCaptureCommitted(posterImageData: Data?)
         case reportReady(Result<FaceResultFeature.ReportPayload, ReportFailure>)
@@ -45,31 +58,43 @@ struct AppFeature {
         Reduce { state, action in
             switch action {
             case let .faceCaptureCommitted(data):
-                // Apple Intelligence 미지원/비활성: LLM 호출 없이 결과 화면 즉시 진입.
+                let grade = state.sessionBox.session.grade
+                let ratios = state.sessionBox.session.lastRatios
+                let language = Self.activeLanguage()
+
+                // Apple Intelligence 미지원/비활성: 로딩 없이 폴백 라이브러리로 즉시 결과 진입.
                 if MonsterDescriber.unavailableReason != nil {
-                    state.faceResult = FaceResultFeature.State(box: state.sessionBox, posterImageData: data)
+                    let payload = Self.fallbackPayload(grade: grade, language: language)
+                    state.faceResult = FaceResultFeature.State(
+                        box: state.sessionBox,
+                        posterImageData: data,
+                        report: payload
+                    )
                     state.sessionBox = SessionBox()
                     return .none
                 }
                 state.pendingReport = PendingReport(box: state.sessionBox, posterImageData: data)
-                let grade = state.sessionBox.session.grade
-                let ratios = state.sessionBox.session.lastRatios
-                let language: MonsterDescriber.DescriptionLanguage = {
-                    switch LanguageResolver.effectiveResourceTag() {
-                    case "ko": return .ko
-                    case "ja": return .ja
-                    default: return .en
-                    }
-                }()
                 return .run { send in
                     let describer = MonsterDescriber()
                     let input = MonsterDescriber.Input(grade: grade, language: language, ratios: ratios)
                     do {
                         let report = try await describer.generate(input)
-                        await send(.reportReady(.success(FaceResultFeature.ReportPayload(
-                            codename: report.codename,
-                            description: report.description
-                        ))))
+                        // LLM 이 빈 문자열을 뱉어도(특히 한국어 케이스) 폴백으로 보강.
+                        let safeCodename = report.codename.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let safeDescription = report.description.trimmingCharacters(in: .whitespacesAndNewlines)
+                        if safeCodename.isEmpty || safeDescription.isEmpty {
+                            let fb = Self.fallbackPayload(grade: grade, language: language)
+                            let merged = FaceResultFeature.ReportPayload(
+                                codename: safeCodename.isEmpty ? fb.codename : safeCodename,
+                                description: safeDescription.isEmpty ? fb.description : safeDescription
+                            )
+                            await send(.reportReady(.success(merged)))
+                        } else {
+                            await send(.reportReady(.success(FaceResultFeature.ReportPayload(
+                                codename: safeCodename,
+                                description: safeDescription
+                            ))))
+                        }
                     } catch {
                         await send(.reportReady(.failure(ReportFailure(message: String(describing: error)))))
                     }
@@ -89,9 +114,13 @@ struct AppFeature {
             case .reportReady(.failure):
                 guard let pending = state.pendingReport else { return .none }
                 state.pendingReport = nil
+                let grade = pending.box.session.grade
+                let language = Self.activeLanguage()
+                let payload = Self.fallbackPayload(grade: grade, language: language)
                 state.faceResult = FaceResultFeature.State(
                     box: pending.box,
-                    posterImageData: pending.posterImageData
+                    posterImageData: pending.posterImageData,
+                    report: payload
                 )
                 state.sessionBox = SessionBox()
                 return .none
