@@ -22,6 +22,7 @@
 		55D4051E3DFF926D22CA456D /* FaceReaderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC76B7898ACE4723D8A2856F /* FaceReaderApp.swift */; };
 		58F607C9C2084F0D12688246 /* PreviewLayerHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C68834165A70FB0D3F8C65 /* PreviewLayerHost.swift */; };
 		5E72C8B45D9A46E190B9ED6C /* FaceReaderLocalization in Frameworks */ = {isa = PBXBuildFile; productRef = 26C9190CEE8A10DFEC10A20A /* FaceReaderLocalization */; };
+		5F439B1155F0F747D625A884 /* Jua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E67D81BDCEB04E21391CBE3 /* Jua-Regular.ttf */; };
 		5FD1139F0CF7503797CF555E /* VHSOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E66851EE925D1BC0366806 /* VHSOverlay.swift */; };
 		608297C2417595B4A366123F /* FaceReaderUI.framework in Dependencies */ = {isa = PBXBuildFile; fileRef = A3AEE4DD4AB70476C7FB13BA /* FaceReaderUI.framework */; };
 		668F316749596E4F80AC08FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C45D3D9000CF64E364B0FB05 /* AppDelegate.swift */; };
@@ -154,6 +155,7 @@
 		4C3159F5E4ABCCDE24208F05 /* ComicBurst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComicBurst.swift; sourceTree = "<group>"; };
 		4D39FF8C24CEC5CCE709587A /* FaceReaderAppRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceReaderAppRoot.swift; sourceTree = "<group>"; };
 		4E62FB7A3D5FE6AC815B625B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4E67D81BDCEB04E21391CBE3 /* Jua-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Jua-Regular.ttf"; sourceTree = "<group>"; };
 		54FF6F79179CD0361E67CF39 /* FaceReaderLocalization */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FaceReaderLocalization; path = Packages/FaceReaderLocalization; sourceTree = "<group>"; };
 		5A8DCDBFD640ACD8B3EE10D5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5CA7BE8DDCC4BEF70C4BAF76 /* CGPoint+FaceMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+FaceMeter.swift"; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		72F6056E438925EF05F2473A /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				4E67D81BDCEB04E21391CBE3 /* Jua-Regular.ttf */,
 				B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */,
 				3CE4EA903B74A423F38E8479 /* SangSangAnt.otf */,
 				B69D605033619C2CFE6AD7AB /* YuseiMagic-Regular.ttf */,
@@ -611,6 +614,7 @@
 			files = (
 				359985950C111EE07F23DCEF /* Assets.xcassets in Resources */,
 				93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */,
+				5F439B1155F0F747D625A884 /* Jua-Regular.ttf in Resources */,
 				550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */,
 				1C0CDB99AC388FEA383FF8C7 /* SangSangAnt.otf in Resources */,
 				AD56794D0DB4B34701A2B9D5 /* YuseiMagic-Regular.ttf in Resources */,

@@ -159,25 +159,15 @@ public struct MonsterPosterView: View {
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 
-    /// 설명 텍스트 길이에 따라 폰트 크기 자동 결정.
-    /// 트랙 3개: 한국어(한글, SangSangAnt 가 같은 pt 에서 시각적으로 작아 보임) /
-    /// 일본어(YuseiMagic) / 영문. 한국어만 다른 두 트랙보다 한 단계 더 큼.
+    /// 설명 폰트 크기 — ASCII 비율로 영문/CJK 두 트랙. 한국어(Jua) 와 일본어(Yusei Magic)
+    /// 둘 다 박스를 잘 채우는 폰트라 동일 단계.
     private static func descriptionFontSize(for text: String) -> CGFloat {
         let count = text.count
         guard count > 0 else { return 24 }
-
-        var asciiCount = 0
-        var hangulCount = 0
-        for scalar in text.unicodeScalars {
-            let v = scalar.value
-            if v < 128 {
-                asciiCount += 1
-            } else if v >= 0xAC00 && v <= 0xD7A3 {
-                hangulCount += 1
-            }
+        let asciiCount = text.unicodeScalars.reduce(0) { acc, s in
+            acc + (s.value < 128 ? 1 : 0)
         }
         let isMostlyLatin = Double(asciiCount) / Double(count) > 0.5
-        let containsHangul = Double(hangulCount) / Double(count) > 0.3
 
         if isMostlyLatin {
             switch count {
@@ -187,18 +177,7 @@ public struct MonsterPosterView: View {
             case 96 ... 125:  return 20
             default:          return 18
             }
-        } else if containsHangul {
-            // 한국어 — SangSangAnt 글리프가 박스 안에서 작아 보여 한 단계 더 키움.
-            switch count {
-            case 0 ... 15:  return 38
-            case 16 ... 25: return 32
-            case 26 ... 40: return 26
-            case 41 ... 55: return 22
-            case 56 ... 70: return 19
-            default:        return 17
-            }
         } else {
-            // 일본어 (Yusei Magic / Hira Maru) — 기존 CJK 단계.
             switch count {
             case 0 ... 15:  return 30
             case 16 ... 25: return 26

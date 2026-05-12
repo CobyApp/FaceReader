@@ -56,9 +56,14 @@ extension Color {
 }
 
 extension Font {
-    /// 한국어 본문 — 번들 손글씨 우선.
+    /// 한국어 본문 — 번들 Jua (둥근 친근한 핸드그로톤). SangSangAnt 는 글리프가 작아 보여서
+    /// 강등. 시스템 폴백.
     private static let koreanAppFontCandidates: [String] = [
-        "SangSangAnt",
+        "Jua-Regular",
+        "BMJUA",                // 일부 iOS 에서 같은 폰트 다른 postscript 이름
+        "AppleSDGothicNeo-Heavy",
+        "AppleSDGothicNeo-Bold",
+        "SangSangAnt",           // 번들 폴백
     ]
 
     /// 영어 본문 — iOS 시스템 코믹/손글씨 폰트.
