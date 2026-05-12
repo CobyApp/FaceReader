@@ -16,14 +16,17 @@ struct SettingsView: View {
         let id: String
         let storageTag: String?
         let title: String
+        /// 라벨 텍스트를 어떤 언어용 폰트로 그릴지 — 활성 언어가 아니라 '라벨 자체의 언어' 기준.
+        /// 예: '日本語' 는 항상 일본어 폰트, '한국어' 는 항상 한국어 폰트.
+        let fontTag: String?
     }
 
     private var languageRows: [LanguageRow] {
         [
-            LanguageRow(id: "system", storageTag: nil, title: L10n.languageOptionSystem),
-            LanguageRow(id: "en", storageTag: "en", title: "English"),
-            LanguageRow(id: "ja", storageTag: "ja", title: "日本語"),
-            LanguageRow(id: "ko", storageTag: "ko", title: "한국어"),
+            LanguageRow(id: "system", storageTag: nil, title: L10n.languageOptionSystem, fontTag: nil),
+            LanguageRow(id: "en", storageTag: "en", title: "English", fontTag: "en"),
+            LanguageRow(id: "ja", storageTag: "ja", title: "日本語", fontTag: "ja"),
+            LanguageRow(id: "ko", storageTag: "ko", title: "한국어", fontTag: "ko"),
         ]
     }
 
@@ -93,7 +96,7 @@ struct SettingsView: View {
     private func languageCell(_ row: LanguageRow) -> some View {
         HStack {
             Text(row.title)
-                .font(.app(17))
+                .font(.app(17, languageTag: row.fontTag))
                 .foregroundStyle(Color.vhsInk)
             Spacer()
             if isSelected(row) {

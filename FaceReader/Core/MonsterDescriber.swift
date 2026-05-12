@@ -114,25 +114,15 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// 한 문장 길이로 강제 자름. ko/ja 40자, en 90자.
+    /// 너무 길게 뱉을 때만 마지막 단어 경계에서 자름. 종결부호 컷팅은 빈 결과(한국어 첫 글자가 부호인 경우 등)
+    /// 을 만들 수 있어 폐기. 프롬프트에 '한 문장만' 이 박혀 있어 보통은 한 문장.
     private static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 90 : 40
+        let limit: Int = (language == .en) ? 100 : 50
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
-
-        // 첫 종결부호까지만 — 한 문장만 살림.
-        let terminators: Set<Character> = [".", "!", "?", "。", "！", "？"]
-        if let firstEnd = collapsed.firstIndex(where: { terminators.contains($0) }) {
-            let firstSentence = String(collapsed[...firstEnd]).trimmingCharacters(in: .whitespacesAndNewlines)
-            return enforceLimit(firstSentence, limit: limit)
-        }
-        return enforceLimit(collapsed, limit: limit)
-    }
-
-    private static func enforceLimit(_ text: String, limit: Int) -> String {
-        guard text.count > limit else { return text }
-        let head = String(text.prefix(limit))
+        guard collapsed.count > limit else { return collapsed }
+        let head = String(collapsed.prefix(limit))
         if let lastSpace = head.lastIndex(of: " ") {
             return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
         }

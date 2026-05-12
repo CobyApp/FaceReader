@@ -56,25 +56,28 @@ extension Color {
 }
 
 extension Font {
-    /// Japanese UI 본문 — 가능하면 ヒラギノ丸ゴ (iOS 시스템 둥근 고딕) 우선, 번들 KosugiMaru 폴백.
-    /// 둘 다 평범한 office 톤보다는 살짝 친근한 둥근 고딕.
-    private static let japaneseAppFontCandidates: [String] = [
-        "HiraMaruProN-W4",          // ヒラギノ丸ゴ ProN W4 — 둥글둥글 귀여움
-        "ToppanBunkyuMidashiGothicStdN-ExtraBold",
-        "TsukushiAMaruGothic-Bold",
-        "KosugiMaru-Regular",       // 번들 폴백
+    /// 한국어 본문 — 번들 손글씨 우선.
+    private static let koreanAppFontCandidates: [String] = [
+        "SangSangAnt",
     ]
 
-    /// Korean / English UI 본문 — SangSangAnt (번들 손글씨) 우선.
-    private static let latinKoreanAppFontCandidates: [String] = [
-        "SangSangAnt",
-        "ChalkboardSE-Bold",        // 영문 폴백, 코믹/둥글한 톤
+    /// 영어 본문 — iOS 시스템 코믹/손글씨 폰트.
+    private static let englishAppFontCandidates: [String] = [
+        "ChalkboardSE-Bold",
         "MarkerFelt-Wide",
         "Noteworthy-Bold",
+        "BradleyHandITCTT-Bold",
     ]
 
-    /// 포스터의 WANTED · 현상금 같은 라틴/숫자 디스플레이 — 언어 무관 항상 동일.
-    /// 코믹 wanted-poster 톤 (마커펜/분필 손글씨).
+    /// 일본어 본문 — iOS 시스템 ヒラギノ丸ゴ 우선, 번들 KosugiMaru 폴백.
+    private static let japaneseAppFontCandidates: [String] = [
+        "HiraMaruProN-W4",
+        "ToppanBunkyuMidashiGothicStdN-ExtraBold",
+        "TsukushiAMaruGothic-Bold",
+        "KosugiMaru-Regular",
+    ]
+
+    /// 포스터의 WANTED · 현상금 디스플레이 — 언어 무관 코믹 마커펜 톤.
     private static let posterDisplayCandidates: [String] = [
         "MarkerFelt-Wide",
         "ChalkboardSE-Bold",
@@ -82,25 +85,38 @@ extension Font {
         "BradleyHandITCTT-Bold",
     ]
 
-    /// 디바이스 폭에 따라 스케일된 본문 폰트. 언어별 캐스케이드.
+    /// 디바이스 폭에 따라 스케일된 본문 폰트. 활성 언어 기준.
     public static func app(_ size: CGFloat) -> Font {
-        appCascade(size: PhoneLayout.scaledFontSize(size), candidates: bodyCandidatesForActiveLanguage())
+        app(size, languageTag: LanguageResolver.effectiveResourceTag())
     }
 
-    /// 디바이스 무관 고정 크기 — 포스터 본문 (닉네임/설명) 용. 언어별 캐스케이드.
+    /// 명시한 언어 태그(ko/ja/en) 기준 본문 폰트. 활성 언어와 무관 — 설정 화면처럼
+    /// 라벨 문자열이 그 자체로 특정 언어인 경우(예: '日本語') 그 언어용 캐스케이드로 그림.
+    public static func app(_ size: CGFloat, languageTag: String?) -> Font {
+        appCascade(
+            size: PhoneLayout.scaledFontSize(size),
+            candidates: candidates(for: languageTag)
+        )
+    }
+
+    /// 디바이스 무관 고정 크기 — 포스터 본문 (닉네임/설명) 용. 활성 언어 캐스케이드.
     public static func posterApp(_ size: CGFloat) -> Font {
-        appCascade(size: size, candidates: bodyCandidatesForActiveLanguage())
+        appCascade(size: size, candidates: candidates(for: LanguageResolver.effectiveResourceTag()))
     }
 
-    /// 디바이스 무관 고정 크기 — 포스터 WANTED · 현상금 전용. 언어 무관 단일 폰트.
+    /// 디바이스 무관 고정 크기 — 포스터 WANTED · 현상금 전용. 언어 무관 단일 코믹 폰트.
     public static func posterDisplay(_ size: CGFloat) -> Font {
         appCascade(size: size, candidates: posterDisplayCandidates, fallbackWeight: .heavy)
     }
 
-    private static func bodyCandidatesForActiveLanguage() -> [String] {
-        switch LanguageResolver.effectiveResourceTag() {
+    private static func candidates(for tag: String?) -> [String] {
+        switch tag {
         case "ja": return japaneseAppFontCandidates
-        default: return latinKoreanAppFontCandidates
+        case "en": return englishAppFontCandidates
+        case "ko": return koreanAppFontCandidates
+        default:
+            // 시스템과 동일 등 — 활성 언어 기준.
+            return candidates(for: LanguageResolver.effectiveResourceTag())
         }
     }
 
