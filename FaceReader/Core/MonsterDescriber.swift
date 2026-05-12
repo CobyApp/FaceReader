@@ -114,19 +114,20 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// 포스터 한두 줄에 들어가도록 길이 cap. 폴백 라이브러리에도 동일하게 적용 가능.
-    /// ko/ja: 36자, en: 80자.
+    /// 포스터 한 줄에 들어가도록 짧게 cap. 줄임표(…) 안 붙임 — 사용자가 끝까지 보길 원함.
+    /// ko/ja: 30자, en: 60자.
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 80 : 36
+        let limit: Int = (language == .en) ? 60 : 30
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
         guard collapsed.count > limit else { return collapsed }
+        // 단어 경계에서 끊되, 줄임표 없이 깔끔하게 마무리.
         let head = String(collapsed.prefix(limit))
         if let lastSpace = head.lastIndex(of: " ") {
-            return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
+            return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines)
         }
-        return head.trimmingCharacters(in: .whitespacesAndNewlines) + "…"
+        return head.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private static func sanitizeCodename(_ raw: String) -> String {
@@ -163,34 +164,38 @@ public actor MonsterDescriber {
         }
     }
 
-    /// 영문 메타-지시 + 타깃 언어 명시 + 예시 (목표 언어로) — 비영어(특히 한국어) 응답에서
+    /// 영문 메타-지시 + 타깃 언어 명시 + 짧은 예시 — 비영어(특히 한국어) 응답에서
     /// 구조화 출력을 더 안정적으로 따르도록.
     private static func systemInstructions(language: DescriptionLanguage) -> String {
         let langName: String
         let exCodename: String
         let exDescription: String
+        let descGuide: String
         switch language {
         case .ko:
             langName = "Korean"
             exCodename = "광기두꺼비"
-            exDescription = "한 번 울 때마다 동네 신호등이 점멸한다."
+            exDescription = "신호등을 점멸시키는 청개구리."
+            descGuide = "ONE short Korean sentence, around 15-25 characters total"
         case .ja:
             langName = "Japanese"
             exCodename = "狂気ガエル"
-            exDescription = "鳴くたびに信号機が点滅する。"
+            exDescription = "信号機を点滅させるカエル。"
+            descGuide = "ONE short Japanese sentence, around 12-20 characters total"
         case .en:
             langName = "English"
             exCodename = "MadToad"
-            exDescription = "Every croak flickers the traffic lights."
+            exDescription = "A frog that flickers traffic lights."
+            descGuide = "ONE short English sentence, around 30-50 characters total"
         }
 
         return """
-        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a one-sentence description.
+        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a very short description.
 
         OUTPUT LANGUAGE: \(langName) ONLY. Both fields must be written in \(langName).
 
         codename: a short single word or compound in \(langName). Avoid real personal names. No spaces, no punctuation.
-        description: ONE funny \(langName) sentence about the fictional monster (its vibe, appearance, or powers). Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition.
+        description: \(descGuide). Funny tone. Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. Keep it punchy and short.
 
         Example output (\(langName)):
         codename: \(exCodename)

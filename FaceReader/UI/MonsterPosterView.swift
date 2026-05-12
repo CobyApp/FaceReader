@@ -66,12 +66,12 @@ public struct MonsterPosterView: View {
                 .resizable(resizingMode: .tile)
             VStack(spacing: 0) {
                 Text(posterWantedText)
-                    .font(.posterDisplay(100))
+                    .font(.posterDisplay(96))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.35)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
-                    .padding(.top, 12)
+                    .padding(.top, 14)
                     .padding(.horizontal, pad * 0.5)
 
                 Group {
@@ -97,34 +97,43 @@ public struct MonsterPosterView: View {
                     }
                 }
                 .padding(.horizontal, pad)
+                .padding(.top, 8)
 
                 Text(nicknameLine)
-                    .font(.posterApp(60))
+                    .font(.posterApp(52))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.45)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 10)
+                    .padding(.top, 16)
                     .padding(.horizontal, pad)
 
                 if let descriptionText, !descriptionText.isEmpty {
                     Text(descriptionText)
-                        .font(.posterApp(20))
-                        .foregroundStyle(Color.appBrown.opacity(0.9))
+                        .font(.posterApp(22))
+                        .foregroundStyle(Color.appBrown.opacity(0.92))
                         .multilineTextAlignment(.center)
-                        .lineLimit(nil)
+                        .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal, pad)
-                        .padding(.top, 10)
+                        .padding(.top, 6)
                 }
 
                 Spacer(minLength: 0)
 
+                // 현상금 — 타이프라이터 톤으로 'official' 느낌. 외곽선으로 강조.
                 Text(formattedScoreText)
-                    .font(.posterDisplay(50))
+                    .font(.posterBounty(54))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.45)
-                    .padding(.horizontal, pad)
-                    .padding(.bottom, 12)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                    .padding(.horizontal, 18)
+                    .padding(.vertical, 6)
+                    .overlay(
+                        Rectangle()
+                            .stroke(Color.appBrown, lineWidth: 3)
+                    )
+                    .padding(.bottom, 18)
             }
             .frame(width: Self.canvasWidth, height: Self.canvasHeight, alignment: .top)
 

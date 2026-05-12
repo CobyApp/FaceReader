@@ -81,12 +81,20 @@ extension Font {
         "KosugiMaru-Regular",                   // 번들 최종 폴백
     ]
 
-    /// 포스터의 WANTED · 현상금 디스플레이 — 언어 무관 코믹 마커펜 톤.
+    /// 포스터 WANTED — 언어 무관, 마커펜/손글씨 톤.
     private static let posterDisplayCandidates: [String] = [
         "MarkerFelt-Wide",
         "ChalkboardSE-Bold",
         "Noteworthy-Bold",
         "BradleyHandITCTT-Bold",
+    ]
+
+    /// 포스터 현상금 ($1,234,567) — 타이프라이터/스탬프 톤으로 'official document' 느낌.
+    private static let posterBountyCandidates: [String] = [
+        "AmericanTypewriter-Bold",
+        "AmericanTypewriter-Semibold",
+        "Courier-Bold",
+        "Menlo-Bold",
     ]
 
     /// 디바이스 폭에 따라 스케일된 본문 폰트. 활성 언어 기준.
@@ -108,9 +116,14 @@ extension Font {
         appCascade(size: size, candidates: candidates(for: LanguageResolver.effectiveResourceTag()))
     }
 
-    /// 디바이스 무관 고정 크기 — 포스터 WANTED · 현상금 전용. 언어 무관 단일 코믹 폰트.
+    /// 디바이스 무관 고정 크기 — 포스터 WANTED 전용. 언어 무관 코믹 마커펜 톤.
     public static func posterDisplay(_ size: CGFloat) -> Font {
         appCascade(size: size, candidates: posterDisplayCandidates, fallbackWeight: .heavy)
+    }
+
+    /// 디바이스 무관 고정 크기 — 포스터 현상금 ($) 전용. 타이프라이터 톤.
+    public static func posterBounty(_ size: CGFloat) -> Font {
+        appCascade(size: size, candidates: posterBountyCandidates, fallbackWeight: .black)
     }
 
     private static func candidates(for tag: String?) -> [String] {
