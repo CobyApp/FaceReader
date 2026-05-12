@@ -63,5 +63,5 @@
 
 /* AI Report */
 "ai_report_title" = "Mysterious Being Report";
-"ai_report_loading" = "Hero Association analyst evaluating...";
+"ai_report_loading" = "Monster Association analyst evaluating...";
 "ai_report_unavailable" = "Apple Intelligence isn't available, so the analyst stayed home. Enable Apple Intelligence in Settings and try again.";

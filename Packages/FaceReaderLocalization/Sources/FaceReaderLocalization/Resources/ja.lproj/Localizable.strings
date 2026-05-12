@@ -63,5 +63,5 @@
 
 /* AI Report */
 "ai_report_title" = "怪人分析レポート";
-"ai_report_loading" = "ヒーロー協会の分析官が評価中...";
+"ai_report_loading" = "怪人協会の分析官が評価中...";
 "ai_report_unavailable" = "Apple Intelligence が無効のため、分析官が出勤していません。設定で Apple Intelligence をオンにしてもう一度お試しください。";

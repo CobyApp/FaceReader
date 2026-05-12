@@ -63,5 +63,5 @@
 
 /* AI Report */
 "ai_report_title" = "괴인 분석 리포트";
-"ai_report_loading" = "히어로 협회 분석관이 평가 중...";
+"ai_report_loading" = "괴인 협회 분석관이 평가 중...";
 "ai_report_unavailable" = "Apple Intelligence 가 비활성 상태라 분석관이 출근하지 않았습니다. 설정에서 Apple Intelligence 를 켜고 다시 시도해주세요.";
