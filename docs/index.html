@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>FaceReader — Monster Association Archive</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="An iOS app that grades your face on a 5-tier disaster scale and issues a One-Punch Man-style wanted poster. Choose your language to enter the Monster Association archive." />
+<meta property="og:title" content="FaceReader — Monster Association Archive" />
+<meta property="og:description" content="Snap a selfie. An on-device AI archivist files you as a fictional monster. Available in Korean, Japanese, English." />
+<meta property="og:image" content="https://github.com/user-attachments/assets/0c6fca89-6d1b-4494-accf-7637b7be1a1a" />
+<meta property="og:url" content="https://cobyapp.github.io/FaceReader/" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="alternate" hreflang="ko" href="https://cobyapp.github.io/FaceReader/ko/" />
+<link rel="alternate" hreflang="ja" href="https://cobyapp.github.io/FaceReader/ja/" />
+<link rel="alternate" hreflang="en" href="https://cobyapp.github.io/FaceReader/en/" />
+<link rel="alternate" hreflang="x-default" href="https://cobyapp.github.io/FaceReader/" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Special+Elite&family=Yusei+Magic&family=Jua&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/style.css" />
+<script>
+  // Auto-redirect to the closest supported locale based on the browser preferences.
+  // Honors ?lang=xx override and a previous user choice (?stay or sessionStorage flag).
+  (function () {
+    var supported = ['ko', 'ja', 'en'];
+    var params = new URLSearchParams(location.search);
+    var override = params.get('lang');
+    if (override && supported.indexOf(override) !== -1) {
+      location.replace(override + '/');
+      return;
+    }
+    if (params.get('stay') === '1' || sessionStorage.getItem('fr-stay') === '1') {
+      sessionStorage.setItem('fr-stay', '1');
+      return;
+    }
+    var langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || 'en']);
+    for (var i = 0; i < langs.length; i++) {
+      var code = (langs[i] || '').toLowerCase().split('-')[0];
+      if (supported.indexOf(code) !== -1) {
+        location.replace(code + '/');
+        return;
+      }
+    }
+    location.replace('en/');
+  })();
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="./">FaceReader</a>
+    <div class="lang-switch">
+      <a href="ko/">한국어</a>
+      <a href="ja/">日本語</a>
+      <a href="en/">English</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="tagline">▌ MONSTER ASSOCIATION ARCHIVE ▌</div>
+  <h1>FaceReader</h1>
+  <p class="lead">
+    Choose your language to enter the archive.<br/>
+    언어를 선택해 주세요 · 言語をお選びください.
+  </p>
+  <div class="cta-row">
+    <a class="btn" href="ko/">한국어</a>
+    <a class="btn" href="ja/">日本語</a>
+    <a class="btn" href="en/">English</a>
+  </div>
+  <p style="margin-top:2rem;font-family:var(--font-mono);font-size:0.8rem;color:rgba(244,233,211,0.4);">
+    Auto-detecting your locale… &nbsp;·&nbsp; <a href="?stay=1" style="color:inherit;">stay on this page</a>
+  </p>
+</header>
+
+<footer class="footer">
+  <div class="footer-links">
+    <a href="ko/privacy.html">개인정보처리방침</a>
+    <a href="ja/privacy.html">プライバシーポリシー</a>
+    <a href="en/privacy.html">Privacy Policy</a>
+    <a href="https://github.com/CobyApp/FaceReader" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://apps.apple.com/app/%EA%B4%B4%EC%9D%B8-%EC%B8%A1%EC%A0%95%EA%B8%B0/id1642236144" target="_blank" rel="noopener">App Store</a>
+  </div>
+  <p>© 2026 Coby (김도영) · FaceReader · MIT License</p>
+</footer>
+
+</body>
+</html>
