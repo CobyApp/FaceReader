@@ -163,45 +163,51 @@ public actor MonsterDescriber {
         }
     }
 
+    /// 영문 메타-지시 + 타깃 언어 명시 + 예시 (목표 언어로) — 비영어(특히 한국어) 응답에서
+    /// 구조화 출력을 더 안정적으로 따르도록.
     private static func systemInstructions(language: DescriptionLanguage) -> String {
+        let langName: String
+        let exCodename: String
+        let exDescription: String
         switch language {
         case .ko:
-            return """
-            너는 원펀맨 세계관 가상의 '괴인 협회' 자료실 사서. 가상의 괴인 캐릭터 한 명에 대해:
-            - codename: 한국어 합성어 한 단어 (예: 광기두꺼비, 입짧은신, 야근전사)
-            - description: 한 문장으로 웃기게 (40자 이하, 평문)
-            """
+            langName = "Korean"
+            exCodename = "광기두꺼비"
+            exDescription = "한 번 울 때마다 동네 신호등이 점멸한다."
         case .ja:
-            return """
-            あなたはワンパンマン世界の架空『怪人協会』資料室司書。架空の怪人キャラ一体について:
-            - codename: 日本語の合成語一語 (例: 狂気ガエル, 残業戦士)
-            - description: 一文で面白く (40字以下、平文)
-            """
+            langName = "Japanese"
+            exCodename = "狂気ガエル"
+            exDescription = "鳴くたびに信号機が点滅する。"
         case .en:
-            return """
-            You are a fictional Monster Association bestiary archivist (One-Punch Man universe). For one fictional monster:
-            - codename: one English compound word (e.g. AbyssEye, OvertimeWraith)
-            - description: one funny sentence (under 90 chars, plain text)
-            """
+            langName = "English"
+            exCodename = "MadToad"
+            exDescription = "Every croak flickers the traffic lights."
         }
+
+        return """
+        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a one-sentence description.
+
+        OUTPUT LANGUAGE: \(langName) ONLY. Both fields must be written in \(langName).
+
+        codename: a short single word or compound in \(langName). Avoid real personal names. No spaces, no punctuation.
+        description: ONE funny \(langName) sentence about the fictional monster (its vibe, appearance, or powers). Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition.
+
+        Example output (\(langName)):
+        codename: \(exCodename)
+        description: \(exDescription)
+        """
     }
 
+    /// userPrompt 도 영문으로 통일 — 메타 지시는 영어, 값은 타깃 언어로 들어옴.
+    /// hints 는 이미 타깃 언어로 변환된 키워드라 그대로 전달.
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
         let hints = input.ratios.map { featureHints(for: $0, language: input.language) } ?? []
-        let hintsText = hints.joined(separator: ", ")
-
-        switch input.language {
-        case .ko:
-            let featureLine = hints.isEmpty ? "" : " 특징: \(hintsText)."
-            return "위협도: \(grade).\(featureLine) 이걸로 한 문장만 웃기게 만들어줘."
-        case .ja:
-            let featureLine = hints.isEmpty ? "" : " 特徴: \(hintsText)。"
-            return "脅威度: \(grade)。\(featureLine)これで一文だけ面白く作って。"
-        case .en:
-            let featureLine = hints.isEmpty ? "" : " Traits: \(hintsText)."
-            return "Threat: \(grade).\(featureLine) Write one funny sentence."
-        }
+        let hintsLine = hints.isEmpty ? "" : "\nFeatures: \(hints.joined(separator: ", "))"
+        return """
+        Threat tier: \(grade)\(hintsLine)
+        Generate the monster now.
+        """
     }
 
     /// 비율 → 사람말 특징 키워드 (정상 범위에서 벗어난 항목만). 숫자/측정 표현을 LLM 에 노출하지 않아
