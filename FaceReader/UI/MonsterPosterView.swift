@@ -18,9 +18,12 @@ public struct PosterGradeStamp: Equatable, Sendable {
 
 /// 현상금 포스터 — 디바이스 무관 고정 캔버스(canvasWidth × canvasHeight) 로 렌더링.
 /// 다른 아이폰에서도 같은 모양/비율로 보이도록 모든 내부 치수와 폰트가 metricScale 영향을 안 받음.
+///
+/// 캔버스: 360 × 640 (9:16). PosterImageRenderer 가 scale 3 으로 렌더 → 출력 1080 × 1920 px
+/// (Instagram story / TikTok 표준 사이즈).
 public struct MonsterPosterView: View {
-    public static let canvasWidth: CGFloat = 390
-    public static let canvasHeight: CGFloat = canvasWidth * 1.8 // 702
+    public static let canvasWidth: CGFloat = 360
+    public static let canvasHeight: CGFloat = 640
 
     let faceImage: UIImage?
     let nicknameLine: String
