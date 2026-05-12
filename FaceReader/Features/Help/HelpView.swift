@@ -16,7 +16,7 @@ public struct HelpView: View {
     }
 
     public var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: 22 * PhoneLayout.metricScale) {
                 introCard
 

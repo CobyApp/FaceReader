@@ -37,6 +37,18 @@ struct AppView: View {
         .tint(Color.vhsInk)
         .background(Color.vhsBase.ignoresSafeArea())
         .preferredColorScheme(.dark)
+        .sheet(isPresented: Binding(
+            get: { store.settingsPresented },
+            set: { presented in
+                if !presented { store.send(.settingsDismissed) }
+            }
+        )) {
+            SettingsView(
+                currentOverride: LanguageResolver.storedOverrideTag,
+                onSelect: { store.send(.languagePreferenceSaved($0)) },
+                onCancel: { store.send(.settingsDismissed) }
+            )
+        }
     }
 
     @ViewBuilder
@@ -54,17 +66,5 @@ struct AppView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.vhsBase.ignoresSafeArea())
-        .sheet(isPresented: Binding(
-            get: { store.settingsPresented },
-            set: { presented in
-                if !presented { store.send(.settingsDismissed) }
-            }
-        )) {
-            SettingsView(
-                currentOverride: LanguageResolver.storedOverrideTag,
-                onSelect: { store.send(.languagePreferenceSaved($0)) },
-                onCancel: { store.send(.settingsDismissed) }
-            )
-        }
     }
 }

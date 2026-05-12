@@ -20,10 +20,10 @@ public actor MonsterDescriber {
 
     @Generable
     public struct MonsterReport: Equatable, Sendable {
-        @Guide(description: "Short fictional villain codename. 2 to 12 characters. One word or compound. No real personal names. Match the requested language. Examples: 광기두꺼비, 심연안구, 狂気ガエル, AbyssEye.")
+        @Guide(description: "Villain codename. 2-10 characters, single word or compound, no spaces or punctuation. Match the requested language.")
         public var codename: String
 
-        @Guide(description: "Punchy bestiary blurb for a fictional being. About 2-3 short sentences, totaling roughly 60-90 characters. Plain text. Funny, manga-bestiary tone. Do not repeat the codename. Do not include grade labels, names, numbers, units, or markdown. Match the requested language.")
+        @Guide(description: "One funny sentence about the monster. Max 40 characters. Plain text, no quotes, no numbers, no codename.")
         public var description: String
     }
 
@@ -112,20 +112,25 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// LLM 이 길이 가이드를 무시하는 경우가 잦아 문장 단위로 강제 자름.
-    /// ko/ja: 80자 cap, en: 180자 cap. 문장 종결 부호에서 끊고, 없으면 줄임표.
+    /// 한 문장 길이로 강제 자름. ko/ja 40자, en 90자.
     private static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 180 : 80
+        let limit: Int = (language == .en) ? 90 : 40
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
-        guard collapsed.count > limit else { return collapsed }
 
-        let head = String(collapsed.prefix(limit))
+        // 첫 종결부호까지만 — 한 문장만 살림.
         let terminators: Set<Character> = [".", "!", "?", "。", "！", "？"]
-        if let lastEnd = head.lastIndex(where: { terminators.contains($0) }) {
-            return String(head[...lastEnd]).trimmingCharacters(in: .whitespacesAndNewlines)
+        if let firstEnd = collapsed.firstIndex(where: { terminators.contains($0) }) {
+            let firstSentence = String(collapsed[...firstEnd]).trimmingCharacters(in: .whitespacesAndNewlines)
+            return enforceLimit(firstSentence, limit: limit)
         }
+        return enforceLimit(collapsed, limit: limit)
+    }
+
+    private static func enforceLimit(_ text: String, limit: Int) -> String {
+        guard text.count > limit else { return text }
+        let head = String(text.prefix(limit))
         if let lastSpace = head.lastIndex(of: " ") {
             return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
         }
@@ -170,30 +175,21 @@ public actor MonsterDescriber {
         switch language {
         case .ko:
             return """
-            너는 만화 '원펀맨' 세계관 속 가상의 히어로 협회 자료실 사서다. 새로 등록된 가상의 '괴인 캐릭터'의 코드네임(별명)과 짧은 도감 본문을 동시에 만든다. 재해 등급: 늑대급 / 호랑이급 / 귀급 / 용급 / 신급.
-
-            톤: 한국 인터넷 유머 + 만화 도감 패러디. 박장대소 가능한 어이없음/시니컬/과장. 실명이 아닌 가공 캐릭터. 절대 진지하게 쓰지 마라.
-
-            codename(별명): 한국어 2~12자 단일 토큰(공백/구두점/줄바꿈 없음). 분위기 + 특이점 살린 합성어. 예시: 광기두꺼비, 절망꼬마, 멸망연골, 입짧은신, 야근전사, 우울메기.
-            description(도감 본문): 2~3 짧은 문장, 총 60~90자. 한국어 평문. 코드네임, 등급 라벨(늑대급/호랑이급 등), 숫자, 측정값, 단위, 마크다운, 이모지, 따옴표 일체 금지. 캐릭터의 외형/분위기/능력으로만 풀어 쓰되 웃겨야 한다.
+            너는 원펀맨 세계관의 가상 괴인 도감 사서. 가상의 괴인 캐릭터 한 명에 대해:
+            - codename: 한국어 합성어 한 단어 (예: 광기두꺼비, 입짧은신, 야근전사)
+            - description: 한 문장으로 웃기게 (40자 이하, 평문)
             """
         case .ja:
             return """
-            あなたは漫画『ワンパンマン』世界のヒーロー協会・資料室司書。新たに登録された架空「怪人キャラクター」のコードネーム(別名)と短い図鑑本文を同時に作る。災害等級: 狼級 / 虎級 / 鬼級 / 竜級 / 神級。
-
-            トーン: 日本のネットスラング寄りのおふざけ+マンガ図鑑パロディ。爆笑できる呆れ/シニカル/誇張。実在人物ではなく架空キャラ。決して真面目に書くな。
-
-            codename(別名): 日本語2〜12文字の単一トークン(空白/句読点/改行なし)。雰囲気と特異点を活かした合成語。例: 狂気ガエル, 絶望チビ, 滅亡軟骨, 残業戦士, 鬱ナマズ。
-            description(図鑑本文): 2〜3 短文、合計60〜90字。日本語平文。コードネーム、等級ラベル(狼級/虎級など)、数字、測定値、単位、マークダウン、絵文字、引用符は一切出力禁止。キャラの外見/雰囲気/能力のみで、必ず笑えるよう書け。
+            あなたはワンパンマン世界の架空怪人図鑑司書。架空の怪人キャラ一体について:
+            - codename: 日本語の合成語一語 (例: 狂気ガエル, 残業戦士)
+            - description: 一文で面白く (40字以下、平文)
             """
         case .en:
             return """
-            You are a fictional Hero Association archivist from the manga 'One-Punch Man'. Generate a codename and a short bestiary blurb for a newly catalogued fictional 'mysterious being'. Disaster levels: Wolf / Tiger / Demon / Dragon / God class.
-
-            Tone: dry comedic, manga bestiary parody, absurd and snarky. The subject is a fictional character, not a real person. Never play it straight — be funny.
-
-            codename: English 2-12 chars, single token (no spaces, punctuation, line breaks). Evocative compound handle. Examples: AbyssEye, DespairTot, RuinCartilage, OvertimeWraith, SadCatfish.
-            description: 2-3 short sentences, 60-90 characters total. Plain English. Do NOT output the codename, any grade label (Wolf/Tiger/Demon/Dragon/God class), numbers, measurements, units, markdown, emoji, quotes. Describe only by appearance, atmosphere, and powers — make it funny.
+            You are a fictional One-Punch Man bestiary archivist. For one fictional monster:
+            - codename: one English compound word (e.g. AbyssEye, OvertimeWraith)
+            - description: one funny sentence (under 90 chars, plain text)
             """
         }
     }
@@ -202,23 +198,11 @@ public actor MonsterDescriber {
         let grade = gradeLabel(input.grade, language: input.language)
         switch input.language {
         case .ko:
-            return """
-            내부 참고용 재해 등급: \(grade) (이 라벨은 description 본문에 절대 쓰지 마라).
-
-            이 등급의 위협 분위기를 살린 가상 괴인 캐릭터의 codename(별명)과 짧은 도감 description 을 생성하라.
-            """
+            return "위협도: \(grade). 어울리는 가상 괴인 만들어줘."
         case .ja:
-            return """
-            内部参考用の災害等級: \(grade)（このラベルはdescription本文に絶対書くな）。
-
-            この等級の脅威の雰囲気を反映した架空怪人キャラクターのcodename(別名)と短い図鑑descriptionを生成せよ。
-            """
+            return "脅威度: \(grade)。それっぽい架空怪人を作って。"
         case .en:
-            return """
-            Internal reference disaster level: \(grade) (do NOT use this label in description body).
-
-            Generate a codename and a short bestiary description for a fictional mysterious being whose vibe matches that threat level.
-            """
+            return "Threat: \(grade). Make a matching fictional monster."
         }
     }
 }
