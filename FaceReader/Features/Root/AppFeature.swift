@@ -30,6 +30,12 @@ struct AppFeature {
         let message: String
     }
 
+    /// LLM 호출과 타임아웃의 race 결과. 첫 결과가 곧 운명.
+    private enum LLMRaceResult: Sendable {
+        case success(MonsterDescriber.MonsterReport)
+        case failure
+    }
+
     private static func activeLanguage() -> MonsterDescriber.DescriptionLanguage {
         switch LanguageResolver.effectiveResourceTag() {
         case "ko": return .ko
@@ -77,9 +83,28 @@ struct AppFeature {
                 return .run { send in
                     let describer = MonsterDescriber()
                     let input = MonsterDescriber.Input(grade: grade, language: language, ratios: ratios)
-                    do {
-                        let report = try await describer.generate(input)
-                        // LLM 이 빈 문자열을 뱉어도(특히 한국어 케이스) 폴백으로 보강.
+
+                    // LLM 호출 vs 5초 타임아웃 race — 늦거나 실패하면 폴백 경로.
+                    let raceResult: LLMRaceResult = await withTaskGroup(of: LLMRaceResult.self) { group in
+                        group.addTask {
+                            do {
+                                let report = try await describer.generate(input)
+                                return .success(report)
+                            } catch {
+                                return .failure
+                            }
+                        }
+                        group.addTask {
+                            try? await Task.sleep(nanoseconds: 5_000_000_000)
+                            return .failure
+                        }
+                        let first = await group.next() ?? .failure
+                        group.cancelAll()
+                        return first
+                    }
+
+                    switch raceResult {
+                    case .success(let report):
                         let safeCodename = report.codename.trimmingCharacters(in: .whitespacesAndNewlines)
                         let safeDescription = report.description.trimmingCharacters(in: .whitespacesAndNewlines)
                         if safeCodename.isEmpty || safeDescription.isEmpty {
@@ -95,8 +120,8 @@ struct AppFeature {
                                 description: safeDescription
                             ))))
                         }
-                    } catch {
-                        await send(.reportReady(.failure(ReportFailure(message: String(describing: error)))))
+                    case .failure:
+                        await send(.reportReady(.failure(ReportFailure(message: "llm-timeout-or-error"))))
                     }
                 }
 
