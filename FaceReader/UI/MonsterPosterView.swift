@@ -132,15 +132,12 @@ public struct MonsterPosterView: View {
                 Spacer(minLength: 0)
 
                 // 현상금 — 타이프라이터 톤 + 외곽선 박스.
-                // 내부 padding: 텍스트와 테두리 사이.
-                // .padding(.top, 16): 위 설명과 박스 사이 간격.
-                // 마지막 .padding(.horizontal, 24): 박스 외부 좌우 여백 (가장자리에서 떨어짐).
                 Text(formattedScoreText)
-                    .font(.posterBounty(44))
+                    .font(.posterBounty(54))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.5)
                     .lineLimit(1)
-                    .padding(.horizontal, 24)
+                    .padding(.horizontal, 22)
                     .padding(.vertical, 12)
                     .overlay(
                         Rectangle()
@@ -159,43 +156,16 @@ public struct MonsterPosterView: View {
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 
-    /// 설명 폰트 크기 — 영문/한국어가 같은 트랙(영문 기준), 일본어만 별도 CJK 트랙.
+    /// 설명 폰트 크기 — 영문/한국어/일본어 단일 트랙. 글자수만 본다.
+    /// 글자 폭이 다른 언어 차이는 minimumScaleFactor 가 흡수.
     private static func descriptionFontSize(for text: String) -> CGFloat {
         let count = text.count
-        guard count > 0 else { return 24 }
-
-        var asciiCount = 0
-        var hangulCount = 0
-        for scalar in text.unicodeScalars {
-            let v = scalar.value
-            if v < 128 {
-                asciiCount += 1
-            } else if v >= 0xAC00 && v <= 0xD7A3 {
-                hangulCount += 1
-            }
-        }
-        let followsLatinTrack = Double(asciiCount) / Double(count) > 0.5
-            || Double(hangulCount) / Double(count) > 0.3
-
-        if followsLatinTrack {
-            // 영문 + 한국어 — 한국어도 영어 기준 사이즈 단계를 따름.
-            switch count {
-            case 0 ... 35:    return 30
-            case 36 ... 65:   return 26
-            case 66 ... 95:   return 23
-            case 96 ... 125:  return 20
-            default:          return 18
-            }
-        } else {
-            // 일본어 (Yusei Magic / Hira Maru) — CJK 단계.
-            switch count {
-            case 0 ... 15:  return 30
-            case 16 ... 25: return 26
-            case 26 ... 40: return 22
-            case 41 ... 55: return 19
-            case 56 ... 70: return 17
-            default:        return 15
-            }
+        switch count {
+        case 0 ... 35:    return 30
+        case 36 ... 65:   return 26
+        case 66 ... 95:   return 23
+        case 96 ... 125:  return 20
+        default:          return 18
         }
     }
 
