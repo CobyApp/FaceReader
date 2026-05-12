@@ -115,7 +115,7 @@ public actor MonsterDescriber {
     }
 
     /// 포스터에 들어갈 길이 cap. 가능하면 문장 종결부호(. ! ? 。 ！ ？) 안쪽에서 끊어
-    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 80자 — 영어는 더 짧게.
+    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 80자.
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
         let limit: Int = (language == .en) ? 80 : 60
         let collapsed = raw

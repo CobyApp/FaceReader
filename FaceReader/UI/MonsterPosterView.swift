@@ -102,26 +102,32 @@ public struct MonsterPosterView: View {
                 .padding(.horizontal, pad)
                 .padding(.top, 8)
 
+                // 코드네임 — 1줄 고정. 긴 영문 코드네임은 minScale 로 자동 축소.
                 Text(nicknameLine)
                     .font(.posterApp(44))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(2)
+                    .minimumScaleFactor(0.45)
+                    .lineLimit(1)
                     .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 14)
+                    .frame(height: 56)
+                    .padding(.top, 12)
                     .padding(.horizontal, 24)
 
-                if let descriptionText, !descriptionText.isEmpty {
-                    Text(descriptionText)
-                        .font(.posterApp(19))
-                        .foregroundStyle(Color.appBrown.opacity(0.92))
-                        .multilineTextAlignment(.center)
-                        .lineLimit(nil)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, 28)
-                        .padding(.top, 6)
+                // 설명 — 고정 박스(2~3줄 분량) 안에서 텍스트 길이에 따라 폰트 자동 조정.
+                // 다른 요소는 모두 고정 사이즈/위치 유지.
+                Group {
+                    if let descriptionText, !descriptionText.isEmpty {
+                        Text(descriptionText)
+                            .font(.posterApp(Self.descriptionFontSize(for: descriptionText)))
+                            .foregroundStyle(Color.appBrown.opacity(0.92))
+                            .multilineTextAlignment(.center)
+                            .lineLimit(3)
+                            .minimumScaleFactor(0.6)
+                    }
                 }
+                .frame(height: 80, alignment: .center)
+                .padding(.horizontal, 28)
+                .padding(.top, 8)
 
                 Spacer(minLength: 0)
 
@@ -151,6 +157,19 @@ public struct MonsterPosterView: View {
             }
         }
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
+    }
+
+    /// 설명 텍스트 길이에 따라 폰트 크기를 자동 결정. 다른 요소는 고정 위치 유지하기 위함.
+    /// 영문은 같은 문자 수여도 글자 폭이 좁아 한국어/일본어 보다 살짝 큰 폰트로 시작.
+    private static func descriptionFontSize(for text: String) -> CGFloat {
+        let count = text.count
+        switch count {
+        case 0 ... 18:  return 24
+        case 19 ... 30: return 20
+        case 31 ... 45: return 17
+        case 46 ... 60: return 15
+        default:        return 13
+        }
     }
 
     /// 포스터 안쪽에 사용하는 KitschStamp 의 고정-사이즈 버전.
