@@ -125,18 +125,23 @@ public struct MonsterPosterView: View {
 
                 Spacer(minLength: 0)
 
-                // 현상금 — 타이프라이터 톤 + 외곽선 박스. 텍스트와 테두리 사이 여백 넉넉히.
+                // 현상금 — 타이프라이터 톤 + 외곽선 박스.
+                // 내부 padding: 텍스트와 테두리 사이.
+                // .padding(.top, 16): 위 설명과 박스 사이 간격.
+                // 마지막 .padding(.horizontal, 24): 박스 외부 좌우 여백 (가장자리에서 떨어짐).
                 Text(formattedScoreText)
-                    .font(.posterBounty(48))
+                    .font(.posterBounty(44))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.55)
+                    .minimumScaleFactor(0.5)
                     .lineLimit(1)
-                    .padding(.horizontal, 28)
+                    .padding(.horizontal, 24)
                     .padding(.vertical, 12)
                     .overlay(
                         Rectangle()
                             .stroke(Color.appBrown, lineWidth: 3)
                     )
+                    .padding(.top, 16)
+                    .padding(.horizontal, 24)
                     .padding(.bottom, 22)
             }
             .frame(width: Self.canvasWidth, height: Self.canvasHeight, alignment: .top)
