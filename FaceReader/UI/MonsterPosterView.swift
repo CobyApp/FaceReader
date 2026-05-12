@@ -69,13 +69,13 @@ public struct MonsterPosterView: View {
                 .resizable(resizingMode: .tile)
             VStack(spacing: 0) {
                 Text(posterWantedText)
-                    .font(.posterDisplay(96))
+                    .font(.posterDisplay(88))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.35)
+                    .minimumScaleFactor(0.45)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 14)
-                    .padding(.horizontal, pad * 0.5)
+                    .padding(.horizontal, 16)
 
                 Group {
                     if let faceImage {
@@ -103,40 +103,41 @@ public struct MonsterPosterView: View {
                 .padding(.top, 8)
 
                 Text(nicknameLine)
-                    .font(.posterApp(52))
+                    .font(.posterApp(44))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.5)
-                    .lineLimit(1)
+                    .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .padding(.top, 16)
-                    .padding(.horizontal, pad)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 14)
+                    .padding(.horizontal, 24)
 
                 if let descriptionText, !descriptionText.isEmpty {
                     Text(descriptionText)
-                        .font(.posterApp(20))
+                        .font(.posterApp(19))
                         .foregroundStyle(Color.appBrown.opacity(0.92))
                         .multilineTextAlignment(.center)
                         .lineLimit(nil)
                         .fixedSize(horizontal: false, vertical: true)
-                        .padding(.horizontal, pad)
-                        .padding(.top, 8)
+                        .padding(.horizontal, 28)
+                        .padding(.top, 6)
                 }
 
                 Spacer(minLength: 0)
 
-                // 현상금 — 타이프라이터 톤으로 'official' 느낌. 외곽선으로 강조.
+                // 현상금 — 타이프라이터 톤 + 외곽선 박스. 텍스트와 테두리 사이 여백 넉넉히.
                 Text(formattedScoreText)
-                    .font(.posterBounty(54))
+                    .font(.posterBounty(48))
                     .foregroundStyle(Color.appBrown)
-                    .minimumScaleFactor(0.5)
+                    .minimumScaleFactor(0.55)
                     .lineLimit(1)
-                    .padding(.horizontal, 18)
-                    .padding(.vertical, 6)
+                    .padding(.horizontal, 28)
+                    .padding(.vertical, 12)
                     .overlay(
                         Rectangle()
                             .stroke(Color.appBrown, lineWidth: 3)
                     )
-                    .padding(.bottom, 18)
+                    .padding(.bottom, 22)
             }
             .frame(width: Self.canvasWidth, height: Self.canvasHeight, alignment: .top)
 
