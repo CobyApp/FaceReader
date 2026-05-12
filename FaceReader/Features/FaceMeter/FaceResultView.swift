@@ -49,7 +49,13 @@ public struct FaceResultView: View {
             customTopBar
 
             GeometryReader { proxy in
-                ScrollView([.vertical, .horizontal], showsIndicators: false) {
+                // 디스플레이만 화면 너비에 맞춰 스케일. 캡처 출력은 여전히 1080×1920 고정.
+                let canvasW = MonsterPosterView.canvasWidth
+                let canvasH = MonsterPosterView.canvasHeight
+                let scale = max(0.01, proxy.size.width / canvasW)
+                let displayH = canvasH * scale
+
+                ScrollView(.vertical, showsIndicators: false) {
                     MonsterPosterView(
                         faceImage: posterUIImage,
                         nicknameLine: nicknameDisplay,
@@ -58,11 +64,13 @@ public struct FaceResultView: View {
                         descriptionText: loadedDescription,
                         gradeStamp: gradeStamp
                     )
-                    .frame(width: MonsterPosterView.canvasWidth, height: MonsterPosterView.canvasHeight)
-                    .padding(.horizontal, max(0, (proxy.size.width - MonsterPosterView.canvasWidth) / 2))
-                    .padding(.vertical, max(0, (proxy.size.height - MonsterPosterView.canvasHeight) / 2))
+                    .frame(width: canvasW, height: canvasH)
+                    .scaleEffect(scale, anchor: .topLeading)
+                    // 스케일된 시각 크기를 외곽 frame 으로 잡아 ScrollView 내용 크기 고정 → 가로 드래그 차단.
+                    .frame(width: proxy.size.width, height: displayH, alignment: .topLeading)
                     .glitchTracking(active: revealActive, intensity: revealIntensity, duration: 0.6)
                 }
+                .scrollBounceBehavior(.basedOnSize)
             }
         }
         .background(Color.appBackground.ignoresSafeArea())
