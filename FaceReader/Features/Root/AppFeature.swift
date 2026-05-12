@@ -53,6 +53,7 @@ struct AppFeature {
                 }
                 state.pendingReport = PendingReport(box: state.sessionBox, posterImageData: data)
                 let grade = state.sessionBox.session.grade
+                let ratios = state.sessionBox.session.lastRatios
                 let language: MonsterDescriber.DescriptionLanguage = {
                     switch LanguageResolver.effectiveResourceTag() {
                     case "ko": return .ko
@@ -62,7 +63,7 @@ struct AppFeature {
                 }()
                 return .run { send in
                     let describer = MonsterDescriber()
-                    let input = MonsterDescriber.Input(grade: grade, language: language)
+                    let input = MonsterDescriber.Input(grade: grade, language: language, ratios: ratios)
                     do {
                         let report = try await describer.generate(input)
                         await send(.reportReady(.success(FaceResultFeature.ReportPayload(

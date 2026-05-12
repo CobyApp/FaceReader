@@ -30,10 +30,12 @@ public actor MonsterDescriber {
     public struct Input: Sendable {
         public let grade: Int
         public let language: DescriptionLanguage
+        public let ratios: FaceMeasureSession.RatioSnapshot?
 
-        public init(grade: Int, language: DescriptionLanguage) {
+        public init(grade: Int, language: DescriptionLanguage, ratios: FaceMeasureSession.RatioSnapshot? = nil) {
             self.grade = grade
             self.language = language
+            self.ratios = ratios
         }
     }
 
@@ -196,13 +198,93 @@ public actor MonsterDescriber {
 
     private static func userPrompt(_ input: Input) -> String {
         let grade = gradeLabel(input.grade, language: input.language)
+        let hints = input.ratios.map { featureHints(for: $0, language: input.language) } ?? []
+        let hintsText = hints.joined(separator: ", ")
+
         switch input.language {
         case .ko:
-            return "위협도: \(grade). 어울리는 가상 괴인 만들어줘."
+            let featureLine = hints.isEmpty ? "" : " 특징: \(hintsText)."
+            return "위협도: \(grade).\(featureLine) 이걸로 한 문장만 웃기게 만들어줘."
         case .ja:
-            return "脅威度: \(grade)。それっぽい架空怪人を作って。"
+            let featureLine = hints.isEmpty ? "" : " 特徴: \(hintsText)。"
+            return "脅威度: \(grade)。\(featureLine)これで一文だけ面白く作って。"
         case .en:
-            return "Threat: \(grade). Make a matching fictional monster."
+            let featureLine = hints.isEmpty ? "" : " Traits: \(hintsText)."
+            return "Threat: \(grade).\(featureLine) Write one funny sentence."
+        }
+    }
+
+    /// 비율 → 사람말 특징 키워드 (정상 범위에서 벗어난 항목만). 숫자/측정 표현을 LLM 에 노출하지 않아
+    /// 안전 가드레일을 자극하지 않고도 외형 양념을 제공.
+    private static func featureHints(for ratios: FaceMeasureSession.RatioSnapshot, language: DescriptionLanguage) -> [String] {
+        var hints: [String] = []
+
+        // 눈 간격 (target 1.1)
+        if ratios.eyeRatio > 1.30 {
+            hints.append(localized(.eyesWide, language))
+        } else if ratios.eyeRatio < 0.90 {
+            hints.append(localized(.eyesClose, language))
+        }
+        // 코 비율 (target 0.6)
+        if ratios.noseRatio > 0.75 {
+            hints.append(localized(.noseWide, language))
+        } else if ratios.noseRatio < 0.45 {
+            hints.append(localized(.noseNarrow, language))
+        }
+        // 입 비율 (target 2.6)
+        if ratios.lipsRatio > 3.50 {
+            hints.append(localized(.mouthWide, language))
+        } else if ratios.lipsRatio < 1.80 {
+            hints.append(localized(.mouthSmall, language))
+        }
+        // 얼굴 상하 비율 (target 1.1)
+        if ratios.faceRatio > 1.40 {
+            hints.append(localized(.foreheadLong, language))
+        } else if ratios.faceRatio < 0.80 {
+            hints.append(localized(.chinLong, language))
+        }
+
+        return hints
+    }
+
+    private enum FeatureKey {
+        case eyesWide, eyesClose, noseWide, noseNarrow
+        case mouthWide, mouthSmall, foreheadLong, chinLong
+    }
+
+    private static func localized(_ key: FeatureKey, _ language: DescriptionLanguage) -> String {
+        switch (key, language) {
+        case (.eyesWide, .ko): return "양눈이 멀리 떨어진"
+        case (.eyesWide, .ja): return "両眼が離れた"
+        case (.eyesWide, .en): return "wide-set eyes"
+
+        case (.eyesClose, .ko): return "양눈이 모인"
+        case (.eyesClose, .ja): return "両眼が寄った"
+        case (.eyesClose, .en): return "close-set eyes"
+
+        case (.noseWide, .ko): return "코가 옆으로 퍼진"
+        case (.noseWide, .ja): return "鼻が横に広い"
+        case (.noseWide, .en): return "wide flat nose"
+
+        case (.noseNarrow, .ko): return "코가 길쭉한"
+        case (.noseNarrow, .ja): return "鼻が細長い"
+        case (.noseNarrow, .en): return "narrow long nose"
+
+        case (.mouthWide, .ko): return "입이 옆으로 늘어진"
+        case (.mouthWide, .ja): return "口が横に伸びた"
+        case (.mouthWide, .en): return "wide stretched mouth"
+
+        case (.mouthSmall, .ko): return "입이 작고 동그란"
+        case (.mouthSmall, .ja): return "口が小さく丸い"
+        case (.mouthSmall, .en): return "small round mouth"
+
+        case (.foreheadLong, .ko): return "이마가 시원하게 넓은"
+        case (.foreheadLong, .ja): return "おでこが広い"
+        case (.foreheadLong, .en): return "tall forehead"
+
+        case (.chinLong, .ko): return "턱이 길쭉한"
+        case (.chinLong, .ja): return "顎が長い"
+        case (.chinLong, .en): return "long chin"
         }
     }
 }
