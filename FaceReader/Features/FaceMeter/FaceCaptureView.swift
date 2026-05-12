@@ -37,7 +37,7 @@ public struct FaceCaptureView: View {
     @StateObject private var engine: FaceCaptureEngine
     @ObservedObject private var prefs = VHSEffectsPreferences.shared
     @State private var isProcessing = false
-    @State private var showNeedFaceAlert = false
+    @State private var showNeedFaceToast = false
 
     // MARK: - Constants
 
@@ -85,6 +85,13 @@ public struct FaceCaptureView: View {
                 if isProcessing {
                     processingOverlay(size: geo.size)
                 }
+
+                if showNeedFaceToast {
+                    needFaceToast
+                        .position(x: geo.size.width / 2, y: layout.viewport.maxY + 28)
+                        .transition(.opacity)
+                        .allowsHitTesting(false)
+                }
             }
             // 최상단 — top bar 는 마지막에 와서 항상 hit-test 우선권을 가짐.
             .overlay(alignment: .top) {
@@ -95,8 +102,34 @@ public struct FaceCaptureView: View {
         .ignoresSafeArea()
         .onAppear { engine.start() }
         .onDisappear { engine.stop() }
-        .alert(L10n.toastCaptureFace, isPresented: $showNeedFaceAlert) {
-            Button(L10n.btnOk, role: .cancel) {}
+    }
+
+    /// 알림 버튼이 잘 안 눌리는 케이스 대신 사용하는 자동 소멸 토스트.
+    @ViewBuilder
+    private var needFaceToast: some View {
+        Text(L10n.toastCaptureFace)
+            .font(.app(14))
+            .fontWeight(.semibold)
+            .foregroundStyle(Self.ink)
+            .multilineTextAlignment(.center)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+            .background(Capsule().fill(Color.black.opacity(0.82)))
+            .overlay(Capsule().stroke(Self.ink.opacity(0.4), lineWidth: 1))
+            .shadow(color: Color.black.opacity(0.35), radius: 6, y: 3)
+    }
+
+    private func showNeedFaceToastTransiently() {
+        withAnimation(.easeInOut(duration: 0.18)) {
+            showNeedFaceToast = true
+        }
+        Task {
+            try? await Task.sleep(nanoseconds: 1_600_000_000)
+            await MainActor.run {
+                withAnimation(.easeInOut(duration: 0.18)) {
+                    showNeedFaceToast = false
+                }
+            }
         }
     }
 
@@ -235,11 +268,11 @@ public struct FaceCaptureView: View {
 
     private func captureTapped() {
         guard box.session.hasMinimumLandmarksForCapture else {
-            showNeedFaceAlert = true
+            showNeedFaceToastTransiently()
             return
         }
         guard let frame = engine.latestCartoonFrameForCapture() else {
-            showNeedFaceAlert = true
+            showNeedFaceToastTransiently()
             return
         }
         isProcessing = true
