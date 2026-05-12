@@ -113,7 +113,7 @@ public struct MonsterPosterView: View {
                     .padding(.top, 12)
                     .padding(.horizontal, 24)
 
-                // 설명 — 고정 박스(2~3줄 분량) 안에서 텍스트 길이에 따라 폰트 자동 조정.
+                // 설명 — 고정 박스(2~4줄) 안에서 텍스트 길이에 따라 폰트 자동 조정.
                 // 다른 요소는 모두 고정 사이즈/위치 유지.
                 Group {
                     if let descriptionText, !descriptionText.isEmpty {
@@ -121,11 +121,11 @@ public struct MonsterPosterView: View {
                             .font(.posterApp(Self.descriptionFontSize(for: descriptionText)))
                             .foregroundStyle(Color.appBrown.opacity(0.92))
                             .multilineTextAlignment(.center)
-                            .lineLimit(3)
-                            .minimumScaleFactor(0.6)
+                            .lineLimit(4)
+                            .minimumScaleFactor(0.5)
                     }
                 }
-                .frame(height: 80, alignment: .center)
+                .frame(height: 96, alignment: .center)
                 .padding(.horizontal, 28)
                 .padding(.top, 8)
 
@@ -159,16 +159,17 @@ public struct MonsterPosterView: View {
         .frame(width: Self.canvasWidth, height: Self.canvasHeight)
     }
 
-    /// 설명 텍스트 길이에 따라 폰트 크기를 자동 결정. 다른 요소는 고정 위치 유지하기 위함.
-    /// 영문은 같은 문자 수여도 글자 폭이 좁아 한국어/일본어 보다 살짝 큰 폰트로 시작.
+    /// 설명 텍스트 길이에 따라 폰트 크기를 자동 결정. 다른 요소는 고정 위치 유지.
+    /// 2문장(35~65자 한국/일본, 70~110자 영문) 기본 가정.
     private static func descriptionFontSize(for text: String) -> CGFloat {
         let count = text.count
         switch count {
-        case 0 ... 18:  return 24
-        case 19 ... 30: return 20
-        case 31 ... 45: return 17
-        case 46 ... 60: return 15
-        default:        return 13
+        case 0 ... 25:  return 22
+        case 26 ... 40: return 19
+        case 41 ... 55: return 17
+        case 56 ... 75: return 15
+        case 76 ... 95: return 13
+        default:        return 12
         }
     }
 

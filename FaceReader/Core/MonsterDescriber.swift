@@ -115,9 +115,9 @@ public actor MonsterDescriber {
     }
 
     /// 포스터에 들어갈 길이 cap. 가능하면 문장 종결부호(. ! ? 。 ！ ？) 안쪽에서 끊어
-    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 80자.
+    /// 완결된 문장 느낌 유지. ko/ja: 65자, en: 110자 — 2문장 들어갈 만큼 여유.
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 80 : 60
+        let limit: Int = (language == .en) ? 110 : 65
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -181,27 +181,27 @@ public actor MonsterDescriber {
         case .ko:
             langName = "Korean"
             exCodename = "광기두꺼비"
-            exDescription = "B급 영웅 셋의 점심을 동시에 망쳤다."
-            descGuide = "ONE complete Korean sentence ending with '.', under 35 characters"
+            exDescription = "B급 영웅 셋의 점심을 망쳤다. 회식 자리에 매번 출몰한다."
+            descGuide = "TWO short complete Korean sentences, each ending with '.', combined 40-55 characters. Each sentence is a different absurd detail"
         case .ja:
             langName = "Japanese"
             exCodename = "狂気ガエル"
-            exDescription = "B級ヒーローの昼休みを同時に潰した。"
-            descGuide = "ONE complete Japanese sentence ending with '。', under 30 characters"
+            exDescription = "B級ヒーローの昼休みを潰した。飲み会には毎回現れる。"
+            descGuide = "TWO short complete Japanese sentences, each ending with '。', combined 35-50 characters. Each sentence is a different absurd detail"
         case .en:
             langName = "English"
             exCodename = "MadToad"
-            exDescription = "Ruined lunch for three B-class heroes at once."
-            descGuide = "ONE complete English sentence ending with '.', under 55 characters"
+            exDescription = "Ruined lunch for three B-class heroes. Always shows up at the staff dinner."
+            descGuide = "TWO short complete English sentences, each ending with '.', combined 70-100 characters. Each sentence is a different absurd detail"
         }
 
         return """
-        You are an archivist at the fictional 'Monster Association' in the manga 'One-Punch Man'. Generate a One-Punch Man-flavored 怪人 character — absurd, slightly cursed, manga-bestiary humor (the kind of dumb low-stakes weirdo monster that S-class heroes wouldn't even bother showing up for).
+        You are an archivist at the fictional 'Monster Association' in the manga 'One-Punch Man'. Generate a 怪人 character entry — absurd, slightly cursed, manga-bestiary humor (the kind of dumb low-stakes weirdo monster that S-class heroes wouldn't even bother showing up for).
 
         OUTPUT LANGUAGE: \(langName) ONLY. Both fields in \(langName).
 
         codename: short \(langName) compound. Mash mundane stuff with cosmic threat for absurd contrast.
-        description: \(descGuide). Manga-bestiary tone, dry and stupid-funny. Reference OPM tropes if natural — hero class letters (C/B/A/S), normal punch series, 영웅 협회 / ヒーロー協会 / Hero Association as background. Plain text only — no markdown, no quotes, no emoji, no numbers like '12345', no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. MUST end with a final period.
+        description: \(descGuide). Manga-bestiary tone, dry and stupid-funny. Combine TWO different vibes — e.g. one mundane habit + one threat detail, or one appearance trait + one weird power. Reference OPM tropes if natural — hero class letters (C/B/A/S), normal punch series, 영웅 협회 / ヒーロー協会 / Hero Association. Plain text only — no markdown, no quotes, no emoji, no numbers like '12345', no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. EACH sentence MUST end with a period — never dangling.
 
         Example output (\(langName)):
         codename: \(exCodename)
