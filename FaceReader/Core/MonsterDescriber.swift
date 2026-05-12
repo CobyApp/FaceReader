@@ -114,16 +114,22 @@ public actor MonsterDescriber {
         return trimmed
     }
 
-    /// 포스터 2~3줄에 자연스럽게 들어갈 길이 cap. 줄임표(…) 안 붙임.
-    /// 포스터 너비 350pt, 글자 22pt 기준 한국어/일본어 ~15자/줄, 영어 ~30자/줄.
-    /// ko/ja: 45자(약 3줄), en: 100자(약 3줄).
+    /// 포스터에 들어갈 길이 cap. 가능하면 문장 종결부호(. ! ? 。 ！ ？) 안쪽에서 끊어
+    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 130자 — LLM 일반 응답이 거의 통째로 통과.
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 100 : 45
+        let limit: Int = (language == .en) ? 130 : 60
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
         guard collapsed.count > limit else { return collapsed }
+
         let head = String(collapsed.prefix(limit))
+        let terminators: Set<Character> = [".", "!", "?", "。", "！", "？"]
+        // 1순위: 한도 내 마지막 종결부호까지 (그 부호 포함). 완결된 한 문장.
+        if let lastTerm = head.lastIndex(where: { terminators.contains($0) }) {
+            return String(head[...lastTerm]).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        // 2순위: 단어 경계.
         if let lastSpace = head.lastIndex(of: " ") {
             return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines)
         }
@@ -176,26 +182,26 @@ public actor MonsterDescriber {
             langName = "Korean"
             exCodename = "광기두꺼비"
             exDescription = "신호등을 점멸시키는 청개구리."
-            descGuide = "ONE short Korean sentence, around 15-25 characters total"
+            descGuide = "ONE complete Korean sentence ending with '.', under 35 characters. Must be a finished sentence — never cut off mid-clause"
         case .ja:
             langName = "Japanese"
             exCodename = "狂気ガエル"
             exDescription = "信号機を点滅させるカエル。"
-            descGuide = "ONE short Japanese sentence, around 12-20 characters total"
+            descGuide = "ONE complete Japanese sentence ending with '。', under 30 characters. Must be a finished sentence — never cut off mid-clause"
         case .en:
             langName = "English"
             exCodename = "MadToad"
             exDescription = "A frog that flickers traffic lights."
-            descGuide = "ONE short English sentence, around 30-50 characters total"
+            descGuide = "ONE complete English sentence ending with '.', under 80 characters. Must be a finished sentence — never cut off mid-clause"
         }
 
         return """
-        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a very short description.
+        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a short complete description.
 
         OUTPUT LANGUAGE: \(langName) ONLY. Both fields must be written in \(langName).
 
         codename: a short single word or compound in \(langName). Avoid real personal names. No spaces, no punctuation.
-        description: \(descGuide). Funny tone. Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. Keep it punchy and short.
+        description: \(descGuide). Funny tone. Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. The sentence MUST end with a final period — do not leave it dangling.
 
         Example output (\(langName)):
         codename: \(exCodename)
