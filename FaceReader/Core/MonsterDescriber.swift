@@ -83,7 +83,7 @@ public actor MonsterDescriber {
             let raw = response.content
             return MonsterReport(
                 codename: Self.sanitizeCodename(raw.codename),
-                description: Self.sanitize(raw.description)
+                description: Self.clampDescription(Self.sanitize(raw.description), language: input.language)
             )
         } catch let error as LanguageModelSession.GenerationError {
             switch error {
@@ -110,6 +110,26 @@ public actor MonsterDescriber {
             return String(trimmed.dropFirst().dropLast()).trimmingCharacters(in: .whitespacesAndNewlines)
         }
         return trimmed
+    }
+
+    /// LLM 이 길이 가이드를 무시하는 경우가 잦아 문장 단위로 강제 자름.
+    /// ko/ja: 80자 cap, en: 180자 cap. 문장 종결 부호에서 끊고, 없으면 줄임표.
+    private static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
+        let limit: Int = (language == .en) ? 180 : 80
+        let collapsed = raw
+            .replacingOccurrences(of: "\n", with: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        guard collapsed.count > limit else { return collapsed }
+
+        let head = String(collapsed.prefix(limit))
+        let terminators: Set<Character> = [".", "!", "?", "。", "！", "？"]
+        if let lastEnd = head.lastIndex(where: { terminators.contains($0) }) {
+            return String(head[...lastEnd]).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        if let lastSpace = head.lastIndex(of: " ") {
+            return String(head[..<lastSpace]).trimmingCharacters(in: .whitespacesAndNewlines) + "…"
+        }
+        return head.trimmingCharacters(in: .whitespacesAndNewlines) + "…"
     }
 
     private static func sanitizeCodename(_ raw: String) -> String {

@@ -49,6 +49,49 @@ public final class FaceMeasureSession {
 
     public init() {}
 
+    // MARK: - Scoring
+
+    /// 정상값(target)과 가중치(weight)를 한 곳에 모아 둠.
+    /// 가중치는 보수적으로 — 가만히 있는 얼굴은 늑대급에 머무르고, 얼굴을 일그러뜨려야 위로 올라가도록.
+    private static let eyeTarget: Double = 1.1
+    private static let noseTarget: Double = 0.6
+    private static let lipsTarget: Double = 2.6
+    private static let faceTarget: Double = 1.1
+
+    private static let eyeWeight: Double = 2_500   // 양안거리 비율
+    private static let noseWeight: Double = 2_500  // 코폭/코높이
+    private static let lipsWeight: Double = 1_200  // 입가로/입세로 (편차 폭이 가장 커서 가중치 낮음)
+    private static let faceWeight: Double = 2_500  // 윗얼굴/아래얼굴
+
+    /// 등급 경계 — score 가 (-inf, t0) → 늑대, [t0, t1) → 호랑이, ..., [t3, +inf) → 신.
+    private static let gradeThresholds: [Int] = [
+        2_500_000,   // < 2.5M  → 늑대급
+        6_000_000,   // < 6M    → 호랑이급
+        12_000_000,  // < 12M   → 귀급
+        22_000_000,  // < 22M   → 용급
+                     // ≥ 22M   → 신급
+    ]
+
+    private static func score(eyeRatio: Double, noseRatio: Double, lipsRatio: Double, faceRatio: Double) -> Int {
+        let parts: [(Double, Double, Double)] = [
+            (eyeRatio, eyeTarget, eyeWeight),
+            (noseRatio, noseTarget, noseWeight),
+            (lipsRatio, lipsTarget, lipsWeight),
+            (faceRatio, faceTarget, faceWeight),
+        ]
+        let raw = parts.reduce(0) { acc, p in
+            acc + Int(abs(p.0 - p.1) * p.2) * 1_000
+        }
+        return raw
+    }
+
+    private static func grade(forScore score: Int) -> Int {
+        for (i, threshold) in gradeThresholds.enumerated() {
+            if score < threshold { return i }
+        }
+        return gradeThresholds.count // 4 = 신급
+    }
+
     public var hasMinimumLandmarksForCapture: Bool {
         leftEye != nil
     }
@@ -89,27 +132,12 @@ public final class FaceMeasureSession {
             faceRatio: faceRatio
         )
 
-        // 기존 가중치(20_000 / 20_000 / 10_000 / 20_000)는 정상 얼굴도 즉시 30M+ 로 치솟아
-        // 거의 모두 신급/용급으로 가는 문제 → ~25% 수준으로 낮춰 보수적으로 계산.
-        let eyeRatioScore = Int(abs(eyeRatio - 1.1) * 5_000) * 1_000
-        let noseRatioScore = Int(abs(noseRatio - 0.6) * 5_000) * 1_000
-        let lipsRatioScore = Int(abs(lipsRatio - 2.6) * 2_500) * 1_000
-        let faceRatioScore = Int(abs(faceRatio - 1.1) * 5_000) * 1_000
-
-        let score = eyeRatioScore + noseRatioScore + lipsRatioScore + faceRatioScore
-        totalScore = score
-
-        // 임계값도 같이 조정: 가만히 있으면 늑대/호랑이, 일그러뜨려야 위로 올라감.
-        if score < 2_000_000 {
-            grade = 0       // 늑대급
-        } else if score < 5_000_000 {
-            grade = 1       // 호랑이급
-        } else if score < 9_000_000 {
-            grade = 2       // 귀급
-        } else if score < 15_000_000 {
-            grade = 3       // 용급
-        } else {
-            grade = 4       // 신급
-        }
+        totalScore = Self.score(
+            eyeRatio: eyeRatio,
+            noseRatio: noseRatio,
+            lipsRatio: lipsRatio,
+            faceRatio: faceRatio
+        )
+        grade = Self.grade(forScore: totalScore)
     }
 }
