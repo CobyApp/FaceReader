@@ -58,7 +58,7 @@ public struct MonsterPosterView: View {
                 .resizable(resizingMode: .tile)
             VStack(spacing: 0) {
                 Text(posterWantedText)
-                    .font(.posterApp(100))
+                    .font(.posterDisplay(100))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.35)
                     .lineLimit(1)
@@ -112,7 +112,7 @@ public struct MonsterPosterView: View {
                 Spacer(minLength: 0)
 
                 Text(formattedScoreText)
-                    .font(.posterApp(50))
+                    .font(.posterDisplay(50))
                     .foregroundStyle(Color.appBrown)
                     .minimumScaleFactor(0.45)
                     .padding(.horizontal, pad)

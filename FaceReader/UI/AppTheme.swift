@@ -56,49 +56,58 @@ extension Color {
 }
 
 extension Font {
-    /// Japanese UI: rounded gothic (bundled). Matches `LanguageResolver` active tag `ja`.
+    /// Japanese UI 본문 — 가능하면 ヒラギノ丸ゴ (iOS 시스템 둥근 고딕) 우선, 번들 KosugiMaru 폴백.
+    /// 둘 다 평범한 office 톤보다는 살짝 친근한 둥근 고딕.
     private static let japaneseAppFontCandidates: [String] = [
-        "KosugiMaru-Regular",
-        "MPLUSRounded1c-Bold",
-        "MPLUSRounded1c-Medium",
-        "ZenMaruGothic-Bold",
-        "ZenMaruGothic-Medium",
-        "YuseiMagic-Regular",
-        "SangSangAnt",
+        "HiraMaruProN-W4",          // ヒラギノ丸ゴ ProN W4 — 둥글둥글 귀여움
+        "ToppanBunkyuMidashiGothicStdN-ExtraBold",
+        "TsukushiAMaruGothic-Bold",
+        "KosugiMaru-Regular",       // 번들 폴백
     ]
 
-    /// English / Korean UI: SangSangAnt first; optional extra faces if not bundled.
+    /// Korean / English UI 본문 — SangSangAnt (번들 손글씨) 우선.
     private static let latinKoreanAppFontCandidates: [String] = [
         "SangSangAnt",
-        "MPLUSRounded1c-Bold",
-        "MPLUSRounded1c-Medium",
-        "ZenMaruGothic-Bold",
-        "ZenMaruGothic-Medium",
-        "YuseiMagic-Regular",
+        "ChalkboardSE-Bold",        // 영문 폴백, 코믹/둥글한 톤
+        "MarkerFelt-Wide",
+        "Noteworthy-Bold",
     ]
 
-    /// Custom display font scaled for the current iPhone width. Font family follows active app language (`LanguageResolver`).
+    /// 포스터의 WANTED · 현상금 같은 라틴/숫자 디스플레이 — 언어 무관 항상 동일.
+    /// 코믹 wanted-poster 톤 (마커펜/분필 손글씨).
+    private static let posterDisplayCandidates: [String] = [
+        "MarkerFelt-Wide",
+        "ChalkboardSE-Bold",
+        "Noteworthy-Bold",
+        "BradleyHandITCTT-Bold",
+    ]
+
+    /// 디바이스 폭에 따라 스케일된 본문 폰트. 언어별 캐스케이드.
     public static func app(_ size: CGFloat) -> Font {
-        let s = PhoneLayout.scaledFontSize(size)
-        return appUnscaled(s)
+        appCascade(size: PhoneLayout.scaledFontSize(size), candidates: bodyCandidatesForActiveLanguage())
     }
 
-    /// Same font family selection but no per-device scaling. Used for fixed-size canvases (e.g., 현상금 포스터)
-    /// so output looks identical on every iPhone.
+    /// 디바이스 무관 고정 크기 — 포스터 본문 (닉네임/설명) 용. 언어별 캐스케이드.
     public static func posterApp(_ size: CGFloat) -> Font {
-        return appUnscaled(size)
+        appCascade(size: size, candidates: bodyCandidatesForActiveLanguage())
     }
 
-    private static func appUnscaled(_ size: CGFloat) -> Font {
-        let candidates: [String] = {
-            switch LanguageResolver.effectiveResourceTag() {
-            case "ja": return japaneseAppFontCandidates
-            default: return latinKoreanAppFontCandidates
-            }
-        }()
+    /// 디바이스 무관 고정 크기 — 포스터 WANTED · 현상금 전용. 언어 무관 단일 폰트.
+    public static func posterDisplay(_ size: CGFloat) -> Font {
+        appCascade(size: size, candidates: posterDisplayCandidates, fallbackWeight: .heavy)
+    }
+
+    private static func bodyCandidatesForActiveLanguage() -> [String] {
+        switch LanguageResolver.effectiveResourceTag() {
+        case "ja": return japaneseAppFontCandidates
+        default: return latinKoreanAppFontCandidates
+        }
+    }
+
+    private static func appCascade(size: CGFloat, candidates: [String], fallbackWeight: Font.Weight = .semibold) -> Font {
         for name in candidates where UIFont(name: name, size: size) != nil {
             return Font.custom(name, size: size)
         }
-        return Font.system(size: size, weight: .semibold, design: .rounded)
+        return Font.system(size: size, weight: fallbackWeight, design: .rounded)
     }
 }
