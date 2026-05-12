@@ -42,6 +42,7 @@
 		9FFF1E0140EADA1282F62353 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 12C97552AD3E03B177F0550C /* ComposableArchitecture */; };
 		A247EE3BA8F8F56A9E02D709 /* CasePaths in Frameworks */ = {isa = PBXBuildFile; productRef = 3C78D1C330C268AB6C3DE2BA /* CasePaths */; };
 		A5639D973ACAEF3E6334A2C2 /* MonsterPosterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66517C5750A1E66FD49FF766 /* MonsterPosterView.swift */; };
+		AD56794D0DB4B34701A2B9D5 /* YuseiMagic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B69D605033619C2CFE6AD7AB /* YuseiMagic-Regular.ttf */; };
 		AEA827060F1B8C248F34CAF7 /* FaceCaptureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037C0EDF346B443A6F08734A /* FaceCaptureView.swift */; };
 		AF85318ABF0CC61F1F305C29 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2D8E19DBDE1D7B5BF66D78E1 /* PrivacyInfo.xcprivacy */; };
 		B467891C4D14E9B359801655 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 26C4BBEB73137B4539BEF22E /* ComposableArchitecture */; };
@@ -172,6 +173,7 @@
 		AC67951918438FC72E91ACEE /* GlitchEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlitchEffect.swift; sourceTree = "<group>"; };
 		AF4F4E2FCB263B42516E2E7F /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
 		B15D82CED7DE775CA74F0864 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		B69D605033619C2CFE6AD7AB /* YuseiMagic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YuseiMagic-Regular.ttf"; sourceTree = "<group>"; };
 		B87862C5D52286CEF63F108A /* FaceReaderUI-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "FaceReaderUI-Info.plist"; sourceTree = "<group>"; };
 		B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "KosugiMaru-Regular.ttf"; sourceTree = "<group>"; };
 		C0B877F63DBBBA251E35FA1D /* SubtitleBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleBox.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 			children = (
 				B9B142E62DC08ED0B0253689 /* KosugiMaru-Regular.ttf */,
 				3CE4EA903B74A423F38E8479 /* SangSangAnt.otf */,
+				B69D605033619C2CFE6AD7AB /* YuseiMagic-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				93645D21F2E6226435B4340C /* LaunchScreen.storyboard in Resources */,
 				550542FE7CBBEE1165B39089 /* KosugiMaru-Regular.ttf in Resources */,
 				1C0CDB99AC388FEA383FF8C7 /* SangSangAnt.otf in Resources */,
+				AD56794D0DB4B34701A2B9D5 /* YuseiMagic-Regular.ttf in Resources */,
 				AF85318ABF0CC61F1F305C29 /* PrivacyInfo.xcprivacy in Resources */,
 				70A5FAAE306D703AA5C0EB4F /* InfoPlist.strings in Resources */,
 			);

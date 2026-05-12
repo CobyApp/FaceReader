@@ -69,16 +69,13 @@ extension Font {
         "BradleyHandITCTT-Bold",
     ]
 
-    /// 일본어 본문 — 손글씨 톤(Klee) → 둥글한 츠쿠시 → 히라기노 마루 → 번들 폴백.
-    /// Klee 와 TsukushiAMaruGothic 은 iOS 시스템 번들 (사용자 디바이스에 따라 가용 여부 다름).
+    /// 일본어 본문 — 만화풍 손글씨 Yusei Magic (번들) 을 최우선.
+    /// 폴백: iOS 시스템 둥근 고딕들 → 마지막엔 번들 KosugiMaru.
     private static let japaneseAppFontCandidates: [String] = [
-        "Klee-Medium",                          // 손글씨 풍 — 매우 귀여움
-        "Klee-DemiBold",
-        "TsukushiAMaruGothic-Bold",             // 둥글둥글 진한 톤
-        "TsukushiAMaruGothic-Regular",
-        "HiraMaruProN-W4",                      // 시스템 폴백
-        "ToppanBunkyuMidashiGothicStdN-ExtraBold",
-        "KosugiMaru-Regular",                   // 번들 최종 폴백
+        "YuseiMagic-Regular",                    // 번들 — 만화/포스터 풍 손글씨
+        "HiraMaruProN-W4",                       // 시스템 둥근 고딕
+        "TsukushiAMaruGothic-Bold",              // 시스템 둥근
+        "KosugiMaru-Regular",                    // 번들 최종 폴백
     ]
 
     /// 포스터 WANTED — 언어 무관, 마커펜/손글씨 톤.

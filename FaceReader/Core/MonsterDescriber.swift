@@ -115,9 +115,9 @@ public actor MonsterDescriber {
     }
 
     /// 포스터에 들어갈 길이 cap. 가능하면 문장 종결부호(. ! ? 。 ！ ？) 안쪽에서 끊어
-    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 130자 — LLM 일반 응답이 거의 통째로 통과.
+    /// 완결된 문장 느낌 유지. ko/ja: 60자, en: 80자 — 영어는 더 짧게.
     public static func clampDescription(_ raw: String, language: DescriptionLanguage) -> String {
-        let limit: Int = (language == .en) ? 130 : 60
+        let limit: Int = (language == .en) ? 80 : 60
         let collapsed = raw
             .replacingOccurrences(of: "\n", with: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -181,27 +181,27 @@ public actor MonsterDescriber {
         case .ko:
             langName = "Korean"
             exCodename = "광기두꺼비"
-            exDescription = "신호등을 점멸시키는 청개구리."
-            descGuide = "ONE complete Korean sentence ending with '.', under 35 characters. Must be a finished sentence — never cut off mid-clause"
+            exDescription = "B급 영웅 셋의 점심을 동시에 망쳤다."
+            descGuide = "ONE complete Korean sentence ending with '.', under 35 characters"
         case .ja:
             langName = "Japanese"
             exCodename = "狂気ガエル"
-            exDescription = "信号機を点滅させるカエル。"
-            descGuide = "ONE complete Japanese sentence ending with '。', under 30 characters. Must be a finished sentence — never cut off mid-clause"
+            exDescription = "B級ヒーローの昼休みを同時に潰した。"
+            descGuide = "ONE complete Japanese sentence ending with '。', under 30 characters"
         case .en:
             langName = "English"
             exCodename = "MadToad"
-            exDescription = "A frog that flickers traffic lights."
-            descGuide = "ONE complete English sentence ending with '.', under 80 characters. Must be a finished sentence — never cut off mid-clause"
+            exDescription = "Ruined lunch for three B-class heroes at once."
+            descGuide = "ONE complete English sentence ending with '.', under 55 characters"
         }
 
         return """
-        You are an archivist at the fictional 'Monster Association' (One-Punch Man universe). For a newly classified fictional monster character, output a codename and a short complete description.
+        You are an archivist at the fictional 'Monster Association' in the manga 'One-Punch Man'. Generate a One-Punch Man-flavored 怪人 character — absurd, slightly cursed, manga-bestiary humor (the kind of dumb low-stakes weirdo monster that S-class heroes wouldn't even bother showing up for).
 
-        OUTPUT LANGUAGE: \(langName) ONLY. Both fields must be written in \(langName).
+        OUTPUT LANGUAGE: \(langName) ONLY. Both fields in \(langName).
 
-        codename: a short single word or compound in \(langName). Avoid real personal names. No spaces, no punctuation.
-        description: \(descGuide). Funny tone. Plain text only — no markdown, no quotes, no emoji, no numbers, no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. The sentence MUST end with a final period — do not leave it dangling.
+        codename: short \(langName) compound. Mash mundane stuff with cosmic threat for absurd contrast.
+        description: \(descGuide). Manga-bestiary tone, dry and stupid-funny. Reference OPM tropes if natural — hero class letters (C/B/A/S), normal punch series, 영웅 협회 / ヒーロー協会 / Hero Association as background. Plain text only — no markdown, no quotes, no emoji, no numbers like '12345', no grade labels (wolf/tiger/demon/dragon/god class), no codename repetition. MUST end with a final period.
 
         Example output (\(langName)):
         codename: \(exCodename)
