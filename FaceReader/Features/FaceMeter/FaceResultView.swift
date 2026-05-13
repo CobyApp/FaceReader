@@ -12,8 +12,15 @@ import UIKit
 public struct FaceResultView: View {
     @Bindable var store: StoreOf<FaceResultFeature>
 
-    @State private var shareImage: UIImage?
-    @State private var showShareSheet = false
+    /// 공유 시트는 .sheet(item:) 으로 표시 → item 이 nil→값 으로 바뀔 때만 한 번에 열려서
+    /// '첫 탭은 안 열리고 두 번째 탭에서 열리는' 타이밍 버그(@State 두 개를 같은 프레임에 갱신할 때
+    /// 클로저가 갱신 전 값을 본 채 평가되는 SwiftUI 함정)를 방지.
+    private struct ShareItem: Identifiable {
+        let id = UUID()
+        let image: UIImage
+    }
+
+    @State private var shareItem: ShareItem?
     @State private var revealActive: Bool = false
 
     public init(store: StoreOf<FaceResultFeature>) {
@@ -79,10 +86,8 @@ public struct FaceResultView: View {
             triggerReveal()
         }
         .id(store.posterImageData)
-        .sheet(isPresented: $showShareSheet) {
-            if let shareImage {
-                ActivityView(activityItems: [shareImage])
-            }
+        .sheet(item: $shareItem) { item in
+            ActivityView(activityItems: [item.image])
         }
     }
 
@@ -159,7 +164,7 @@ public struct FaceResultView: View {
             descriptionText: loadedDescription,
             gradeStamp: gradeStamp
         )
-        shareImage = img
-        showShareSheet = img != nil
+        guard let img else { return }
+        shareItem = ShareItem(image: img)
     }
 }
