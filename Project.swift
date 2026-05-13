@@ -8,7 +8,7 @@ private let frameworkSettings: Settings = .settings(
         "CODE_SIGNING_ALLOWED": "NO",
         "CODE_SIGNING_REQUIRED": "NO",
         "CURRENT_PROJECT_VERSION": "202209021",
-        "MARKETING_VERSION": "3.0.0",
+        "MARKETING_VERSION": "3.0.1",
         "SWIFT_VERSION": "5.0",
     ]
 )
@@ -112,7 +112,7 @@ let project = Project(
                     "DEVELOPMENT_TEAM": "3Y8YH8GWMM",
                     "GENERATE_INFOPLIST_FILE": "YES",
                     "INFOPLIST_KEY_UILaunchStoryboardName": "LaunchScreen",
-                    "MARKETING_VERSION": "3.0.0",
+                    "MARKETING_VERSION": "3.0.1",
                     "SWIFT_EMIT_LOC_STRINGS": "YES",
                     "SWIFT_VERSION": "5.0",
                     "TARGETED_DEVICE_FAMILY": "1",

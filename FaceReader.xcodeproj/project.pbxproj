@@ -775,7 +775,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
 				PRODUCT_NAME = FaceReaderUI;
 				SDKROOT = iphoneos;
@@ -816,7 +816,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
 				PRODUCT_NAME = FaceReaderFeatures;
 				SDKROOT = iphoneos;
@@ -855,7 +855,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
 				PRODUCT_NAME = FaceReader;
 				SDKROOT = iphoneos;
@@ -949,7 +949,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader;
 				PRODUCT_NAME = FaceReader;
 				SDKROOT = iphoneos;
@@ -984,7 +984,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
 				PRODUCT_NAME = FaceReaderCore;
 				SDKROOT = iphoneos;
@@ -1076,7 +1076,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.features;
 				PRODUCT_NAME = FaceReaderFeatures;
 				SDKROOT = iphoneos;
@@ -1113,7 +1113,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.core;
 				PRODUCT_NAME = FaceReaderCore;
 				SDKROOT = iphoneos;
@@ -1154,7 +1154,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = staticlib;
-				MARKETING_VERSION = 3.0.0;
+				MARKETING_VERSION = 3.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.coby.FaceReader.ui;
 				PRODUCT_NAME = FaceReaderUI;
 				SDKROOT = iphoneos;
