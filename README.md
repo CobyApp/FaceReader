@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="FaceReader/Global/Resource/Assets.xcassets/AppIcon.appiconset/appstore.png" alt="怪人メーター アイコン" width="120" height="120" />
+
 # 怪人メーター ／ FaceReader
 
 **あなたの顔の災害レベルは？**
@@ -14,13 +16,13 @@
 <img height="28" src="https://img.shields.io/badge/Tuist-4.155-purple">
 <img height="28" src="https://img.shields.io/badge/Apple%20Intelligence-on--device-ff69b4">
 
-[App Store](https://apps.apple.com/app/%EA%B4%B4%EC%9D%B8-%EC%B8%A1%EC%A0%95%EA%B8%B0/id1642236144)
+[App Store](https://apps.apple.com/app/id1642236144)
 &nbsp;·&nbsp;
 [公式サイト](https://cobyapp.github.io/FaceReader/)
 &nbsp;·&nbsp;
 [プライバシーポリシー](https://cobyapp.github.io/FaceReader/ja/privacy.html)
 
-![banner](https://github.com/user-attachments/assets/0c6fca89-6d1b-4494-accf-7637b7be1a1a)
+![banner](docs/assets/hero-ja.png)
 
 </div>
 
@@ -39,6 +41,19 @@
 
 <br/>
 
+## 🎬 画面の流れ
+
+上のバナーは実機スクリーンショットを左から並べた１ループです。
+
+| # | 画面 | 内容 |
+|---|---|---|
+| ① | **怪人図鑑** | 起動直後に開ける、災害レベル ５段階のリファレンス。狼級から神級までのイラスト＋短い解説で、自分の判定結果を読み解く下地に。 |
+| ② | **顔の測定** | フロントカメラに顔をかざすと、Vision がランドマークを検出し、目／鼻／口／顔長の比率を即時オーバーレイ。比率からスコアが計算され、シャッターで確定。 |
+| ③ | **怪人協会 分析中** | シャッター後の小休止。Apple Intelligence が裏でコードネームと図鑑文を生成し、フォールバック分岐も同時に評価。 |
+| ④ | **WANTED ポスター** | コミック効果＋ハーフトーン化された顔写真の上に、生成コードネーム・図鑑文・等級スタンプ・賞金額を組み版。タップひとつでシェア可能。 |
+
+<br/>
+
 ## 🎴 主な機能
 
 | | |
@@ -49,6 +64,20 @@
 | 🎨 **VHS ポスターレンダリング** | デバイス非依存の固定キャンバスで、どの端末でも同じ仕上がり |
 | 🌐 **3言語対応** | 韓国語 / 日本語 / 英語 — UI もポスターも完全多言語化 |
 | 🔒 **プライバシー最優先** | カメラ画像も AI 生成結果もすべてオンデバイス処理。アカウント不要 |
+
+<br/>
+
+## 📱 ダウンロード
+
+<div align="center">
+
+<a href="https://apps.apple.com/app/id1642236144">
+  <img src="docs/assets/appstore-qr.png" alt="App Store QR" width="180" height="180" />
+</a>
+
+iPhone で QR をスキャン、もしくは [App Store リンク](https://apps.apple.com/app/id1642236144) から。
+
+</div>
 
 <br/>
 
@@ -113,10 +142,15 @@ main ブランチへの push または `v*` タグ push で、GitHub Actions が
 ```bash
 git push origin main          # 即デプロイ
 # あるいは
-git tag v2.1.0 && git push origin v2.1.0
+git tag v3.0.1 && git push origin v3.0.1
 ```
 
 ワークフロー: [.github/workflows/deploy.yml](.github/workflows/deploy.yml) / Fastfile: [fastlane/Fastfile](fastlane/Fastfile)
+
+ヘッドレス CI で安定動作させるための調整:
+- `-skipPackagePluginValidation` / `-skipMacroValidation` — Swift マクロの "Trust" GUI プロンプト回避
+- 静的フレームワークに `CODE_SIGNING_ALLOWED=NO` — 自動プロビジョニングが全 78 ターゲットへ伝播するのを防止
+- App アイコンは RGB（α なし） — actool の検証エラー回避
 
 <br/>
 
