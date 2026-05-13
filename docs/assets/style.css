@@ -187,6 +187,42 @@ hr {
   color: var(--vhs-ink);
 }
 
+/* ----- App Store QR ----- */
+.qr-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.6rem auto 0;
+  padding: 0.7rem 1rem 0.7rem 0.7rem;
+  background: var(--vhs-base);
+  border: 3px solid var(--vhs-ink);
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 4px 4px 0 var(--vhs-cyan), 8px 8px 0 var(--vhs-red);
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.qr-block:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 var(--vhs-cyan), 10px 10px 0 var(--vhs-red);
+}
+.qr-block img.qr {
+  display: block;
+  width: 96px;
+  height: 96px;
+  background: #fff;
+  padding: 6px;
+  border-radius: 4px;
+}
+.qr-block .qr-caption {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--vhs-ink);
+  line-height: 1.3;
+  text-align: left;
+}
+
 /* ----- Banner image ----- */
 .banner {
   max-width: var(--max-w);
@@ -394,4 +430,6 @@ section {
   .nav-brand { font-size: 1.1rem; }
   .lang-switch { font-size: 0.75rem; }
   .lang-switch a { padding: 0.2rem 0.4rem; }
+  .qr-block img.qr { width: 84px; height: 84px; }
+  .qr-block .qr-caption { font-size: 0.75rem; }
 }
